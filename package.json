@@ -1,7 +1,14 @@
 {
   "name": "what2eat-front",
+  "description": "What 2 Eat Frontend App",
   "version": "0.0.1",
   "private": true,
+  "scripts": {
+    "dev": "ionic serve -p 5500",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
   "dependencies": {
     "@ionic/react": "^4.11.0",
     "@ionic/react-router": "^4.11.0",
@@ -19,12 +26,6 @@
     "react-scripts": "3.2.0",
     "typescript": "3.6.3"
   },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
-  },
   "eslintConfig": {
     "extends": "react-app"
   },
@@ -39,6 +40,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "description": "An Ionic project"
+  }
 }
