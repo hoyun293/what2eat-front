@@ -1,33 +1,30 @@
 import * as React from 'react'
 import * as _ from 'lodash'
 
+import { INews } from '../models/news.d'
 import ExampleListItem from '../components/ExampleListItem'
+import { connect } from '../redux/redux-connect'
 
-interface IExampleListContainerProps {}
+interface IOwnProps {}
+interface IStateProps {
+  readonly news: INews[]
+}
+interface IDispatchProps {}
 
-const items = [
-  {
-    title: '안녕!!',
-    content: '내용입니다!'
-  },
-  {
-    title: '안뇽!!!!',
-    content: '내용입니다!'
-  },
-  {
-    title: '안냥!!',
-    content: '내용입니다!'
-  }
-]
-
-const ExampleListContainer: React.FunctionComponent<IExampleListContainerProps> = props => {
+const ExampleListContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ news }) => {
   return (
     <ol>
-      {_.map(items, v => (
-        <ExampleListItem title={v.title} content={v.content} />
+      {_.map(news, (v, i) => (
+        <ExampleListItem key={i} title={v.title} content={v.content} />
       ))}
     </ol>
   )
 }
 
-export default ExampleListContainer
+export default connect<IOwnProps, IStateProps, IDispatchProps>({
+  mapStateToProps: ({ example }) => ({
+    news: example.news
+  }),
+  mapDispatchToProps: {},
+  component: ExampleListContainer
+})
