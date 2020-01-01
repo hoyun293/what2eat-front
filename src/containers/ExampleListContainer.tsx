@@ -19,11 +19,11 @@ const ExampleListContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> =
   news,
   selectExampleNews
 }) => {
-  // useEffect(() => {
-  //   console.log('TCL: selectExampleNews', selectExampleNews)
-  //   selectExampleNews()
-  //   // eslint-disable-next-line
-  // }, [])
+  useEffect(() => {
+    console.log('TCL: selectExampleNews', selectExampleNews)
+    selectExampleNews()
+    // eslint-disable-next-line
+  }, [])
 
   console.log(news)
 

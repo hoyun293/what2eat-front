@@ -1,20 +1,17 @@
 import { ISetExampleNews } from './example-payloads'
 import { SET_EXMAPLE_NEWS, INCREASE_EXMAPLE_COUNT, SELECT_EXMAPLE_NEWS } from './example-constants'
 
-export const selectExampleNews = () =>
-  ({
-    type: SELECT_EXMAPLE_NEWS,
-    payload: null
-  } as const)
+export const selectExampleNews = () => ({
+  type: SELECT_EXMAPLE_NEWS,
+  payload: null
+})
 
-export const setExampleNews = (payload: Partial<ISetExampleNews>) =>
-  ({
-    type: SET_EXMAPLE_NEWS,
-    payload
-  } as const)
+export const setExampleNews = (news: Partial<ISetExampleNews>) => ({
+  type: SET_EXMAPLE_NEWS,
+  payload: { news }
+})
 
-export const increaseExampleCount = (payload: number) =>
-  ({
-    type: INCREASE_EXMAPLE_COUNT,
-    payload: { count: payload }
-  } as const)
+export const increaseExampleCount = (count: number) => ({
+  type: INCREASE_EXMAPLE_COUNT,
+  payload: { count }
+})

@@ -3,20 +3,7 @@ import { IExampleState } from './example-state'
 import { handleActions } from 'redux-actions'
 
 const initialExampleState: IExampleState = {
-  news: [
-    {
-      title: '안녕!!',
-      user: '내용입니다!'
-    },
-    {
-      title: '안뇽!!!!',
-      user: '내용입니다!'
-    },
-    {
-      title: '안냥!!',
-      user: '내용입니다!'
-    }
-  ],
+  news: [],
   count: 0
 }
 
