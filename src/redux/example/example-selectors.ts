@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect'
-import { TRootState } from '../root-state'
+import { IState } from '../root-state'
 
-export const exampleState = (state: TRootState) => state.example
+export const exampleState = (state: IState) => state.example
 
 export const getExampleNews = createSelector(exampleState, ({ news }) => {
   return news

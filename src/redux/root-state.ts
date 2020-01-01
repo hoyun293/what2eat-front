@@ -1,15 +1,16 @@
+import { IExampleState } from './example/example-state'
 import { combineReducers } from './combine-reducers'
-import { exampleReducer } from './example/example-reducer'
+import example from './example/example-reducer'
 
-export const initialState: TRootState = {
+export const initialState: IState = {
   example: {
     news: [],
     count: 0
-  }
+  } as IExampleState
 }
 
 export const rootReducers = combineReducers({
-  example: exampleReducer
+  example
 })
 
-export type TRootState = ReturnType<typeof rootReducers>
+export type IState = ReturnType<typeof rootReducers>

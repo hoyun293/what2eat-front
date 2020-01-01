@@ -1,10 +1,10 @@
 import React, { useContext, useMemo } from 'react'
 import { RootContext } from '../Root'
 import { IDispatch } from './redux-type'
-import { TRootState } from './root-state'
+import { IState } from './root-state'
 
 interface ConnectParams<TOwnProps, TStateProps, TDispatchProps> {
-  mapStateToProps?: (state: TRootState, props: TOwnProps) => TStateProps
+  mapStateToProps?: (state: IState, props: TOwnProps) => TStateProps
   mapDispatchToProps?: TDispatchProps
   component: React.ComponentType<any>
 }
