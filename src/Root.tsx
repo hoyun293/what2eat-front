@@ -1,6 +1,8 @@
-import React, { createContext, useReducer } from 'react'
+import React, { createContext } from 'react'
 import { initialState, TRootState, rootReducers } from './redux/root-state'
 import App from './App'
+import useSagaReducer from 'use-saga-reducer'
+import { combineSagas } from './redux/root-saga'
 
 export interface IRootContextState {
   state: TRootState
@@ -13,7 +15,7 @@ export const RootContext = createContext<IRootContextState>({
 })
 
 const Root: React.FC = props => {
-  const [store, dispatch] = useReducer(rootReducers, initialState)
+  const [store, dispatch] = useSagaReducer(combineSagas, rootReducers, initialState)
 
   return (
     <RootContext.Provider

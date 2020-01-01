@@ -1,5 +1,6 @@
-// import { exampleSagas } from './example/sagas'
+import { exampleSagas } from './example/example-sagas'
+import { all } from 'redux-saga/effects'
 
-export default [
-  // exampleSagas,
-]
+export function* combineSagas() {
+  yield all([...exampleSagas])
+}

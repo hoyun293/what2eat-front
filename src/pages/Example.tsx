@@ -9,12 +9,12 @@ import {
   IonLabel
 } from '@ionic/react'
 import ExampleListContainer from '../containers/ExampleListContainer'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { informationCircle } from 'ionicons/icons'
 
 import { connect } from '../redux/redux-connect'
 import { INews } from '../models/news'
-import { increaseExampleCount } from '../redux/example/example-actions'
+import { increaseExampleCount, setExampleNews, selectExampleNews } from '../redux/example/example-actions'
 
 interface IOwnProps {}
 interface IStateProps {
@@ -23,9 +23,21 @@ interface IStateProps {
 }
 interface IDispatchProps {
   readonly increaseExampleCount: typeof increaseExampleCount
+  setExampleNews: typeof setExampleNews
+  selectExampleNews: typeof selectExampleNews
 }
 
-const Example: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ count, increaseExampleCount }) => {
+const Example: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
+  news,
+  count,
+  increaseExampleCount,
+  setExampleNews,
+  selectExampleNews
+}) => {
+  useEffect(() => {
+    selectExampleNews()
+  }, []) // eslint-disable-line
+
   return (
     <IonPage>
       <IonHeader>
@@ -50,7 +62,9 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
     count: example.count
   }),
   mapDispatchToProps: {
-    increaseExampleCount
+    selectExampleNews,
+    increaseExampleCount,
+    setExampleNews
   },
   component: React.memo(Example)
 })

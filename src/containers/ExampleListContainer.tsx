@@ -15,7 +15,7 @@ const ExampleListContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> =
   return (
     <ol>
       {_.map(news, (v, i) => (
-        <ExampleListItem key={i} title={v.title} content={v.content} />
+        <ExampleListItem key={i} title={v.title} user={v.user} />
       ))}
     </ol>
   )
