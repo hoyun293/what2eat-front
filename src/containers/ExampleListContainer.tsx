@@ -1,32 +1,17 @@
-import React, { useEffect } from 'react'
+import * as React from 'react'
 import * as _ from 'lodash'
 
 import { INews } from '../models/news.d'
 import ExampleListItem from '../components/ExampleListItem'
-import { connect } from 'react-redux'
-import { selectExampleNews } from '../redux/example/example-actions'
-import { IState } from '../redux/root-state'
+import { connect } from '../redux/redux-connect'
 
 interface IOwnProps {}
 interface IStateProps {
   readonly news: INews[]
 }
-interface IDispatchProps {
-  selectExampleNews: typeof selectExampleNews
-}
+interface IDispatchProps {}
 
-const ExampleListContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
-  news,
-  selectExampleNews
-}) => {
-  useEffect(() => {
-    console.log('TCL: selectExampleNews', selectExampleNews)
-    selectExampleNews()
-    // eslint-disable-next-line
-  }, [])
-
-  console.log(news)
-
+const ExampleListContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ news }) => {
   return (
     <ol>
       {_.map(news, (v, i) => (
@@ -36,13 +21,10 @@ const ExampleListContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> =
   )
 }
 
-const mapStateToProps = ({ example }: IState) => ({
-  news: example.news
+export default connect<IOwnProps, IStateProps, IDispatchProps>({
+  mapStateToProps: ({ example }) => ({
+    news: example.news
+  }),
+  mapDispatchToProps: {},
+  component: ExampleListContainer
 })
-
-// TODO: any 고칠것!!
-const mapDispatchToProps = (dispatch: any) => ({
-  selectExampleNews: () => dispatch(selectExampleNews())
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(ExampleListContainer)

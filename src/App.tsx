@@ -2,7 +2,7 @@ import React, { Suspense, lazy } from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { IonApp, IonRouterOutlet } from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
-import { connect } from 'react-redux'
+import { connect } from './redux/redux-connect'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css'
@@ -48,6 +48,10 @@ const App: React.FC<IAppProps> = () => {
   )
 }
 
-const AppWithConnect = connect(() => ({}), {})(App)
+const AppWithConnect = connect<{}, IStateProps, IDispatchProps>({
+  mapStateToProps: () => ({}),
+  mapDispatchToProps: {},
+  component: App
+})
 
 export default AppWithConnect

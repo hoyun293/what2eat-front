@@ -7,6 +7,6 @@ export const getExampleNews = createSelector(exampleState, ({ news }) => {
   return news
 })
 
-export const getExmapleCount = createSelector(exampleState, ({ count }) => {
+export const getExampleCount = createSelector(exampleState, ({ count }) => {
   return count
 })

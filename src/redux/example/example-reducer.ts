@@ -1,17 +1,14 @@
-import { SET_EXMAPLE_NEWS, INCREASE_EXMAPLE_COUNT, SELECT_EXMAPLE_NEWS } from './example-constants'
+import { SET_EXAMPLE_NEWS, INCREASE_EXAMPLE_COUNT, SELECT_EXAMPLE_NEWS } from './example-constants'
 import { IExampleState } from './example-state'
-import { handleActions } from 'redux-actions'
+import { TExampleActions } from './example-actions'
 
-const initialExampleState: IExampleState = {
-  news: [],
-  count: 0
+export default function exampleReducer(state: IExampleState, action: TExampleActions): IExampleState {
+  switch (action.type) {
+    case SELECT_EXAMPLE_NEWS:
+      return { ...state }
+    case SET_EXAMPLE_NEWS:
+      return { ...state, ...action.payload }
+    case INCREASE_EXAMPLE_COUNT:
+      return { ...state, count: action.payload }
+  }
 }
-
-export default handleActions<IExampleState>(
-  {
-    [SELECT_EXMAPLE_NEWS]: (state, action) => ({ ...state }),
-    [SET_EXMAPLE_NEWS]: (state, action) => ({ ...state, ...action.payload }),
-    [INCREASE_EXMAPLE_COUNT]: (state, action) => ({ ...state, ...action.payload })
-  },
-  initialExampleState
-)

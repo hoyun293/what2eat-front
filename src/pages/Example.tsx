@@ -9,13 +9,12 @@ import {
   IonLabel
 } from '@ionic/react'
 import ExampleListContainer from '../containers/ExampleListContainer'
-import React from 'react'
+import React, { useEffect } from 'react'
 import { informationCircle } from 'ionicons/icons'
 
-import { connect } from 'react-redux'
+import { connect } from '../redux/redux-connect'
 import { INews } from '../models/news'
-import { increaseExampleCount } from '../redux/example/example-actions'
-import { IState } from '../redux/root-state'
+import { increaseExampleCount, setExampleNews, selectExampleNews } from '../redux/example/example-actions'
 
 interface IOwnProps {}
 interface IStateProps {
@@ -24,9 +23,21 @@ interface IStateProps {
 }
 interface IDispatchProps {
   readonly increaseExampleCount: typeof increaseExampleCount
+  setExampleNews: typeof setExampleNews
+  selectExampleNews: typeof selectExampleNews
 }
 
-const Example: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ count, increaseExampleCount }) => {
+const Example: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
+  news,
+  count,
+  increaseExampleCount,
+  setExampleNews,
+  selectExampleNews
+}) => {
+  useEffect(() => {
+    selectExampleNews()
+  }, []) // eslint-disable-line
+
   return (
     <IonPage>
       <IonHeader>
@@ -45,14 +56,15 @@ const Example: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ count, in
   )
 }
 
-const mapStateToProps = ({ example }: IState) => ({
-  news: example.news,
-  count: example.count
+export default connect<IOwnProps, IStateProps, IDispatchProps>({
+  mapStateToProps: ({ example }) => ({
+    news: example.news,
+    count: example.count
+  }),
+  mapDispatchToProps: {
+    selectExampleNews,
+    increaseExampleCount,
+    setExampleNews
+  },
+  component: React.memo(Example)
 })
-
-// TODO : dispatch any고칠것!!
-const mapDispatchToProps = (dispatch: any) => ({
-  increaseExampleCount: (payload: number) => dispatch(increaseExampleCount(payload))
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(Example)
