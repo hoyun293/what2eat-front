@@ -1,28 +1,11 @@
-import { combineReducers } from './combine-reducers'
-import { exampleReducer } from './example/example-reducer'
+import { IExampleState } from './example/example-state'
+import { combineReducers, Reducer, AnyAction } from 'redux'
+import example from './example/example-reducer'
 
-export const initialState: TRootState = {
-  example: {
-    news: [
-      {
-        title: '안녕!!',
-        content: '내용입니다!'
-      },
-      {
-        title: '안뇽!!!!',
-        content: '내용입니다!'
-      },
-      {
-        title: '안냥!!',
-        content: '내용입니다!'
-      }
-    ],
-    count: 0
-  }
+export interface IState {
+  example: IExampleState
 }
 
-export const rootReducers = combineReducers({
-  example: exampleReducer
+export const rootReducers: Reducer<IState, AnyAction> = combineReducers<IState>({
+  example
 })
-
-export type TRootState = ReturnType<typeof rootReducers>

@@ -1,5 +1,3 @@
-// import { exampleSagas } from './example/sagas'
+import { exampleSagas } from './example/example-sagas'
 
-export default [
-  // exampleSagas,
-]
+export default [exampleSagas]

@@ -12,9 +12,10 @@ import ExampleListContainer from '../containers/ExampleListContainer'
 import React from 'react'
 import { informationCircle } from 'ionicons/icons'
 
-import { connect } from '../redux/redux-connect'
+import { connect } from 'react-redux'
 import { INews } from '../models/news'
 import { increaseExampleCount } from '../redux/example/example-actions'
+import { IState } from '../redux/root-state'
 
 interface IOwnProps {}
 interface IStateProps {
@@ -44,13 +45,14 @@ const Example: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ count, in
   )
 }
 
-export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ example }) => ({
-    news: example.news,
-    count: example.count
-  }),
-  mapDispatchToProps: {
-    increaseExampleCount
-  },
-  component: React.memo(Example)
+const mapStateToProps = ({ example }: IState) => ({
+  news: example.news,
+  count: example.count
 })
+
+// TODO : dispatch any고칠것!!
+const mapDispatchToProps = (dispatch: any) => ({
+  increaseExampleCount: (payload: number) => dispatch(increaseExampleCount(payload))
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Example)

@@ -1,29 +1,15 @@
-import React, { createContext, useReducer } from 'react'
-import { initialState, TRootState, rootReducers } from './redux/root-state'
+import React from 'react'
 import App from './App'
+import { configureStore } from './redux/create-store'
+import { Provider } from 'react-redux'
 
-export interface IRootContextState {
-  state: TRootState
-  dispatch: React.Dispatch<any>
-}
+const { store } = configureStore()
 
-export const RootContext = createContext<IRootContextState>({
-  state: initialState,
-  dispatch: () => undefined
-})
-
-const Root: React.FC = props => {
-  const [store, dispatch] = useReducer(rootReducers, initialState)
-
+const Root: React.FC = () => {
   return (
-    <RootContext.Provider
-      value={{
-        state: store,
-        dispatch
-      }}
-    >
+    <Provider store={store}>
       <App />
-    </RootContext.Provider>
+    </Provider>
   )
 }
 
