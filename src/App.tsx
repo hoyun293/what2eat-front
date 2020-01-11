@@ -4,7 +4,6 @@ import { IonApp, IonRouterOutlet } from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
 import { connect } from './redux/redux-connect'
 import { signIn } from './redux/user/user-actions'
-import { setAuthoriation } from './utils/http-with-credential-util'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css'
@@ -38,12 +37,7 @@ interface IAppProps extends IStateProps, IDispatchProps {}
 
 const App: React.FC<IAppProps> = ({ signIn }) => {
   useEffect(() => {
-    const token = localStorage.getItem('token')
-    if (!token) {
-      signIn()
-    } else {
-      setAuthoriation(token)
-    }
+    signIn()
   }, []) // eslint-disable-line
 
   return (

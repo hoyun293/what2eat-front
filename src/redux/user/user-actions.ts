@@ -2,6 +2,7 @@ import { IUser } from './../../models/user.d'
 import { SET_USER_DOMAIN, SET_USER_IS_LOADING, SET_USER_ERROR_MESSAGE } from './user-constants'
 import { TAction } from '../redux-type'
 import { postSignInApi } from '../../api/user-api'
+import { setAuthoriation } from '../../utils/http-with-credential-util'
 
 export const signIn = () => async (dispatch: React.Dispatch<any>) => {
   dispatch(setUserIsLoading(true))
@@ -15,6 +16,7 @@ export const signIn = () => async (dispatch: React.Dispatch<any>) => {
       console.log(data.token)
       localStorage.setItem('token', data.token)
       localStorage.setItem('account', data.account)
+      setAuthoriation(data.token)
     })
     .catch(err => dispatch(setUserErrorMessage(err.message)))
 }
