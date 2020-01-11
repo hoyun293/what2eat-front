@@ -3,6 +3,11 @@ export interface IDispatch {
   type: string
 }
 
+export interface ICommonState {
+  isLoading: boolean
+  errorMessage: string
+}
+
 type TPromiseResolveValue<T> = T extends Promise<infer R> ? R : T
 type TEffect<T extends (...args: any) => any> = ReturnType<ReturnType<T>>
 type TEffectReturnValue<T extends (...args: any) => any> = TPromiseResolveValue<TEffect<T>>

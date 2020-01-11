@@ -1,16 +1,31 @@
 import { ISetExampleNews } from './example-payloads'
-import { SET_EXAMPLE_NEWS, INCREASE_EXAMPLE_COUNT, SELECT_EXAMPLE_NEWS } from './example-constants'
+import {
+  SET_EXAMPLE_NEWS,
+  INCREASE_EXAMPLE_COUNT,
+  SET_EXAMPLE_IS_LOADING,
+  SET_EXAMPLE_ERROR_MESSAGE
+} from './example-constants'
 import { TAction } from '../redux-type'
+import { getExampleNewsApi } from '../../api/example-api'
+import { setUserIsLoading } from '../user/user-actions'
 
-export const selectExampleNews = () =>
+export const selectExampleNews = () => async (dispatch: React.Dispatch<any>) => {
+  dispatch(setUserIsLoading(true))
+  const { data } = await getExampleNewsApi()
+  dispatch(setExampleNews({ news: data }))
+  dispatch(setUserIsLoading(false))
+}
+
+export const setExampleIsLoading = (isLoading: boolean) =>
   ({
-    type: SELECT_EXAMPLE_NEWS
+    type: SET_EXAMPLE_IS_LOADING,
+    isLoading
   } as const)
 
-export const setExampleNews = (payload: Partial<ISetExampleNews>) =>
+export const setExampleErrorMessage = (errorMessage: string) =>
   ({
-    type: SET_EXAMPLE_NEWS,
-    payload
+    type: SET_EXAMPLE_ERROR_MESSAGE,
+    errorMessage
   } as const)
 
 export const increaseExampleCount = (payload: number) =>
@@ -19,7 +34,14 @@ export const increaseExampleCount = (payload: number) =>
     payload
   } as const)
 
+export const setExampleNews = (payload: Partial<ISetExampleNews>) =>
+  ({
+    type: SET_EXAMPLE_NEWS,
+    payload
+  } as const)
+
 export type TExampleActions =
   | TAction<typeof setExampleNews>
+  | TAction<typeof setExampleIsLoading>
   | TAction<typeof increaseExampleCount>
-  | TAction<typeof selectExampleNews>
+  | TAction<typeof setExampleErrorMessage>

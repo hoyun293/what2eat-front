@@ -5,7 +5,9 @@ import example from './example/example-reducer'
 export const initialState: IState = {
   example: {
     news: [],
-    count: 0
+    count: 0,
+    isLoading: false,
+    errorMessage: ''
   } as IExampleState
 }
 
