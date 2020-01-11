@@ -1,8 +1,10 @@
-import React, { Suspense, lazy } from 'react'
+import React, { Suspense, lazy, useEffect } from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { IonApp, IonRouterOutlet } from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
 import { connect } from './redux/redux-connect'
+import { signIn } from './redux/user/user-actions'
+import { setAuthoriation } from './utils/http-with-credential-util'
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css'
@@ -29,10 +31,21 @@ const Home = lazy(() => import('./pages/Home'))
 const Example = lazy(() => import('./pages/Example'))
 
 interface IStateProps {}
-interface IDispatchProps {}
+interface IDispatchProps {
+  signIn: typeof signIn
+}
 interface IAppProps extends IStateProps, IDispatchProps {}
 
-const App: React.FC<IAppProps> = () => {
+const App: React.FC<IAppProps> = ({ signIn }) => {
+  useEffect(() => {
+    const token = localStorage.getItem('token')
+    if (!token) {
+      signIn()
+    } else {
+      setAuthoriation(token)
+    }
+  }, []) // eslint-disable-line
+
   return (
     <IonApp>
       <Suspense fallback={<SpinnerUi isFull={true} color='tertiary' />}>
@@ -50,7 +63,9 @@ const App: React.FC<IAppProps> = () => {
 
 const AppWithConnect = connect<{}, IStateProps, IDispatchProps>({
   mapStateToProps: () => ({}),
-  mapDispatchToProps: {},
+  mapDispatchToProps: {
+    signIn
+  },
   component: App
 })
 
