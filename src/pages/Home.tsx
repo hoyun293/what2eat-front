@@ -1,4 +1,13 @@
-import { IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonPage, IonTitle, IonToolbar } from '@ionic/react'
+import {
+  IonContent,
+  IonHeader,
+  IonIcon,
+  IonItem,
+  IonLabel,
+  IonPage,
+  IonTitle,
+  IonToolbar
+} from '@ionic/react'
 import { hammer } from 'ionicons/icons'
 import React from 'react'
 
@@ -15,6 +24,10 @@ const Home: React.FC = () => {
         <IonItem button routerLink={'/example'} routerDirection='none'>
           <IonIcon slot='start' icon={hammer} />
           <IonLabel>예제 페이지</IonLabel>
+        </IonItem>
+        <IonItem button routerLink={'/vote-save'} routerDirection='none'>
+          <IonIcon slot='start' icon={hammer} />
+          <IonLabel>투표 생성</IonLabel>
         </IonItem>
       </IonContent>
     </IonPage>

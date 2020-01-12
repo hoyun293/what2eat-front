@@ -5,28 +5,12 @@ import { IonReactRouter } from '@ionic/react-router'
 import { connect } from './redux/redux-connect'
 import { signIn } from './redux/user/user-actions'
 
-/* Core CSS required for Ionic components to work properly */
-import '@ionic/react/css/core.css'
-
-/* Basic CSS for apps built with Ionic */
-import '@ionic/react/css/normalize.css'
-import '@ionic/react/css/structure.css'
-import '@ionic/react/css/typography.css'
-
-/* Optional CSS utils that can be commented out */
-import '@ionic/react/css/padding.css'
-import '@ionic/react/css/float-elements.css'
-import '@ionic/react/css/text-alignment.css'
-import '@ionic/react/css/text-transformation.css'
-import '@ionic/react/css/flex-utils.css'
-import '@ionic/react/css/display.css'
-
-/* Theme variables */
-import './theme/variables.css'
-
 import SpinnerUi from './components/ui/SpinnerUi'
 
+import './global.scss'
+
 const Home = lazy(() => import('./pages/Home'))
+const VoteSave = lazy(() => import('./pages/VoteSave'))
 const Example = lazy(() => import('./pages/Example'))
 
 interface IStateProps {}
@@ -47,6 +31,7 @@ const App: React.FC<IAppProps> = ({ signIn }) => {
           <IonRouterOutlet>
             <Route path='/home' component={Home} exact={true} />
             <Route path='/example' component={Example} exact={true} />
+            <Route path='/vote-save' component={VoteSave} exact={true} />
             <Route exact path='/' render={() => <Redirect to='/home' />} />
           </IonRouterOutlet>
         </IonReactRouter>
