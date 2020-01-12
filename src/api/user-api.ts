@@ -7,7 +7,7 @@ export const postSignInApi = () => {
   let loginInfo = { ts: new Date().getTime(), account }
 
   const enc = crypto
-    .publicEncrypt(config.PUBKEY, Buffer.from(loginInfo.toString(), 'utf8'))
+    .publicEncrypt(config.PUBKEY, Buffer.from(JSON.stringify(loginInfo), 'utf8'))
     .toString('base64')
-  return axios.post('/login', null, { params: { enc } })
+  return axios.post('/login', null, {params: {enc: enc}})
 }
