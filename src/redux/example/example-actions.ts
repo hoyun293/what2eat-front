@@ -11,7 +11,7 @@ import { setUserIsLoading } from '../user/user-actions'
 
 export const selectExampleNews = () => async (dispatch: React.Dispatch<any>) => {
   dispatch(setUserIsLoading(true))
-  const { data } = await getExampleNewsApi()
+  const { data }: any = await getExampleNewsApi()
   dispatch(setExampleNews({ news: data }))
   dispatch(setUserIsLoading(false))
 }

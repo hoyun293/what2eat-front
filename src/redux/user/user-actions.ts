@@ -8,15 +8,15 @@ export const signIn = () => async (dispatch: React.Dispatch<any>) => {
   dispatch(setUserIsLoading(true))
 
   postSignInApi()
-    .then(({ data }) => {
-      dispatch(setUserDomain(data))
+    .then(({ result }) => {
+      dispatch(setUserDomain(result))
       dispatch(setUserIsLoading(false))
 
       // TODO : 테스트 필요
-      console.log(data.token)
-      localStorage.setItem('token', data.token)
-      localStorage.setItem('account', data.account)
-      setAuthoriation(data.token)
+      console.log(result.token)
+      localStorage.setItem('token', result.token)
+      localStorage.setItem('account', result.account)
+      setAuthoriation(result.token)
     })
     .catch(err => dispatch(setUserErrorMessage(err.message)))
 }

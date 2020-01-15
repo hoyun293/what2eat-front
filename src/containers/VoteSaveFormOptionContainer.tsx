@@ -6,7 +6,7 @@ import { connect } from '../redux/redux-connect'
 
 interface IOwnProps {}
 interface IStateProps {
-  readonly news: INews[]
+  news: INews[]
 }
 interface IDispatchProps {}
 

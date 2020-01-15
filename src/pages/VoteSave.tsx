@@ -20,11 +20,11 @@ import { increaseExampleCount, setExampleNews, selectExampleNews } from '../redu
 
 interface IOwnProps {}
 interface IStateProps {
-  readonly news: INews[]
-  readonly count: number
+  news: INews[]
+  count: number
 }
 interface IDispatchProps {
-  readonly increaseExampleCount: typeof increaseExampleCount
+  increaseExampleCount: typeof increaseExampleCount
   setExampleNews: typeof setExampleNews
   selectExampleNews: typeof selectExampleNews
 }

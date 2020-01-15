@@ -7,7 +7,7 @@ import { getPlaceList } from '../api/google-api'
 
 interface IOwnProps {}
 interface IStateProps {
-  readonly news: INews[]
+  news: INews[]
 }
 interface IDispatchProps {}
 

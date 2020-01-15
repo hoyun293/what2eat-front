@@ -1,4 +1,4 @@
 export interface INews {
-  readonly title: string
-  readonly user: string
+  title: string
+  user: string
 }
