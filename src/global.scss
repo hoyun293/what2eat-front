@@ -14,7 +14,9 @@
 @import '~@ionic/react/css/flex-utils.css';
 @import '~@ionic/react/css/display.css';
 
-@import 'theme/functional.scss';
-
 /* Theme variables */
-@import 'theme/variables.css';
+@import 'theme/ionic.css';
+
+@import 'theme/reset.scss';
+@import 'theme/functional.scss';
+@import 'theme/override.scss';

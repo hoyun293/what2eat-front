@@ -1,5 +1,6 @@
 import axios from 'axios'
 import config from '../config'
+import * as _ from 'lodash'
 
 const apiKey = config.GOOGLE_API_KEY
 
@@ -7,8 +8,10 @@ const apiKey = config.GOOGLE_API_KEY
 // 프론트에서 API를 호출하기 위해서는 아래와 같은 방법으로 PROXY 서버를 통해, CORS 허용 헤더를 붙여 RESPONSE시킨다.
 // https://stackoverflow.com/questions/43871637/no-access-control-allow-origin-header-is-present-on-the-requested-resource-whe/43881141#43881141
 const proxyUrl = 'https://cors-anywhere.herokuapp.com/'
-const googlePlaceAddr =
-  'https://maps.googleapis.com/maps/api/place/nearbysearch/json?language=ko&type=restaurant'
+const commonGooglePlaceAddr = 'https://maps.googleapis.com/maps/api/place'
+// const googlePlaceNearByAddr = `${commonGooglePlaceAddr}/nearbysearch/json?language=ko&type=restaurant`
+// const googlePlaceDetailAddr = `${commonGooglePlaceAddr}/nearbysearch/json?language=ko&type=restaurant`
+const googlePlacePhotoAddr = `${commonGooglePlaceAddr}/photo?maxwidth=400&photoreference=`
 
 interface IGetPlaceList {
   radius: number
@@ -19,8 +22,19 @@ interface IGetPlaceList {
 }
 
 // rankby : prominence or distance
-let places: any = []
-let count = 0
+// let places: any = []
+// let count = 0
+
+export const getPhotoUrl = async (photoReference: string) => {
+  // console.log(proxyUrl + googlePlacePhotoAddr + photoReference)
+
+  return axios.get(proxyUrl + googlePlacePhotoAddr + photoReference, {
+    params: {
+      key: apiKey
+    }
+  })
+}
+
 export const getPlaceList = async ({
   radius,
   longitude,
@@ -30,25 +44,43 @@ export const getPlaceList = async ({
 }: IGetPlaceList) => {
   console.log(`${latitude},${longitude}`)
 
-  const { data } = await axios.get(proxyUrl + googlePlaceAddr, {
-    params: {
-      key: apiKey,
-      location: `${longitude},${latitude}`,
-      radius,
-      rankby: sortBy,
-      pagetoken: nextPageToken
-    }
-  })
-  console.log(data)
+  // const { data } = await axios.get(proxyUrl + googlePlaceNearByAddr, {
+  //   params: {
+  //     key: apiKey,
+  //     location: `${longitude},${latitude}`,
+  //     radius,
+  //     rankby: sortBy,
+  //     pagetoken: nextPageToken
+  //   }
+  // })
+  // console.log(data)
 
-  places = places.concat(data.results)
-  console.log(data.next_page_token)
-  count++
-  if (!data.next_page_token || count > 3) return places
-  setTimeout(
-    () => getPlaceList({ radius, longitude, latitude, sortBy, nextPageToken: data.next_page_token }),
-    1200
+  // const photoReferences = _.map(data.results, v => _.get(v, 'photos[0].photo_reference'))
+  // console.log(photoReferences)
+
+  const x: any = await getPhotoUrl(
+    'CmRaAAAA-f_6wF9QLBN5hJTQY9Bg9xDS2iosXJoTWo0NGQxr0QNM8VURKSQF4nHxdfpj2_fsCHAo7y03-qcP9erjNfWdYNEyyUyaYso17vatTccOOmMwLE3IndYG0lAIY34codK-EhCvDPT55VkEsrnAe96aUbRaGhQuVslWtqwNS6BuSnr36SQgev6-bg'
   )
+  // console.log(x.data)
+  // console.log(photoReference)
+  // console.log(photoReferences)
+  // const res = await Promise.all(_.map(photoReferences, v => (v ? getPhotoUrl(v) : new Promise(r => r))))
+  // const res = await Promise.all(_.map(photoReferences, v => v && getPhotoUrl(v)))
+  // console.log(res)
+
+  // places = places.concat(data.results)
+  // console.log(data.next_page_token)
+  // count++
+  // if (!data.next_page_token || count > 3) return places
+  // getPlaceList({ radius, longitude, latitude, sortBy, nextPageToken: data.next_page_token })
+  // setTimeout(
+  //   () => getPlaceList({ radius, longitude, latitude, sortBy, nextPageToken: data.next_page_token }),
+  //   1200
+  // )
+  // setTimeout(
+  //   () => getPlaceList({ radius, longitude, latitude, sortBy, nextPageToken: data.next_page_token }),
+  //   2000
+  // )
 }
 
 //   let restaurantList = []
