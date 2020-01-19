@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="360" height="20" viewBox="0 0 360 20">
+    <defs>
+        <style>
+            .cls-1{fill:url(#linear-gradient)}
+        </style>
+        <linearGradient id="linear-gradient" x1=".5" x2=".5" y2="1" gradientUnits="objectBoundingBox">
+            <stop offset="0" stop-color="#f6f6f6" stop-opacity="0"/>
+            <stop offset="1" stop-color="#f6f6f6"/>
+        </linearGradient>
+    </defs>
+    <path id="floating_btn_bg_grey_gradient" d="M0 0h360v20H0z" class="cls-1" data-name="floating btn_bg_grey gradient"/>
+</svg>

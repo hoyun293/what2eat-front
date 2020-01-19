@@ -1,6 +1,7 @@
 import {
   IonContent,
   IonHeader,
+  IonFooter,
   IonPage,
   IonTitle,
   IonToolbar,
@@ -17,6 +18,9 @@ import { informationCircle } from 'ionicons/icons'
 import { connect } from '../redux/redux-connect'
 import { INews } from '../models/news'
 import { increaseExampleCount, setExampleNews, selectExampleNews } from '../redux/example/example-actions'
+import ButtonShadowUi from '../components/ui/ButtonShadowUi'
+import ButtonUi from '../components/ui/ButtonUi'
+import IconUi from '../components/ui/IconUi'
 
 interface IOwnProps {}
 interface IStateProps {
@@ -46,9 +50,9 @@ const Example: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <div className='flex'>
+          <div className='flex-center px-container'>
             <div className='w-1/6'>
-              {step > 1 && <IonButton onClick={() => setStep(step - 1)}>back</IonButton>}
+              {step > 1 && <IconUi iconName='icon-left-arrow' onClick={() => setStep(step - 1)} />}
             </div>
             <div className='w-4/6'>{step === 2 && <IonTitle>투표지 담기</IonTitle>}</div>
             <div className='w-1/6'>
@@ -57,33 +61,34 @@ const Example: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
           </div>
         </IonToolbar>
       </IonHeader>
-      <IonContent className='ion-padding'>
+      <IonContent className='ion-padding' fullscreen>
         <h1>
-          어떤 식사를 위한
+          새로운 투표를
           <br />
-          투표인가요?
+          생성합니다.
         </h1>
         {step === 1 && (
           <Fragment>
             <VoteSaveFormContainer />
-            <IonButton onClick={() => setStep(2)}>다음 1/3</IonButton>
           </Fragment>
         )}
         {step === 2 && (
           <Fragment>
             <VoteSaveFormFoodCartContainer />
-            <IonButton onClick={() => setStep(3)}>다음 2/3</IonButton>
           </Fragment>
         )}
         {step === 3 && (
           <Fragment>
             <VoteSaveFormOptionContainer />
-            <IonButton>투표 만들기 3/3</IonButton>
           </Fragment>
         )}
-
-        {/* <IonButton onClick={()=>setStep()}>다음</IonButton> */}
       </IonContent>
+      <IonFooter>
+        {(step === 1 || step === 2) && (
+          <ButtonShadowUi onClick={() => setStep(step + 1)} text='다음' color='yellow' />
+        )}
+        {step === 3 && <ButtonShadowUi onClick={() => {}} color='yellow' text='저장' />}
+      </IonFooter>
     </IonPage>
   )
 }

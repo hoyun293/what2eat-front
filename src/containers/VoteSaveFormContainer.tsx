@@ -1,9 +1,11 @@
 import React from 'react'
 import * as _ from 'lodash'
+import { IonInput } from '@ionic/react'
 
 import { INews } from '../models/news.d'
 import { connect } from '../redux/redux-connect'
 import { getPlaceList } from '../api/google-api'
+import InputUi from '../components/ui/InputUi'
 
 interface IOwnProps {}
 interface IStateProps {
@@ -15,17 +17,13 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
   React.useEffect(() => {
     googleFunction()
   }, [])
-  const googleFunction = async () => {
-    const res = await getPlaceList({
-      radius: 1000,
-      longitude: 37.482643,
-      latitude: 126.896992,
-      sortBy: 'prominence'
-    })
-    console.log('TCL: googleFunction -> re', res)
-  }
+  const googleFunction = async () => {}
 
-  return <ol></ol>
+  return (
+    <div>
+      <InputUi placeholder='투표명을 입력해주세요'></InputUi>
+    </div>
+  )
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({

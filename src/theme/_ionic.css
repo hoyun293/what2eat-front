@@ -1,0 +1,53 @@
+/* Ionic Variables and Theming. For more info, please see:
+http://ionicframework.com/docs/theming/ */
+
+/** Ionic CSS Variables **/
+:root {
+  --ion-color-yellow: #fee000;
+  --ion-color-yellow-rgb: 254, 224, 0;
+  --ion-color-yellow-contrast: #000000;
+  --ion-color-yellow-contrast-rgb: 0, 0, 0;
+  --ion-color-yellow-shade: #e0c500;
+  --ion-color-yellow-tint: #fee31a;
+
+  --ion-color-disabled: #dfe2e6;
+  --ion-color-disabled-rgb: 223, 226, 230;
+  --ion-color-disabled-contrast: #000000;
+  --ion-color-disabled-contrast-rgb: 0, 0, 0;
+  --ion-color-disabled-shade: #c4c7ca;
+  --ion-color-disabled-tint: #e2e5e9;
+
+  --ion-color-gray: #f8f8f8;
+  --ion-color-gray-rgb: 248, 248, 248;
+  --ion-color-gray-contrast: #000000;
+  --ion-color-gray-contrast-rgb: 0, 0, 0;
+  --ion-color-gray-shade: #dadada;
+  --ion-color-gray-tint: #f9f9f9;
+}
+
+.ion-color-yellow {
+  --ion-color-base: var(--ion-color-yellow);
+  --ion-color-base-rgb: var(--ion-color-yellow-rgb);
+  --ion-color-contrast: var(--ion-color-yellow-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-yellow-contrast-rgb);
+  --ion-color-shade: var(--ion-color-yellow-shade);
+  --ion-color-tint: var(--ion-color-yellow-tint);
+}
+
+.ion-color-disabled {
+  --ion-color-base: var(--ion-color-disabaled);
+  --ion-color-base-rgb: var(--ion-color-disabled-rgb);
+  --ion-color-contrast: var(--ion-color-disabled-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-disabled-contrast-rgb);
+  --ion-color-shade: var(--ion-color-disabled-shade);
+  --ion-color-tint: var(--ion-color-disabled-tint);
+}
+
+.ion-color-gray {
+  --ion-color-base: var(--ion-color-gray);
+  --ion-color-base-rgb: var(--ion-color-gray-rgb);
+  --ion-color-contrast: var(--ion-color-gray-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-gray-contrast-rgb);
+  --ion-color-shade: var(--ion-color-gray-shade);
+  --ion-color-tint: var(--ion-color-gray-tint);
+}
