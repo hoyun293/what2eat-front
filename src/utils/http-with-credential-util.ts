@@ -22,7 +22,7 @@ const _axios = axios.create({
 // Add a response interceptor
 _axios.interceptors.response.use(
   response => {
-    return response.data
+    return JSON.parse(response.data)
   },
   error => {
     console.log(error)

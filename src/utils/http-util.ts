@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from 'axios'
+import axios from 'axios'
 import config from '../config'
 
 interface IAxiosResponse {
@@ -21,8 +21,7 @@ const _axios = axios.create({
 
 _axios.interceptors.response.use(
   response => {
-    console.log(response)
-    return response.data
+    return JSON.parse(response.data)
   },
   error => {
     console.log(error)
