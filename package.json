@@ -4,7 +4,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "dev": "ionic serve -p 5500",
+    "dev": "concurrently \"npm run server\" \"npm run front\"",
+    "front": "ionic serve -p 5500",
+    "server": "nodemon --watch server server/index.js",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -37,7 +39,15 @@
     "@types/react-router": "^5.1.1",
     "@types/react-router-dom": "^5.1.0",
     "@types/recompose": "^0.30.7",
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.0.2",
+    "cookie-parser": "^1.4.4",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "faker": "^4.1.0",
+    "morgan": "^1.9.1",
     "node-sass": "^4.13.0",
+    "nodemon": "^2.0.2",
     "typescript": "3.6.3"
   },
   "eslintConfig": {
