@@ -3,11 +3,7 @@ html {
 }
 
 .ion-page {
-  font-size: 16px;
-}
-
-main {
-  overflow: hidden;
+  font-size: 16px; // default font size로 복구
 }
 
 @media (min-width: 720px) {
@@ -19,6 +15,5 @@ main {
     max-width: 720px;
     position: relative;
     margin: auto;
-    height: auto;
   }
 }
