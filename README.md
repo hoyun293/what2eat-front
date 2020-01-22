@@ -31,3 +31,36 @@ express 서버로 구성, mock data 라이브러리로 faker.js 이용, https://
 > yarn server
 
 `localhost:5050/api/news` 를 호출 하면 api 결과를 볼 수 있습니다.
+
+# build 준비
+
+- setup
+
+https://capacitor.ionicframework.com/docs/getting-started/dependencies
+
+- capacitor init(이미 하였음)
+
+https://capacitor.ionicframework.com/docs/getting-started/with-ionic/
+
+- create ios
+
+https://capacitor.ionicframework.com/docs/ios
+
+```
+$ yarn build
+
+// ios platform 추가
+$ npx cap add ios
+
+// update dependencies and copies any web assets to your project
+$ npx cap sync
+
+// launch xcode
+$ npx cap open
+```
+
+# 배포
+
+- build 한 파일 구동
+
+> yarn build && yarn serve:build

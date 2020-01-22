@@ -1,5 +1,7 @@
 {
   "name": "what2eat-front",
-  "integrations": {},
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "react"
 }

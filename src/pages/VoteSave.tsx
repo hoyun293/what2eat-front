@@ -22,6 +22,10 @@ import ButtonShadowUi from '../components/ui/ButtonShadowUi'
 import ButtonUi from '../components/ui/ButtonUi'
 import IconUi from '../components/ui/IconUi'
 
+import { Plugins } from '@capacitor/core'
+
+const { Geolocation } = Plugins
+
 interface IOwnProps {}
 interface IStateProps {
   news: INews[]
@@ -42,8 +46,14 @@ const Example: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 }) => {
   const [step, setStep] = useState(1)
 
+  const getCurrentPosition = async () => {
+    const coordinates = await Geolocation.getCurrentPosition()
+    console.log('Current', coordinates)
+  }
+
   useEffect(() => {
     selectExampleNews()
+    getCurrentPosition()
   }, []) // eslint-disable-line
 
   return (

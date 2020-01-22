@@ -1,0 +1,8 @@
+{
+  "appId": "kr.what2eat.app",
+  "appName": "what2eat",
+  "bundledWebRuntime": false,
+  "npmClient": "yarn",
+  "webDir": "www",
+  "cordova": {}
+}

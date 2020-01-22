@@ -8,10 +8,13 @@
     "front": "ionic serve -p 5500",
     "server": "nodemon --watch server server/index.js",
     "build": "react-scripts build",
+    "serve:build": "npx serve -s build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@capacitor/core": "1.4.0",
+    "@capacitor/ios": "^1.4.0",
     "@ionic/react": "^4.11.0",
     "@ionic/react-router": "^4.11.0",
     "@types/react-redux": "^7.1.5",
@@ -31,6 +34,7 @@
     "use-saga-reducer": "^2.0.0"
   },
   "devDependencies": {
+    "@capacitor/cli": "1.4.0",
     "@types/jest": "^24.0.18",
     "@types/lodash": "^4.14.149",
     "@types/node": "^12.7.12",
@@ -39,6 +43,7 @@
     "@types/react-router": "^5.1.1",
     "@types/react-router-dom": "^5.1.0",
     "@types/recompose": "^0.30.7",
+    "babel-loader": "^8.0.6",
     "body-parser": "^1.19.0",
     "concurrently": "^5.0.2",
     "cookie-parser": "^1.4.4",
