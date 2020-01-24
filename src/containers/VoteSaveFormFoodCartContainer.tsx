@@ -1,9 +1,10 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import * as _ from 'lodash'
 
 import { INews } from '../models/news.d'
 import { connect } from '../redux/redux-connect'
-import { getPlaceList } from '../api/google-api'
+import { getAddressByCoordinate } from '../api/google-api'
+import { Plugins } from '@capacitor/core'
 
 interface IOwnProps {}
 interface IStateProps {
@@ -13,19 +14,18 @@ interface IDispatchProps {}
 
 const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ news }) => {
   useEffect(() => {
-    googleFunction()
+    getCurrentPosition()
   }, [])
-  const googleFunction = async () => {
-    const res = await getPlaceList({
-      radius: 1000,
-      longitude: 37.482643,
-      latitude: 126.896992,
-      sortBy: 'prominence'
-    })
-    console.log('TCL: googleFunction -> re', res)
+
+  const [address, setAddress] = useState('')
+
+  const getCurrentPosition = async () => {
+    const { coords } = await Plugins.Geolocation.getCurrentPosition()
+    const { data }: any = await getAddressByCoordinate(coords.latitude, coords.longitude)
+    setAddress(_.get(data.results, '[0].formatted_address'))
   }
 
-  return <ol></ol>
+  return <ol>{address}</ol>
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({

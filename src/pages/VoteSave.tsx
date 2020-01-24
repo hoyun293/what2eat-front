@@ -1,19 +1,8 @@
-import {
-  IonContent,
-  IonHeader,
-  IonFooter,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonButton,
-  IonIcon,
-  IonLabel
-} from '@ionic/react'
+import { IonContent, IonHeader, IonFooter, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/react'
 import VoteSaveFormContainer from '../containers/VoteSaveFormContainer'
 import VoteSaveFormFoodCartContainer from '../containers/VoteSaveFormFoodCartContainer'
 import VoteSaveFormOptionContainer from '../containers/VoteSaveFormOptionContainer'
 import React, { useEffect, useState, Fragment } from 'react'
-import { informationCircle } from 'ionicons/icons'
 
 import { connect } from '../redux/redux-connect'
 import { INews } from '../models/news'
@@ -21,10 +10,6 @@ import { increaseExampleCount, setExampleNews, selectExampleNews } from '../redu
 import ButtonShadowUi from '../components/ui/ButtonShadowUi'
 import ButtonUi from '../components/ui/ButtonUi'
 import IconUi from '../components/ui/IconUi'
-
-import { Plugins } from '@capacitor/core'
-
-const { Geolocation } = Plugins
 
 interface IOwnProps {}
 interface IStateProps {
@@ -46,14 +31,8 @@ const Example: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 }) => {
   const [step, setStep] = useState(1)
 
-  const getCurrentPosition = async () => {
-    const coordinates = await Geolocation.getCurrentPosition()
-    console.log('Current', coordinates)
-  }
-
   useEffect(() => {
     selectExampleNews()
-    getCurrentPosition()
   }, []) // eslint-disable-line
 
   return (

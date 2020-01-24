@@ -12,6 +12,7 @@ const commonGooglePlaceAddr = 'https://maps.googleapis.com/maps/api/place'
 // const googlePlaceNearByAddr = `${commonGooglePlaceAddr}/nearbysearch/json?language=ko&type=restaurant`
 // const googlePlaceDetailAddr = `${commonGooglePlaceAddr}/nearbysearch/json?language=ko&type=restaurant`
 const googlePlacePhotoAddr = `${commonGooglePlaceAddr}/photo?maxwidth=400&photoreference=`
+const googleGeocodeAddr = `https://maps.googleapis.com/maps/api/geocode/json?key=${config.GOOGLE_GEO_KEY}`
 
 interface IGetPlaceList {
   radius: number
@@ -21,9 +22,13 @@ interface IGetPlaceList {
   nextPageToken?: string
 }
 
-// rankby : prominence or distance
-// let places: any = []
-// let count = 0
+export const getAddressByCoordinate = async (lat: number, lng: number) => {
+  return axios.get(proxyUrl + googleGeocodeAddr, {
+    params: {
+      latlng: `${lat},${lng}`
+    }
+  })
+}
 
 export const getPhotoUrl = async (photoReference: string) => {
   // console.log(proxyUrl + googlePlacePhotoAddr + photoReference)
