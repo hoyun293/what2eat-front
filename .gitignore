@@ -9,12 +9,7 @@
 /coverage
 
 # production
-/build/assets
-/build/static
-/build/index.html
-/build/*.json
-/build/*.js
-
+/build
 
 # misc
 .DS_Store
