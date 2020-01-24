@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="18" viewBox="0 0 16 18">
+    <defs>
+        <style>
+            .cls-1{fill:#fff;opacity:0}.cls-2{fill:none;stroke:#c2c7cc;stroke-linecap:round}
+        </style>
+    </defs>
+    <g id="vote_option_icon_arrow" data-name="vote option_icon_arrow" transform="translate(-328 -357)">
+        <path id="bg" d="M0 0h16v18H0z" class="cls-1" transform="translate(328 357)"/>
+        <path id="vote_option_icon_arrow-2" d="M1609.4 3546.713l-6.818 7.083 6.818 6.917" class="cls-2" data-name="vote option_icon_arrow" transform="rotate(-90 -622.405 2595.308)"/>
+    </g>
+</svg>

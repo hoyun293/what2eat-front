@@ -2,7 +2,9 @@ import { IExampleState } from './example/example-state'
 import { combineReducers } from './combine-reducers'
 import example from './example/example-reducer'
 import user from './user/user-reducer'
+import vote from './vote/vote-reducer'
 import { IUserState } from './user/user-state'
+import { IVoteState } from './vote/vote-state'
 
 export const initialState: IState = {
   example: {
@@ -15,12 +17,21 @@ export const initialState: IState = {
     userDomain: {},
     isLoading: false,
     errorMessage: ''
-  } as IUserState
+  } as IUserState,
+  vote: {
+    voteForm: {
+      voteName: '',
+      placeIds: []
+    },
+    isLoading: false,
+    errorMessage: ''
+  } as IVoteState
 }
 
 export const rootReducers = combineReducers({
   example,
-  user
+  user,
+  vote
 })
 
 export type IState = ReturnType<typeof rootReducers>

@@ -10,19 +10,19 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-yellow-shade: #e0c500;
   --ion-color-yellow-tint: #fee31a;
 
-  --ion-color-disabled: #dfe2e6;
-  --ion-color-disabled-rgb: 223, 226, 230;
-  --ion-color-disabled-contrast: #000000;
-  --ion-color-disabled-contrast-rgb: 0, 0, 0;
-  --ion-color-disabled-shade: #c4c7ca;
-  --ion-color-disabled-tint: #e2e5e9;
+  --ion-color-border: #dfe2e6;
+  --ion-color-border-rgb: 223, 226, 230;
+  --ion-color-border-contrast: #000000;
+  --ion-color-border-contrast-rgb: 0, 0, 0;
+  --ion-color-border-shade: #c4c7ca;
+  --ion-color-border-tint: #e2e5e9;
 
-  --ion-color-gray: #f8f8f8;
-  --ion-color-gray-rgb: 248, 248, 248;
+  --ion-color-gray: #c2c7cc;
+  --ion-color-gray-rgb: 194, 199, 204;
   --ion-color-gray-contrast: #000000;
   --ion-color-gray-contrast-rgb: 0, 0, 0;
-  --ion-color-gray-shade: #dadada;
-  --ion-color-gray-tint: #f9f9f9;
+  --ion-color-gray-shade: #abafb4;
+  --ion-color-gray-tint: #c8cdd1;
 }
 
 .ion-color-yellow {
@@ -34,13 +34,13 @@ http://ionicframework.com/docs/theming/ */
   --ion-color-tint: var(--ion-color-yellow-tint);
 }
 
-.ion-color-disabled {
+.ion-color-border {
   --ion-color-base: var(--ion-color-disabaled);
-  --ion-color-base-rgb: var(--ion-color-disabled-rgb);
-  --ion-color-contrast: var(--ion-color-disabled-contrast);
-  --ion-color-contrast-rgb: var(--ion-color-disabled-contrast-rgb);
-  --ion-color-shade: var(--ion-color-disabled-shade);
-  --ion-color-tint: var(--ion-color-disabled-tint);
+  --ion-color-base-rgb: var(--ion-color-border-rgb);
+  --ion-color-contrast: var(--ion-color-border-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-border-contrast-rgb);
+  --ion-color-shade: var(--ion-color-border-shade);
+  --ion-color-tint: var(--ion-color-border-tint);
 }
 
 .ion-color-gray {

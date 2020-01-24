@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="20.381" height="12" viewBox="0 0 20.381 12">
+    <defs>
+        <style>
+            .cls-1{fill:#fff;opacity:0}.cls-2{fill:none;stroke:#959da6}
+        </style>
+    </defs>
+    <g id="vote_option_icon_chk" data-name="vote option_icon_chk" transform="translate(-243.82 -346.706)">
+        <path id="bg" d="M0 0h20v12H0z" class="cls-1" transform="translate(244.201 346.706)"/>
+        <path id="vote_option_icon_chk-2" d="M0 3.729l4.491 4.288L12.821 0" class="cls-2" data-name="vote option_icon_chk" transform="rotate(-6.02 3438.958 -2144.774)"/>
+        <path id="vote_option_icon_chk-3" d="M0 6.952l1.068 1.065L9.4 0" class="cls-2" data-name="vote option_icon_chk" transform="rotate(-6.02 3432.557 -2224.758)"/>
+    </g>
+</svg>

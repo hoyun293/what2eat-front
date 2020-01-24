@@ -5,35 +5,23 @@ import VoteSaveFormOptionContainer from '../containers/VoteSaveFormOptionContain
 import React, { useEffect, useState, Fragment } from 'react'
 
 import { connect } from '../redux/redux-connect'
-import { INews } from '../models/news'
-import { increaseExampleCount, setExampleNews, selectExampleNews } from '../redux/example/example-actions'
 import ButtonShadowUi from '../components/ui/ButtonShadowUi'
 import ButtonUi from '../components/ui/ButtonUi'
 import IconUi from '../components/ui/IconUi'
+import { IVote } from '../models/vote'
 
 interface IOwnProps {}
 interface IStateProps {
-  news: INews[]
-  count: number
+  voteForm: IVote
 }
-interface IDispatchProps {
-  increaseExampleCount: typeof increaseExampleCount
-  setExampleNews: typeof setExampleNews
-  selectExampleNews: typeof selectExampleNews
-}
+interface IDispatchProps {}
 
-const Example: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
-  news,
-  count,
-  increaseExampleCount,
-  setExampleNews,
-  selectExampleNews
-}) => {
+const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm }) => {
   const [step, setStep] = useState(1)
 
-  useEffect(() => {
-    selectExampleNews()
-  }, []) // eslint-disable-line
+  useEffect(() => {}, []) // eslint-disable-line
+
+  console.log(voteForm)
 
   return (
     <IonPage>
@@ -44,23 +32,14 @@ const Example: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
               {step > 1 && <IconUi iconName='icon-left-arrow' onClick={() => setStep(step - 1)} />}
             </div>
             <div className='w-4/6'>{step === 2 && <IonTitle>투표지 담기</IonTitle>}</div>
-            <div className='w-1/6'>
-              <IonButton href='/home'>X</IonButton>
+            <div className='w-1/6 text-right'>
+              <IconUi iconName='close' onClick={() => (window.location.href = '/home')}></IconUi>
             </div>
           </div>
         </IonToolbar>
       </IonHeader>
       <IonContent className='ion-padding' fullscreen>
-        <h1>
-          새로운 투표를
-          <br />
-          생성합니다.
-        </h1>
-        {step === 1 && (
-          <Fragment>
-            <VoteSaveFormContainer />
-          </Fragment>
-        )}
+        {step === 1 && <VoteSaveFormContainer />}
         {step === 2 && (
           <Fragment>
             <VoteSaveFormFoodCartContainer />
@@ -68,13 +47,32 @@ const Example: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
         )}
         {step === 3 && (
           <Fragment>
-            <VoteSaveFormOptionContainer />
+            <div className='text-xxxl font-bold mb-7 text-center'>
+              투표가
+              <br />
+              생성되었습니다!
+            </div>
+            {/* <VoteSaveFormOptionContainer /> */}
           </Fragment>
         )}
       </IonContent>
       <IonFooter>
-        {(step === 1 || step === 2) && (
-          <ButtonShadowUi onClick={() => setStep(step + 1)} text='다음' color='yellow' />
+        {voteForm.placeIds.length} 2
+        {step === 1 && (
+          <ButtonShadowUi
+            disabled={!voteForm.voteName}
+            onClick={() => setStep(step + 1)}
+            text='다음'
+            color='yellow'
+          />
+        )}
+        {step === 2 && (
+          <ButtonShadowUi
+            disabled={voteForm.placeIds.length === 0}
+            onClick={() => setStep(step + 1)}
+            text='다음'
+            color='yellow'
+          />
         )}
         {step === 3 && <ButtonShadowUi onClick={() => {}} color='yellow' text='저장' />}
       </IonFooter>
@@ -83,14 +81,9 @@ const Example: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ example }) => ({
-    news: example.news,
-    count: example.count
+  mapStateToProps: ({ vote }) => ({
+    voteForm: vote.voteForm
   }),
-  mapDispatchToProps: {
-    selectExampleNews,
-    increaseExampleCount,
-    setExampleNews
-  },
-  component: React.memo(Example)
+  mapDispatchToProps: {},
+  component: VoteSave
 })

@@ -12,8 +12,6 @@ export const signIn = () => async (dispatch: React.Dispatch<any>) => {
       dispatch(setUserDomain(result))
       dispatch(setUserIsLoading(false))
 
-      // TODO : 테스트 필요
-      console.log(result.token)
       localStorage.setItem('token', result.token)
       localStorage.setItem('account', result.account)
       setAuthoriation(result.token)

@@ -1,6 +1,45 @@
 // color
 $yellow: #fee000;
-$disabled: #dfe2e6;
-$gray: #f8f8f8;
+$border: #dfe2e6;
+$gray: #c2c7cc;
+// $gray: #f8f8f8;
 
 $padding-container: 1.6rem;
+
+$text-xs-size: 1.2rem;
+$text-sm-size: 1.3rem;
+$text-base-size: 1.4rem;
+$text-lg-size: 1.5rem;
+$text-xl-size: 1.6rem;
+$text-xxl-size: 1.9rem;
+$text-xxxl-size: 2.9rem;
+
+%text-xs {
+  font-size: $text-xs-size;
+  line-height: 2.8rem;
+}
+
+%text-sm {
+  font-size: $text-sm-size;
+  line-height: 2.8rem;
+}
+%text-base {
+  font-size: $text-base-size;
+  line-height: 3.6rem;
+}
+%text-lg {
+  font-size: $text-lg-size;
+  line-height: 3.6rem;
+}
+%text-xl {
+  font-size: $text-xl-size;
+  line-height: 3.6rem;
+}
+%text-xxl {
+  font-size: $text-xxl-size;
+  line-height: 3.6rem;
+}
+%text-xxxl {
+  font-size: $text-xxxl-size;
+  line-height: 3.6rem;
+}
