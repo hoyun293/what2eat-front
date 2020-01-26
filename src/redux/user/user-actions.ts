@@ -5,6 +5,14 @@ import { postSignInApi } from '../../api/user-api'
 import { setAuthoriation } from '../../utils/http-with-credential-util'
 
 export const signIn = () => async (dispatch: React.Dispatch<any>) => {
+  const accountTs = localStorage.getItem('account-ts') || '0'
+  const ts = new Date().getTime()
+  //3 hour
+  const expire = 1000 * 60 * 60 * 3
+  if (parseInt(accountTs) + expire > ts) {
+    return true
+  }
+
   dispatch(setUserIsLoading(true))
 
   postSignInApi()
