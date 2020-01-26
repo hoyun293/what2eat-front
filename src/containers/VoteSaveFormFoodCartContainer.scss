@@ -1,0 +1,38 @@
+@import '../theme/variable';
+
+.back-btn {
+  position: absolute;
+  z-index: 1;
+  padding-top: $padding-container;
+  padding-left: $padding-container;
+}
+
+.map-container {
+  position: absolute;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  border: 1px $border solid;
+}
+
+.reload-btn-container {
+  padding: 1.1rem;
+  bottom: 7.8rem;
+  right: 1.4rem;
+
+  .reload-btn {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+}
+
+.address-container {
+  width: 93%;
+  height: 5.8rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  padding: 1.7rem 1rem 1.7rem 1rem;
+  bottom: 1rem;
+}

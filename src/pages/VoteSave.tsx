@@ -27,12 +27,16 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm
     <IonPage>
       <IonHeader>
         <IonToolbar>
-          <div className='flex-center px-container'>
-            <div className='w-1/6'>
-              {step > 1 && <IconUi iconName='icon-left-arrow' onClick={() => setStep(step - 1)} />}
+          <div className='flex justify-between items-center px-container'>
+            <div>{step > 1 && <IconUi iconName='icon-left-arrow' onClick={() => setStep(step - 1)} />}</div>
+            <div>
+              {step === 2 && (
+                <IonTitle>
+                  <div className='text-xl text-medium black'>투표지 담기</div>
+                </IonTitle>
+              )}
             </div>
-            <div className='w-4/6'>{step === 2 && <IonTitle>투표지 담기</IonTitle>}</div>
-            <div className='w-1/6 text-right'>
+            <div>
               <IconUi iconName='close' onClick={() => history.push('/home')}></IconUi>
             </div>
           </div>

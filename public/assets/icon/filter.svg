@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="9" height="11" viewBox="0 0 9 11">
+    <defs>
+        <style>
+            .cls-1,.cls-4{fill:none}.cls-1,.cls-2{stroke:#333}.cls-2{fill:#fff}.cls-3{stroke:none}
+        </style>
+    </defs>
+    <g id="filter_btn_icon" data-name="filter btn_icon" transform="translate(-30.5 -156.5)">
+        <g id="그룹_1174" data-name="그룹 1174">
+            <path id="선_19" d="M0 0v11" class="cls-1" data-name="선 19" transform="translate(32.5 156.5)"/>
+            <g id="타원_1213" class="cls-2" data-name="타원 1213" transform="translate(30.5 158)">
+                <circle cx="2" cy="2" r="2" class="cls-3"/>
+                <circle cx="2" cy="2" r="1.5" class="cls-4"/>
+            </g>
+        </g>
+        <g id="그룹_1175" data-name="그룹 1175" transform="translate(35.5 156.5)">
+            <path id="선_19-2" d="M0 11V0" class="cls-1" data-name="선 19" transform="translate(2)"/>
+            <g id="타원_1213-2" class="cls-2" data-name="타원 1213" transform="translate(0 5.5)">
+                <circle cx="2" cy="2" r="2" class="cls-3"/>
+                <circle cx="2" cy="2" r="1.5" class="cls-4"/>
+            </g>
+        </g>
+    </g>
+</svg>

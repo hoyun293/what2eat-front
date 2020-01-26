@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" viewBox="0 0 23 23">
+    <defs>
+        <style>
+            .cls-1{fill:#ebedef}.cls-2{fill:#333}
+        </style>
+    </defs>
+    <g id="location_btn" transform="translate(-187 -68)">
+        <circle id="location_btn_circle" cx="11.5" cy="11.5" r="11.5" class="cls-1" transform="translate(187 68)"/>
+        <path id="location_btn_icon" d="M817.24 1255.1l-9.873 3.14 5.195.836.784 5.112z" class="cls-2" transform="translate(-614.4 -1179.168)"/>
+    </g>
+</svg>

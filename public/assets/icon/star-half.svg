@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 11 11">
+    <defs>
+        <style>
+            .cls-1{fill:#dfe2e6}.cls-2{clip-path:url(#clip-path)}.cls-3{fill:#fee000}
+        </style>
+        <clipPath id="clip-path">
+            <path id="list_restaurant_icon_star_half" d="M239.9 98.949l1.046 3.134a.442.442 0 0 0 .332.253l3.35.209a.468.468 0 0 1 .245.787l-2.712 1.834a.476.476 0 0 0-.127.409l1.033 3.576a.445.445 0 0 1-.639.487l-2.742-2.268a.421.421 0 0 0-.41 0l-2.692 2.268a.445.445 0 0 1-.639-.487l.767-3.576a.476.476 0 0 0-.127-.409l-2.445-1.834a.467.467 0 0 1 .244-.787l3.181-.209a.443.443 0 0 0 .332-.253l1.215-3.134a.432.432 0 0 1 .788 0z" class="cls-1" transform="translate(-166.506 311.809)"/>
+        </clipPath>
+    </defs>
+    <g id="list_restaurant_icon_star_half-2" data-name="list_restaurant_icon_star_half" transform="translate(-67.5 -411)">
+        <path id="list_restaurant_icon_star_half-3" d="M239.9 98.949l1.046 3.134a.443.443 0 0 0 .332.253l3.35.209a.468.468 0 0 1 .245.787l-2.712 1.834a.476.476 0 0 0-.127.409l1.033 3.576a.445.445 0 0 1-.639.487l-2.742-2.268a.421.421 0 0 0-.41 0l-2.692 2.268a.445.445 0 0 1-.639-.487l.767-3.576a.476.476 0 0 0-.127-.409l-2.445-1.834a.467.467 0 0 1 .244-.787l3.181-.209a.443.443 0 0 0 .332-.253l1.215-3.134a.432.432 0 0 1 .788 0z" class="cls-1" data-name="list_restaurant_icon_star_half" transform="translate(-166.506 312.309)"/>
+        <g id="마스크_그룹_110" class="cls-2" data-name="마스크 그룹 110" transform="translate(0 .5)">
+            <path id="사각형_368" d="M0 0h6v11H0z" class="cls-3" data-name="사각형 368" transform="translate(67 410.5)"/>
+        </g>
+    </g>
+</svg>

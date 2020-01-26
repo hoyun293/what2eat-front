@@ -43,3 +43,10 @@ $text-xxxl-size: 2.9rem;
   font-size: $text-xxxl-size;
   line-height: 3.6rem;
 }
+
+%ellipsis {
+  word-break: break-all;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

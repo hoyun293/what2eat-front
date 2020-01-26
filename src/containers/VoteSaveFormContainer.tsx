@@ -40,7 +40,7 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
           }
         ></InputUi>
         <div className='x-divider' />
-        <div className='text-right text-xs text-gray mt-1'>{voteForm.voteName.length || 0}/24</div>
+        <div className='text-right text-xs gray mt-1'>{voteForm.voteName.length || 0}/24</div>
       </div>
 
       <div className='x-divider mt-8' />
@@ -63,7 +63,7 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
           <IconUi className='pr-3' iconName='clock'></IconUi>
           <div className='text-xl text-medium mb-1'>마감시한 설정</div>
         </div>
-        <div className='text-purple flex items-center'>
+        <div className='purple flex items-center'>
           <DateTime
             ref={datepickerRef}
             value={voteForm.endDate}

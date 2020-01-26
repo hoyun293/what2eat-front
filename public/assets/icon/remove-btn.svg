@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="42" height="42" viewBox="0 0 42 42">
+    <defs>
+        <style>
+            .cls-1{fill:#5f5cce}.cls-2{fill:none;stroke:#fff}
+        </style>
+    </defs>
+    <g id="list_restaurants_btn_remove" transform="translate(1.358 1)">
+        <circle id="타원_1113" cx="21" cy="21" r="21" class="cls-1" data-name="타원 1113" transform="translate(-1.358 -1)"/>
+        <g id="그룹_1157" data-name="그룹 1157" transform="translate(-1 3.5)">
+            <path id="선_15" d="M0 0h13" class="cls-2" data-name="선 15" transform="translate(14.142 16.5)"/>
+        </g>
+    </g>
+</svg>
