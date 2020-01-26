@@ -4,12 +4,12 @@ import * as _ from 'lodash'
 import { connect } from '../redux/redux-connect'
 import { getAddressByCoordinate } from '../api/google-api'
 import { Plugins } from '@capacitor/core'
-import { IVote } from '../models/vote'
+import { IVoteForm } from '../models/vote'
 import { setVoteForm } from '../redux/vote/vote-actions'
 
 interface IOwnProps {}
 interface IStateProps {
-  voteForm: IVote
+  voteForm: IVoteForm
 }
 interface IDispatchProps {
   setVoteForm: typeof setVoteForm

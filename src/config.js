@@ -1,4 +1,6 @@
 export default {
+  BASE_URL: 'http://localhost:5050/api',
+  // BASE_URL: 'https://rm7is5pi3b.execute-api.ap-northeast-2.amazonaws.com/dev',
   BASE_URL: 'https://rm7is5pi3b.execute-api.ap-northeast-2.amazonaws.com/dev',
   AUTH_PUBKEY: `-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDKV3M9UazjIEUEVI/Gq8MNTrd2
