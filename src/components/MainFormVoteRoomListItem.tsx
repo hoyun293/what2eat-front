@@ -1,17 +1,20 @@
 import * as React from 'react'
 
-interface IExampleListItemProps {
-  title: string
-  user: string
+interface IMainFromVoteRoomListItemProps {
+  vote_room_title: string
+  vote_room_status: boolean
+  is_private_status: boolean
 }
 
-const ExampleListItem: React.FunctionComponent<IExampleListItemProps> = props => {
+const MainFormVoteRoomListItem: React.FunctionComponent<IMainFromVoteRoomListItemProps> = props => {
   return (
     <li>
-      <h1>{props.title}</h1>
-      <div>{props.user}</div>
+      <h1>{props.vote_room_title}</h1>
+      <div>{props.vote_room_status}</div>
+      <div>{props.is_private_status}</div>
+
     </li>
   )
 }
 
-export default ExampleListItem
+export default MainFormVoteRoomListItem

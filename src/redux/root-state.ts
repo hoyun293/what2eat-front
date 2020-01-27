@@ -30,12 +30,7 @@ export const initialState: IState = {
     errorMessage: ''
   } as IVoteState,
   voteRoom: {
-    voteRoom: {
-      vote_room_key: 0,
-      vote_room_title: '',
-      vote_room_status: true,
-      is_private_status: false
-    },
+    voteRooms: [],
     isLoading: false,
     errorMessage: ''
   } as IVoteRoomState
