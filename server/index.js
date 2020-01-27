@@ -1,6 +1,6 @@
 const express = require('express')
 const apis = require('./routes')
-const PORT = 80
+const PORT = 5050
 
 const server = express()
 
