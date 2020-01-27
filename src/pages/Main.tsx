@@ -40,7 +40,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm }) 
           <br />
           하루되세요
         </div>
-        <div className='backgound-img'>
+        <div className='background-img'>
           {step === 1}
           {step === 2 && <Fragment></Fragment>}
           {step === 3 && (

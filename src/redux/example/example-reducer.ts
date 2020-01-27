@@ -12,7 +12,7 @@ export default function exampleReducer(state: IExampleState, action: TExampleAct
     case SET_EXAMPLE_IS_LOADING:
       return { ...state, isLoading: action.isLoading }
     case SET_EXAMPLE_NEWS:
-      return { ...state, ...action.payload }
+      return { ...state, news: action.news }
     case SET_EXAMPLE_ERROR_MESSAGE:
       return { ...state, errorMessage: action.errorMessage }
     case INCREASE_EXAMPLE_COUNT:

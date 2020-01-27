@@ -1,7 +1,7 @@
 import * as React from 'react'
 import * as _ from 'lodash'
 
-import { IVoteRoom } from '../models/voteRoom'
+import { IVoteRoom } from '../models/vote-room'
 import MainFormVoteRoomListItem from '../components/MainFormVoteRoomListItem'
 import { connect } from '../redux/redux-connect'
 

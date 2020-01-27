@@ -3,10 +3,10 @@ import { combineReducers } from './combine-reducers'
 import example from './example/example-reducer'
 import user from './user/user-reducer'
 import vote from './vote/vote-reducer'
-import voteRoom from './voteRoom/voteRoom-reducer'
+import voteRoom from './vote-room/vote-room-reducer'
 import { IUserState } from './user/user-state'
 import { IVoteState } from './vote/vote-state'
-import { IVoteRoomState } from './voteRoom/voteRoom-state'
+import { IVoteRoomState } from './vote-room/vote-room-state'
 
 export const initialState: IState = {
   example: {

@@ -855,17 +855,18 @@
   position: fixed;
   left: 0;
   bottom: 0;
-
   width: 100%;
   text-align: center;
 }
 
-.backgound-img {
-  background-image: url('../assets/main_bg.svg');
+.background-img {
+  background-image: url('/assets/img/main_bg.svg');
+  background-size: cover;
   width: 100%;
-  height: 1064px;
+  height: 100%;
+  //height: 106.4rem;
   background-repeat: no-repeat;
-  background-position: center;
+ // background-position: center;
 }
 .ellipsis {
   @extend %ellipsis;
