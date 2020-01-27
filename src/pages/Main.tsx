@@ -1,5 +1,6 @@
 import { IonContent, IonHeader, IonFooter, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/react'
 import React, { useEffect, useState, Fragment } from 'react'
+import { useHistory } from 'react-router-dom'
 
 import { connect } from '../redux/redux-connect'
 import ButtonShadowUi from '../components/ui/ButtonShadowUi'
@@ -15,6 +16,7 @@ interface IDispatchProps {}
 
 const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm }) => {
   const [step, setStep] = useState(1)
+  const history = useHistory()
 
   useEffect(() => {}, []) // eslint-disable-line
 
@@ -54,7 +56,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm }) 
             </Fragment>
           )}
 
-          <div className='bottom-floating'>
+          <div className='bottom-floating' onClick={() => history.push('/vote-save')}>
             <img src='/assets/img/floating_btn_add.svg' alt='' />
           </div>
         </div>

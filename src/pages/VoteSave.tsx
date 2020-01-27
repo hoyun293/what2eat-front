@@ -18,7 +18,7 @@ interface IStateProps {
 interface IDispatchProps {}
 
 const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm }) => {
-  const [step, setStep] = useState(2)
+  const [step, setStep] = useState(1)
   const history = useHistory()
 
   useEffect(() => {}, []) // eslint-disable-line
@@ -37,7 +37,7 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm
               )}
             </div>
             <div>
-              <IconUi iconName='close' onClick={() => history.push('/home')}></IconUi>
+              <IconUi iconName='close' onClick={() => history.push('/')}></IconUi>
             </div>
           </div>
         </IonToolbar>
@@ -61,7 +61,6 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm
         )}
       </IonContent>
       <IonFooter>
-        2222{voteForm.placeIds}
         {step === 1 && (
           <ButtonShadowUi
             disabled={!voteForm.voteName && !voteForm.endDate}

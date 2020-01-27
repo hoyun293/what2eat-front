@@ -75,7 +75,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
     <div className='px-container pt-4'>
       <div className='text-xxl text-bold flex items-center' onClick={() => setIsShowModal(true)}>
         <div className='ellipsis'>{address}</div>
-        {coordinate.lat && <IconUi className='ml-2' iconName='location'></IconUi>}
+        {coordinate.lat !== 0 && <IconUi className='ml-2' iconName='location'></IconUi>}
       </div>
       <div className='flex items-center justify-between mt-3'>
         <div className='filter-btn flex-center text-lg m-black'>
@@ -89,6 +89,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
       <div className='pt-8'>
         {_.map(votePlaces, v => (
           <VotePlaceItem
+            key={v.placeId}
             placeId={v.placeId}
             name={v.name}
             rating={v.rating}
