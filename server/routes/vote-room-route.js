@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const { rooms } = require('./mock/vote-room-mock')
 
-router.get('/rooms', (req, res) => {
+router.post('/rooms', (req, res) => {
   res.send({
     result: {
       rooms
