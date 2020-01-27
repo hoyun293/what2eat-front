@@ -4,5 +4,5 @@ import { IVoteForm } from '../../models/vote'
 
 export interface IVoteState extends ICommonState {
   voteForm: IVoteForm
-  places: IPlace[]
+  votePlaces: IPlace[]
 }

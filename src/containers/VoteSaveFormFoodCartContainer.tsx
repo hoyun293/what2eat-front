@@ -6,12 +6,14 @@ import { connect } from '../redux/redux-connect'
 import { getAddressByCoordinate } from '../api/google-api'
 import { Plugins } from '@capacitor/core'
 import { IVoteForm } from '../models/vote'
-import { setVoteForm } from '../redux/vote/vote-actions'
+import { setVoteForm, selectVotePlaces } from '../redux/vote/vote-actions'
 import IconUi from '../components/ui/IconUi'
 import { IonModal, IonButton, IonHeader, IonToolbar } from '@ionic/react'
+import VotePlaceItem from '../components/VotePlaceItem'
 
 import './VoteSaveFormFoodCartContainer.scss'
 import GoogleMapReact from 'google-map-react'
+import { IPlace } from '../models/place'
 
 // eslint-disable-next-line
 const Marker = ({}: any) => (
@@ -23,32 +25,45 @@ const Marker = ({}: any) => (
 interface IOwnProps {}
 interface IStateProps {
   voteForm: IVoteForm
+  votePlaces: IPlace[]
 }
 interface IDispatchProps {
   setVoteForm: typeof setVoteForm
+  selectVotePlaces: typeof selectVotePlaces
 }
 
 const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   voteForm,
-  setVoteForm
+  votePlaces,
+  setVoteForm,
+  selectVotePlaces
 }) => {
   const [address, setAddress] = useState('주소를 불러오는중...')
   const [isShowModal, setIsShowModal] = useState(false)
+  const [filterDistance, setFilterDistance] = useState(1000)
+  const [sortBy, setSortBy] = useState({ label: '거리순', value: 'distance' })
 
-  const [coordinate, setCoordinate] = useState({ lat: 37.4961895, lng: 127.0253834 })
+  const [coordinate, setCoordinate] = useState({ lat: 0, lng: 0 })
 
   useEffect(() => {
     getCurrentPosition()
   }, []) // eslint-disable-line
 
   useEffect(() => {
+    if (!coordinate.lat) return
+
     getAddress(coordinate.lat, coordinate.lng)
-  }, [coordinate])
+    selectVotePlaces()
+  }, [coordinate]) // eslint-disable-line
 
   const getCurrentPosition = async () => {
-    const { coords } = await Plugins.Geolocation.getCurrentPosition()
-    setCoordinate({ lat: coords.latitude, lng: coords.longitude })
-    // setVoteForm({ placeIds: [address] })
+    try {
+      const { coords } = await Plugins.Geolocation.getCurrentPosition()
+      setCoordinate({ lat: coords.latitude, lng: coords.longitude })
+    } catch (e) {
+      console.log(e)
+      setCoordinate({ lat: 37.4961895, lng: 127.0253834 })
+    }
   }
 
   const getAddress = async (latitude: number, longitude: number) => {
@@ -60,7 +75,31 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
     <div className='px-container pt-4'>
       <div className='text-xxl text-bold flex items-center' onClick={() => setIsShowModal(true)}>
         <div className='ellipsis'>{address}</div>
-        <IconUi className='ml-2' iconName='location'></IconUi>
+        {coordinate.lat && <IconUi className='ml-2' iconName='location'></IconUi>}
+      </div>
+      <div className='flex items-center justify-between mt-3'>
+        <div className='filter-btn flex-center text-lg m-black'>
+          <IconUi iconName='filter' className='pr-1'></IconUi> {(filterDistance / 1000).toFixed(1)}km
+        </div>
+        <div className='flex-center text-lg m-black'>
+          <IconUi iconName='sort' className='pt-1 pr-1'></IconUi> {sortBy.label}
+        </div>
+      </div>
+
+      <div className='pt-8'>
+        {_.map(votePlaces, v => (
+          <VotePlaceItem
+            placeId={v.placeId}
+            name={v.name}
+            rating={v.rating}
+            ratingCount={v.ratingCount}
+            latitude={v.latitude}
+            longitude={v.longitude}
+            nowLatitude={coordinate.lat}
+            nowLongitude={coordinate.lng}
+            imageUrl={v.imageUrl}
+          ></VotePlaceItem>
+        ))}
       </div>
 
       <IonModal isOpen={isShowModal}>
@@ -96,10 +135,12 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ vote }) => ({
-    voteForm: vote.voteForm
+    voteForm: vote.voteForm,
+    votePlaces: vote.votePlaces
   }),
   mapDispatchToProps: {
-    setVoteForm
+    setVoteForm,
+    selectVotePlaces
   },
   component: VoteSaveFormFoodCartContainer
 })

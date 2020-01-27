@@ -21,9 +21,9 @@ export const initialState: IState = {
   vote: {
     voteForm: {
       voteName: '',
-      placeIds: []
+      votePlaceIds: []
     },
-    places: [],
+    votePlaces: [],
     isLoading: false,
     errorMessage: ''
   } as IVoteState

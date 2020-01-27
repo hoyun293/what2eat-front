@@ -1,4 +1,4 @@
-import { SET_VOTE_IS_LOADING, SET_VOTE_ERROR_MESSAGE, SET_VOTE_FORM } from './vote-constants'
+import { SET_VOTE_IS_LOADING, SET_VOTE_ERROR_MESSAGE, SET_VOTE_FORM, SET_VOTE_PLACES } from './vote-constants'
 import { IVoteState } from './vote-state'
 import { TVoteActions } from './vote-actions'
 
@@ -6,6 +6,8 @@ export default function userReducer(state: IVoteState, action: TVoteActions): IV
   switch (action.type) {
     case SET_VOTE_FORM:
       return { ...state, voteForm: { ...state.voteForm, ...action.voteForm } }
+    case SET_VOTE_PLACES:
+      return { ...state, votePlaces: [...state.votePlaces, ...action.votePlaces] }
     case SET_VOTE_IS_LOADING:
       return { ...state, isLoading: action.isLoading }
     case SET_VOTE_ERROR_MESSAGE:

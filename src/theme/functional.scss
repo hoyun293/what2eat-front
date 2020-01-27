@@ -401,8 +401,7 @@
 }
 
 .px-container {
-  padding-left: $padding-container;
-  padding-right: $padding-container;
+  @extend %px-container;
 }
 
 // margin
@@ -833,13 +832,19 @@
   font-weight: 800;
 }
 
+.leading-none {
+  line-height: 1;
+}
+
 .black {
-  color: black;
+  color: $black;
+}
+.m-black {
+  color: $m-black;
 }
 .gray {
   color: $gray;
 }
-
 .purple {
   color: $purple;
 }

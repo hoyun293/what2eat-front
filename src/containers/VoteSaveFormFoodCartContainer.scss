@@ -36,3 +36,11 @@
   padding: 1.7rem 1rem 1.7rem 1rem;
   bottom: 1rem;
 }
+
+.filter-btn {
+  border: 1px $border solid;
+  border-radius: 1.5rem;
+  @extend %px-container;
+  padding-top: 0rem;
+  padding-bottom: 0rem;
+}

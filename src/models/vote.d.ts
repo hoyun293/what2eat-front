@@ -2,11 +2,11 @@ export interface IVote {
   voteName: string
   isMulti: boolean
   endDate: Date
-  places: IPlace[]
+  votePlaces: IPlace[]
 }
 
 interface VoteForm extends IVote {
-  placeIds: string[]
+  votePlaceIds: string[]
 }
 
 export type IVoteForm = PickPartial<VoteForm, 'voteName' | 'isMulti' | 'endDate' | 'placeIds'>
