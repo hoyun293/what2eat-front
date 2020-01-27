@@ -1,0 +1,18 @@
+@import '../theme/variable';
+
+.item-container {
+  margin-bottom: 2rem;
+  box-shadow: 0 5px 18px 0 rgba(195, 195, 203, 0.25);
+  border-radius: 1.2rem;
+
+  .image-container {
+    border-top-left-radius: 1.2rem;
+    border-top-right-radius: 1.2rem;
+
+    @extend %bg-image;
+  }
+
+  .info-container {
+    padding: 1.3rem 2rem 1rem;
+  }
+}

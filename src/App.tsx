@@ -30,11 +30,11 @@ const App: React.FC<IAppProps> = ({ signIn }) => {
       <Suspense fallback={<SpinnerUi isFull={true} color='tertiary' />}>
         <IonReactRouter>
           <IonRouterOutlet>
-            <Route path='/home' component={Home} exact={true} />
+            <Route path='/main' component={Main} exact={true} />
             <Route path='/example' component={Example} exact={true} />
             <Route path='/vote-save' component={VoteSave} exact={true} />
-            <Route path='/main' component={Main} exact={true} />
-            <Route exact path='/' render={() => <Redirect to='/home' />} />
+            <Route path='/dev' component={Home} exact={true} />
+            <Route exact path='/' render={() => <Redirect to='/main' />} />
           </IonRouterOutlet>
         </IonReactRouter>
       </Suspense>
