@@ -15,7 +15,7 @@ OEQxke9JGLTTwqNb4wIDAQAB
     GOOGLE_GEO_KEY: 'AIzaSyDlfsuPwv_HHvWnMUSEkca1H2GbE4KlJgw'
   },
   production: {
-    BASE_URL: 'http://kindrobot.duckdns.org/api',
+    BASE_URL: 'https://cors-anywhere.herokuapp.com/http://kindrobot.duckdns.org/api',
     // BASE_URL: 'https://rm7is5pi3b.execute-api.ap-northeast-2.amazonaws.com/dev',
     AUTH_PUBKEY: `-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDKV3M9UazjIEUEVI/Gq8MNTrd2
