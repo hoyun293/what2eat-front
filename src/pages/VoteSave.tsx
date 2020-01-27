@@ -61,6 +61,7 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm
         )}
       </IonContent>
       <IonFooter>
+        2222{voteForm.placeIds}
         {step === 1 && (
           <ButtonShadowUi
             disabled={!voteForm.voteName && !voteForm.endDate}

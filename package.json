@@ -33,8 +33,7 @@
     "react-scripts": "3.2.0",
     "redux": "^4.0.4",
     "redux-actions": "^2.6.5",
-    "reselect": "^4.0.0",
-    "use-saga-reducer": "^2.0.0"
+    "reselect": "^4.0.0"
   },
   "devDependencies": {
     "@capacitor/cli": "1.4.0",

@@ -8,11 +8,12 @@ import {
 import { TAction } from '../redux-type'
 import { getExampleNewsApi } from '../../api/example-api'
 import { setUserIsLoading } from '../user/user-actions'
+import { INews } from '../../models/news'
 
 export const selectExampleNews = () => async (dispatch: React.Dispatch<any>) => {
   dispatch(setUserIsLoading(true))
   const { result } = await getExampleNewsApi()
-  dispatch(setExampleNews({ news: result.news }))
+  dispatch(setExampleNews(result.news))
   dispatch(setUserIsLoading(false))
 }
 
@@ -34,10 +35,10 @@ export const increaseExampleCount = (payload: number) =>
     payload
   } as const)
 
-export const setExampleNews = (payload: Partial<ISetExampleNews>) =>
+export const setExampleNews = (news: INews[]) =>
   ({
     type: SET_EXAMPLE_NEWS,
-    payload
+    news
   } as const)
 
 export type TExampleActions =
