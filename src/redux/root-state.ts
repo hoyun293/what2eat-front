@@ -25,6 +25,7 @@ export const initialState: IState = {
       voteName: '',
       placeIds: []
     },
+    places: [],
     isLoading: false,
     errorMessage: ''
   } as IVoteState,

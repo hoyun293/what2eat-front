@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 16 15">
+    <defs>
+        <style>
+            .cls-1{fill:#fff;opacity:0}.cls-2{fill:none;stroke:#333}
+        </style>
+    </defs>
+    <g id="sorting_btn_icon" data-name="sorting btn_icon" transform="translate(-288.857 -178.512)">
+        <path id="bg" d="M0 0h16v15H0z" class="cls-1" transform="translate(288.857 178.512)"/>
+        <path id="sorting_btn_icon-2" d="M1517.094 6020.709v-12.188l4.59 3.319" class="cls-2" data-name="sorting btn_icon" transform="translate(-1218.381 -5828.344)"/>
+        <path id="sorting_btn_icon-3" d="M1523.683 6008.521v12.188l-4.59-3.319" class="cls-2" data-name="sorting btn_icon" transform="translate(-1228.737 -5828.921)"/>
+    </g>
+</svg>

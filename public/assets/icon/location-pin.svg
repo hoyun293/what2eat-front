@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="31" height="49" viewBox="0 0 31 49">
+    <defs>
+        <style>
+            .cls-1{fill:#5f5cce}.cls-2{fill:#fff}.cls-3,.cls-5{fill:none}.cls-3{stroke:#5f5cce;stroke-width:1.5px}.cls-4{stroke:none}
+        </style>
+    </defs>
+    <g id="pin_now_location" data-name="pin_now location" transform="translate(-172 -383)">
+        <path id="패스_1188" d="M15.5 0A15.5 15.5 0 0 1 31 15.5c0 8.56-15.279 23.188-15.5 23.188S0 24.06 0 15.5A15.5 15.5 0 0 1 15.5 0z" class="cls-1" data-name="패스 1188" transform="translate(172 383)"/>
+        <circle id="타원_1215" cx="4.5" cy="4.5" r="4.5" class="cls-2" data-name="타원 1215" transform="translate(183 393)"/>
+        <g id="그룹_1187" data-name="그룹 1187" transform="translate(2 2)">
+            <g id="타원_1216" class="cls-3" data-name="타원 1216" transform="translate(177 413)">
+                <circle cx="8.5" cy="8.5" r="8.5" class="cls-4"/>
+                <circle cx="8.5" cy="8.5" r="7.75" class="cls-5"/>
+            </g>
+            <path id="패스_1190" d="M0 0h4.238" class="cls-3" data-name="패스 1190" transform="translate(177.405 421.5)"/>
+            <path id="패스_1189" d="M-1 0h4.238" class="cls-3" data-name="패스 1189" transform="translate(190.357 421.5)"/>
+            <path id="패스_1191" d="M-1 0h4.238" class="cls-3" data-name="패스 1191" transform="rotate(90 -120.429 305.929)"/>
+        </g>
+    </g>
+</svg>

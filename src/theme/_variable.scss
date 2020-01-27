@@ -2,7 +2,7 @@
 $yellow: #fee000;
 $border: #dfe2e6;
 $gray: #c2c7cc;
-// $gray: #f8f8f8;
+$purple: #5f5cce;
 
 $padding-container: 1.6rem;
 
@@ -42,4 +42,11 @@ $text-xxxl-size: 2.9rem;
 %text-xxxl {
   font-size: $text-xxxl-size;
   line-height: 3.6rem;
+}
+
+%ellipsis {
+  word-break: break-all;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }

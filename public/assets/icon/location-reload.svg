@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+    <defs>
+        <style>
+            .cls-1{fill:#fff;stroke:#707070;opacity:0}.cls-2,.cls-4{fill:none}.cls-2{stroke:#6c7580}.cls-3{stroke:none}
+        </style>
+    </defs>
+    <g id="btn_reload_icon" transform="translate(-177.033 -413.033)">
+        <g id="bg" class="cls-1">
+            <path d="M0 0h18v18H0z" class="cls-3" transform="translate(177.033 413.033)"/>
+            <path d="M.5.5h17v17H.5z" class="cls-4" transform="translate(177.033 413.033)"/>
+        </g>
+        <g id="그룹_1201" data-name="그룹 1201" transform="translate(.033 .033)">
+            <g id="타원_1216" class="cls-2" data-name="타원 1216" transform="translate(177 413)">
+                <circle cx="8.85" cy="8.85" r="8.85" class="cls-3"/>
+                <circle cx="8.85" cy="8.85" r="8.35" class="cls-4"/>
+            </g>
+            <path id="패스_1190" d="M0 0h4.412" class="cls-2" data-name="패스 1190" transform="translate(177.421 421.85)"/>
+            <path id="패스_1189" d="M-1 0h4.412" class="cls-2" data-name="패스 1189" transform="translate(190.865 421.85)"/>
+            <path id="패스_1191" d="M0 0h4.412" class="cls-2" data-name="패스 1191" transform="rotate(90 -120.008 305.858)"/>
+            <path id="패스_1192" d="M0 0h4.412" class="cls-2" data-name="패스 1192" transform="rotate(90 -113.761 299.611)"/>
+        </g>
+    </g>
+</svg>
