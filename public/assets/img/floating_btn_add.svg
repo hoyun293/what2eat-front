@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="92" height="98" viewBox="0 0 92 98">
+    <defs>
+        <style>
+            .cls-1{fill:#fff;opacity:0}.cls-2{fill:#fee000}.cls-3{fill:none;stroke:#5f5cce;stroke-width:2px}.cls-4{filter:url(#floating_btn_add_circle)}
+        </style>
+        <filter id="floating_btn_add_circle" width="92" height="92" x="0" y="6" filterUnits="userSpaceOnUse">
+            <feOffset dy="8"/>
+            <feGaussianBlur result="blur" stdDeviation="6"/>
+            <feFlood flood-opacity=".2"/>
+            <feComposite in2="blur" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+    </defs>
+    <g id="floating_btn_add" data-name="floating btn_add" transform="translate(-138 -539)">
+        <path id="bg" d="M0 0h92v92H0z" class="cls-1" transform="translate(138 539)"/>
+        <g class="cls-4" transform="translate(138 539)">
+            <circle id="floating_btn_add_circle-2" cx="28" cy="28" r="28" class="cls-2" data-name="floating btn_add_circle" transform="translate(18 16)"/>
+        </g>
+        <g id="floating_btn_add_icon" data-name="floating btn_add_icon" transform="translate(177 576)">
+            <path id="패스_80" d="M3 0h14" class="cls-3" data-name="패스 80" transform="translate(-3 7)"/>
+            <path id="패스_79" d="M0 3v14" class="cls-3" data-name="패스 79" transform="translate(7 -3)"/>
+        </g>
+    </g>
+</svg>
