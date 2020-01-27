@@ -4,20 +4,22 @@ import { TAction } from '../redux-type'
 import { getMyVoteRooms}from'../../api/voteRoom-api'
 import { IVoteRoomState } from './vote-room-state'
 
-export const selectExampleNews = () => async (dispatch: React.Dispatch<any>) => {
+export const selectVoteRooms = () => async (dispatch: React.Dispatch<any>) => {
+  console.log('여기까지')
   dispatch(setVoteRoomIsLoading(true))
   const { result } = await getMyVoteRooms(null)
-  dispatch(setVoteRoomForm({ voteRooms: result.rooms }))
+  console.log(result)
+  dispatch(setVoteRoomForm(result.rooms))
   dispatch(setVoteRoomIsLoading(false))
 }
 //export const signIn = () => async (dispatch: React.Dispatch<any>) => {
 //  dispatch(setVoteRoomIsLoading(true))
 //}
 
-export const setVoteRoomForm = (voteForm: Partial<IVoteRoomState>) =>
+export const setVoteRoomForm = (voteRoom: IVoteRoom[]) =>
   ({
     type: SET_VOTEROOM_FORM,
-    voteForm
+    voteRoom
   } as const)
 
 export const setVoteRoomIsLoading = (isLoading: boolean) =>

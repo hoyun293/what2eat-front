@@ -7,18 +7,26 @@ import ButtonShadowUi from '../components/ui/ButtonShadowUi'
 import ButtonUi from '../components/ui/ButtonUi'
 import IconUi from '../components/ui/IconUi'
 import { IVote } from '../models/vote'
-
+import {selectVoteRooms} from '../redux/vote-room/vote-room-actions'
+import MainFormVoteRoomListContainer from '../containers/MainFormVoteRoomListContainer'
 interface IOwnProps {}
 interface IStateProps {
   voteForm: IVote
 }
-interface IDispatchProps {}
+interface IDispatchProps {
+  selectVoteRooms: typeof selectVoteRooms
+}
 
-const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm }) => {
+const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ 
+  voteForm,
+  selectVoteRooms 
+}) => {
   const [step, setStep] = useState(1)
   const history = useHistory()
 
-  useEffect(() => {}, []) // eslint-disable-line
+  useEffect(() => {
+    selectVoteRooms()
+  }, []) // eslint-disable-line
 
   return (
     <IonPage>
@@ -43,18 +51,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm }) 
           하루되세요
         </div>
         <div className='background-img'>
-          {step === 1}
-          {step === 2 && <Fragment></Fragment>}
-          {step === 3 && (
-            <Fragment>
-              <div className='text-xxxl font-bold mb-7 text-center'>
-                투표가
-                <br />
-                생성되었습니다!
-              </div>
-              {/* <VoteSaveFormOptionContainer /> */}
-            </Fragment>
-          )}
+          <MainFormVoteRoomListContainer/>
 
           <div className='bottom-floating' onClick={() => history.push('/vote-save')}>
             <img src='/assets/img/floating_btn_add.svg' alt='' />
@@ -69,6 +66,8 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ vote }) => ({
     voteForm: vote.voteForm
   }),
-  mapDispatchToProps: {},
+  mapDispatchToProps: {
+    selectVoteRooms
+  },
   component: Main
 })

@@ -4,6 +4,7 @@ import * as _ from 'lodash'
 import { IVoteRoom } from '../models/vote-room'
 import MainFormVoteRoomListItem from '../components/MainFormVoteRoomListItem'
 import { connect } from '../redux/redux-connect'
+import './MainFormVoteRoomListContainer.scss'
 
 interface IOwnProps {}
 interface IStateProps {
@@ -13,7 +14,7 @@ interface IDispatchProps {}
 
 const MainFormVoteRoomListContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteRooms }) => {
   return (
-    <ol>
+    <ol className='align-center'>
       {_.map(voteRooms, (v, i) => (
         <MainFormVoteRoomListItem
           key={i}
