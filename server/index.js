@@ -15,8 +15,6 @@ server.use(bodyParser.json())
 server.use(bodyParser.urlencoded({ extended: false }))
 server.use(cookieParser())
 
-server.use(express.static('server/public'))
-
 apis(server)
 
 server.listen(PORT, err => {
