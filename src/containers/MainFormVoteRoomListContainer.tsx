@@ -18,9 +18,9 @@ const MainFormVoteRoomListContainer: React.FC<IOwnProps & IStateProps & IDispatc
       {_.map(voteRooms, (v, i) => (
         <MainFormVoteRoomListItem
           key={i}
-          vote_room_title={v.vote_room_title}
-          vote_room_status={v.vote_room_status}
-          is_private_status={v.is_private_status}
+          voteRoomTitle={v.voteRoomTitle}
+          voteRoomStatus={v.voteRoomStatus}
+          isPrivateStatus={v.isPrivateStatus}
         />
       ))}
     </ol>

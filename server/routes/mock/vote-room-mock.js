@@ -4,10 +4,10 @@ faker.seed(5)
 
 const createRooms = count =>
   _.times(count, num => ({
-    vote_room_key: faker.random.number(),
-    vote_room_title: faker.random.words(),
-    vote_room_status: faker.random.boolean(),
-    is_private_status: faker.random.boolean()
+    voteRoomKey: faker.random.number(),
+    voteRoomTitle: faker.random.words(),
+    voteRoomStatus: faker.random.boolean(),
+    isPrivateStatus: faker.random.boolean()
   }))
 
 module.exports = {

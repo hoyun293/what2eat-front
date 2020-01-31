@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="60" height="54" viewBox="0 0 60 54">
+    <defs>
+        <style>
+            .cls-1{fill:#fff;opacity:0}.cls-2,.cls-5{fill:none}.cls-2{stroke:#c2c7cc}.cls-3{fill:#c2c7cc;font-size:12px;font-family:NotoSansCJKkr-Medium,Noto Sans CJK KR;font-weight:500;letter-spacing:-.02em}.cls-4{stroke:none}
+        </style>
+    </defs>
+    <g id="list_vote_badge_expired" transform="translate(3 14)">
+        <path id="bg" d="M0 0h60v54H0z" class="cls-1" transform="translate(-3 -14)"/>
+        <g id="badge" class="cls-2">
+            <rect width="54" height="26" class="cls-4" rx="13"/>
+            <rect width="53" height="25" x=".5" y=".5" class="cls-5" rx="12.5"/>
+        </g>
+        <text id="미투표" class="cls-3" transform="translate(27 17.1)">
+            <tspan x="-16.32" y="0">미투표</tspan>
+        </text>
+    </g>
+</svg>
