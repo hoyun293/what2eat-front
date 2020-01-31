@@ -22,10 +22,10 @@ interface IDispatchProps {
 const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm, selectVoteRooms }) => {
   const history = useHistory()
   const [toggle, setToggle] = useState(1)
-
+  const pagingNum = 5
   useEffect(() => {
     selectVoteRooms()
-  }, []) // eslint-disable-line
+  }, [toggle]) // eslint-disable-line
 
   return (
     <IonPage>
@@ -38,6 +38,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm, se
               className='toggleName'
               onClick={() => {
                 setToggle(toggle + 1)
+                selectVoteRooms(pagingNum, true)
               }}
             >
               마감순
@@ -48,6 +49,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm, se
               className='toggleName'
               onClick={() => {
                 setToggle(toggle + 1)
+                selectVoteRooms(pagingNum, false)
               }}
             >
               인기순
