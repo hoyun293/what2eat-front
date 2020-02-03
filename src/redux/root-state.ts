@@ -23,7 +23,7 @@ export const initialState: IState = {
   vote: {
     voteForm: {
       voteName: '',
-      votePlaceIds: []
+      votePlaceIds: {}
     },
     votePlaces: [],
     isLoading: false,

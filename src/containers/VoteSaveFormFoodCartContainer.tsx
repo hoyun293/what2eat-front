@@ -6,7 +6,7 @@ import { connect } from '../redux/redux-connect'
 import { getAddressByCoordinate } from '../api/google-api'
 import { Plugins } from '@capacitor/core'
 import { IVoteForm } from '../models/vote'
-import { setVoteForm, selectVotePlaces } from '../redux/vote/vote-actions'
+import { setVoteForm, selectVotePlaces, deleteVotePlaceId, setVotePlaceId } from '../redux/vote/vote-actions'
 import IconUi from '../components/ui/IconUi'
 import { IonModal, IonButton, IonHeader, IonToolbar } from '@ionic/react'
 import VotePlaceItem from '../components/VotePlaceItem'
@@ -30,20 +30,24 @@ interface IStateProps {
 interface IDispatchProps {
   setVoteForm: typeof setVoteForm
   selectVotePlaces: typeof selectVotePlaces
+  setVotePlaceId: typeof setVotePlaceId
+  deleteVotePlaceId: typeof deleteVotePlaceId
 }
 
 const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   voteForm,
   votePlaces,
   setVoteForm,
-  selectVotePlaces
+  selectVotePlaces,
+  setVotePlaceId,
+  deleteVotePlaceId
 }) => {
   const [address, setAddress] = useState('주소를 불러오는중...')
   const [isShowModal, setIsShowModal] = useState(false)
   const [filterDistance, setFilterDistance] = useState(1000)
   const [sortBy, setSortBy] = useState({ label: '거리순', value: 'distance' })
 
-  const [coordinate, setCoordinate] = useState({ lat: 0, lng: 0 })
+  const [coordinate, setCoordinate] = useState({ lat: 37.4961895, lng: 127.0253834 })
 
   useEffect(() => {
     getCurrentPosition()
@@ -53,8 +57,11 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
     if (!coordinate.lat) return
 
     getAddress(coordinate.lat, coordinate.lng)
+
+    // TODO: coordinate 변경시엔 리셋해야함
     selectVotePlaces()
-  }, [coordinate]) // eslint-disable-line
+  }, []) // eslint-disable-line
+  // }, [coordinate]) // eslint-disable-line
 
   const getCurrentPosition = async () => {
     try {
@@ -99,8 +106,14 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
             nowLatitude={coordinate.lat}
             nowLongitude={coordinate.lng}
             imageUrl={v.imageUrl}
+            isAdded={voteForm?.placeIds?.hasOwnProperty(v.placeId)}
+            onClickItem={voteForm?.placeIds?.hasOwnProperty(v.placeId) ? deleteVotePlaceId : setVotePlaceId}
           ></VotePlaceItem>
         ))}
+      </div>
+
+      <div className='flex-center fixed cart-list-btn'>
+        <IconUi iconName='cart-list' className='pt-1'></IconUi>
       </div>
 
       <IonModal isOpen={isShowModal}>
@@ -141,7 +154,9 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
   }),
   mapDispatchToProps: {
     setVoteForm,
-    selectVotePlaces
+    selectVotePlaces,
+    deleteVotePlaceId,
+    setVotePlaceId
   },
   component: VoteSaveFormFoodCartContainer
 })

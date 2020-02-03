@@ -6,7 +6,9 @@ export interface IVote {
 }
 
 interface VoteForm extends IVote {
-  votePlaceIds: string[]
+  placeIds: {
+    [key: string]: string
+  }
 }
 
 export type IVoteForm = PickPartial<VoteForm, 'voteName' | 'isMulti' | 'endDate' | 'placeIds'>
