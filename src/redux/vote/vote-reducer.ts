@@ -28,7 +28,10 @@ export default function userReducer(state: IVoteState, action: TVoteActions): IV
       delete newFormPlaceIds[action.votePlaceId]
       return { ...state, voteForm: { ...state.voteForm, placeIds: newFormPlaceIds } }
     case SET_VOTE_PLACES:
-      return { ...state, votePlaces: [...state.votePlaces, ...action.votePlaces] }
+      return {
+        ...state,
+        votePlaces: action.reset ? action.votePlaces : [...state.votePlaces, ...action.votePlaces]
+      }
     case SET_VOTE_IS_LOADING:
       return { ...state, isLoading: action.isLoading }
     case SET_VOTE_ERROR_MESSAGE:

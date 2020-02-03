@@ -49,10 +49,11 @@ export const deleteVotePlaceId = (votePlaceId: string) =>
     votePlaceId
   } as const)
 
-export const setVotePlaces = (votePlaces: IPlace[]) =>
+export const setVotePlaces = (votePlaces: IPlace[], reset: boolean = true) =>
   ({
     type: SET_VOTE_PLACES,
-    votePlaces
+    votePlaces,
+    reset
   } as const)
 
 export const setVoteIsLoading = (isLoading: boolean) =>

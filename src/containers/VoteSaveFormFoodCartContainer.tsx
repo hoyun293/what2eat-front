@@ -47,7 +47,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
   const [filterDistance, setFilterDistance] = useState(1000)
   const [sortBy, setSortBy] = useState({ label: '거리순', value: 'distance' })
 
-  const [coordinate, setCoordinate] = useState({ lat: 37.4961895, lng: 127.0253834 })
+  const [coordinate, setCoordinate] = useState({ lat: 0, lng: 0 })
 
   useEffect(() => {
     getCurrentPosition()
@@ -55,13 +55,14 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
 
   useEffect(() => {
     if (!coordinate.lat) return
-
     getAddress(coordinate.lat, coordinate.lng)
 
-    // TODO: coordinate 변경시엔 리셋해야함
     selectVotePlaces()
-  }, []) // eslint-disable-line
-  // }, [coordinate]) // eslint-disable-line
+  }, [coordinate]) // eslint-disable-line
+
+  useEffect(() => {
+    if (isShowModal) getCurrentPosition()
+  }, [isShowModal])
 
   const getCurrentPosition = async () => {
     try {
