@@ -19,18 +19,19 @@ const getClassNameByStatus = (voteRoomStatus: boolean, isPrivateStatus: boolean)
 const MainFormVoteRoomListItem: React.FunctionComponent<IMainFromVoteRoomListItemProps> = props => {
   return (
     <div>
-      <div className='itemBox'>
+      <div className='itemBox mb-1_5 flex'>
         {props.voteRoomStatus === true && (
-          <img className='voteBox' src='/assets/img/list_vote_icon_on.svg' alt='' />
+          <img className='voteBox pl-3 pt-2_5 pb-2_5' src='/assets/img/list_vote_icon_on.svg' alt='' />
         )}
         {props.voteRoomStatus === false && (
-          <img className='voteBox' src='/assets/img/list_vote_icon_off.svg' alt='' />
+          <img className='voteBox pl-3 pt-2_5 pb-2_5' src='/assets/img/list_vote_icon_off.svg' alt='' />
         )}
-        <div className='itemContent'>
-          <div className='voteTitle'>{props.voteRoomTitle}</div>
-          {props.voteRoomStatus === true && <div className='voteOn'>투표진행중</div>}
-          {props.voteRoomStatus === false && <div className='voteOff'>투표마감됨</div>}
+        <div className='itemContent flex-col pt-1 pl-3'>
+          <div className='voteTitle text-left text-lg'>{props.voteRoomTitle}</div>
+          {props.voteRoomStatus === true && <div className='voteOn text-sm'>투표진행중</div>}
+          {props.voteRoomStatus === false && <div className='voteOff text-sm'>투표마감됨</div>}
         </div>
+
         {getClassNameByStatus(props.voteRoomStatus, props.isPrivateStatus) === 0 && (
           <img className='cplBtn' src='/assets/img/list_vote_badge_done.svg' alt='' />
         )}
