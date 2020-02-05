@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="19" height="21" viewBox="0 0 19 21">
+    <defs>
+        <style>
+            .cls-1,.cls-2{fill:#fff}.cls-1{opacity:0}.cls-2,.cls-3{stroke:#c2c7cc}.cls-3,.cls-5{fill:none}.cls-4{stroke:none}
+        </style>
+    </defs>
+    <g id="info_icon_clock" transform="translate(-15 -444.5)">
+        <path id="bg" d="M0 0h19v21H0z" class="cls-1" transform="translate(15 444.5)"/>
+        <g id="타원_1160" class="cls-2" data-name="타원 1160" transform="translate(15 447)">
+            <circle cx="8" cy="8" r="8" class="cls-4"/>
+            <circle cx="8" cy="8" r="7.5" class="cls-5"/>
+        </g>
+        <path id="패스_1117" d="M729.5 3102.587v5.115l3.309 1.929" class="cls-3" data-name="패스 1117" transform="translate(-706.5 -2652.587)"/>
+    </g>
+</svg>

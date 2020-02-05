@@ -31,11 +31,15 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm, se
     <IonPage>
       <IonContent className='ion-padding' fullscreen>
         <div className='mb-7 flex'>
-          <div className='pageHeadPhrase'>오늘도 맛있는 하루되세요</div>
+          <div className='pageHeadPhrase text-xxxl'>
+            오늘도 맛있는
+            <br />
+            하루되세요
+          </div>
           <img className='toggleIcon' src='/assets/icon/sorting btn_icon.svg' alt='' />
           {toggle % 2 === 1 && (
             <div
-              className='toggleName'
+              className='toggleName text-lg'
               onClick={() => {
                 setToggle(toggle + 1)
                 selectVoteRooms(pagingNum, true)
@@ -46,7 +50,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm, se
           )}
           {toggle % 2 === 0 && (
             <div
-              className='toggleName'
+              className='toggleName text-lg'
               onClick={() => {
                 setToggle(toggle + 1)
                 selectVoteRooms(pagingNum, false)

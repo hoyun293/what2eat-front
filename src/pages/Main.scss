@@ -5,11 +5,24 @@
   font-style: normal;
   font-stretch: normal;
 }
+
+@font-face {
+  font-family: NotoSansCJKkr-Regular;
+  src: local(NotoSansCJKkr-Regular), url(../font/NotoSansCJKkr-Regular.otf) format('OpenType');
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: NotoSansCJKkr-Medium;
+  src: local(NotoSansCJKkr-Medium), url(../font/NotoSansCJKkr-Medium.otf) format('OpenType');
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+}
 .pageHeadPhrase {
-  width: 200px;
-  height: 79px;
   font-family: NotoSansCJKkr-Bold;
-  font-size: 29px;
   font-weight: bold;
   font-stretch: normal;
   font-style: normal;
@@ -17,23 +30,19 @@
   letter-spacing: -0.58px;
   text-align: left;
   color: #111111;
-  padding-left: 16px;
-  padding-top: 56px;
-  margin-right: 0px;
+  padding-left: 1rem;
+  padding-top: 3.5rem;
+  margin-right: 0rem;
 }
 
 .toggleIcon {
-  margin-left: 98px;
-  padding-top: 65px;
+  margin-left: auto;
 }
 .toggleName {
-  margin-left: 4px;
-  padding-right: 16px;
-  padding-top: 61px;
-  width: 60px;
-  height: 22px;
+  margin-left: 0.25rem;
+  padding-right: 1rem;
+  padding-top: 4rem;
   font-family: NotoSansCJKkr-Regular;
-  font-size: 15px;
   font-weight: normal;
   font-stretch: normal;
   font-style: normal;
