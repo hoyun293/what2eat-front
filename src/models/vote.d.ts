@@ -1,14 +1,14 @@
+import { IPlace } from './place'
+
 export interface IVote {
   voteName: string
   isMulti: boolean
-  endDate: Date
+  endDate: string
   votePlaces: IPlace[]
 }
 
-interface VoteForm extends IVote {
-  placeIds: {
-    [key: string]: string
+export interface IVoteForm extends IVote {
+  votePlaces: {
+    [key: string]: IPlace
   }
 }
-
-export type IVoteForm = PickPartial<VoteForm, 'voteName' | 'isMulti' | 'endDate' | 'placeIds'>

@@ -55,3 +55,23 @@
   border: solid 1px $border;
   background-color: $white;
 }
+
+.cart-list-modal {
+  --width: auto;
+  --min-width: 29rem;
+
+  &__header {
+    height: 6.6rem;
+  }
+
+  &__confirm-btn {
+    border-top: 1px $border solid;
+    height: 4.6rem;
+  }
+
+  .thumb-container {
+    @extend %bg-image;
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+}

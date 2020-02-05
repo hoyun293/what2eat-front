@@ -18,7 +18,7 @@ interface IStateProps {
 interface IDispatchProps {}
 
 const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm }) => {
-  const [step, setStep] = useState(1)
+  const [step, setStep] = useState(2)
   const history = useHistory()
 
   useEffect(() => {}, []) // eslint-disable-line
@@ -71,7 +71,7 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm
         )}
         {step === 2 && (
           <ButtonShadowUi
-            disabled={voteForm.votePlaceIds.length === 0}
+            disabled={Object.keys(voteForm.votePlaces).length === 0}
             onClick={() => setStep(step + 1)}
             text='다음'
             color='yellow'

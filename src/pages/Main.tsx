@@ -12,14 +12,12 @@ import MainFormVoteRoomListContainer from '../containers/MainFormVoteRoomListCon
 import './Main.scss'
 
 interface IOwnProps {}
-interface IStateProps {
-  voteForm: IVote
-}
+interface IStateProps {}
 interface IDispatchProps {
   selectVoteRooms: typeof selectVoteRooms
 }
 
-const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm, selectVoteRooms }) => {
+const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ selectVoteRooms }) => {
   const history = useHistory()
   const [toggle, setToggle] = useState(1)
   const pagingNum = 5
@@ -69,9 +67,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm, se
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ vote }) => ({
-    voteForm: vote.voteForm
-  }),
+  mapStateToProps: () => ({}),
   mapDispatchToProps: {
     selectVoteRooms
   },

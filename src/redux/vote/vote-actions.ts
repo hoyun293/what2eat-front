@@ -31,22 +31,22 @@ export const selectVotePlaces = () => async (dispatch: React.Dispatch<any>) => {
     .catch(err => dispatch(setVoteErrorMessage(err.message)))
 }
 
-export const setVoteForm = (voteForm: IVoteForm) =>
+export const setVoteForm = (voteForm: Partial<IVoteForm>) =>
   ({
     type: SET_VOTE_FORM,
     voteForm
   } as const)
 
-export const setVotePlaceId = (votePlaceId: string) =>
+export const setVotePlace = (votePlace: IPlace) =>
   ({
     type: SET_VOTE_FORM_PLACE_ID,
-    votePlaceId
+    votePlace
   } as const)
 
-export const deleteVotePlaceId = (votePlaceId: string) =>
+export const deleteVotePlace = (votePlace: IPlace) =>
   ({
     type: DELETE_VOTE_FORM_PLACE_ID,
-    votePlaceId
+    votePlace
   } as const)
 
 export const setVotePlaces = (votePlaces: IPlace[], reset: boolean = true) =>
@@ -73,5 +73,5 @@ export type TVoteActions =
   | TAction<typeof setVotePlaces>
   | TAction<typeof setVoteIsLoading>
   | TAction<typeof setVoteErrorMessage>
-  | TAction<typeof setVotePlaceId>
-  | TAction<typeof deleteVotePlaceId>
+  | TAction<typeof setVotePlace>
+  | TAction<typeof deleteVotePlace>

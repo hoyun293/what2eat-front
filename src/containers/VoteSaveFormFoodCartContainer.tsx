@@ -6,9 +6,9 @@ import { connect } from '../redux/redux-connect'
 import { getAddressByCoordinate } from '../api/google-api'
 import { Plugins } from '@capacitor/core'
 import { IVoteForm } from '../models/vote'
-import { setVoteForm, selectVotePlaces, deleteVotePlaceId, setVotePlaceId } from '../redux/vote/vote-actions'
+import { setVoteForm, selectVotePlaces, deleteVotePlace, setVotePlace } from '../redux/vote/vote-actions'
 import IconUi from '../components/ui/IconUi'
-import { IonModal, IonButton, IonHeader, IonToolbar } from '@ionic/react'
+import { IonModal, IonButton, IonHeader, IonToolbar, IonPopover, IonFooter } from '@ionic/react'
 import VotePlaceItem from '../components/VotePlaceItem'
 
 import './VoteSaveFormFoodCartContainer.scss'
@@ -30,39 +30,39 @@ interface IStateProps {
 interface IDispatchProps {
   setVoteForm: typeof setVoteForm
   selectVotePlaces: typeof selectVotePlaces
-  setVotePlaceId: typeof setVotePlaceId
-  deleteVotePlaceId: typeof deleteVotePlaceId
+  setVotePlace: typeof setVotePlace
+  deleteVotePlace: typeof deleteVotePlace
 }
+
+const INIT_LATITUDE = 37.4961895
+const INIT_LONGITUDE = 127.0253834
 
 const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   voteForm,
   votePlaces,
   setVoteForm,
   selectVotePlaces,
-  setVotePlaceId,
-  deleteVotePlaceId
+  setVotePlace,
+  deleteVotePlace
 }) => {
   const [address, setAddress] = useState('주소를 불러오는중...')
   const [isShowModal, setIsShowModal] = useState(false)
+  const [isShowCartModal, setIsShowCartModal] = useState(false)
   const [filterDistance, setFilterDistance] = useState(1000)
   const [sortBy, setSortBy] = useState({ label: '거리순', value: 'distance' })
 
-  const [coordinate, setCoordinate] = useState({ lat: 0, lng: 0 })
+  const [coordinate, setCoordinate] = useState({ lat: INIT_LATITUDE, lng: INIT_LONGITUDE })
 
   useEffect(() => {
     getCurrentPosition()
   }, []) // eslint-disable-line
 
   useEffect(() => {
-    if (!coordinate.lat) return
+    if (coordinate.lat === INIT_LONGITUDE) return
     getAddress(coordinate.lat, coordinate.lng)
 
     selectVotePlaces()
   }, [coordinate]) // eslint-disable-line
-
-  useEffect(() => {
-    if (isShowModal) getCurrentPosition()
-  }, [isShowModal])
 
   const getCurrentPosition = async () => {
     try {
@@ -107,13 +107,13 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
             nowLatitude={coordinate.lat}
             nowLongitude={coordinate.lng}
             imageUrl={v.imageUrl}
-            isAdded={voteForm?.placeIds?.hasOwnProperty(v.placeId)}
-            onClickItem={voteForm?.placeIds?.hasOwnProperty(v.placeId) ? deleteVotePlaceId : setVotePlaceId}
+            isAdded={voteForm?.votePlaces?.hasOwnProperty(v.placeId)}
+            onClickItem={voteForm?.votePlaces?.hasOwnProperty(v.placeId) ? deleteVotePlace : setVotePlace}
           ></VotePlaceItem>
         ))}
       </div>
 
-      <div className='flex-center fixed cart-list-btn'>
+      <div className='flex-center fixed cart-list-btn' onClick={() => setIsShowCartModal(true)}>
         <IconUi iconName='cart-list' className='pt-1'></IconUi>
       </div>
 
@@ -144,6 +144,33 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
           </GoogleMapReact>
         </div>
       </IonModal>
+
+      <IonPopover isOpen={isShowCartModal} cssClass='cart-list-modal'>
+        <div>
+          <div className='cart-lit-modal__header flex-center text-xl black text-bold'>추가한 투표지</div>
+          <div className='flex-column'>
+            {_.map(voteForm.votePlaces, v => (
+              <div className='flex'>
+                <div
+                  className='thumb-container'
+                  style={{
+                    backgroundImage: `url(${v.imageUrl || '/assets/img/list-place-thumb-empty.svg'})`,
+                    backgroundSize: v.imageUrl ? 'cover' : 'initial'
+                  }}
+                ></div>
+                <div className='flex items-center'>{v.name}</div>
+                <IconUi onClick={() => deleteVotePlace(v)} iconName='remove-btn'></IconUi>
+              </div>
+            ))}
+          </div>
+          <div
+            onClick={() => setIsShowCartModal(false)}
+            className='purple text-sm flex-center cart-list-modal__confirm-btn'
+          >
+            확인
+          </div>
+        </div>
+      </IonPopover>
     </div>
   )
 }
@@ -156,8 +183,8 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapDispatchToProps: {
     setVoteForm,
     selectVotePlaces,
-    deleteVotePlaceId,
-    setVotePlaceId
+    deleteVotePlace,
+    setVotePlace
   },
   component: VoteSaveFormFoodCartContainer
 })

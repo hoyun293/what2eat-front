@@ -55,7 +55,13 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
 
   return (
     <li key={placeId} className='item-container'>
-      <div className='image-container' style={{ backgroundImage: `url(${imageUrl})` }}>
+      <div
+        className='image-container'
+        style={{
+          backgroundImage: `url(${imageUrl || '/assets/img/list-place-thumb-empty.svg'})`,
+          backgroundSize: imageUrl ? 'cover' : 'initial'
+        }}
+      >
         <img src='/assets/img/vote-place-thumb-holder.png' alt='' />
       </div>
       <div className='info-container flex justify-between'>
@@ -67,7 +73,7 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
             <span className='purple'>{getNumberUnit(distance)}m</span>
           </div>
         </div>
-        <div onClick={() => onClickItem(placeId)}>
+        <div onClick={() => onClickItem({ placeId, imageUrl, name })}>
           {isAdded ? <IconUi iconName='remove-btn'></IconUi> : <IconUi iconName='add-btn'></IconUi>}
         </div>
       </div>

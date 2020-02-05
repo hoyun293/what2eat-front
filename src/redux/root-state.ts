@@ -7,6 +7,7 @@ import voteRoom from './vote-room/vote-room-reducer'
 import { IUserState } from './user/user-state'
 import { IVoteState } from './vote/vote-state'
 import { IVoteRoomState } from './vote-room/vote-room-state'
+import moment from 'moment'
 
 export const initialState: IState = {
   example: {
@@ -23,7 +24,11 @@ export const initialState: IState = {
   vote: {
     voteForm: {
       voteName: '',
-      votePlaceIds: {}
+      isMulti: false,
+      endDate: moment()
+        .add(7, 'days')
+        .format(),
+      votePlaces: {}
     },
     votePlaces: [],
     isLoading: false,

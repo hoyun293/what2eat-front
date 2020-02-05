@@ -20,13 +20,13 @@ export default function userReducer(state: IVoteState, action: TVoteActions): IV
         ...state,
         voteForm: {
           ...state.voteForm,
-          placeIds: { ...voteForm.placeIds, [action.votePlaceId]: action.votePlaceId }
+          votePlaces: { ...voteForm.votePlaces, [action.votePlace.placeId]: action.votePlace }
         }
       }
     case DELETE_VOTE_FORM_PLACE_ID:
-      const newFormPlaceIds = { ...voteForm.placeIds }
-      delete newFormPlaceIds[action.votePlaceId]
-      return { ...state, voteForm: { ...state.voteForm, placeIds: newFormPlaceIds } }
+      const newFormPlaces = { ...voteForm.votePlaces }
+      delete newFormPlaces[action.votePlace.placeId]
+      return { ...state, voteForm: { ...state.voteForm, votePlaces: newFormPlaces } }
     case SET_VOTE_PLACES:
       return {
         ...state,
