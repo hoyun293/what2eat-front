@@ -6,7 +6,7 @@ import { connect } from '../redux/redux-connect'
 import { getAddressByCoordinate } from '../api/google-api'
 import { Plugins } from '@capacitor/core'
 import { IVoteForm } from '../models/vote'
-import { setVoteForm, selectVotePlaces } from '../redux/vote/vote-actions'
+import { setVoteForm, selectVotePlaces, deleteVotePlaceId, setVotePlaceId } from '../redux/vote/vote-actions'
 import IconUi from '../components/ui/IconUi'
 import { IonModal, IonButton, IonHeader, IonToolbar } from '@ionic/react'
 import VotePlaceItem from '../components/VotePlaceItem'
@@ -30,13 +30,17 @@ interface IStateProps {
 interface IDispatchProps {
   setVoteForm: typeof setVoteForm
   selectVotePlaces: typeof selectVotePlaces
+  setVotePlaceId: typeof setVotePlaceId
+  deleteVotePlaceId: typeof deleteVotePlaceId
 }
 
 const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   voteForm,
   votePlaces,
   setVoteForm,
-  selectVotePlaces
+  selectVotePlaces,
+  setVotePlaceId,
+  deleteVotePlaceId
 }) => {
   const [address, setAddress] = useState('주소를 불러오는중...')
   const [isShowModal, setIsShowModal] = useState(false)
@@ -51,10 +55,14 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
 
   useEffect(() => {
     if (!coordinate.lat) return
-
     getAddress(coordinate.lat, coordinate.lng)
+
     selectVotePlaces()
   }, [coordinate]) // eslint-disable-line
+
+  useEffect(() => {
+    if (isShowModal) getCurrentPosition()
+  }, [isShowModal])
 
   const getCurrentPosition = async () => {
     try {
@@ -99,8 +107,14 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
             nowLatitude={coordinate.lat}
             nowLongitude={coordinate.lng}
             imageUrl={v.imageUrl}
+            isAdded={voteForm?.placeIds?.hasOwnProperty(v.placeId)}
+            onClickItem={voteForm?.placeIds?.hasOwnProperty(v.placeId) ? deleteVotePlaceId : setVotePlaceId}
           ></VotePlaceItem>
         ))}
+      </div>
+
+      <div className='flex-center fixed cart-list-btn'>
+        <IconUi iconName='cart-list' className='pt-1'></IconUi>
       </div>
 
       <IonModal isOpen={isShowModal}>
@@ -141,7 +155,9 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
   }),
   mapDispatchToProps: {
     setVoteForm,
-    selectVotePlaces
+    selectVotePlaces,
+    deleteVotePlaceId,
+    setVotePlaceId
   },
   component: VoteSaveFormFoodCartContainer
 })

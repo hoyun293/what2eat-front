@@ -9,6 +9,8 @@ import ReviewStar from './ReviewStar'
 interface IVotePlace extends IPlace {
   nowLatitude: number
   nowLongitude: number
+  isAdded: boolean
+  onClickItem: Function
 }
 
 const getDistanceByCordinate = ({
@@ -45,7 +47,9 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
   latitude,
   longitude,
   nowLatitude,
-  nowLongitude
+  nowLongitude,
+  isAdded,
+  onClickItem
 }) => {
   const distance = getDistanceByCordinate({ latitude, longitude, nowLatitude, nowLongitude })
 
@@ -63,8 +67,8 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
             <span className='purple'>{getNumberUnit(distance)}m</span>
           </div>
         </div>
-        <div>
-          <IconUi iconName='add-btn'></IconUi>
+        <div onClick={() => onClickItem(placeId)}>
+          {isAdded ? <IconUi iconName='remove-btn'></IconUi> : <IconUi iconName='add-btn'></IconUi>}
         </div>
       </div>
     </li>

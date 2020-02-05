@@ -44,3 +44,14 @@
   padding-top: 0rem;
   padding-bottom: 0rem;
 }
+
+.cart-list-btn {
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+  bottom: 10rem;
+  right: $padding-container;
+  box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2);
+  border: solid 1px $border;
+  background-color: $white;
+}

@@ -37,7 +37,7 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm
               )}
             </div>
             <div>
-              <IconUi iconName='close' onClick={() => history.push('/')}></IconUi>
+              <IconUi iconName='close' onClick={() => history.push('/main')}></IconUi>
             </div>
           </div>
         </IonToolbar>
