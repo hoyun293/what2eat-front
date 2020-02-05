@@ -55,22 +55,8 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm
         </div>
       </IonContent>
       <IonFooter>
-        {step === 1 && (
-          <ButtonShadowUi
-            disabled={!voteForm.voteName && !voteForm.endDate}
-            onClick={() => setStep(step + 1)}
-            text='다음'
-            color='yellow'
-          />
-        )}
-        {step === 2 && (
-          <ButtonShadowUi
-            disabled={voteForm.votePlaceIds.length === 0}
-            onClick={() => setStep(step + 1)}
-            text='다음'
-            color='yellow'
-          />
-        )}
+        {step === 1 && <ButtonShadowUi onClick={() => setStep(step + 1)} text='다음' color='yellow' />}
+        {step === 2 && <ButtonShadowUi onClick={() => setStep(step + 1)} text='다음' color='yellow' />}
         {step === 3 && <ButtonShadowUi onClick={() => {}} color='yellow' text='저장' />}
       </IonFooter>
     </IonPage>
