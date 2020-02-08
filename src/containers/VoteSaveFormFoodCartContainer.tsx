@@ -8,7 +8,19 @@ import { Plugins } from '@capacitor/core'
 import { IVoteForm } from '../models/vote'
 import { setVoteForm, selectVotePlaces, deleteVotePlace, setVotePlace } from '../redux/vote/vote-actions'
 import IconUi from '../components/ui/IconUi'
-import { IonModal, IonButton, IonHeader, IonToolbar, IonPopover, IonFooter } from '@ionic/react'
+import {
+  IonItem,
+  IonModal,
+  IonButton,
+  IonHeader,
+  IonToolbar,
+  IonPopover,
+  IonFabButton,
+  IonFab,
+  IonLabel,
+  IonSelect,
+  IonSelectOption
+} from '@ionic/react'
 import VotePlaceItem from '../components/VotePlaceItem'
 
 import './VoteSaveFormFoodCartContainer.scss'
@@ -62,7 +74,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
     getAddress(coordinate.lat, coordinate.lng)
 
     selectVotePlaces()
-  }, [coordinate]) // eslint-disable-line
+  }, [coordinate, sortBy, filterDistance]) // eslint-disable-line
 
   const getCurrentPosition = async () => {
     try {
@@ -79,6 +91,17 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
     setAddress(_.get(data.results, '[0].formatted_address'))
   }
 
+  const toggleSortBy = () => {
+    switch (sortBy.value) {
+      case 'distance':
+        setSortBy({ label: '인기순', value: 'prominence' })
+        break
+      case 'prominence':
+        setSortBy({ label: '거리순', value: 'distance' })
+        break
+    }
+  }
+
   return (
     <div className='px-container pt-4'>
       <div className='text-xxl text-bold flex items-center' onClick={() => setIsShowModal(true)}>
@@ -87,9 +110,18 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
       </div>
       <div className='flex items-center justify-between mt-3'>
         <div className='filter-btn flex-center text-lg m-black'>
-          <IconUi iconName='filter' className='pr-1'></IconUi> {(filterDistance / 1000).toFixed(1)}km
+          <IonLabel>
+            <IconUi iconName='filter' className='pr-1'></IconUi>
+          </IonLabel>
+          <IonSelect value={filterDistance} onIonChange={({ detail }) => setFilterDistance(detail.value)}>
+            <IonSelectOption value={500}>0.5 km</IonSelectOption>
+            <IonSelectOption value={1000}>1 km</IonSelectOption>
+            <IonSelectOption value={1500}>1.5 km</IonSelectOption>
+            <IonSelectOption value={2000}>2 km</IonSelectOption>
+            <IonSelectOption value={3000}>3 km</IonSelectOption>
+          </IonSelect>
         </div>
-        <div className='flex-center text-lg m-black'>
+        <div className='flex-center text-lg m-black' onClick={() => toggleSortBy()}>
           <IconUi iconName='sort' className='pt-1 pr-1'></IconUi> {sortBy.label}
         </div>
       </div>
@@ -150,15 +182,17 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
           <div className='cart-lit-modal__header flex-center text-xl black text-bold'>추가한 투표지</div>
           <div className='flex-column'>
             {_.map(voteForm.votePlaces, v => (
-              <div className='flex'>
-                <div
-                  className='thumb-container'
-                  style={{
-                    backgroundImage: `url(${v.imageUrl || '/assets/img/list-place-thumb-empty.svg'})`,
-                    backgroundSize: v.imageUrl ? 'cover' : 'initial'
-                  }}
-                ></div>
-                <div className='flex items-center'>{v.name}</div>
+              <div className='flex justify-between p-4'>
+                <div className='flex items-center'>
+                  <div
+                    className='thumb-container'
+                    style={{
+                      backgroundImage: `url(${v.imageUrl || '/assets/img/list-place-thumb-empty.svg'})`,
+                      backgroundSize: v.imageUrl ? 'cover' : 'initial'
+                    }}
+                  ></div>
+                  <div className='pl-4'>{v.name}</div>
+                </div>
                 <IconUi onClick={() => deleteVotePlace(v)} iconName='remove-btn'></IconUi>
               </div>
             ))}
