@@ -82,3 +82,40 @@
     }
   }
 }
+
+.line {
+  height: 1px;
+  background: #eeeeee;
+}
+.map {
+  font-family: NotoSansCJKkr-Medium;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.36;
+  letter-spacing: -0.28px;
+  text-align: left;
+  color: #111111;
+}
+.googleMap {
+  height: 20rem;
+}
+
+.photo {
+  font-family: NotoSansCJKkr-Medium;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.36;
+  letter-spacing: -0.28px;
+  text-align: left;
+  color: #111111;
+}
+.foodPhotoBox {
+  width: 100%;
+}
+.foodPhoto {
+  width: 10rem !important;
+  height: 10rem !important;
+  border-radius: 1rem;
+}
