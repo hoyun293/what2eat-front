@@ -36,7 +36,7 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
         objectType: 'feed',
         content: {
           title: '투표 공유하기',
-          imageUrl: '/assets/img/vote-save-complete.svg',
+          imageUrl: '/assets/img/logo.png',
           link: { mobileWebUrl: url, webUrl: url }
         },
         buttons: [

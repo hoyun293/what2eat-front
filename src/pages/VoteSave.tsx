@@ -12,14 +12,23 @@ import { IVoteForm } from '../models/vote'
 
 import './VoteSave.scss'
 
+import { insertVote } from '../redux/vote/vote-actions'
+
 interface IOwnProps {}
 interface IStateProps {
   voteForm: IVoteForm
+  voteErrorMessage: string
 }
-interface IDispatchProps {}
+interface IDispatchProps {
+  insertVote: typeof insertVote
+}
 
-const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm }) => {
-  const [step, setStep] = useState(3)
+const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
+  voteForm,
+  voteErrorMessage,
+  insertVote
+}) => {
+  const [step, setStep] = useState(1)
   const history = useHistory()
 
   useEffect(() => {}, []) // eslint-disable-line
@@ -60,7 +69,11 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm
         {step === 2 && (
           <ButtonShadowUi
             disabled={Object.keys(voteForm.votePlaces).length === 0}
-            onClick={() => setStep(step + 1)}
+            onClick={async () => {
+              await insertVote()
+
+              if (!voteErrorMessage) setStep(step + 1)
+            }}
             text='다음'
             color='yellow'
           />
@@ -72,8 +85,11 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ vote }) => ({
-    voteForm: vote.voteForm
+    voteForm: vote.voteForm,
+    voteErrorMessage: vote.errorMessage
   }),
-  mapDispatchToProps: {},
+  mapDispatchToProps: {
+    insertVote
+  },
   component: VoteSave
 })
