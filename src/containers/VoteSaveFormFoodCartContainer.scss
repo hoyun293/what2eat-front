@@ -40,9 +40,16 @@
 .filter-btn {
   border: 1px $border solid;
   border-radius: 1.5rem;
-  @extend %px-container;
+  padding-left: $padding-container;
   padding-top: 0rem;
   padding-bottom: 0rem;
+  ion-select {
+    left: -1rem;
+    display: flex;
+    align-items: center;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
 }
 
 .cart-list-btn {
@@ -73,5 +80,6 @@
     @extend %bg-image;
     width: 4.5rem;
     height: 4.5rem;
+    border-radius: 10px;
   }
 }
