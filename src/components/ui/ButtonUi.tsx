@@ -5,10 +5,22 @@ import './ButtonUi.scss'
 
 interface IButtonUiProps {
   color: string
+  text: string
+  onClick?: Function
+  height?: string
 }
 
-const ButtonUi: React.FunctionComponent<IButtonUiProps> = ({ color = 'yellow' }) => {
-  return <IonButton expand='block' color={color}></IonButton>
+const ButtonUi: React.FunctionComponent<IButtonUiProps> = ({
+  color = 'yellow',
+  text,
+  height = '5.2rem',
+  onClick = () => {}
+}) => {
+  return (
+    <IonButton expand='block' color={color} style={{ height }} onClick={() => onClick()}>
+      {text}
+    </IonButton>
+  )
 }
 
 export default ButtonUi

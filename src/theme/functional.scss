@@ -329,6 +329,9 @@
 .pt-8 {
   padding-top: 3.2rem;
 }
+.pt-9 {
+  padding-top: 3.6rem;
+}
 .pr-0 {
   padding-right: 0;
 }
@@ -863,6 +866,9 @@
 .gray {
   color: $gray;
 }
+.dark-gray {
+  color: $dark-gray;
+}
 .purple {
   color: $purple;
 }
@@ -923,4 +929,12 @@
 }
 .left-0 {
   left: 0;
+}
+
+.bg-yellow {
+  background-color: $yellow;
+}
+
+.h-full {
+  height: 100%;
 }

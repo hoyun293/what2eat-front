@@ -209,7 +209,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
           <div className='cart-lit-modal__header flex-center text-xl black text-bold'>추가한 투표지</div>
           <div className='flex-column'>
             {_.map(voteForm.votePlaces, v => (
-              <div className='flex justify-between p-4'>
+              <div className='flex justify-between p-4' key={v.placeId}>
                 <div className='flex items-center'>
                   <div
                     className='thumb-container'

@@ -1,7 +1,6 @@
 import { IonContent, IonHeader, IonFooter, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/react'
 import VoteSaveFormContainer from '../containers/VoteSaveFormContainer'
 import VoteSaveFormFoodCartContainer from '../containers/VoteSaveFormFoodCartContainer'
-import VoteSaveFormOptionContainer from '../containers/VoteSaveFormOptionContainer'
 import React, { useEffect, useState, Fragment } from 'react'
 import { useHistory } from 'react-router-dom'
 

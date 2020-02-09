@@ -1,7 +1,7 @@
 import { IonContent, IonHeader, IonFooter, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/react'
 import VoteSaveFormContainer from '../containers/VoteSaveFormContainer'
 import VoteSaveFormFoodCartContainer from '../containers/VoteSaveFormFoodCartContainer'
-import VoteSaveFormOptionContainer from '../containers/VoteSaveFormOptionContainer'
+import VoteSaveCompleteContainer from '../containers/VoteSaveCompleteContainer'
 import React, { useEffect, useState, Fragment } from 'react'
 import { useHistory } from 'react-router-dom'
 
@@ -11,6 +11,8 @@ import ButtonUi from '../components/ui/ButtonUi'
 import IconUi from '../components/ui/IconUi'
 import { IVoteForm } from '../models/vote'
 
+import './VoteSave.scss'
+
 interface IOwnProps {}
 interface IStateProps {
   voteForm: IVoteForm
@@ -18,7 +20,7 @@ interface IStateProps {
 interface IDispatchProps {}
 
 const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm }) => {
-  const [step, setStep] = useState(2)
+  const [step, setStep] = useState(3)
   const history = useHistory()
 
   useEffect(() => {}, []) // eslint-disable-line
@@ -26,9 +28,9 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm
   return (
     <IonPage>
       <IonHeader>
-        <IonToolbar>
+        <IonToolbar className={`toolbar--step${step}`}>
           <div className='flex justify-between items-center px-container'>
-            <div>{step > 1 && <IconUi iconName='icon-left-arrow' onClick={() => setStep(step - 1)} />}</div>
+            <div>{step === 2 && <IconUi iconName='icon-left-arrow' onClick={() => setStep(step - 1)} />}</div>
             <div>
               {step === 2 && (
                 <IonTitle>
@@ -44,21 +46,8 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm
       </IonHeader>
       <IonContent fullscreen>
         {step === 1 && <VoteSaveFormContainer />}
-        {step === 2 && (
-          <Fragment>
-            <VoteSaveFormFoodCartContainer />
-          </Fragment>
-        )}
-        {step === 3 && (
-          <Fragment>
-            <div className='text-xxxl text-bold mb-7 text-center'>
-              투표가
-              <br />
-              생성되었습니다!
-            </div>
-            {/* <VoteSaveFormOptionContainer /> */}
-          </Fragment>
-        )}
+        {step === 2 && <VoteSaveFormFoodCartContainer />}
+        {step === 3 && <VoteSaveCompleteContainer />}
       </IonContent>
       <IonFooter>
         {step === 1 && (
@@ -77,7 +66,6 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteForm
             color='yellow'
           />
         )}
-        {step === 3 && <ButtonShadowUi onClick={() => {}} color='yellow' text='저장' />}
       </IonFooter>
     </IonPage>
   )
