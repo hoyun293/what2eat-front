@@ -7,7 +7,6 @@ import { useHistory } from 'react-router-dom'
 
 import { connect } from '../redux/redux-connect'
 import ButtonShadowUi from '../components/ui/ButtonShadowUi'
-import ButtonUi from '../components/ui/ButtonUi'
 import IconUi from '../components/ui/IconUi'
 import { IVoteForm } from '../models/vote'
 

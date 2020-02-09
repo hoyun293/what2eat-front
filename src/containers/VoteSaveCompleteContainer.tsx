@@ -1,13 +1,14 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { isMobile } from 'react-device-detect'
+import { IonToast, IonButton } from '@ionic/react'
+import copy from 'copy-to-clipboard'
+import Helmet from 'react-helmet'
 
 import { connect } from '../redux/redux-connect'
-import ButtonUi from '../components/ui/ButtonUi'
-import Helmet from 'react-helmet'
 import config from '../config'
-import { IonToast } from '@ionic/react'
-import copy from 'copy-to-clipboard'
+
+import './VoteSaveCompleteContainer.scss'
 
 interface IOwnProps {}
 interface IStateProps {}
@@ -70,11 +71,15 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
         <img className='text-center' src='/assets/img/vote-save-complete.svg' alt='' />
       </div>
       <div>
-        <ButtonUi onClick={() => shareKakao()} color='white' text='투표 공유하기' height='5.2rem'></ButtonUi>
+        <IonButton className='vote-button' onClick={() => shareKakao()} expand='block' color='white'>
+          투표 공유하기
+        </IonButton>
       </div>
       <div className='pt-2'>
         {/* TODO : 연동 필요 */}
-        <ButtonUi color='white' text='투표 하러가기' height='5.2rem'></ButtonUi>
+        <IonButton className='vote-button' color='white' expand='block'>
+          투표 하러가기
+        </IonButton>
       </div>
       <div className='dark-gray text-xl text-center pt-4' onClick={() => history.push('/main')}>
         홈으로 이동
