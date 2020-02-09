@@ -5,4 +5,5 @@ import { IVoteForm } from '../../models/vote'
 export interface IVoteState extends ICommonState {
   voteForm: IVoteForm
   votePlaces: IPlace[]
+  disableVotePlacesInfiniteScroll: boolean
 }
