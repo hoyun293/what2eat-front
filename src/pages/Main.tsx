@@ -21,8 +21,11 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ selectVoteRo
   const history = useHistory()
   const [toggle, setToggle] = useState(1)
   const pagingNum = 5
+
   useEffect(() => {
     selectVoteRooms()
+    //selectVoteRooms(pagingNum, bool)  onClick 시 pagingNum, bool만 바꾸게 해야되지 않을까?
+    // toggle 값 바뀌면 useEffect가 실행되고 selectVoteRooms가 2번실행될듯?
   }, [toggle]) // eslint-disable-line
 
   return (

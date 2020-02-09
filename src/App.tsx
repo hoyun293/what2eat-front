@@ -4,9 +4,7 @@ import { IonApp, IonRouterOutlet } from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
 import { connect } from './redux/redux-connect'
 import { signIn } from './redux/user/user-actions'
-
 import SpinnerUi from './components/ui/SpinnerUi'
-
 import './global.scss'
 import RestaurantDetail from './pages/RestaurantDetail'
 
@@ -35,7 +33,7 @@ const App: React.FC<IAppProps> = ({ signIn }) => {
             <Route path='/example' component={Example} exact={true} />
             <Route path='/vote-save' component={VoteSave} exact={true} />
             <Route path='/dev' component={Home} exact={true} />
-            <Route path='/restaurantDetail' component={RestaurantDetail} exact={true} />
+            <Route path='/restaurant-detail/:placeId' component={RestaurantDetail} exact={true} />
             <Route exact path='/' render={() => <Redirect to='/main' />} />
           </IonRouterOutlet>
         </IonReactRouter>

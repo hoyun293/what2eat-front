@@ -65,7 +65,12 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
         <img src='/assets/img/vote-place-thumb-holder.png' alt='' />
       </div>
       <div className='info-container flex justify-between'>
-        <div className='flex-col'>
+        <div
+          className='flex-col'
+          onClick={() => {
+            window.location.href = `http://localhost:5500/restaurant-detail/${placeId}`
+          }}
+        >
           <div>{name}</div>
           <div className='mt-1 flex text-base leading-none'>
             <ReviewStar rating={rating} ratingCount={ratingCount}></ReviewStar>
@@ -73,7 +78,11 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
             <span className='purple'>{getNumberUnit(distance)}m</span>
           </div>
         </div>
-        <div onClick={() => onClickItem({ placeId, imageUrl, name })}>
+        <div
+          onClick={() => {
+            onClickItem({ placeId, imageUrl, name })
+          }}
+        >
           {isAdded ? <IconUi iconName='remove-btn'></IconUi> : <IconUi iconName='add-btn'></IconUi>}
         </div>
       </div>

@@ -17,9 +17,17 @@ const ButtonUi: React.FunctionComponent<IButtonUiProps> = ({
   onClick = () => {}
 }) => {
   return (
-    <IonButton expand='block' color={color} style={{ height }} onClick={() => onClick()}>
-      {text}
-    </IonButton>
+    <div className='button-no-shadow'>
+      <IonButton
+        className='button__container p-4 pt-3 m-0'
+        expand='block'
+        color={color}
+        style={{ height }}
+        onClick={() => onClick()}
+      >
+        {text}
+      </IonButton>
+    </div>
   )
 }
 
