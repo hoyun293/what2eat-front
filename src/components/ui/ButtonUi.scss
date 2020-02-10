@@ -1,19 +1,5 @@
-.button-shadow {
+.button-no-shadow {
   &__container {
-    background-color: #f6f6f6;
-    height: 8.2rem;
-
-    ion-button {
-      height: 8.2rem;
-    }
-  }
-
-  &__gradient {
-    width: 100%;
-    position: fixed;
-    bottom: 8.2rem;
-  }
-  &__temp {
     background-color: #f6f6f6;
     height: 8.2rem;
   }
