@@ -22,7 +22,7 @@ export const signIn = () => async (dispatch: React.Dispatch<any>) => {
 
       localStorage.setItem('token', result.token)
       localStorage.setItem('account', result.account)
-      // localStorage.setItem('account', 'guest-test')
+      //localStorage.setItem('account', 'GUEST-TEST')
 
       setAuthoriation(result.token)
     })

@@ -3,13 +3,18 @@ import { SET_VOTEROOM_FORM, SET_VOTEROOM_IS_LOADING, SET_VOTEROOM_ERROR_MESSAGE 
 import { TAction } from '../redux-type'
 import { getMyVoteRooms } from '../../api/voteRoom-api'
 import { IVoteRoomState } from './vote-room-state'
+import { mainVotesApi } from '../../api/main-api'
 
 export const selectVoteRooms = (limit: number = 5, orderby: boolean = true) => async (
   dispatch: React.Dispatch<any>
 ) => {
   dispatch(setVoteRoomIsLoading(true))
   const { result } = await getMyVoteRooms(limit, orderby)
-  console.log(result)
+  /*
+  mainVotesApi().then(({ result }) => {
+    console.log(result)
+  })
+  */
   dispatch(setVoteRoomForm(result.rooms))
   dispatch(setVoteRoomIsLoading(false))
 }
