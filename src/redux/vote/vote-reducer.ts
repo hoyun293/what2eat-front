@@ -3,6 +3,7 @@ import {
   SET_VOTE_ERROR_MESSAGE,
   SET_VOTE_FORM,
   SET_VOTE_PLACES,
+  SET_DISABLE_VOTE_PLACES_INFINITE_SCROLL,
   SET_VOTE_FORM_PLACE_ID,
   DELETE_VOTE_FORM_PLACE_ID
 } from './vote-constants'
@@ -31,6 +32,11 @@ export default function userReducer(state: IVoteState, action: TVoteActions): IV
       return {
         ...state,
         votePlaces: action.reset ? action.votePlaces : [...state.votePlaces, ...action.votePlaces]
+      }
+    case SET_DISABLE_VOTE_PLACES_INFINITE_SCROLL:
+      return {
+        ...state,
+        disableVotePlacesInfiniteScroll: action.disableVotePlacesInfiniteScroll
       }
     case SET_VOTE_IS_LOADING:
       return { ...state, isLoading: action.isLoading }

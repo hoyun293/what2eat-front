@@ -19,7 +19,9 @@ import {
   IonFab,
   IonLabel,
   IonSelect,
-  IonSelectOption
+  IonSelectOption,
+  IonInfiniteScroll,
+  IonInfiniteScrollContent
 } from '@ionic/react'
 import VotePlaceItem from '../components/VotePlaceItem'
 
@@ -38,6 +40,7 @@ interface IOwnProps {}
 interface IStateProps {
   voteForm: IVoteForm
   votePlaces: IPlace[]
+  disableVotePlacesInfiniteScroll: boolean
 }
 interface IDispatchProps {
   setVoteForm: typeof setVoteForm
@@ -52,6 +55,7 @@ const INIT_LONGITUDE = 127.0253834
 const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   voteForm,
   votePlaces,
+  disableVotePlacesInfiniteScroll,
   setVoteForm,
   selectVotePlaces,
   setVotePlace,
@@ -73,7 +77,12 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
     if (coordinate.lat === INIT_LONGITUDE) return
     getAddress(coordinate.lat, coordinate.lng)
 
-    selectVotePlaces()
+    selectVotePlaces({
+      latitude: coordinate.lat,
+      longitude: coordinate.lng,
+      sortBy: sortBy.value,
+      distance: filterDistance
+    })
   }, [coordinate, sortBy, filterDistance]) // eslint-disable-line
 
   const getCurrentPosition = async () => {
@@ -81,7 +90,6 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
       const { coords } = await Plugins.Geolocation.getCurrentPosition()
       setCoordinate({ lat: coords.latitude, lng: coords.longitude })
     } catch (e) {
-      console.log(e)
       setCoordinate({ lat: 37.4961895, lng: 127.0253834 })
     }
   }
@@ -100,6 +108,18 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
         setSortBy({ label: '거리순', value: 'distance' })
         break
     }
+  }
+
+  async function searchNext($event: CustomEvent<void>) {
+    await selectVotePlaces({
+      latitude: coordinate.lat,
+      longitude: coordinate.lng,
+      sortBy: sortBy.value,
+      distance: filterDistance,
+      nextpagetoken: '1234'
+    })
+
+    _.invoke($event.target, 'complete')
   }
 
   return (
@@ -127,9 +147,9 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
       </div>
 
       <div className='pt-8'>
-        {_.map(votePlaces, v => (
+        {_.map(votePlaces, (v, i) => (
           <VotePlaceItem
-            key={v.placeId}
+            key={i}
             placeId={v.placeId}
             name={v.name}
             rating={v.rating}
@@ -144,6 +164,13 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
           ></VotePlaceItem>
         ))}
       </div>
+      <IonInfiniteScroll
+        threshold='100px'
+        disabled={disableVotePlacesInfiniteScroll}
+        onIonInfinite={(e: CustomEvent<void>) => searchNext(e)}
+      >
+        <IonInfiniteScrollContent loadingText='데이터를 불러오는 중입니다.'></IonInfiniteScrollContent>
+      </IonInfiniteScroll>
 
       <div className='flex-center fixed cart-list-btn' onClick={() => setIsShowCartModal(true)}>
         <IconUi iconName='cart-list' className='pt-1'></IconUi>
@@ -182,7 +209,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
           <div className='cart-lit-modal__header flex-center text-xl black text-bold'>추가한 투표지</div>
           <div className='flex-column'>
             {_.map(voteForm.votePlaces, v => (
-              <div className='flex justify-between p-4'>
+              <div className='flex justify-between p-4' key={v.placeId}>
                 <div className='flex items-center'>
                   <div
                     className='thumb-container'
@@ -212,7 +239,8 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ vote }) => ({
     voteForm: vote.voteForm,
-    votePlaces: vote.votePlaces
+    votePlaces: vote.votePlaces,
+    disableVotePlacesInfiniteScroll: vote.disableVotePlacesInfiniteScroll
   }),
   mapDispatchToProps: {
     setVoteForm,

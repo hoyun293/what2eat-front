@@ -2,3 +2,7 @@
 .header-ios:after {
   height: 0;
 }
+
+ion-toolbar {
+  --border-width: 0 0 0 !important;
+}

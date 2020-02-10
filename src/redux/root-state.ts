@@ -31,6 +31,7 @@ export const initialState: IState = {
       votePlaces: {}
     },
     votePlaces: [],
+    disableVotePlacesInfiniteScroll: false,
     isLoading: false,
     errorMessage: ''
   } as IVoteState,

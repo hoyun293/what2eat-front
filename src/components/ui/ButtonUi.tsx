@@ -6,12 +6,25 @@ import './ButtonUi.scss'
 interface IButtonUiProps {
   color: string
   text: string
+  onClick?: Function
+  height?: string
 }
 
-const ButtonUi: React.FunctionComponent<IButtonUiProps> = ({ text = '', color = 'yellow' }) => {
+const ButtonUi: React.FunctionComponent<IButtonUiProps> = ({
+  color = 'yellow',
+  text,
+  height = '5.2rem',
+  onClick = () => {}
+}) => {
   return (
-    <div className='button-no-shadow'>
-      <IonButton className='button-no-shadow__container p-4 pt-3 m-0' expand='block' color={color}>
+    <div className='button'>
+      <IonButton
+        className='button__container p-4 pt-3 m-0'
+        expand='block'
+        color={color}
+        style={{ height }}
+        onClick={() => onClick()}
+      >
         {text}
       </IonButton>
     </div>

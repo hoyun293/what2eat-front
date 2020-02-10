@@ -12,7 +12,8 @@ OEQxke9JGLTTwqNb4wIDAQAB
 -----END PUBLIC KEY-----`,
     GOOGLE_API_KEY: 'AIzaSyCRDNZxC7GOx96YVc8KgMS32e7NLod1uO4',
     GOOGLE_MAP_KEY: 'AIzaSyA85fGuvNEmFwCOB-ULc_cn09G7RtDrdvY',
-    GOOGLE_GEO_KEY: 'AIzaSyDlfsuPwv_HHvWnMUSEkca1H2GbE4KlJgw'
+    GOOGLE_GEO_KEY: 'AIzaSyDlfsuPwv_HHvWnMUSEkca1H2GbE4KlJgw',
+    KAKAO_JS_KEY: 'cc0ac1ff1e0fbed988147684d98bb273'
   },
   production: {
     BASE_URL: 'https://w2e.kindrobot.me/api',
@@ -25,7 +26,8 @@ OEQxke9JGLTTwqNb4wIDAQAB
 -----END PUBLIC KEY-----`,
     GOOGLE_API_KEY: 'AIzaSyCRDNZxC7GOx96YVc8KgMS32e7NLod1uO4',
     GOOGLE_MAP_KEY: 'AIzaSyA85fGuvNEmFwCOB-ULc_cn09G7RtDrdvY',
-    GOOGLE_GEO_KEY: 'AIzaSyDlfsuPwv_HHvWnMUSEkca1H2GbE4KlJgw'
+    GOOGLE_GEO_KEY: 'AIzaSyDlfsuPwv_HHvWnMUSEkca1H2GbE4KlJgw',
+    KAKAO_JS_KEY: 'cc0ac1ff1e0fbed988147684d98bb273'
   }
 }
 
