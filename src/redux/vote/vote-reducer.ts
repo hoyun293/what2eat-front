@@ -3,6 +3,7 @@ import {
   SET_VOTE_ERROR_MESSAGE,
   SET_VOTE_FORM,
   SET_VOTE_PLACES,
+  SET_VOTE_PAGETOKEN,
   SET_DISABLE_VOTE_PLACES_INFINITE_SCROLL,
   SET_VOTE_FORM_PLACE_ID,
   DELETE_VOTE_FORM_PLACE_ID
@@ -24,6 +25,8 @@ export default function userReducer(state: IVoteState, action: TVoteActions): IV
           votePlaces: { ...voteForm.votePlaces, [action.votePlace.placeId]: action.votePlace }
         }
       }
+    case SET_VOTE_PAGETOKEN:
+      return { ...state, pagetoken: action.pagetoken }
     case DELETE_VOTE_FORM_PLACE_ID:
       const newFormPlaces = { ...voteForm.votePlaces }
       delete newFormPlaces[action.votePlace.placeId]

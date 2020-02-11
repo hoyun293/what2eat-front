@@ -5,6 +5,7 @@ import {
   SET_VOTE_IS_LOADING,
   SET_VOTE_ERROR_MESSAGE,
   SET_VOTE_PLACES,
+  SET_VOTE_PAGETOKEN,
   DELETE_VOTE_FORM_PLACE_ID,
   SET_VOTE_FORM_PLACE_ID,
   SET_DISABLE_VOTE_PLACES_INFINITE_SCROLL
@@ -27,17 +28,23 @@ export const selectVotePlaces = (payload: IGetVotePlaces) => async (dispatch: Re
   dispatch(setVoteIsLoading(true))
   getVotePlaces(payload)
     .then(({ result }) => {
-      dispatch(setVotePlaces(result.places, !payload.nextpagetoken))
-      dispatch(setVoteIsLoading(false))
+      dispatch(setVotePlaces(result.restaurants, !payload.pagetoken))
+      dispatch(setVotePagetoken(result.nextPageToken))
 
-      if (result.places.length > 0) {
-        dispatch(setDisableVotePlacesInfiniteScroll(result.places.length < 20))
+      if (result.restaurants.length > 0) {
+        dispatch(setDisableVotePlacesInfiniteScroll(result.restaurants.length < 20))
       } else {
         dispatch(setDisableVotePlacesInfiniteScroll(true))
       }
     })
     .catch(err => dispatch(setVoteErrorMessage(err.message)))
 }
+
+export const setVotePagetoken = (pagetoken: string) =>
+  ({
+    type: SET_VOTE_PAGETOKEN,
+    pagetoken
+  } as const)
 
 export const setVoteForm = (voteForm: Partial<IVoteForm>) =>
   ({
@@ -85,6 +92,7 @@ export const setVoteErrorMessage = (errorMessage: string) =>
 export type TVoteActions =
   | TAction<typeof setVoteForm>
   | TAction<typeof setVotePlaces>
+  | TAction<typeof setVotePagetoken>
   | TAction<typeof setVoteIsLoading>
   | TAction<typeof setVoteErrorMessage>
   | TAction<typeof setVotePlace>

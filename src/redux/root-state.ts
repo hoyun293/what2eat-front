@@ -31,6 +31,7 @@ export const initialState: IState = {
       votePlaces: {}
     },
     votePlaces: [],
+    pagetoken: '',
     disableVotePlacesInfiniteScroll: false,
     isLoading: false,
     errorMessage: ''

@@ -42,24 +42,24 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
   placeId,
   name,
   rating,
-  ratingCount,
-  imageUrl,
-  latitude,
-  longitude,
+  userRatingsTotal,
+  photoUrl,
+  lat,
+  lng,
   nowLatitude,
   nowLongitude,
   isAdded,
   onClickItem
 }) => {
-  const distance = getDistanceByCordinate({ latitude, longitude, nowLatitude, nowLongitude })
+  const distance = getDistanceByCordinate({ latitude: lat, longitude: lng, nowLatitude, nowLongitude })
 
   return (
     <li key={placeId} className='item-container'>
       <div
         className='image-container'
         style={{
-          backgroundImage: `url(${imageUrl || '/assets/img/list-place-thumb-empty.svg'})`,
-          backgroundSize: imageUrl ? 'cover' : 'initial'
+          backgroundImage: `url(${photoUrl || '/assets/img/list-place-thumb-empty.svg'})`,
+          backgroundSize: photoUrl ? 'cover' : 'initial'
         }}
       >
         <img src='/assets/img/vote-place-thumb-holder.png' alt='' />
@@ -73,14 +73,14 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
         >
           <div>{name}</div>
           <div className='mt-1 flex text-base leading-none'>
-            <ReviewStar rating={rating} ratingCount={ratingCount}></ReviewStar>
+            <ReviewStar rating={rating} userRatingsTotal={userRatingsTotal}></ReviewStar>
             <div className='gray px-1'>·</div>
             <span className='purple'>{getNumberUnit(distance)}m</span>
           </div>
         </div>
         <div
           onClick={() => {
-            onClickItem({ placeId, imageUrl, name })
+            onClickItem({ placeId, photoUrl, name })
           }}
         >
           {isAdded ? <IconUi iconName='remove-btn'></IconUi> : <IconUi iconName='add-btn'></IconUi>}

@@ -2,8 +2,8 @@ const NODE_ENV = process.env.NODE_ENV
 
 const config = {
   development: {
-    BASE_URL: 'http://localhost:5050/api',
-    // BASE_URL: 'https://rm7is5pi3b.execute-api.ap-northeast-2.amazonaws.com/dev',
+    // BASE_URL: 'http://localhost:5050/api',
+    BASE_URL: 'https://rm7is5pi3b.execute-api.ap-northeast-2.amazonaws.com/dev',
     AUTH_PUBKEY: `-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDKV3M9UazjIEUEVI/Gq8MNTrd2
 teWRBlpx+92I3ejgi86BFo1kb4Uh5iBnhouM5/CeqjIvhOEGhlY6nAusZCMmNO2d
@@ -16,8 +16,8 @@ OEQxke9JGLTTwqNb4wIDAQAB
     KAKAO_JS_KEY: 'cc0ac1ff1e0fbed988147684d98bb273'
   },
   production: {
-    BASE_URL: 'https://w2e.kindrobot.me/api',
-    // BASE_URL: 'https://rm7is5pi3b.execute-api.ap-northeast-2.amazonaws.com/dev',
+    // BASE_URL: 'https://w2e.kindrobot.me/api',
+    BASE_URL: 'https://rm7is5pi3b.execute-api.ap-northeast-2.amazonaws.com/dev',
     AUTH_PUBKEY: `-----BEGIN PUBLIC KEY-----
 MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDKV3M9UazjIEUEVI/Gq8MNTrd2
 teWRBlpx+92I3ejgi86BFo1kb4Uh5iBnhouM5/CeqjIvhOEGhlY6nAusZCMmNO2d

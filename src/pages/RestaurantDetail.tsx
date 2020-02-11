@@ -63,7 +63,7 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompone
         <div className='restaurantInfo flex-col'>
           <div className='title w-full text-center text-xxl pt-2'>식당이름</div>
           <div className='rating w-full flex'>
-            <ReviewStar className='ratingCenter pt-2' rating={3.6} ratingCount={23}></ReviewStar>
+            <ReviewStar className='ratingCenter pt-2' rating={3.6} userRatingsTotal={23}></ReviewStar>
           </div>
           <div className='address flex text-left pt-4'>
             <img className='ml-3' src='/assets/icon/location2.svg' alt='' />

@@ -40,6 +40,7 @@ interface IOwnProps {}
 interface IStateProps {
   voteForm: IVoteForm
   votePlaces: IPlace[]
+  pagetoken: string
   disableVotePlacesInfiniteScroll: boolean
 }
 interface IDispatchProps {
@@ -57,6 +58,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
   votePlaces,
   disableVotePlacesInfiniteScroll,
   setVoteForm,
+  pagetoken,
   selectVotePlaces,
   setVotePlace,
   deleteVotePlace
@@ -65,7 +67,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
   const [isShowModal, setIsShowModal] = useState(false)
   const [isShowCartModal, setIsShowCartModal] = useState(false)
   const [filterDistance, setFilterDistance] = useState(1000)
-  const [sortBy, setSortBy] = useState({ label: '거리순', value: 'distance' })
+  const [rankby, setRankBy] = useState({ label: '거리순', value: 'distance' })
 
   const [coordinate, setCoordinate] = useState({ lat: INIT_LATITUDE, lng: INIT_LONGITUDE })
 
@@ -80,10 +82,10 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
     selectVotePlaces({
       latitude: coordinate.lat,
       longitude: coordinate.lng,
-      sortBy: sortBy.value,
-      distance: filterDistance
+      rankby: rankby.value,
+      radius: filterDistance
     })
-  }, [coordinate, sortBy, filterDistance]) // eslint-disable-line
+  }, [coordinate, rankby, filterDistance]) // eslint-disable-line
 
   const getCurrentPosition = async () => {
     try {
@@ -100,12 +102,12 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
   }
 
   const toggleSortBy = () => {
-    switch (sortBy.value) {
+    switch (rankby.value) {
       case 'distance':
-        setSortBy({ label: '인기순', value: 'prominence' })
+        setRankBy({ label: '인기순', value: 'prominence' })
         break
       case 'prominence':
-        setSortBy({ label: '거리순', value: 'distance' })
+        setRankBy({ label: '거리순', value: 'distance' })
         break
     }
   }
@@ -114,11 +116,12 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
     await selectVotePlaces({
       latitude: coordinate.lat,
       longitude: coordinate.lng,
-      sortBy: sortBy.value,
-      distance: filterDistance,
-      nextpagetoken: '1234'
+      rankby: rankby.value,
+      radius: filterDistance,
+      pagetoken
     })
 
+    // radius=6500&latitude=37.482643&longitude=126.896992&rankby=distance&pagetoken=CsQDw
     _.invoke($event.target, 'complete')
   }
 
@@ -142,7 +145,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
           </IonSelect>
         </div>
         <div className='flex-center text-lg m-black' onClick={() => toggleSortBy()}>
-          <IconUi iconName='sort' className='pt-1 pr-1'></IconUi> {sortBy.label}
+          <IconUi iconName='sort' className='pt-1 pr-1'></IconUi> {rankby.label}
         </div>
       </div>
 
@@ -153,12 +156,12 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
             placeId={v.placeId}
             name={v.name}
             rating={v.rating}
-            ratingCount={v.ratingCount}
-            latitude={v.latitude}
-            longitude={v.longitude}
+            userRatingsTotal={v.userRatingsTotal}
+            lat={v.lat}
+            lng={v.lng}
             nowLatitude={coordinate.lat}
             nowLongitude={coordinate.lng}
-            imageUrl={v.imageUrl}
+            photoUrl={v.photoUrl}
             isAdded={voteForm?.votePlaces?.hasOwnProperty(v.placeId)}
             onClickItem={voteForm?.votePlaces?.hasOwnProperty(v.placeId) ? deleteVotePlace : setVotePlace}
           ></VotePlaceItem>
@@ -214,8 +217,8 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
                   <div
                     className='thumb-container'
                     style={{
-                      backgroundImage: `url(${v.imageUrl || '/assets/img/list-place-thumb-empty.svg'})`,
-                      backgroundSize: v.imageUrl ? 'cover' : 'initial'
+                      backgroundImage: `url(${v.photoUrl || '/assets/img/list-place-thumb-empty.svg'})`,
+                      backgroundSize: v.photoUrl ? 'cover' : 'initial'
                     }}
                   ></div>
                   <div className='pl-4'>{v.name}</div>
@@ -240,6 +243,7 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ vote }) => ({
     voteForm: vote.voteForm,
     votePlaces: vote.votePlaces,
+    pagetoken: vote.pagetoken,
     disableVotePlacesInfiniteScroll: vote.disableVotePlacesInfiniteScroll
   }),
   mapDispatchToProps: {

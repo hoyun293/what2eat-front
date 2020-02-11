@@ -4,11 +4,11 @@ import IconUi from './ui/IconUi'
 
 interface IReviewStarProps {
   rating: number
-  ratingCount: number
+  userRatingsTotal: number
   className?: string
 }
 
-const ReviewStar: React.FC<IReviewStarProps> = ({ rating, ratingCount, className = '' }) => {
+const ReviewStar: React.FC<IReviewStarProps> = ({ rating, userRatingsTotal, className = '' }) => {
   const fullStarCount = Math.floor(rating)
   const halfStarCount = rating - fullStarCount >= 0.5 ? 1 : 0
   const emptyStarCount = 5 - fullStarCount - halfStarCount
@@ -31,7 +31,7 @@ const ReviewStar: React.FC<IReviewStarProps> = ({ rating, ratingCount, className
           <IconUi iconName='star-empty'></IconUi>
         </li>
       ))}
-      <li className='pl-1 text-base leading-none gray'>({ratingCount})</li>
+      <li className='pl-1 text-base leading-none gray'>({userRatingsTotal})</li>
     </ul>
   )
 }

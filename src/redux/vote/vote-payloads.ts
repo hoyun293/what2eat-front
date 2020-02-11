@@ -1,7 +1,7 @@
 export interface IGetVotePlaces {
   latitude: number
   longitude: number
-  sortBy: 'prominence' | 'distance' | any
-  distance: number
-  nextpagetoken?: string
+  rankby: 'prominence' | 'distance' | any
+  radius: number
+  pagetoken?: string
 }
