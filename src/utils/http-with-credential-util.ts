@@ -12,7 +12,7 @@ interface IResponse {
 
 const _axios = axios.create({
   baseURL: config.BASE_URL,
-  withCredentials: true,
+  withCredentials: false,
   transformResponse: (r: IAxiosResponse) => r,
   headers: {
     'Content-Type': 'application/json'
