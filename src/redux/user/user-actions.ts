@@ -10,6 +10,8 @@ export const signIn = () => async (dispatch: React.Dispatch<any>) => {
   //3 hour
   const expire = 1000 * 60 * 60 * 3
   if (parseInt(accountTs) + expire > ts) {
+    const token = localStorage.getItem('token') || ''
+    setAuthoriation(token)
     return true
   }
 
