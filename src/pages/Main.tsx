@@ -30,8 +30,8 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ selectVoteRo
 
   return (
     <IonPage>
-      <IonContent className='ion-padding' fullscreen>
-        <div className='mb-7 flex'>
+      <IonContent fullscreen>
+        <div className='mb-7 flex px-container'>
           <div className='pageHeadPhrase text-xxxl'>
             오늘도 맛있는
             <br />
@@ -63,7 +63,6 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ selectVoteRo
         </div>
         <div className='background-img'>
           <MainFormVoteRoomListContainer />
-
           <div className='bottom-floating' onClick={() => history.push('/vote-save')}>
             <img src='/assets/img/floating_btn_add.svg' alt='' />
           </div>

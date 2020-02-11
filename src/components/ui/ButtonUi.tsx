@@ -17,7 +17,7 @@ const ButtonUi: React.FunctionComponent<IButtonUiProps> = ({
   onClick = () => {}
 }) => {
   return (
-    <div className='button-no-shadow'>
+    <div className='button'>
       <IonButton
         className='button__container p-4 pt-3 m-0'
         expand='block'

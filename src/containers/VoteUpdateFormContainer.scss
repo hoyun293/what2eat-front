@@ -1,0 +1,55 @@
+.dummy {
+  flex-basis: 10%;
+}
+.HeaderTitle {
+  flex-basis: 100%;
+  font-family: NotoSansCJKkr-Medium;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.12;
+  letter-spacing: -0.34px;
+  color: #111111;
+}
+.HeaderIcon {
+  flex-basis: 10%;
+}
+
+.x-container {
+  padding-left: 5rem;
+  padding-right: 5rem;
+}
+
+.spaceMaker {
+  margin-top: 6.4rem;
+}
+.multiStr1 {
+  font-family: NotoSansCJKkr-Medium;
+  font-weight: 500;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.25;
+  letter-spacing: -0.32px;
+  text-align: left;
+  color: #111111;
+}
+.multiStr2 {
+  font-family: NotoSansCJKkr-Regular;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.57;
+  letter-spacing: -0.28px;
+  text-align: right;
+  color: #c2c7cc;
+}
+
+.deadlineStr {
+  font-family: NotoSansCJKkr-Medium;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 2.25;
+  letter-spacing: -0.32px;
+  text-align: left;
+  color: #111111;
+}
