@@ -2,10 +2,10 @@ import { IExampleState } from './example/example-state'
 import { combineReducers } from './combine-reducers'
 import example from './example/example-reducer'
 import user from './user/user-reducer'
-import vote from './vote/vote-reducer'
+import voteInsert from './vote-insert/vote-insert-reducer'
 import voteRoom from './vote-room/vote-room-reducer'
 import { IUserState } from './user/user-state'
-import { IVoteState } from './vote/vote-state'
+import { IVoteInsertState } from './vote-insert/vote-insert-state'
 import { IVoteRoomState } from './vote-room/vote-room-state'
 import moment from 'moment'
 
@@ -21,7 +21,7 @@ export const initialState: IState = {
     isLoading: false,
     errorMessage: ''
   } as IUserState,
-  vote: {
+  voteInsert: {
     voteForm: {
       voteName: '',
       isMultiVote: false,
@@ -35,7 +35,7 @@ export const initialState: IState = {
     disableVotePlacesInfiniteScroll: false,
     isLoading: false,
     errorMessage: ''
-  } as IVoteState,
+  } as IVoteInsertState,
   voteRoom: {
     voteRooms: [],
     isLoading: false,
@@ -46,7 +46,7 @@ export const initialState: IState = {
 export const rootReducers = combineReducers({
   example,
   user,
-  vote,
+  voteInsert,
   voteRoom
 })
 

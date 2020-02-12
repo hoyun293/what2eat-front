@@ -1,4 +1,4 @@
-import { IGetVotePlaces, IPostVote } from './../redux/vote/vote-payloads'
+import { IGetVotePlaces, IPostVote } from './../redux/vote-insert/vote-insert-payloads'
 import axios from '../utils/http-with-credential-util'
 
 export const getVotePlaces = (p: IGetVotePlaces) => {

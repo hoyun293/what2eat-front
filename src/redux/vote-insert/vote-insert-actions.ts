@@ -1,15 +1,15 @@
-import { IGetVotePlaces, IPostVote } from './vote-payloads'
-import { IVoteForm } from './../../models/vote.d'
+import { IGetVotePlaces, IPostVote } from './vote-insert-payloads'
+import { IVoteForm } from '../../models/vote'
 import {
-  SET_VOTE_FORM,
-  SET_VOTE_IS_LOADING,
-  SET_VOTE_ERROR_MESSAGE,
-  SET_VOTE_PLACES,
-  SET_VOTE_PAGETOKEN,
-  DELETE_VOTE_FORM_PLACE_ID,
-  SET_VOTE_FORM_PLACE_ID,
+  SET_VOTE_INSERT_FORM,
+  SET_VOTE_FORM_IS_LOADING,
+  SET_VOTE_FORM_ERROR_MESSAGE,
+  SET_VOTE_INSERT_PLACES,
+  SET_VOTE_INSERT_PAGETOKEN,
+  DELETE_VOTE_INSERT_FORM_PLACE_ID,
+  SET_VOTE_INSERT_FORM_PLACE_ID,
   SET_DISABLE_VOTE_PLACES_INFINITE_SCROLL
-} from './vote-constants'
+} from './vote-insert-constants'
 import { TAction } from '../redux-type'
 import { getVotePlaces, postVote } from '../../api/vote-api'
 import { IPlace } from '../../models/place'
@@ -42,31 +42,31 @@ export const selectVotePlaces = (payload: IGetVotePlaces) => async (dispatch: Re
 
 export const setVotePagetoken = (pagetoken: string) =>
   ({
-    type: SET_VOTE_PAGETOKEN,
+    type: SET_VOTE_INSERT_PAGETOKEN,
     pagetoken
   } as const)
 
 export const setVoteForm = (voteForm: Partial<IVoteForm>) =>
   ({
-    type: SET_VOTE_FORM,
+    type: SET_VOTE_INSERT_FORM,
     voteForm
   } as const)
 
 export const setVotePlace = (votePlace: IPlace) =>
   ({
-    type: SET_VOTE_FORM_PLACE_ID,
+    type: SET_VOTE_INSERT_FORM_PLACE_ID,
     votePlace
   } as const)
 
 export const deleteVotePlace = (votePlace: IPlace) =>
   ({
-    type: DELETE_VOTE_FORM_PLACE_ID,
+    type: DELETE_VOTE_INSERT_FORM_PLACE_ID,
     votePlace
   } as const)
 
 export const setVotePlaces = (votePlaces: IPlace[], reset: boolean = true) =>
   ({
-    type: SET_VOTE_PLACES,
+    type: SET_VOTE_INSERT_PLACES,
     votePlaces,
     reset
   } as const)
@@ -79,13 +79,13 @@ export const setDisableVotePlacesInfiniteScroll = (disableVotePlacesInfiniteScro
 
 export const setVoteIsLoading = (isLoading: boolean) =>
   ({
-    type: SET_VOTE_IS_LOADING,
+    type: SET_VOTE_FORM_IS_LOADING,
     isLoading
   } as const)
 
 export const setVoteErrorMessage = (errorMessage: string) =>
   ({
-    type: SET_VOTE_ERROR_MESSAGE,
+    type: SET_VOTE_FORM_ERROR_MESSAGE,
     errorMessage
   } as const)
 

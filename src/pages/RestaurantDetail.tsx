@@ -129,8 +129,8 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompone
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ vote }) => ({
-    voteForm: vote.voteForm
+  mapStateToProps: ({ voteInsert }) => ({
+    voteForm: voteInsert.voteForm
   }),
   mapDispatchToProps: {},
   component: VoteSave

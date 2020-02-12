@@ -12,7 +12,7 @@ import { IVoteForm } from '../models/vote'
 
 import './VoteSave.scss'
 
-import { insertVote } from '../redux/vote/vote-actions'
+import { insertVote } from '../redux/vote-insert/vote-insert-actions'
 
 interface IOwnProps {}
 interface IStateProps {
@@ -91,9 +91,9 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ vote }) => ({
-    voteForm: vote.voteForm,
-    voteErrorMessage: vote.errorMessage
+  mapStateToProps: ({ voteInsert }) => ({
+    voteForm: voteInsert.voteForm,
+    voteErrorMessage: voteInsert.errorMessage
   }),
   mapDispatchToProps: {
     insertVote

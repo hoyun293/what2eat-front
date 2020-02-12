@@ -4,7 +4,7 @@ import { IonInput, IonToggle, IonDatetime } from '@ionic/react'
 import { IVote, IVoteForm } from '../models/vote.d'
 import { connect } from '../redux/redux-connect'
 import { getPlaceList } from '../api/google-api'
-import { setVoteForm } from '../redux/vote/vote-actions'
+import { setVoteForm } from '../redux/vote-insert/vote-insert-actions'
 import InputUi from '../components/ui/InputUi'
 import IconUi from '../components/ui/IconUi'
 import DateTime from '../components/DateTime'
@@ -90,8 +90,8 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ vote }) => ({
-    voteForm: vote.voteForm
+  mapStateToProps: ({ voteInsert }) => ({
+    voteForm: voteInsert.voteForm
   }),
   mapDispatchToProps: {
     setVoteForm

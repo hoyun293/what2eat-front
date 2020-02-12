@@ -6,7 +6,12 @@ import { connect } from '../redux/redux-connect'
 import { getAddressByCoordinate } from '../api/google-api'
 import { Plugins } from '@capacitor/core'
 import { IVoteForm } from '../models/vote'
-import { setVoteForm, selectVotePlaces, deleteVotePlace, setVotePlace } from '../redux/vote/vote-actions'
+import {
+  setVoteForm,
+  selectVotePlaces,
+  deleteVotePlace,
+  setVotePlace
+} from '../redux/vote-insert/vote-insert-actions'
 import IconUi from '../components/ui/IconUi'
 import {
   IonItem,
@@ -240,11 +245,11 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ vote }) => ({
-    voteForm: vote.voteForm,
-    votePlaces: vote.votePlaces,
-    pagetoken: vote.pagetoken,
-    disableVotePlacesInfiniteScroll: vote.disableVotePlacesInfiniteScroll
+  mapStateToProps: ({ voteInsert }) => ({
+    voteForm: voteInsert.voteForm,
+    votePlaces: voteInsert.votePlaces,
+    pagetoken: voteInsert.pagetoken,
+    disableVotePlacesInfiniteScroll: voteInsert.disableVotePlacesInfiniteScroll
   }),
   mapDispatchToProps: {
     setVoteForm,

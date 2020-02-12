@@ -1,8 +1,8 @@
-import { IPlace } from './../../models/place.d'
-import { ICommonState } from './../redux-type'
+import { IPlace } from '../../models/place'
+import { ICommonState } from '../redux-type'
 import { IVoteForm } from '../../models/vote'
 
-export interface IVoteState extends ICommonState {
+export interface IVoteInsertState extends ICommonState {
   voteForm: IVoteForm
   votePlaces: IPlace[]
   pagetoken: string
