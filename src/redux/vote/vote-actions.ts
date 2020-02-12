@@ -1,4 +1,4 @@
-import { IGetVotePlaces } from './vote-payloads'
+import { IGetVotePlaces, IPostVote } from './vote-payloads'
 import { IVoteForm } from './../../models/vote.d'
 import {
   SET_VOTE_FORM,
@@ -14,10 +14,10 @@ import { TAction } from '../redux-type'
 import { getVotePlaces, postVote } from '../../api/vote-api'
 import { IPlace } from '../../models/place'
 
-export const insertVote = () => async (dispatch: React.Dispatch<any>) => {
+export const insertVote = (payload: IPostVote) => async (dispatch: React.Dispatch<any>) => {
   dispatch(setVoteIsLoading(true))
 
-  postVote({})
+  postVote(payload)
     .then(() => {
       dispatch(setVoteIsLoading(false))
     })

@@ -56,8 +56,8 @@ const VoteUpdateFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps
         <div className='purple flex items-center'>
           <DateTime
             ref={datepickerRef}
-            value={voteForm.endDate}
-            //  onChange={(endDate: string) => setVoteForm({ endDate })}
+            value={voteForm.voteEndDtm}
+            //  onChange={(voteEndDtm: string) => setVoteForm({ voteEndDtm })}
           />
           <IconUi
             iconName='arrow'

@@ -51,8 +51,8 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
           <div className='text-xl text-medium'>복수투표 가능</div>
         </div>
         <IonToggle
-          checked={voteForm.isMulti}
-          onIonChange={({ detail }) => setVoteForm({ isMulti: detail.checked })}
+          checked={voteForm.isMultiVote}
+          onIonChange={({ detail }) => setVoteForm({ isMultiVote: detail.checked })}
         ></IonToggle>
       </div>
 
@@ -66,8 +66,8 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
         <div className='purple flex items-center'>
           <DateTime
             ref={datepickerRef}
-            value={voteForm.endDate}
-            onChange={(endDate: string) => setVoteForm({ endDate })}
+            value={voteForm.voteEndDtm}
+            onChange={(voteEndDtm: string) => setVoteForm({ voteEndDtm })}
           />
 
           <IconUi

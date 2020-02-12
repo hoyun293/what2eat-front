@@ -5,3 +5,10 @@ export interface IGetVotePlaces {
   radius: number
   pagetoken?: string
 }
+
+export interface IPostVote {
+  voteName: string
+  voteEndDtm: string // YYYY-MM-DD HH:mm:ss
+  isMultiVote: boolean
+  placeIds: string[]
+}

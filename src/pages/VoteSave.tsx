@@ -60,7 +60,7 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
       <IonFooter>
         {step === 1 && (
           <ButtonShadowUi
-            disabled={!voteForm.voteName && !voteForm.endDate}
+            disabled={!voteForm.voteName || !voteForm.voteEndDtm}
             onClick={() => setStep(step + 1)}
             text='다음'
             color='yellow'
@@ -70,7 +70,14 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
           <ButtonShadowUi
             disabled={Object.keys(voteForm.votePlaces).length === 0}
             onClick={async () => {
-              await insertVote()
+              const { isMultiVote, voteName, votePlaces, voteEndDtm } = voteForm
+
+              await insertVote({
+                voteName: voteName,
+                placeIds: Object.keys(votePlaces),
+                isMultiVote,
+                voteEndDtm
+              })
 
               if (!voteErrorMessage) setStep(step + 1)
             }}

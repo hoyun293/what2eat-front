@@ -24,10 +24,10 @@ export const initialState: IState = {
   vote: {
     voteForm: {
       voteName: '',
-      isMulti: false,
-      endDate: moment()
+      isMultiVote: false,
+      voteEndDtm: moment()
         .add(7, 'days')
-        .format(),
+        .format('YYYY-MM-DD HH:mm:ss'),
       votePlaces: {}
     },
     votePlaces: [],
