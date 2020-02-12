@@ -30,7 +30,7 @@ const VoteUpdateFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps
           value={voteForm.voteName}
           maxlength={24}
           onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
-            // setVoteForm({ voteName: target.value })
+            // setVoteInsertForm({ voteName: target.value })
             {}
           }
         ></InputUi>
@@ -57,7 +57,7 @@ const VoteUpdateFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps
           <DateTime
             ref={datepickerRef}
             value={voteForm.voteEndDtm}
-            //  onChange={(voteEndDtm: string) => setVoteForm({ voteEndDtm })}
+            //  onChange={(voteEndDtm: string) => setVoteInsertForm({ voteEndDtm })}
           />
           <IconUi
             iconName='arrow'

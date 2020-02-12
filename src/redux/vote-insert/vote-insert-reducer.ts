@@ -1,6 +1,6 @@
 import {
-  SET_VOTE_FORM_IS_LOADING,
-  SET_VOTE_FORM_ERROR_MESSAGE,
+  SET_VOTE_INSERT_IS_LOADING,
+  SET_VOTE_INSERT_ERROR_MESSAGE,
   SET_VOTE_INSERT_FORM,
   SET_VOTE_INSERT_PLACES,
   SET_VOTE_INSERT_PAGETOKEN,
@@ -41,9 +41,9 @@ export default function userReducer(state: IVoteInsertState, action: TVoteAction
         ...state,
         disableVotePlacesInfiniteScroll: action.disableVotePlacesInfiniteScroll
       }
-    case SET_VOTE_FORM_IS_LOADING:
+    case SET_VOTE_INSERT_IS_LOADING:
       return { ...state, isLoading: action.isLoading }
-    case SET_VOTE_FORM_ERROR_MESSAGE:
+    case SET_VOTE_INSERT_ERROR_MESSAGE:
       return { ...state, errorMessage: action.errorMessage }
   }
 }

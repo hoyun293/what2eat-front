@@ -4,7 +4,7 @@ import { IonInput, IonToggle, IonDatetime } from '@ionic/react'
 import { IVote, IVoteForm } from '../models/vote.d'
 import { connect } from '../redux/redux-connect'
 import { getPlaceList } from '../api/google-api'
-import { setVoteForm } from '../redux/vote-insert/vote-insert-actions'
+import { setVoteInsertForm } from '../redux/vote-insert/vote-insert-actions'
 import InputUi from '../components/ui/InputUi'
 import IconUi from '../components/ui/IconUi'
 import DateTime from '../components/DateTime'
@@ -14,12 +14,12 @@ interface IStateProps {
   voteForm: IVoteForm
 }
 interface IDispatchProps {
-  setVoteForm: typeof setVoteForm
+  setVoteInsertForm: typeof setVoteInsertForm
 }
 
 const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   voteForm,
-  setVoteForm
+  setVoteInsertForm
 }) => {
   const datepickerRef = useRef<HTMLInputElement>()
 
@@ -36,7 +36,7 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
           value={voteForm.voteName}
           maxlength={24}
           onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
-            setVoteForm({ voteName: target.value })
+            setVoteInsertForm({ voteName: target.value })
           }
         ></InputUi>
         <div className='x-divider' />
@@ -52,7 +52,7 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
         </div>
         <IonToggle
           checked={voteForm.isMultiVote}
-          onIonChange={({ detail }) => setVoteForm({ isMultiVote: detail.checked })}
+          onIonChange={({ detail }) => setVoteInsertForm({ isMultiVote: detail.checked })}
         ></IonToggle>
       </div>
 
@@ -67,7 +67,7 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
           <DateTime
             ref={datepickerRef}
             value={voteForm.voteEndDtm}
-            onChange={(voteEndDtm: string) => setVoteForm({ voteEndDtm })}
+            onChange={(voteEndDtm: string) => setVoteInsertForm({ voteEndDtm })}
           />
 
           <IconUi
@@ -94,7 +94,7 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
     voteForm: voteInsert.voteForm
   }),
   mapDispatchToProps: {
-    setVoteForm
+    setVoteInsertForm
   },
   component: VoteSaveFormContainer
 })

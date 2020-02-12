@@ -2,8 +2,8 @@ import { IGetVotePlaces, IPostVote } from './vote-insert-payloads'
 import { IVoteForm } from '../../models/vote'
 import {
   SET_VOTE_INSERT_FORM,
-  SET_VOTE_FORM_IS_LOADING,
-  SET_VOTE_FORM_ERROR_MESSAGE,
+  SET_VOTE_INSERT_IS_LOADING,
+  SET_VOTE_INSERT_ERROR_MESSAGE,
   SET_VOTE_INSERT_PLACES,
   SET_VOTE_INSERT_PAGETOKEN,
   DELETE_VOTE_INSERT_FORM_PLACE_ID,
@@ -15,21 +15,21 @@ import { getVotePlaces, postVote } from '../../api/vote-api'
 import { IPlace } from '../../models/place'
 
 export const insertVote = (payload: IPostVote) => async (dispatch: React.Dispatch<any>) => {
-  dispatch(setVoteIsLoading(true))
+  dispatch(setVoteInsertIsLoading(true))
 
   postVote(payload)
     .then(() => {
-      dispatch(setVoteIsLoading(false))
+      dispatch(setVoteInsertIsLoading(false))
     })
-    .catch(err => dispatch(setVoteErrorMessage(err.message)))
+    .catch(err => dispatch(setVoteInsertErrorMessage(err.message)))
 }
 
 export const selectVotePlaces = (payload: IGetVotePlaces) => async (dispatch: React.Dispatch<any>) => {
-  dispatch(setVoteIsLoading(true))
+  dispatch(setVoteInsertIsLoading(true))
   getVotePlaces(payload)
     .then(({ result }) => {
-      dispatch(setVotePlaces(result.restaurants, !payload.pagetoken))
-      dispatch(setVotePagetoken(result.nextPageToken))
+      dispatch(setVoteInsertPlaces(result.restaurants, !payload.pagetoken))
+      dispatch(setVoteInsertPagetoken(result.nextPageToken))
 
       if (result.restaurants.length > 0) {
         dispatch(setDisableVotePlacesInfiniteScroll(result.restaurants.length < 20))
@@ -37,34 +37,34 @@ export const selectVotePlaces = (payload: IGetVotePlaces) => async (dispatch: Re
         dispatch(setDisableVotePlacesInfiniteScroll(true))
       }
     })
-    .catch(err => dispatch(setVoteErrorMessage(err.message)))
+    .catch(err => dispatch(setVoteInsertErrorMessage(err.message)))
 }
 
-export const setVotePagetoken = (pagetoken: string) =>
+export const setVoteInsertPagetoken = (pagetoken: string) =>
   ({
     type: SET_VOTE_INSERT_PAGETOKEN,
     pagetoken
   } as const)
 
-export const setVoteForm = (voteForm: Partial<IVoteForm>) =>
+export const setVoteInsertForm = (voteForm: Partial<IVoteForm>) =>
   ({
     type: SET_VOTE_INSERT_FORM,
     voteForm
   } as const)
 
-export const setVotePlace = (votePlace: IPlace) =>
+export const setVoteInsertPlace = (votePlace: IPlace) =>
   ({
     type: SET_VOTE_INSERT_FORM_PLACE_ID,
     votePlace
   } as const)
 
-export const deleteVotePlace = (votePlace: IPlace) =>
+export const deleteVoteInsertPlace = (votePlace: IPlace) =>
   ({
     type: DELETE_VOTE_INSERT_FORM_PLACE_ID,
     votePlace
   } as const)
 
-export const setVotePlaces = (votePlaces: IPlace[], reset: boolean = true) =>
+export const setVoteInsertPlaces = (votePlaces: IPlace[], reset: boolean = true) =>
   ({
     type: SET_VOTE_INSERT_PLACES,
     votePlaces,
@@ -77,24 +77,24 @@ export const setDisableVotePlacesInfiniteScroll = (disableVotePlacesInfiniteScro
     disableVotePlacesInfiniteScroll
   } as const)
 
-export const setVoteIsLoading = (isLoading: boolean) =>
+export const setVoteInsertIsLoading = (isLoading: boolean) =>
   ({
-    type: SET_VOTE_FORM_IS_LOADING,
+    type: SET_VOTE_INSERT_IS_LOADING,
     isLoading
   } as const)
 
-export const setVoteErrorMessage = (errorMessage: string) =>
+export const setVoteInsertErrorMessage = (errorMessage: string) =>
   ({
-    type: SET_VOTE_FORM_ERROR_MESSAGE,
+    type: SET_VOTE_INSERT_ERROR_MESSAGE,
     errorMessage
   } as const)
 
 export type TVoteActions =
-  | TAction<typeof setVoteForm>
-  | TAction<typeof setVotePlaces>
-  | TAction<typeof setVotePagetoken>
-  | TAction<typeof setVoteIsLoading>
-  | TAction<typeof setVoteErrorMessage>
-  | TAction<typeof setVotePlace>
+  | TAction<typeof setVoteInsertForm>
+  | TAction<typeof setVoteInsertPlaces>
+  | TAction<typeof setVoteInsertPagetoken>
+  | TAction<typeof setVoteInsertIsLoading>
+  | TAction<typeof setVoteInsertErrorMessage>
+  | TAction<typeof setVoteInsertPlace>
   | TAction<typeof setDisableVotePlacesInfiniteScroll>
-  | TAction<typeof deleteVotePlace>
+  | TAction<typeof deleteVoteInsertPlace>
