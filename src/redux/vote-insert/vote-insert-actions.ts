@@ -8,7 +8,8 @@ import {
   SET_VOTE_INSERT_PAGETOKEN,
   DELETE_VOTE_INSERT_FORM_PLACE_ID,
   SET_VOTE_INSERT_FORM_PLACE_ID,
-  SET_DISABLE_VOTE_PLACES_INFINITE_SCROLL
+  SET_DISABLE_VOTE_PLACES_INFINITE_SCROLL,
+  SET_VOTE_INSERT_VOTE_URL
 } from './vote-insert-constants'
 import { TAction } from '../redux-type'
 import { getVotePlaces, postVote } from '../../api/vote-api'
@@ -18,7 +19,8 @@ export const insertVote = (payload: IPostVote) => async (dispatch: React.Dispatc
   dispatch(setVoteInsertIsLoading(true))
 
   postVote(payload)
-    .then(() => {
+    .then(({ result }) => {
+      dispatch(setVoteInsertVoteUrl(result.voteUrl))
       dispatch(setVoteInsertIsLoading(false))
     })
     .catch(err => dispatch(setVoteInsertErrorMessage(err.message)))
@@ -77,6 +79,12 @@ export const setDisableVotePlacesInfiniteScroll = (disableVotePlacesInfiniteScro
     disableVotePlacesInfiniteScroll
   } as const)
 
+export const setVoteInsertVoteUrl = (voteUrl: string) =>
+  ({
+    type: SET_VOTE_INSERT_VOTE_URL,
+    voteUrl
+  } as const)
+
 export const setVoteInsertIsLoading = (isLoading: boolean) =>
   ({
     type: SET_VOTE_INSERT_IS_LOADING,
@@ -98,3 +106,4 @@ export type TVoteActions =
   | TAction<typeof setVoteInsertPlace>
   | TAction<typeof setDisableVotePlacesInfiniteScroll>
   | TAction<typeof deleteVoteInsertPlace>
+  | TAction<typeof setVoteInsertVoteUrl>

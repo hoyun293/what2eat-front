@@ -6,7 +6,8 @@ import {
   SET_VOTE_INSERT_PAGETOKEN,
   SET_DISABLE_VOTE_PLACES_INFINITE_SCROLL,
   SET_VOTE_INSERT_FORM_PLACE_ID,
-  DELETE_VOTE_INSERT_FORM_PLACE_ID
+  DELETE_VOTE_INSERT_FORM_PLACE_ID,
+  SET_VOTE_INSERT_VOTE_URL
 } from './vote-insert-constants'
 import { IVoteInsertState } from './vote-insert-state'
 import { TVoteActions } from './vote-insert-actions'
@@ -41,6 +42,8 @@ export default function userReducer(state: IVoteInsertState, action: TVoteAction
         ...state,
         disableVotePlacesInfiniteScroll: action.disableVotePlacesInfiniteScroll
       }
+    case SET_VOTE_INSERT_VOTE_URL:
+      return { ...state, voteUrl: action.voteUrl }
     case SET_VOTE_INSERT_IS_LOADING:
       return { ...state, isLoading: action.isLoading }
     case SET_VOTE_INSERT_ERROR_MESSAGE:

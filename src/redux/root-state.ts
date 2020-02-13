@@ -35,6 +35,7 @@ export const initialState: IState = {
     votePlaces: [],
     pagetoken: '',
     disableVotePlacesInfiniteScroll: false,
+    voteUrl: '',
     isLoading: false,
     errorMessage: ''
   } as IVoteInsertState,

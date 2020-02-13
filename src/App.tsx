@@ -12,6 +12,7 @@ const Home = lazy(() => import('./pages/Home'))
 const VoteSave = lazy(() => import('./pages/VoteSave'))
 const Example = lazy(() => import('./pages/Example'))
 const Main = lazy(() => import('./pages/Main'))
+const VoteDetail = lazy(() => import('./pages/VoteDetail'))
 
 interface IStateProps {}
 interface IDispatchProps {
@@ -33,6 +34,7 @@ const App: React.FC<IAppProps> = ({ signIn }) => {
             <Route path='/example' component={Example} exact={true} />
             <Route path='/vote-save' component={VoteSave} exact={true} />
             <Route path='/dev' component={Home} exact={true} />
+            <Route path='/vote/:voteId' component={VoteDetail} exact={true} />
             <Route path='/restaurant-detail/:placeId' component={RestaurantDetail} exact={true} />
             <Route exact path='/' render={() => <Redirect to='/main' />} />
           </IonRouterOutlet>

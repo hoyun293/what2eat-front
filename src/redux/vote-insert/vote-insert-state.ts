@@ -7,4 +7,5 @@ export interface IVoteInsertState extends ICommonState {
   votePlaces: IPlace[]
   pagetoken: string
   disableVotePlacesInfiniteScroll: boolean
+  voteUrl: string
 }
