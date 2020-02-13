@@ -1,5 +1,9 @@
 @import '../theme/variable';
 
+ion-toolbar.toolbar--step1 {
+  --opacity: 0;
+}
+
 ion-toolbar.toolbar--step3 {
   --background: #fee000;
 }
