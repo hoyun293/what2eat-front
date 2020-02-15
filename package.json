@@ -9,6 +9,9 @@
     "server": "nodemon --watch server server/index.js",
     "build": "react-scripts build",
     "serve:build": "npx serve -s build",
+    "sync": "npx cap sync",
+    "dev:ios": "ionic capacitor run ios -l --external",
+    "dev:and": "ionic capacitor run android -l --external",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

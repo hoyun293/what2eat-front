@@ -59,6 +59,14 @@ $ npx cap sync
 $ npx cap open
 ```
 
+- live reload
+
+```
+  yarn sync
+
+  yarn dev:ios or yarn dev:and
+```
+
 # 배포
 
 - build 한 파일 구동

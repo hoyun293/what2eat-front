@@ -1,8 +1,8 @@
-import { IonContent, IonHeader, IonFooter, IonPage, IonTitle, IonToolbar, IonButton } from '@ionic/react'
+import { IonContent, IonHeader, IonFooter, IonPage, IonTitle, IonToolbar } from '@ionic/react'
 import VoteSaveFormContainer from '../containers/VoteSaveFormContainer'
 import VoteSaveFormFoodCartContainer from '../containers/VoteSaveFormFoodCartContainer'
 import VoteSaveCompleteContainer from '../containers/VoteSaveCompleteContainer'
-import React, { useEffect, useState, Fragment } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
 import { connect } from '../redux/redux-connect'
@@ -38,7 +38,7 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
       <IonHeader>
         <IonToolbar className={`toolbar--step${step}`}>
           <div className='flex justify-between items-center px-container'>
-            <div>{step === 2 && <IconUi iconName='icon-left-arrow' onClick={() => setStep(step - 1)} />}</div>
+            <div>{step === 2 && <IconUi iconName='left-arrow' onClick={() => setStep(step - 1)} />}</div>
             <div>
               {step === 2 && (
                 <IonTitle>

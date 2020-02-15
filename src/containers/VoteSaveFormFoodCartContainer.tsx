@@ -182,17 +182,23 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
         <IonInfiniteScrollContent loadingText='데이터를 불러오는 중입니다.'></IonInfiniteScrollContent>
       </IonInfiniteScroll>
 
-      <div className='flex-center fixed cart-list-btn' onClick={() => setIsShowCartModal(true)}>
-        <IconUi iconName='cart-list' className='pt-1'></IconUi>
-      </div>
+      <IonFab
+        className='cart-list__container'
+        vertical='bottom'
+        horizontal='end'
+        slot='fixed'
+        edge={false}
+        onClick={() => setIsShowCartModal(true)}
+      >
+        <div className='flex-center cart-list__btn'>
+          <IconUi iconName='cart-list' className='pt-1'></IconUi>
+        </div>
+      </IonFab>
 
       <IonModal isOpen={isShowModal}>
         <div style={{ height: '100vh', width: '100%' }}>
-          <IconUi
-            className='back-btn'
-            iconName='icon-left-arrow'
-            onClick={() => setIsShowModal(false)}
-          ></IconUi>
+          <IconUi className='back-btn' iconName='left-arrow' onClick={() => setIsShowModal(false)}></IconUi>
+
           <div className='map-container reload-btn-container'>
             <IconUi
               className='reload-btn'

@@ -11,11 +11,13 @@ import config from '../config'
 import './VoteSaveCompleteContainer.scss'
 
 interface IOwnProps {}
-interface IStateProps {}
+interface IStateProps {
+  voteUrl: string
+}
 interface IDispatchProps {}
 declare const Kakao: any
 
-const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = () => {
+const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteUrl }) => {
   const history = useHistory()
   const [isShowToast, setIsShowToast] = useState(false)
   const handleScriptInject = ({ scriptTags }: any) => {
@@ -77,7 +79,12 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
       </div>
       <div className='pt-2'>
         {/* TODO : 연동 필요 */}
-        <IonButton className='vote-button' color='white' expand='block'>
+        <IonButton
+          className='vote-button'
+          color='white'
+          expand='block'
+          onClick={() => history.push(`/vote/${voteUrl}`)}
+        >
           투표 하러가기
         </IonButton>
       </div>
@@ -96,7 +103,9 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: () => ({}),
+  mapStateToProps: ({ voteInsert }) => ({
+    voteUrl: voteInsert.voteUrl
+  }),
   mapDispatchToProps: {},
   component: VoteSaveCompleteContainer
 })

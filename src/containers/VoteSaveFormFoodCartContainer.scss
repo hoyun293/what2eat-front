@@ -52,15 +52,20 @@
   }
 }
 
-.cart-list-btn {
-  width: 5.6rem;
-  height: 5.6rem;
-  border-radius: 50%;
-  bottom: 10rem;
-  right: $padding-container;
-  box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2);
-  border: solid 1px $border;
-  background-color: $white;
+.cart-list {
+  &__container {
+    bottom: 10rem;
+    right: $padding-container;
+  }
+
+  &__btn {
+    width: 5.6rem;
+    height: 5.6rem;
+    border-radius: 50%;
+    box-shadow: 0 8px 12px 0 rgba(0, 0, 0, 0.2);
+    border: solid 1px $border;
+    background-color: $white;
+  }
 }
 
 .cart-list-modal {
@@ -81,5 +86,12 @@
     width: 4.5rem;
     height: 4.5rem;
     border-radius: 10px;
+  }
+}
+
+/* iphone X Landscape */
+@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
+  .back-btn {
+    padding-top: 5rem;
   }
 }
