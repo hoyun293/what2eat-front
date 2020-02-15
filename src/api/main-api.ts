@@ -4,7 +4,6 @@ import * as crypto from 'crypto'
 
 export const mainVotesApi = () => {
   const account = localStorage.getItem('account')
-  console.log('here')
   const ts = new Date().getTime()
   localStorage.setItem('account-ts', ts.toString())
   let loginInfo = { ts, account }

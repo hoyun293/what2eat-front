@@ -15,7 +15,7 @@ export const selectVoteRooms = (limit: number = 5, orderby: boolean = true) => a
     console.log(result)
   })
   */
-  dispatch(setVoteRoomForm(result.rooms))
+  dispatch(setVoteRoomForm(result))
   dispatch(setVoteRoomIsLoading(false))
 }
 //export const signIn = () => async (dispatch: React.Dispatch<any>) => {

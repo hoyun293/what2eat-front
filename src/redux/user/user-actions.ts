@@ -4,9 +4,9 @@ import { TAction } from '../redux-type'
 import { postSignInApi } from '../../api/user-api'
 import { setAuthoriation } from '../../utils/http-with-credential-util'
 
+const accountTs = localStorage.getItem('account-ts') || '0'
+const ts = new Date().getTime()
 export const signIn = () => async (dispatch: React.Dispatch<any>) => {
-  const accountTs = localStorage.getItem('account-ts') || '0'
-  const ts = new Date().getTime()
   //3 hour
   const expire = 1000 * 60 * 60 * 3
   if (parseInt(accountTs) + expire > ts) {
@@ -21,11 +21,9 @@ export const signIn = () => async (dispatch: React.Dispatch<any>) => {
     .then(({ result }) => {
       dispatch(setUserDomain(result))
       dispatch(setUserIsLoading(false))
-
       localStorage.setItem('token', result.token)
       localStorage.setItem('account', 'guest-test')
-      // localStorage.setItem('account', result.account)
-
+      //localStorage.setItem('account', result.account)
       setAuthoriation(result.token)
     })
     .catch(err => dispatch(setUserErrorMessage(err.message)))

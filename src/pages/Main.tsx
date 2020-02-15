@@ -9,20 +9,23 @@ import IconUi from '../components/ui/IconUi'
 import { IVote } from '../models/vote'
 import { selectVoteRooms } from '../redux/vote-room/vote-room-actions'
 import MainFormVoteRoomListContainer from '../containers/MainFormVoteRoomListContainer'
+import { signIn } from '../redux/user/user-actions'
 import './Main.scss'
 
 interface IOwnProps {}
 interface IStateProps {}
 interface IDispatchProps {
   selectVoteRooms: typeof selectVoteRooms
+  signIn: typeof signIn
 }
 
-const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ selectVoteRooms }) => {
+const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ selectVoteRooms, signIn }) => {
   const history = useHistory()
   const [toggle, setToggle] = useState(1)
   const pagingNum = 5
 
   useEffect(() => {
+    //signIn()
     selectVoteRooms()
     //selectVoteRooms(pagingNum, bool)  onClick 시 pagingNum, bool만 바꾸게 해야되지 않을까?
     // toggle 값 바뀌면 useEffect가 실행되고 selectVoteRooms가 2번실행될듯?
@@ -75,7 +78,8 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ selectVoteRo
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: () => ({}),
   mapDispatchToProps: {
-    selectVoteRooms
+    selectVoteRooms,
+    signIn
   },
   component: Main
 })

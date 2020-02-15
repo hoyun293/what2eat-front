@@ -3,8 +3,9 @@ import config from '../config'
 import * as crypto from 'crypto'
 
 export const postSignInApi = () => {
-  const account = localStorage.getItem('account')
-  console.log('here')
+  var account = localStorage.getItem('account')
+  //console.log(account)
+  account = 'guest-test'
   const ts = new Date().getTime()
   localStorage.setItem('account-ts', ts.toString())
   let loginInfo = { ts, account }

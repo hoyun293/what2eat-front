@@ -18,10 +18,14 @@ const MainFormVoteRoomListContainer: React.FC<IOwnProps & IStateProps & IDispatc
       <ol className='align-center flex-col justify-between'>
         {_.map(voteRooms, (v, i) => (
           <MainFormVoteRoomListItem
-            key={i}
-            voteRoomTitle={v.voteRoomTitle}
-            voteRoomStatus={v.voteRoomStatus}
-            isPrivateStatus={v.isPrivateStatus}
+            //key={i}
+            //voteRoomTitle={v.voteRoomTitle}
+            //voteRoomStatus={v.voteRoomStatus}
+            //isPrivateStatus={v.isPrivateStatus}
+            key={v._id}
+            voteRoomTitle={v.voteName}
+            voteRoomStatus={v.isEnded}
+            isPrivateStatus={v.isVoted}
           />
         ))}
       </ol>
