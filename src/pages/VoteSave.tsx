@@ -12,7 +12,7 @@ import { IVoteForm } from '../models/vote'
 
 import './VoteSave.scss'
 
-import { insertVote } from '../redux/vote/vote-actions'
+import { insertVote } from '../redux/vote-insert/vote-insert-actions'
 
 interface IOwnProps {}
 interface IStateProps {
@@ -60,7 +60,7 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
       <IonFooter>
         {step === 1 && (
           <ButtonShadowUi
-            disabled={!voteForm.voteName && !voteForm.endDate}
+            disabled={!voteForm.voteName || !voteForm.voteEndDtm}
             onClick={() => setStep(step + 1)}
             text='다음'
             color='yellow'
@@ -70,7 +70,14 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
           <ButtonShadowUi
             disabled={Object.keys(voteForm.votePlaces).length === 0}
             onClick={async () => {
-              await insertVote()
+              const { isMultiVote, voteName, votePlaces, voteEndDtm } = voteForm
+
+              await insertVote({
+                voteName: voteName,
+                placeIds: Object.keys(votePlaces),
+                isMultiVote,
+                voteEndDtm
+              })
 
               if (!voteErrorMessage) setStep(step + 1)
             }}
@@ -84,9 +91,9 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ vote }) => ({
-    voteForm: vote.voteForm,
-    voteErrorMessage: vote.errorMessage
+  mapStateToProps: ({ voteInsert }) => ({
+    voteForm: voteInsert.voteForm,
+    voteErrorMessage: voteInsert.errorMessage
   }),
   mapDispatchToProps: {
     insertVote

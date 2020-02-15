@@ -24,6 +24,7 @@ export const signIn = () => async (dispatch: React.Dispatch<any>) => {
       localStorage.setItem('token', result.token)
       localStorage.setItem('account', 'guest-test')
       //localStorage.setItem('account', result.account)
+
       setAuthoriation(result.token)
     })
     .catch(err => dispatch(setUserErrorMessage(err.message)))

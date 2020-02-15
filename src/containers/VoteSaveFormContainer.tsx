@@ -4,7 +4,7 @@ import { IonInput, IonToggle, IonDatetime } from '@ionic/react'
 import { IVote, IVoteForm } from '../models/vote.d'
 import { connect } from '../redux/redux-connect'
 import { getPlaceList } from '../api/google-api'
-import { setVoteForm } from '../redux/vote/vote-actions'
+import { setVoteInsertForm } from '../redux/vote-insert/vote-insert-actions'
 import InputUi from '../components/ui/InputUi'
 import IconUi from '../components/ui/IconUi'
 import DateTime from '../components/DateTime'
@@ -14,12 +14,12 @@ interface IStateProps {
   voteForm: IVoteForm
 }
 interface IDispatchProps {
-  setVoteForm: typeof setVoteForm
+  setVoteInsertForm: typeof setVoteInsertForm
 }
 
 const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   voteForm,
-  setVoteForm
+  setVoteInsertForm
 }) => {
   const datepickerRef = useRef<HTMLInputElement>()
 
@@ -36,7 +36,7 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
           value={voteForm.voteName}
           maxlength={24}
           onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
-            setVoteForm({ voteName: target.value })
+            setVoteInsertForm({ voteName: target.value })
           }
         ></InputUi>
         <div className='x-divider' />
@@ -51,8 +51,8 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
           <div className='text-xl text-medium'>복수투표 가능</div>
         </div>
         <IonToggle
-          checked={voteForm.isMulti}
-          onIonChange={({ detail }) => setVoteForm({ isMulti: detail.checked })}
+          checked={voteForm.isMultiVote}
+          onIonChange={({ detail }) => setVoteInsertForm({ isMultiVote: detail.checked })}
         ></IonToggle>
       </div>
 
@@ -66,8 +66,8 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
         <div className='purple flex items-center'>
           <DateTime
             ref={datepickerRef}
-            value={voteForm.endDate}
-            onChange={(endDate: string) => setVoteForm({ endDate })}
+            value={voteForm.voteEndDtm}
+            onChange={(voteEndDtm: string) => setVoteInsertForm({ voteEndDtm })}
           />
 
           <IconUi
@@ -90,11 +90,11 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ vote }) => ({
-    voteForm: vote.voteForm
+  mapStateToProps: ({ voteInsert }) => ({
+    voteForm: voteInsert.voteForm
   }),
   mapDispatchToProps: {
-    setVoteForm
+    setVoteInsertForm
   },
   component: VoteSaveFormContainer
 })

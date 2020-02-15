@@ -1,10 +1,10 @@
-import { IGetVotePlaces } from './../redux/vote/vote-payloads'
+import { IGetVotePlaces, IPostVote } from './../redux/vote-insert/vote-insert-payloads'
 import axios from '../utils/http-with-credential-util'
 
 export const getVotePlaces = (p: IGetVotePlaces) => {
   return axios.get('/restaurants', { params: p })
 }
 
-export const postVote = (p: any) => {
-  return axios.post('/vote', p)
+export const postVote = (p: IPostVote) => {
+  return axios.post('/votes', p)
 }

@@ -6,7 +6,12 @@ import { connect } from '../redux/redux-connect'
 import { getAddressByCoordinate } from '../api/google-api'
 import { Plugins } from '@capacitor/core'
 import { IVoteForm } from '../models/vote'
-import { setVoteForm, selectVotePlaces, deleteVotePlace, setVotePlace } from '../redux/vote/vote-actions'
+import {
+  setVoteInsertForm,
+  selectVotePlaces,
+  deleteVoteInsertPlace,
+  setVoteInsertPlace
+} from '../redux/vote-insert/vote-insert-actions'
 import IconUi from '../components/ui/IconUi'
 import {
   IonItem,
@@ -44,10 +49,10 @@ interface IStateProps {
   disableVotePlacesInfiniteScroll: boolean
 }
 interface IDispatchProps {
-  setVoteForm: typeof setVoteForm
+  setVoteInsertForm: typeof setVoteInsertForm
   selectVotePlaces: typeof selectVotePlaces
-  setVotePlace: typeof setVotePlace
-  deleteVotePlace: typeof deleteVotePlace
+  setVoteInsertPlace: typeof setVoteInsertPlace
+  deleteVoteInsertPlace: typeof deleteVoteInsertPlace
 }
 
 const INIT_LATITUDE = 37.4961895
@@ -57,11 +62,11 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
   voteForm,
   votePlaces,
   disableVotePlacesInfiniteScroll,
-  setVoteForm,
+  setVoteInsertForm,
   pagetoken,
   selectVotePlaces,
-  setVotePlace,
-  deleteVotePlace
+  setVoteInsertPlace,
+  deleteVoteInsertPlace
 }) => {
   const [address, setAddress] = useState('주소를 불러오는중...')
   const [isShowModal, setIsShowModal] = useState(false)
@@ -76,7 +81,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
   }, []) // eslint-disable-line
 
   useEffect(() => {
-    if (coordinate.lat === INIT_LONGITUDE) return
+    if (coordinate.lat === INIT_LATITUDE) return
     getAddress(coordinate.lat, coordinate.lng)
 
     selectVotePlaces({
@@ -163,7 +168,9 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
             nowLongitude={coordinate.lng}
             photoUrl={v.photoUrl}
             isAdded={voteForm?.votePlaces?.hasOwnProperty(v.placeId)}
-            onClickItem={voteForm?.votePlaces?.hasOwnProperty(v.placeId) ? deleteVotePlace : setVotePlace}
+            onClickItem={
+              voteForm?.votePlaces?.hasOwnProperty(v.placeId) ? deleteVoteInsertPlace : setVoteInsertPlace
+            }
           ></VotePlaceItem>
         ))}
       </div>
@@ -223,7 +230,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
                   ></div>
                   <div className='pl-4'>{v.name}</div>
                 </div>
-                <IconUi onClick={() => deleteVotePlace(v)} iconName='remove-btn'></IconUi>
+                <IconUi onClick={() => deleteVoteInsertPlace(v)} iconName='remove-btn'></IconUi>
               </div>
             ))}
           </div>
@@ -240,17 +247,17 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ vote }) => ({
-    voteForm: vote.voteForm,
-    votePlaces: vote.votePlaces,
-    pagetoken: vote.pagetoken,
-    disableVotePlacesInfiniteScroll: vote.disableVotePlacesInfiniteScroll
+  mapStateToProps: ({ voteInsert }) => ({
+    voteForm: voteInsert.voteForm,
+    votePlaces: voteInsert.votePlaces,
+    pagetoken: voteInsert.pagetoken,
+    disableVotePlacesInfiniteScroll: voteInsert.disableVotePlacesInfiniteScroll
   }),
   mapDispatchToProps: {
-    setVoteForm,
+    setVoteInsertForm,
     selectVotePlaces,
-    deleteVotePlace,
-    setVotePlace
+    deleteVoteInsertPlace,
+    setVoteInsertPlace
   },
   component: VoteSaveFormFoodCartContainer
 })

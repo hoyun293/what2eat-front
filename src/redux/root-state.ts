@@ -2,11 +2,13 @@ import { IExampleState } from './example/example-state'
 import { combineReducers } from './combine-reducers'
 import example from './example/example-reducer'
 import user from './user/user-reducer'
-import vote from './vote/vote-reducer'
+import voteInsert from './vote-insert/vote-insert-reducer'
 import voteRoom from './vote-room/vote-room-reducer'
+import voteDetail from './vote-detail/vote-detail-reducer'
 import { IUserState } from './user/user-state'
-import { IVoteState } from './vote/vote-state'
+import { IVoteInsertState } from './vote-insert/vote-insert-state'
 import { IVoteRoomState } from './vote-room/vote-room-state'
+import { IVoteDetailState } from './vote-detail/vote-detail-state'
 import moment from 'moment'
 
 export const initialState: IState = {
@@ -21,13 +23,13 @@ export const initialState: IState = {
     isLoading: false,
     errorMessage: ''
   } as IUserState,
-  vote: {
+  voteInsert: {
     voteForm: {
       voteName: '',
-      isMulti: false,
-      endDate: moment()
+      isMultiVote: false,
+      voteEndDtm: moment()
         .add(7, 'days')
-        .format(),
+        .format('YYYY-MM-DD HH:mm:ss'),
       votePlaces: {}
     },
     votePlaces: [],
@@ -35,19 +37,24 @@ export const initialState: IState = {
     disableVotePlacesInfiniteScroll: false,
     isLoading: false,
     errorMessage: ''
-  } as IVoteState,
+  } as IVoteInsertState,
   voteRoom: {
     voteRooms: [],
     isLoading: false,
     errorMessage: ''
-  } as IVoteRoomState
+  } as IVoteRoomState,
+  voteDetail: {
+    isLoading: false,
+    errorMessage: ''
+  } as IVoteDetailState
 }
 
 export const rootReducers = combineReducers({
   example,
   user,
-  vote,
-  voteRoom
+  voteInsert,
+  voteRoom,
+  voteDetail
 })
 
 export type IState = ReturnType<typeof rootReducers>

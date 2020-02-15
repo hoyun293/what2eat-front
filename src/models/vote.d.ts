@@ -2,8 +2,8 @@ import { IPlace } from './place'
 
 export interface IVote {
   voteName: string
-  isMulti: boolean
-  endDate: string
+  isMultiVote: boolean
+  voteEndDtm: string
   votePlaces: IPlace[]
 }
 
