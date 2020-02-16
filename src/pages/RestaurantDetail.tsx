@@ -107,20 +107,14 @@ const RestaurantDetail: React.FC<IOwnProps &
       selectRestaurnatDetail(match.params.placeId)
       i++
     }
-    //console.log(restaurantDetailInfo)
-    // console.log(restaurantDetailInfo['userPhotoUrl'])
-    var index = 0
-    for (var key in restaurantDetailInfo.userPhotoUrl) {
-      //tempArr = restaurantDetailInfo['userPhotoUrl'][Object.keys(restaurantDetailInfo['userPhotoUrl'])]
-      tempArr[index++] = restaurantDetailInfo['userPhotoUrl'][key]
-    }
-    console.log(typeof restaurantDetailInfo.userPhotoUrl)
   }, [restaurantDetailInfo]) // eslint-disable-line
 
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className='thumbnail w-full'></div>
+        <div className='thumbnail w-full'>
+          <img className='thumbnailImg' src={restaurantDetailInfo.photoUrl}></img>
+        </div>
         <div className='restaurantInfo flex-col'>
           <div className='title w-full text-center text-xxl pt-2'>{restaurantDetailInfo.name}</div>
           <div className='rating w-full flex'>

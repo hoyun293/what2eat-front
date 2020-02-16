@@ -21,8 +21,10 @@
 }
 
 .thumbnail {
-  height: 13.75rem;
-  background-color: #5f5cce;
+  .thumbnailImg {
+    height: 30rem;
+    width: 100%;
+  }
 }
 .restaurantInfo {
   .title {
