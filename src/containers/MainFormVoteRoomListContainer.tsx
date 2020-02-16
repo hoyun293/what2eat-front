@@ -14,7 +14,7 @@ interface IDispatchProps {}
 
 const MainFormVoteRoomListContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteRooms }) => {
   return (
-    <div className='px-container'>
+    <div className='px-container pt-3'>
       <ol className='align-center flex-col justify-between'>
         {_.map(voteRooms, (v, i) => (
           <MainFormVoteRoomListItem

@@ -34,7 +34,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ selectVoteRo
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div className='mb-7 flex px-container'>
+        <div className='mb-1 flex px-container'>
           <div className='pageHeadPhrase text-xxxl'>
             오늘도 맛있는
             <br />

@@ -1,0 +1,493 @@
+[33mcommit 080198b03b2a41433f8301fdd9d7ed6f7c938c77[m[33m ([m[1;36mHEAD[m[33m)[m
+Author: hoyeon <hoyun293@naver.com>
+Date:   Sat Feb 15 14:16:04 2020 +0900
+
+    feature: account : gest-test 로 로그인시도 및 votes api 호출 처리
+
+[33mcommit d9f26c96f24939c2f5bd41d4937b51b7cb5741cb[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Tue Feb 11 22:57:41 2020 +0900
+
+    fix: 재로그인시 header 셋팅 안하던 bug fix
+
+[33mcommit b481d0d32a39f961be7c4e21d0a5de71f88fc578[m[33m ([m[1;31morigin/feature/FixCredentials[m[33m)[m
+Author: Jinhyuk Park <jh.park@hdjunction.co.kr>
+Date:   Tue Feb 11 22:26:58 2020 +0900
+
+    Fix axios withCredentials set false
+
+[33mcommit b76d17bdbe5cbd818876e8d80536e6023a6d440b[m
+Merge: d2717bf 89022d2
+Author: junho <jhnam@howtobiz.com>
+Date:   Tue Feb 11 21:50:22 2020 +0900
+
+    Merge branch 'master' of https://gitlab.com/what2eat/what2eat-front
+
+[33mcommit d2717bf06fcb108636181ed2083101a83d0e3881[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Tue Feb 11 21:49:41 2020 +0900
+
+    feature: backend api 적용 및 pagetoken 적용
+
+[33mcommit 89022d2975b21400cd0c3f844fbb5b3afea8d2ca[m
+Author: hoyeon <hoyun293@naver.com>
+Date:   Mon Feb 10 22:50:56 2020 +0900
+
+    feature: main페이지 votes api호출 테스트 코드 추가
+
+[33mcommit 962ced75c300a325480130c9cdc5a4d75831b5ad[m
+Merge: 8098f29 bd0ad3b
+Author: hoyeon <hoyun293@naver.com>
+Date:   Mon Feb 10 21:23:44 2020 +0900
+
+    Merge branch 'master' of gitlab.com:what2eat/what2eat-front
+
+[33mcommit 8098f29c3a0123e72a2fcd80ce2dbb047533d7c4[m
+Author: hoyeon <hoyun293@naver.com>
+Date:   Mon Feb 10 21:08:36 2020 +0900
+
+    feature: 투표수정 container 화면 디자인
+
+[33mcommit bd0ad3b5949582a574944d701200aa7fdffea7d7[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Feb 9 23:22:19 2020 +0900
+
+    feature: 투표저장, 공유하기 썸네일 변경
+
+[33mcommit a67d29567ab50081f15beb38e630a0bb624e6a47[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Feb 9 22:56:48 2020 +0900
+
+    fix: build error fix
+
+[33mcommit 4f30b9b56d2bbb26cf04bdea51722029e5920d26[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Feb 9 22:45:50 2020 +0900
+
+    merge with hoyeon
+
+[33mcommit 0305174a18228709f2276646c1c08880c2f40729[m
+Merge: feb55ca b58828c
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Feb 9 22:45:11 2020 +0900
+
+    Merge branch 'master' of https://gitlab.com/what2eat/what2eat-front
+
+[33mcommit feb55cacd5579f268a433d20054ce1551fd18e6d[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Feb 9 22:26:33 2020 +0900
+
+    feature: 투표 생성 완료 페이지, 투표 공유하기
+
+[33mcommit 75f57e414e2a0b544b91a632a1ea920b9d9e04fb[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Feb 9 19:50:32 2020 +0900
+
+    feature: 음식점 리스트 infinite scrolling 적용
+
+[33mcommit b58828c4cbda374f246f4acfc73237142b9486cf[m
+Merge: eaf7343 4feb4b0
+Author: hoyeon <hoyun293@naver.com>
+Date:   Sun Feb 9 16:06:08 2020 +0900
+
+    Merge branch 'master' of gitlab.com:what2eat/what2eat-front
+
+[33mcommit eaf73430acda5a6ca55080c531b34818962c5d96[m
+Author: hoyeon <hoyun293@naver.com>
+Date:   Sun Feb 9 16:05:11 2020 +0900
+
+    feature: 음식점상세 조회 화면 디자인 및 react match 적용
+
+[33mcommit 4feb4b0681bd889dc6b2650a1400c6f650958336[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sat Feb 8 23:33:14 2020 +0900
+
+    feature: 투표지 담기-거리선택/sort by
+
+[33mcommit 675f331cf52412cae9da0cebfea8877aa50cb394[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Wed Feb 5 23:11:08 2020 +0900
+
+    fix: fix
+
+[33mcommit 6b84bf2a99b42df1ec287397a6995cf360718841[m
+Merge: a625d94 5b0cec5
+Author: junho <jhnam@howtobiz.com>
+Date:   Wed Feb 5 23:10:06 2020 +0900
+
+    Merge branch 'master' of https://gitlab.com/what2eat/what2eat-front
+
+[33mcommit a625d94e0d437acc8f9fc247c2af600620b44253[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Wed Feb 5 23:09:56 2020 +0900
+
+    feature : 투표생성 장바구니 담기 작업중
+
+[33mcommit 5b0cec555d6c59afde7b919a13c5c767454424b1[m
+Merge: 2b33847 a477a17
+Author: hoyeon <hoyun293@naver.com>
+Date:   Wed Feb 5 21:57:28 2020 +0900
+
+    Merge branch 'master' of gitlab.com:what2eat/what2eat-front
+
+[33mcommit 2b338476769f6ff0f02e83bf553315954e73b7b0[m
+Author: hoyeon <hoyun293@naver.com>
+Date:   Wed Feb 5 21:56:36 2020 +0900
+
+    fix: px -> rem 변환 및 반응형으로 수정
+
+[33mcommit a477a1776ed704937767cc46740e9b4037a5383c[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Mon Feb 3 23:02:55 2020 +0900
+
+    update: 투표생성 닫기 버튼 fix /  지도 검색시 무조건 현재 위치 load 하기
+
+[33mcommit ad47d8536cebe729dd8e78b40c7319c3d49c8749[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Mon Feb 3 22:40:45 2020 +0900
+
+    feature: 투표생성 장바구니 버튼 생성
+
+[33mcommit 8d8e98d77b13d6c5c7dbbad498cddaefead08c65[m
+Author: hoyeon <hoyun293@naver.com>
+Date:   Fri Jan 31 22:04:54 2020 +0900
+
+    feature: 투표 리스트 정렬기능 구현
+
+[33mcommit f67b267e7c44771fd13321bb275e2eee336f3bbc[m
+Merge: 9bf5518 ef5a78d
+Author: hoyeon <hoyun293@naver.com>
+Date:   Fri Jan 31 21:45:24 2020 +0900
+
+    Merge branch 'master' of gitlab.com:what2eat/what2eat-front
+
+[33mcommit 9bf5518274611e3241d08e5bad4c7f13d5d09d16[m
+Author: hoyeon <hoyun293@naver.com>
+Date:   Fri Jan 31 21:44:15 2020 +0900
+
+    update 메인페이지 디자인 작업
+
+[33mcommit ef5a78d86314ea628d833584f753f9569670e49a[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Tue Jan 28 21:55:53 2020 +0900
+
+    update: mock api server url change
+
+[33mcommit 79cce6094b3a355eb574e9b2769f636b9515ad8b[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Tue Jan 28 01:33:51 2020 +0900
+
+    feature: https config
+
+[33mcommit 0579c5a6cfba197eea13d1b01acce40dc36cc3e3[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Tue Jan 28 01:17:26 2020 +0900
+
+    fix: rollback proxy
+
+[33mcommit 92f6a3b2b156e0d2a396de98127ac5d7ac39be7c[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Tue Jan 28 00:52:11 2020 +0900
+
+    fix: base_rul proxy 적용
+
+[33mcommit 96121e26e8005afce7e22daf3bbe26c014545c24[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Tue Jan 28 00:25:45 2020 +0900
+
+    fix: server port fix
+
+[33mcommit 26f9d78e35c548f323f2d1260565cc9204a417b5[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Tue Jan 28 00:23:06 2020 +0900
+
+    feature: server setting
+
+[33mcommit 687bc33f32f3544d6e88f4d83de1a5c18a345fd2[m
+Merge: 98c3581 3355da6
+Author: junho <jhnam@howtobiz.com>
+Date:   Mon Jan 27 20:14:32 2020 +0900
+
+    Merge branch 'master' of https://gitlab.com/what2eat/what2eat-front
+
+[33mcommit 98c35811b44f783259ff39377fd73a9910d692aa[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Mon Jan 27 20:14:11 2020 +0900
+
+    fix: router 연결 및 오타 수정
+
+[33mcommit 3355da6e2cec7de36fa7e0864d17332e4e754911[m
+Merge: e57dc35 d0e350c
+Author: hoyeon <hoyun293@naver.com>
+Date:   Mon Jan 27 20:13:42 2020 +0900
+
+    Merge branch 'master' of gitlab.com:what2eat/what2eat-front
+
+[33mcommit e57dc35e8a7b1df4702530c3712b94f0bccb5d8d[m
+Author: hoyeon <hoyun293@naver.com>
+Date:   Mon Jan 27 20:12:52 2020 +0900
+
+    feature: 메인페이지 mock데이터 및 투표방 리스트 draft 생성
+
+[33mcommit d0e350c972533dd76464bbda1cefdbb965c534be[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Mon Jan 27 19:59:46 2020 +0900
+
+    update: 투표리스트 디폴트 페이지로 변경
+
+[33mcommit 7e1bca3f352d36791d6973601e1f8b1909f682b3[m
+Merge: 6a6a725 8aac972
+Author: junho <jhnam@howtobiz.com>
+Date:   Mon Jan 27 19:58:40 2020 +0900
+
+    Merge branch 'master' of https://gitlab.com/what2eat/what2eat-front
+
+[33mcommit 6a6a7252188a9a90bbc967e71789a48c07cd66e9[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Mon Jan 27 19:55:01 2020 +0900
+
+    feature: 투표생성 -음식점 후보리스트
+
+[33mcommit 8aac9729a75b1fb42707e346fcc71ce8ad0c43ae[m
+Author: hoyeon <hoyun293@naver.com>
+Date:   Mon Jan 27 16:55:46 2020 +0900
+
+    fix: camelCase -> kebabCase 및example News수정
+
+[33mcommit 9907bb63d6d1a3aa943a44ca967a5be70b5aab03[m
+Author: hoyeon <hoyun293@naver.com>
+Date:   Mon Jan 27 14:39:43 2020 +0900
+
+    fix: 머지시 오류 해결# with '#' will be ignored, and an empty message aborts the commit.
+
+[33mcommit 5a1a3a2dd6c4125a722ac2c9f5a5064d2b37d512[m
+Merge: 81f168b c012346
+Author: hoyeon <hoyun293@naver.com>
+Date:   Mon Jan 27 11:25:36 2020 +0900
+
+    Merge branch 'master' of gitlab.com:what2eat/what2eat-front into HEAD
+
+[33mcommit 81f168b8fa9d8b47815ea1f8801e4276467c3059[m
+Author: hoyeon <hoyun293@naver.com>
+Date:   Mon Jan 27 11:06:16 2020 +0900
+
+    feature: 메인페이지 draft 생성
+
+[33mcommit c01234630e457d2b12f76f90fceae34e475a54fd[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Mon Jan 27 01:56:08 2020 +0900
+
+    feature: 투표 생성 스텝2 google 지도 검색 추가
+
+[33mcommit 77ecbceb77328101c9c6b0ab6c4bb381b4c9c186[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Jan 26 22:26:41 2020 +0900
+
+    update: 3hour 지난 후에만 login 하도록 수정
+
+[33mcommit 4cda6665975409f5e947c0b6b5b56f8194f71711[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Jan 26 22:26:21 2020 +0900
+
+    featue: 투표생성 step 1 페이지 완료
+
+[33mcommit 093cc2e4b2b9168baf2469cec975790194bdd4cf[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sat Jan 25 03:46:53 2020 +0900
+
+    fix: 오타 제거
+
+[33mcommit a60a91b02e1e3f98c1f7b3c5dcfd1a35a92f1420[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sat Jan 25 03:44:13 2020 +0900
+
+    feature: vote reducer생성
+    
+    update: button gradient 수정
+
+[33mcommit 9a3aba63a1c854f353771a7864c7347c141b8c23[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sat Jan 25 00:58:24 2020 +0900
+
+    fix: netlify redirect rule
+
+[33mcommit b78b77374c9356fea761f609b11a4559b5e2b1d5[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sat Jan 25 00:49:30 2020 +0900
+
+    fix: netlify redirects
+
+[33mcommit 5adc6d3f015a437b61986ffc915ecedfdbf17a35[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sat Jan 25 00:31:01 2020 +0900
+
+    feature: geocoding 주소 이름 알아오기
+
+[33mcommit 7c46044f9031befe6c07fd1254c9078fea9b2998[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sat Jan 25 00:02:48 2020 +0900
+
+    update: ios/android build 셋팅
+
+[33mcommit dc0d16271f122701e94505f82331f54a83adccc2[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Wed Jan 22 23:29:50 2020 +0900
+
+    feature : gps 정보 받아오기
+
+[33mcommit f06505b24217ddb9736b71a7b6f578befc6fd46d[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Wed Jan 22 22:43:07 2020 +0900
+
+    update: example page api server 호출 하도록 수정
+
+[33mcommit 87fbdbf15408493df2f7d6e35670e55880a24cbc[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Wed Jan 22 22:40:59 2020 +0900
+
+    feature : mock data api server 생성
+
+[33mcommit 46b241f945aa1b9626b8748fd7015fbf40050a61[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Wed Jan 22 22:40:47 2020 +0900
+
+    fix: 페이지 안나오던 bug fix
+
+[33mcommit 49ba5e513a71ad96dc0311c4817e63b9ef039e7a[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Jan 19 23:03:08 2020 +0900
+
+    feature: 버튼,아이콘,인풋박스 ui 컴포넌트 생성
+
+[33mcommit 83d91d8a88bec803058f8fbf24ac2263e7daa42e[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Jan 19 16:29:37 2020 +0900
+
+    update: axios, JSON.parse하여 return 하도록 수정
+
+[33mcommit 20f0c205073c76b8471cf8e5119ee98ca44f56ee[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Jan 19 16:23:01 2020 +0900
+
+    feature: default font-size setting
+
+[33mcommit 0dfc347c1fc3438535cb4cbf6040b41bf22fee34[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Wed Jan 15 23:25:14 2020 +0900
+
+    refactoring: readonly 제거
+    axios type선언 및 reponse type지정
+
+[33mcommit 23e8e4ac86abff992cf5dffa259391160c4271d5[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Wed Jan 15 21:38:31 2020 +0900
+
+    merge
+
+[33mcommit 917632d85f5a37c9a34e00926f0e5b7fa569931e[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Tue Jan 14 21:04:27 2020 +0900
+
+    refactoring
+
+[33mcommit f33121af717cd21a15556a1db40a147ae020a3b8[m
+Author: Jinhyuk Park <jh.park@hdjunction.co.kr>
+Date:   Sun Jan 12 23:35:28 2020 +0900
+
+    update: /login API params 수정
+
+[33mcommit c8347e347434bffbf9c64ce7161fe3e7a47d79c0[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Jan 12 16:18:56 2020 +0900
+
+    feature: tailwind css 적용/투표 생성 페이지 생성
+
+[33mcommit 9fedd9cf5cf23d26e5faa73670e520dcc46b03fb[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Jan 12 00:59:22 2020 +0900
+
+    Update: 최초 진입시, 항상 토큰 재발급받도록 수정
+
+[33mcommit 5c3253cf9b86b34f8539fe53b542cd906a913999[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Jan 12 00:38:44 2020 +0900
+
+    feature : 로그인 완료, 테스트 필요
+
+[33mcommit 9d878dbcbc3b353b3dabcec262a369f205ce8d32[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sat Jan 11 22:01:04 2020 +0900
+
+    update: redux saga 없는 버전 update
+
+[33mcommit e237f025e744c02e2059a2464491b97f3350862b[m
+Merge: dfc3167 88f5187
+Author: junho nam <nowonlyhere@gmail.com>
+Date:   Wed Jan 1 13:19:05 2020 +0000
+
+    Merge branch 'saga-reducer' into 'master'
+    
+    Saga reducer
+    
+    See merge request what2eat/what2eat-front!1
+
+[33mcommit 88f5187207ddb2958dbe84ec2521703648932c14[m
+Merge: f31036d dfc3167
+Author: junho <jhnam@howtobiz.com>
+Date:   Wed Jan 1 22:18:09 2020 +0900
+
+    Merge branch 'master' into saga-reducer
+
+[33mcommit f31036d24062ccabf9743904a323e9e28ad7907f[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Wed Jan 1 21:58:57 2020 +0900
+
+    useReducerAndSaga 패턴으로 변경
+
+[33mcommit dfc316728973d69ff2e969ec99bfe6348176194b[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Wed Jan 1 20:25:38 2020 +0900
+
+    redux saga 샘플 완료
+
+[33mcommit 920872284ecc90db3505ed4ccaa8a0026c7aec24[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Wed Jan 1 19:12:25 2020 +0900
+
+    redux-saga 연동 작업중
+
+[33mcommit 4b639c596624e0d48d449220a82029772d4e3bb5[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Dec 29 16:39:35 2019 +0900
+
+    add: react redux 적용
+
+[33mcommit aad7bae7a75b09beaeca97a9697248e3eaedc8b5[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Dec 22 22:52:14 2019 +0900
+
+    앱초기화 spinner 코드 작성
+
+[33mcommit cc74c10b5b4d622a57709a46af55b3d27b06ef2b[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Dec 22 14:34:37 2019 +0900
+
+    프로젝트 기본 구조 생성
+
+[33mcommit bbcfd8d1a997ef768451d15e7ce800dfbe3023e3[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Dec 22 14:34:27 2019 +0900
+
+    config 적용
+
+[33mcommit 091d03caae471cbc32f8f770508f9f26990c8f7d[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Dec 22 10:16:27 2019 +0900
+
+    README.md/package.json
+
+[33mcommit b7553190ec006ca2d720cb97ab2203ed0a9813c6[m
+Author: junho <jhnam@howtobiz.com>
+Date:   Sun Dec 22 10:09:12 2019 +0900
+
+    Initial commit

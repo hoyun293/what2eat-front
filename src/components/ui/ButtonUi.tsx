@@ -13,7 +13,7 @@ interface IButtonUiProps {
 const ButtonUi: React.FunctionComponent<IButtonUiProps> = ({
   color = 'yellow',
   text,
-  height = '5.2rem',
+  height = '8.2rem',
   onClick = () => {}
 }) => {
   return (

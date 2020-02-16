@@ -111,11 +111,13 @@
   text-align: left;
   color: #111111;
 }
+
 .foodPhotoBox {
   width: 100%;
-}
-.foodPhoto {
-  width: 10rem !important;
-  height: 10rem !important;
-  border-radius: 1rem;
+
+  .foodPhoto {
+    width: 10rem !important;
+    height: 10rem !important;
+    border-radius: 1rem;
+  }
 }

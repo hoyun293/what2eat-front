@@ -8,7 +8,7 @@ interface IReviewStarProps {
   className?: string
 }
 
-const ReviewStar: React.FC<IReviewStarProps> = ({ rating, userRatingsTotal, className = '' }) => {
+const ReviewStar: React.FC<IReviewStarProps> = ({ rating = 0, userRatingsTotal = 0, className = '' }) => {
   const fullStarCount = Math.floor(rating)
   const halfStarCount = rating - fullStarCount >= 0.5 ? 1 : 0
   const emptyStarCount = 5 - fullStarCount - halfStarCount
