@@ -31,6 +31,7 @@ import { IRestaurantDetail } from '../models/restaurant-detail'
 import { IRestaurantDetailState } from '../redux/restaurant-detail/restaurant-detail-state'
 import _ from 'lodash'
 import RestaurantPhotoSlideContainer from '../containers/RestaurantPhotoSlideContainer'
+import ReactSwipe from 'react-swipe'
 interface IOwnProps {}
 interface IStateProps {
   restaurantDetailInfo: IRestaurantDetail
@@ -44,7 +45,7 @@ interface MatchParams {
 
 // 무한루프를 방지하기 위한 변수
 var i = 0
-
+var reactSwipeEl: ReactSwipe | null
 const Marker = ({}: any) => (
   <div style={{ position: 'absolute', transform: 'translate(-50%, -50%)' }}>
     <IconUi iconName='location-pin' />
@@ -157,13 +158,11 @@ const RestaurantDetail: React.FC<IOwnProps &
         </div>
 
         <div className='photo mt-3 ml-3 text-base mb-3'>사진</div>
-        <IonSlides pager={true} options={slideOpts}>
-          <IonSlide>
-            <div className='foodPhotoBox flex justify-between ml-5 mr-5'>
-              <img className='foodPhoto' src=''></img>
-            </div>
-          </IonSlide>
-        </IonSlides>
+        <ReactSwipe className='carousel' swipeOptions={{ continuous: false }} ref={el => (reactSwipeEl = el)}>
+          {_.map(restaurantDetailInfo.userPhotoUrl, (v, i) => (
+            <RestaurantPhotoSlideContainer photoUrl={v}></RestaurantPhotoSlideContainer>
+          ))}
+        </ReactSwipe>
       </IonContent>
       <IonFooter>
         <ButtonUi color='yellow' text='후보지 추가' />

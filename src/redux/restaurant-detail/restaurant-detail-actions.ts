@@ -10,7 +10,6 @@ import { getRestaurantDetail } from '../../api/restaurant-detail-api'
 export const selectRestaurnatDetail = (placeId: string) => async (dispatch: React.Dispatch<any>) => {
   dispatch(setRestaurantDetailIsLoading(true))
   const { result } = await getRestaurantDetail(placeId)
-  console.log(result)
   dispatch(setRestaurantDetailForm(result['restaurantDetail']))
   dispatch(setRestaurantDetailIsLoading(false))
 }
