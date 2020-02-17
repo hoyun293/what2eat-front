@@ -68,7 +68,7 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
         <div
           className='flex-col'
           onClick={() => {
-            window.location.href = `http://localhost:5500/restaurant-detail/${placeId}`
+            window.location.href = `http://what2eat.me/restaurant-detail/${placeId}`
           }}
         >
           <div>{name}</div>
