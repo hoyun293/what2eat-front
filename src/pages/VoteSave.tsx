@@ -52,11 +52,10 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
           </div>
         </IonToolbar>
       </IonHeader>
-      <IonContent fullscreen>
-        {step === 1 && <VoteSaveFormContainer />}
-        {step === 2 && <VoteSaveFormFoodCartContainer />}
-        {step === 3 && <VoteSaveCompleteContainer />}
-      </IonContent>
+
+      {step === 1 && <VoteSaveFormContainer />}
+      {step === 2 && <VoteSaveFormFoodCartContainer />}
+      {step === 3 && <VoteSaveCompleteContainer />}
       <IonFooter>
         {step === 1 && (
           <ButtonShadowUi

@@ -14,13 +14,9 @@ import {
 } from '../redux/vote-insert/vote-insert-actions'
 import IconUi from '../components/ui/IconUi'
 import {
-  IonItem,
+  IonContent,
   IonModal,
-  IonButton,
-  IonHeader,
-  IonToolbar,
   IonPopover,
-  IonFabButton,
   IonFab,
   IonLabel,
   IonSelect,
@@ -131,69 +127,58 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
   }
 
   return (
-    <div className='px-container pt-4'>
-      <div className='text-xxl text-bold flex items-center' onClick={() => setIsShowModal(true)}>
-        <div className='ellipsis'>{address}</div>
-        {coordinate.lat !== 0 && <IconUi className='ml-2' iconName='location'></IconUi>}
-      </div>
-      <div className='flex items-center justify-between mt-3'>
-        <div className='filter-btn flex-center text-lg m-black'>
-          <IonLabel>
-            <IconUi iconName='filter' className='pr-1'></IconUi>
-          </IonLabel>
-          <IonSelect value={filterDistance} onIonChange={({ detail }) => setFilterDistance(detail.value)}>
-            <IonSelectOption value={500}>0.5 km</IonSelectOption>
-            <IonSelectOption value={1000}>1 km</IonSelectOption>
-            <IonSelectOption value={1500}>1.5 km</IonSelectOption>
-            <IonSelectOption value={2000}>2 km</IonSelectOption>
-            <IonSelectOption value={3000}>3 km</IonSelectOption>
-          </IonSelect>
+    <IonContent>
+      <div className='px-container pt-4'>
+        <div className='text-xxl text-bold flex items-center' onClick={() => setIsShowModal(true)}>
+          <div className='ellipsis'>{address}</div>
+          {coordinate.lat !== 0 && <IconUi className='ml-2' iconName='location'></IconUi>}
         </div>
-        <div className='flex-center text-lg m-black' onClick={() => toggleSortBy()}>
-          <IconUi iconName='sort' className='pt-1 pr-1'></IconUi> {rankby.label}
+        <div className='flex items-center justify-between mt-3'>
+          <div className='filter-btn flex-center text-lg m-black'>
+            <IonLabel>
+              <IconUi iconName='filter' className='pr-1'></IconUi>
+            </IonLabel>
+            <IonSelect value={filterDistance} onIonChange={({ detail }) => setFilterDistance(detail.value)}>
+              <IonSelectOption value={500}>0.5 km</IonSelectOption>
+              <IonSelectOption value={1000}>1 km</IonSelectOption>
+              <IonSelectOption value={1500}>1.5 km</IonSelectOption>
+              <IonSelectOption value={2000}>2 km</IonSelectOption>
+              <IonSelectOption value={3000}>3 km</IonSelectOption>
+            </IonSelect>
+          </div>
+          <div className='flex-center text-lg m-black' onClick={() => toggleSortBy()}>
+            <IconUi iconName='sort' className='pt-1 pr-1'></IconUi> {rankby.label}
+          </div>
         </div>
-      </div>
 
-      <div className='pt-8'>
-        {_.map(votePlaces, (v, i) => (
-          <VotePlaceItem
-            key={i}
-            placeId={v.placeId}
-            name={v.name}
-            rating={v.rating}
-            userRatingsTotal={v.userRatingsTotal}
-            lat={v.lat}
-            lng={v.lng}
-            nowLatitude={coordinate.lat}
-            nowLongitude={coordinate.lng}
-            photoUrl={v.photoUrl}
-            isAdded={voteForm?.votePlaces?.hasOwnProperty(v.placeId)}
-            onClickItem={
-              voteForm?.votePlaces?.hasOwnProperty(v.placeId) ? deleteVoteInsertPlace : setVoteInsertPlace
-            }
-          ></VotePlaceItem>
-        ))}
-      </div>
-      <IonInfiniteScroll
-        threshold='100px'
-        disabled={disableVotePlacesInfiniteScroll}
-        onIonInfinite={(e: CustomEvent<void>) => searchNext(e)}
-      >
-        <IonInfiniteScrollContent loadingText='데이터를 불러오는 중입니다.'></IonInfiniteScrollContent>
-      </IonInfiniteScroll>
-
-      <IonFab
-        className='cart-list__container'
-        vertical='bottom'
-        horizontal='end'
-        slot='fixed'
-        edge={false}
-        onClick={() => setIsShowCartModal(true)}
-      >
-        <div className='flex-center cart-list__btn'>
-          <IconUi iconName='cart-list' className='pt-1'></IconUi>
+        <div className='pt-8'>
+          {_.map(votePlaces, (v, i) => (
+            <VotePlaceItem
+              key={i}
+              placeId={v.placeId}
+              name={v.name}
+              rating={v.rating}
+              userRatingsTotal={v.userRatingsTotal}
+              lat={v.lat}
+              lng={v.lng}
+              nowLatitude={coordinate.lat}
+              nowLongitude={coordinate.lng}
+              photoUrl={v.photoUrl}
+              isAdded={voteForm?.votePlaces?.hasOwnProperty(v.placeId)}
+              onClickItem={
+                voteForm?.votePlaces?.hasOwnProperty(v.placeId) ? deleteVoteInsertPlace : setVoteInsertPlace
+              }
+            ></VotePlaceItem>
+          ))}
         </div>
-      </IonFab>
+        <IonInfiniteScroll
+          threshold='100px'
+          disabled={disableVotePlacesInfiniteScroll}
+          onIonInfinite={(e: CustomEvent<void>) => searchNext(e)}
+        >
+          <IonInfiniteScrollContent loadingText='데이터를 불러오는 중입니다.'></IonInfiniteScrollContent>
+        </IonInfiniteScroll>
+      </div>
 
       <IonModal isOpen={isShowModal}>
         <div style={{ height: '100vh', width: '100%' }}>
@@ -248,7 +233,20 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
           </div>
         </div>
       </IonPopover>
-    </div>
+
+      <IonFab
+        className='cart-list__container'
+        vertical='bottom'
+        horizontal='end'
+        slot='fixed'
+        edge={false}
+        onClick={() => setIsShowCartModal(true)}
+      >
+        <div className='flex-center cart-list__btn'>
+          <IconUi iconName='cart-list' className='pt-1'></IconUi>
+        </div>
+      </IonFab>
+    </IonContent>
   )
 }
 

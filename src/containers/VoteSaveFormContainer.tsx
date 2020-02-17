@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { IonInput, IonToggle, IonDatetime } from '@ionic/react'
+import { IonToggle, IonContent } from '@ionic/react'
 
 import { IVote, IVoteForm } from '../models/vote.d'
 import { connect } from '../redux/redux-connect'
@@ -24,7 +24,7 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
   const datepickerRef = useRef<HTMLInputElement>()
 
   return (
-    <div>
+    <IonContent fullscreen>
       <div className='px-container'>
         <div className='text-xxxl text-bold mb-7'>
           새로운 투표를
@@ -85,7 +85,7 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
       <div className='text-center mt-8'>
         <img src='/assets/img/vote-save.svg' alt='' />
       </div>
-    </div>
+    </IonContent>
   )
 }
 
