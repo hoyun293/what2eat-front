@@ -21,6 +21,17 @@
   font-style: normal;
   font-stretch: normal;
 }
+
+.background-img {
+  background-image: url('/assets/img/main_bg.svg');
+  background-size: cover;
+  width: 100%;
+  height: auto;
+  padding-top: 2.8rem;
+  background-repeat: no-repeat;
+  background-position: top;
+}
+
 .pageHeadPhrase {
   font-family: NotoSansCJKkr-Bold;
   font-weight: bold;
@@ -36,12 +47,15 @@
 }
 
 .toggleIcon {
+  width: 1.6rem;
+  height: 1.5rem;
   margin-left: auto;
+  margin-top: 4.5rem;
 }
 .toggleName {
   margin-left: 0.25rem;
   padding-right: 1rem;
-  padding-top: 4rem;
+  padding-top: 4.1rem;
   font-family: NotoSansCJKkr-Regular;
   font-weight: normal;
   font-stretch: normal;
