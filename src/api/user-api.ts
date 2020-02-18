@@ -4,8 +4,6 @@ import * as crypto from 'crypto'
 
 export const postSignInApi = () => {
   var account = localStorage.getItem('account')
-  //console.log(account)
-  account = 'guest-test'
 
   const ts = new Date().getTime()
   localStorage.setItem('account-ts', ts.toString())

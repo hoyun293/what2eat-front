@@ -22,6 +22,8 @@ import IconUi from '../components/ui/IconUi'
 import './VoteDetail.scss'
 
 import { insertVote } from '../redux/vote-insert/vote-insert-actions'
+import VoteDetailTitleContainer from '../containers/VoteDetailTitleContainer'
+import VoteDetailPlaceListContainer from '../containers/VoteDetailPlaceListContainer'
 
 interface IOwnProps {}
 interface IStateProps {}
@@ -37,24 +39,24 @@ const getThemeNum = (str: string) => {
 const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteComponentProps<MatchParams>> = ({
   match
 }) => {
-  const [step, setStep] = useState(1)
+  const [scrollY, setScrollY] = useState(0)
+
   const history = useHistory()
   const themeNum = getThemeNum(match.params.voteId)
   console.log(match.params.voteId)
 
   useEffect(() => {}, []) // eslint-disable-line
 
-  useEffect(() => {}, []) // eslint-disable-line
-
   return (
     <IonPage>
-      <IonHeader mode='ios' translucent={false}>
-        <IonToolbar className={`toolbar--step${step}`}>
-          {/* <IconUi
+      {scrollY !== 0 && (
+        <IonHeader mode='ios' translucent={false}>
+          <IonToolbar className={`theme-${themeNum}`}>
+            {/* <IconUi
             iconName='left-arrow-white'
             // onClick={() => setIsShowModal(false)}
           ></IconUi> */}
-          {/* <div className='flex justify-between items-center px-container'>
+            {/* <div className='flex justify-between items-center px-container'>
             <div>{step === 2 && <IconUi iconName='left-arrow' onClick={() => setStep(step - 1)} />}</div>
             <div>
               {step === 2 && (
@@ -67,16 +69,19 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
               <IconUi iconName='close' onClick={() => history.push('/main')}></IconUi>
             </div>
           </div> */}
-        </IonToolbar>
-      </IonHeader>
-      <IonContent fullscreen className={`theme-${themeNum}`}>
-        <IonFab
-          vertical='top'
-          horizontal='start'
-          slot='fixed'
-          edge={true}
-          onClick={() => history.push('/main')}
-        >
+          </IonToolbar>
+        </IonHeader>
+      )}
+      <IonContent
+        fullscreen
+        className={`theme-${themeNum}`}
+        scrollEvents={true}
+        onIonScroll={({ detail }) => setScrollY(detail.currentY)}
+      >
+        <VoteDetailTitleContainer themeNum={themeNum} />
+        <VoteDetailPlaceListContainer themeNum={themeNum} />
+
+        <IonFab vertical='top' horizontal='start' slot='fixed' onClick={() => history.push('/main')}>
           <IconUi
             iconName='left-arrow-white'
             // onClick={() => setIsShowModal(false)}
