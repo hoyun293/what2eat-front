@@ -114,9 +114,13 @@
   color: #111111;
 }
 
+.react-swipe-container {
+  height: 10rem;
+}
+
 .foodPhotoBox {
   width: 100%;
-
+  display: block !important;
   .foodPhoto {
     width: 10rem !important;
     height: 10rem !important;
