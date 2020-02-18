@@ -1,37 +1,20 @@
-import {
-  IonContent,
-  IonHeader,
-  IonFooter,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonButton,
-  IonSlides,
-  IonSlide,
-  IonSelect
-} from '@ionic/react'
-import VoteSaveFormContainer from '../containers/VoteSaveFormContainer'
-import VoteSaveFormFoodCartContainer from '../containers/VoteSaveFormFoodCartContainer'
-import React, { useEffect, useState, Fragment } from 'react'
-import { useHistory } from 'react-router-dom'
+import { IonContent, IonFooter, IonPage } from '@ionic/react'
+import React, { useEffect } from 'react'
 
 import { connect } from '../redux/redux-connect'
-import ButtonShadowUi from '../components/ui/ButtonShadowUi'
 import ButtonUi from '../components/ui/ButtonUi'
 import IconUi from '../components/ui/IconUi'
-import { IVoteForm } from '../models/vote'
 import './RestaurantDetail.scss'
 import ReviewStar from '../components/ReviewStar'
 import { RouteComponentProps } from 'react-router'
 import GoogleMapReact from 'google-map-react'
 import config from '../config'
-import { getRestaurantDetail } from '../api/restaurant-detail-api'
 import { selectRestaurnatDetail } from '../redux/restaurant-detail/restaurant-detail-actions'
 import { IRestaurantDetail } from '../models/restaurant-detail'
-import { IRestaurantDetailState } from '../redux/restaurant-detail/restaurant-detail-state'
 import _ from 'lodash'
-import RestaurantPhotoSlideContainer from '../containers/RestaurantPhotoSlideContainer'
-import ReactSwipe from 'react-swipe'
+import Slider from 'react-slick'
+import 'slick-carousel/slick/slick.css'
+import 'slick-carousel/slick/slick-theme.css'
 interface IOwnProps {}
 interface IStateProps {
   restaurantDetailInfo: IRestaurantDetail
@@ -45,64 +28,27 @@ interface MatchParams {
 
 // 무한루프를 방지하기 위한 변수
 var i = 0
-var reactSwipeEl: ReactSwipe | null
 const Marker = ({}: any) => (
   <div style={{ position: 'absolute', transform: 'translate(-50%, -50%)' }}>
     <IconUi iconName='location-pin' />
   </div>
 )
 
-const ionSlideTemplate = (arr?: string[]): string => {
-  if (arr === undefined) {
-    return ''
-  }
-  var cnt = arr.length
-  var num = cnt / 3
-  var remainder = cnt % 3
-
-  var template
-  var idx = 0
-  var j = 0
-  for (j = 0; j < num; j++) {
-    template =
-      template +
-      `<IonSlide>
-        <div class='foodPhotoBox flex justify-between ml-5 mr-5'>
-          <img class='foodPhoto' src='${arr[idx]}'></img>
-          <img class='foodPhoto' src='${arr[idx + 1]}'></img>
-          <img class='foodPhoto' src='${arr[idx + 2]}'></img>
-        </div>
-      </IonSlide>`
-    idx = idx + 3
-  }
-
-  if (remainder !== 0) {
-    template =
-      template +
-      `<IonSlide>
-        <div className='foodPhotoBox flex justify-between ml-5 mr-5'>
-          <img class='foodPhoto' src='${arr[idx]}'></img>
-          <img class='foodPhoto' src='${arr[idx + 1]}'></img>
-          <img class='foodPhoto' src='${arr[idx + 2]}'></img>
-        </div>
-      </IonSlide>`
-  }
-  //const myElement: HTMLElement | null = template
-  //document.getElementById('inHere')?.innerHTML = template
-  return template as string
+var settings = {
+  dots: true,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 3,
+  slidesToScroll: 3
 }
 
 const RestaurantDetail: React.FC<IOwnProps &
   IStateProps &
   IDispatchProps &
   RouteComponentProps<MatchParams>> = ({ match, restaurantDetailInfo, selectRestaurnatDetail }) => {
-  const history = useHistory()
-  const [photoURL, setPhotoURL] = useState('1')
-  var tempArr = new Array()
-  const slideOpts = {
-    initialSlide: 1,
-    speed: 400
-  }
+  const photoUrlArr = _.map(restaurantDetailInfo.userPhotoUrl, (val, key) => {
+    return val
+  })
   useEffect(() => {
     if (i == 0) {
       selectRestaurnatDetail(match.params.placeId)
@@ -114,7 +60,7 @@ const RestaurantDetail: React.FC<IOwnProps &
     <IonPage>
       <IonContent fullscreen>
         <div className='thumbnail w-full'>
-          <img className='thumbnailImg' src={restaurantDetailInfo.photoUrl}></img>
+          <img className='thumbnailImg' alt='' src={restaurantDetailInfo.photoUrl}></img>
         </div>
         <div className='restaurantInfo flex-col'>
           <div className='title w-full text-center text-xxl pt-2'>{restaurantDetailInfo.name}</div>
@@ -158,11 +104,26 @@ const RestaurantDetail: React.FC<IOwnProps &
         </div>
 
         <div className='photo mt-3 ml-3 text-base mb-3'>사진</div>
-        <ReactSwipe className='carousel' swipeOptions={{ continuous: false }} ref={el => (reactSwipeEl = el)}>
-          {_.map(restaurantDetailInfo.userPhotoUrl, (v, i) => (
-            <RestaurantPhotoSlideContainer photoUrl={v}></RestaurantPhotoSlideContainer>
-          ))}
-        </ReactSwipe>
+        <Slider className='ml-6' {...settings}>
+          <div className='foodPhotoBox'>
+            <img className='foodPhoto' alt='' src={photoUrlArr[0]}></img>
+          </div>
+          <div className='foodPhotoBox'>
+            <img className='foodPhoto' alt='' src={photoUrlArr[1]}></img>
+          </div>
+          <div className='foodPhotoBox'>
+            <img className='foodPhoto' alt='' src={photoUrlArr[2]}></img>
+          </div>
+          <div className='foodPhotoBox'>
+            <img className='foodPhoto' alt='' src={photoUrlArr[3]}></img>
+          </div>
+          <div className='foodPhotoBox'>
+            <img className='foodPhoto' alt='' src={photoUrlArr[4]}></img>
+          </div>
+          <div className='foodPhotoBox'>
+            <img className='foodPhoto' alt='' src={photoUrlArr[5]}></img>
+          </div>
+        </Slider>
       </IonContent>
       <IonFooter>
         <ButtonUi color='yellow' text='후보지 추가' />
