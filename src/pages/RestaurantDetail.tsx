@@ -15,6 +15,7 @@ import _ from 'lodash'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import RestaurantPhotoSlideContainer from '../containers/RestaurantPhotoSlideContainer'
 interface IOwnProps {}
 interface IStateProps {
   restaurantDetailInfo: IRestaurantDetail
@@ -104,25 +105,11 @@ const RestaurantDetail: React.FC<IOwnProps &
         </div>
 
         <div className='photo mt-3 ml-3 text-base mb-3'>사진</div>
+
         <Slider className='ml-6' {...settings}>
-          <div className='foodPhotoBox'>
-            <img className='foodPhoto' alt='' src={photoUrlArr[0]}></img>
-          </div>
-          <div className='foodPhotoBox'>
-            <img className='foodPhoto' alt='' src={photoUrlArr[1]}></img>
-          </div>
-          <div className='foodPhotoBox'>
-            <img className='foodPhoto' alt='' src={photoUrlArr[2]}></img>
-          </div>
-          <div className='foodPhotoBox'>
-            <img className='foodPhoto' alt='' src={photoUrlArr[3]}></img>
-          </div>
-          <div className='foodPhotoBox'>
-            <img className='foodPhoto' alt='' src={photoUrlArr[4]}></img>
-          </div>
-          <div className='foodPhotoBox'>
-            <img className='foodPhoto' alt='' src={photoUrlArr[5]}></img>
-          </div>
+          {_.map(photoUrlArr, (v, i) => (
+            <RestaurantPhotoSlideContainer key={i} photoUrl={v}></RestaurantPhotoSlideContainer>
+          ))}
         </Slider>
       </IonContent>
       <IonFooter>
