@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="22" height="22.086" viewBox="0 0 22 22.086">
+    <defs>
+        <style>
+            .cls-1,.cls-7{fill:#fff}.cls-1{opacity:0}.cls-2{fill:none}.cls-3,.cls-4,.cls-6{fill:#333}.cls-5,.cls-6,.cls-7{stroke:none}
+        </style>
+    </defs>
+    <g id="btn_share_link_icon" data-name="btn_share link_icon" transform="translate(4 .608)">
+        <path id="bg" d="M0 0h22v22H0z" class="cls-1" transform="translate(-4 -.522)"/>
+        <g id="패스_1088" class="cls-2" data-name="패스 1088">
+            <path d="M2.122 0h9.191a2.122 2.122 0 0 1 2.122 2.122V8.87a2.122 2.122 0 0 1-2.122 2.122H2.122A2.122 2.122 0 0 1 0 8.87V2.122A2.122 2.122 0 0 1 2.122 0z" class="cls-5" transform="translate(0 7.374)"/>
+            <path d="M2.122 1.2a.923.923 0 0 0-.922.922V8.87c0 .508.414.922.922.922h9.19a.923.923 0 0 0 .922-.922V2.122a.923.923 0 0 0-.921-.922H2.122m0-1.2h9.19c1.172 0 2.122.95 2.122 2.122V8.87c0 1.172-.95 2.122-2.121 2.122H2.122A2.122 2.122 0 0 1 0 8.87V2.122C0 .95.95 0 2.122 0z" class="cls-6" transform="translate(0 7.374)"/>
+        </g>
+        <g id="그룹_1087" data-name="그룹 1087" transform="translate(0 .5)">
+            <g id="패스_922" class="cls-3" data-name="패스 922">
+                <path d="M2.2 8.577H-1V-1h3.2v9.577z" class="cls-5" transform="translate(5.9 .891)"/>
+                <path d="M0 0v7.577h1.2V0H0m-2-2h5.2V9.577H-2V-2z" class="cls-7" transform="translate(5.9 .891)"/>
+            </g>
+            <g id="그룹_848" data-name="그룹 848" transform="translate(2.434 -.022)">
+                <g id="그룹_952" data-name="그룹 952">
+                    <path id="패스_920" d="M0 0h1.164L1.2 5.7H.036z" class="cls-4" data-name="패스 920" transform="rotate(45 1.989 4.877)"/>
+                    <path id="패스_921" d="M.041 5.67H1.2L1.159 0H0z" class="cls-4" data-name="패스 921" transform="rotate(135 3.222 3.683)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
