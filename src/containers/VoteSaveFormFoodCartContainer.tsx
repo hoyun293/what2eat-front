@@ -208,7 +208,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
       <IonPopover isOpen={isShowCartModal} cssClass='cart-list-modal'>
         <div>
           <div className='cart-lit-modal__header flex-center text-xl black text-bold'>추가한 투표지</div>
-          <div className='flex-column'>
+          <div className='flex-col'>
             {_.map(voteForm.votePlaces, v => (
               <div className='flex justify-between p-4' key={v.placeId}>
                 <div className='flex items-center'>
