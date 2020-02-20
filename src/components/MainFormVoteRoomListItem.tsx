@@ -1,10 +1,12 @@
 import * as React from 'react'
+import { useHistory } from 'react-router-dom'
 import './MainFormVoteRoomListItem.scss'
 
 interface IMainFromVoteRoomListItemProps {
   voteRoomTitle: string
   voteRoomStatus: boolean
   isPrivateStatus: boolean
+  voteUrl: string
 }
 
 const getClassNameByStatus = (voteRoomStatus: boolean, isPrivateStatus: boolean): number => {
@@ -19,9 +21,11 @@ const getClassNameByStatus = (voteRoomStatus: boolean, isPrivateStatus: boolean)
   }
 }
 const MainFormVoteRoomListItem: React.FunctionComponent<IMainFromVoteRoomListItemProps> = props => {
+  const history = useHistory()
+
   return (
     <div>
-      <div className='itemBox mb-1_5 flex'>
+      <div className='itemBox mb-1_5 flex' onClick={() => history.push(`/vote/${props.voteUrl}`)}>
         {props.voteRoomStatus === true && (
           <img className='voteBox pt-2_5 pb-2_5' src='/assets/img/list_vote_icon_off.svg' alt='' />
         )}

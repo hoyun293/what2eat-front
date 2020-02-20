@@ -23,6 +23,7 @@ const MainFormVoteRoomListContainer: React.FC<IOwnProps & IStateProps & IDispatc
             //voteRoomStatus={v.voteRoomStatus}
             //isPrivateStatus={v.isPrivateStatus}
             key={v._id}
+            voteUrl={v.voteUrl}
             voteRoomTitle={v.voteName}
             voteRoomStatus={v.isEnded}
             isPrivateStatus={v.isVoted}

@@ -33,7 +33,7 @@ interface MatchParams {
 }
 
 const getThemeNum = (str: string) => {
-  return str.charCodeAt(0) % 2
+  return (str.charCodeAt(0) % 2) + 1
 }
 
 const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteComponentProps<MatchParams>> = ({

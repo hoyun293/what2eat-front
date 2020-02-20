@@ -20,7 +20,7 @@ const VoteDetailPlaceListContainer: React.FC<IOwnProps & IStateProps & IDispatch
   useEffect(() => {}, []) // eslint-disable-line
 
   return (
-    <div className='vote-detail-place-list-container flex'>
+    <div className='vote-detail-place-list-container flex move-up'>
       <div className='vote-detail-place-list-container__handle'></div>
     </div>
   )
