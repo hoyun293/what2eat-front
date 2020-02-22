@@ -1,5 +1,4 @@
 import React from 'react'
-import { IonSlides, IonSlide } from '@ionic/react'
 
 interface IOwnProps {}
 interface IStateProps {
