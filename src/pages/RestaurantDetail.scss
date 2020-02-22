@@ -21,9 +21,25 @@
 }
 
 .thumbnail {
-  .thumbnailImg {
-    height: 30rem;
+  .btn_close {
+    width: 3rem;
+    height: 3rem;
+    margin-bottom: 15rem;
+  }
+  .rounded {
+    background-color: white;
+    height: 2rem;
     width: 100%;
+    border-top-left-radius: 2rem;
+    border-top-right-radius: 2rem;
+    text-align: center;
+    .greyed {
+      height: 0.4rem;
+      width: 3.6rem;
+      background-color: #c2c7cc;
+      border-radius: 0.3rem;
+      display: inline-block;
+    }
   }
 }
 .restaurantInfo {
