@@ -4,6 +4,7 @@ import { getNumberUnit } from '../utils/number-util'
 import './VotePlaceItem.scss'
 import IconUi from './ui/IconUi'
 import ReviewStar from './ReviewStar'
+import { useHistory } from 'react-router-dom'
 
 interface IVotePlace {
   placeId: string
@@ -26,6 +27,7 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
   isAdded,
   onClickItem
 }) => {
+  const history = useHistory()
   return (
     <li key={placeId} className='item-container'>
       <div
@@ -41,8 +43,9 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
         <div
           className='flex-col'
           onClick={() => {
-            window.location.href = `http://what2eat.me/restaurant-detail/${placeId}`
+            //window.location.href = `http://what2eat.me/restaurant-detail/${placeId}`
             //window.location.href = `http://localhost:5500/restaurant-detail/${placeId}`
+            history.push(`/restaurant-detail/${placeId}`)
           }}
         >
           <div>{name}</div>

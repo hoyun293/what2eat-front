@@ -7,26 +7,27 @@ import { selectVoteRooms } from '../redux/vote-room/vote-room-actions'
 import MainFormVoteRoomListContainer from '../containers/MainFormVoteRoomListContainer'
 import { signIn } from '../redux/user/user-actions'
 import './Main.scss'
+import { IVoteRoom } from '../models/vote-room'
 
 interface IOwnProps {}
-interface IStateProps {}
+interface IStateProps {
+  voteRooms: IVoteRoom[]
+}
 interface IDispatchProps {
   selectVoteRooms: typeof selectVoteRooms
   signIn: typeof signIn
 }
 
-const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ selectVoteRooms, signIn }) => {
+const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ selectVoteRooms, voteRooms }) => {
   const history = useHistory()
   const [toggle, setToggle] = useState(1)
   const pagingNum = 5
-
   useEffect(() => {
     //signIn()
     selectVoteRooms()
     //selectVoteRooms(pagingNum, bool)  onClick 시 pagingNum, bool만 바꾸게 해야되지 않을까?
     // toggle 값 바뀌면 useEffect가 실행되고 selectVoteRooms가 2번실행될듯?
   }, [toggle]) // eslint-disable-line
-
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -60,7 +61,12 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ selectVoteRo
             </div>
           )}
         </div>
-        <div className='background-img'>
+        <div
+          className='background-img'
+          style={{
+            height: voteRooms ? (voteRooms.length > 5 ? 'auto' : '100%') : '100%'
+          }}
+        >
           <MainFormVoteRoomListContainer />
           <div className='bottom-floating' onClick={() => history.push('/vote-save')}>
             <img src='/assets/img/floating_btn_add.svg' alt='' />
@@ -72,7 +78,9 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ selectVoteRo
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: () => ({}),
+  mapStateToProps: ({ voteRoom }) => ({
+    voteRooms: voteRoom.voteRooms
+  }),
   mapDispatchToProps: {
     selectVoteRooms,
     signIn

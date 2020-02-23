@@ -1,5 +1,5 @@
 import { IonContent, IonFooter, IonPage } from '@ionic/react'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { connect } from '../redux/redux-connect'
 import ButtonUi from '../components/ui/ButtonUi'
@@ -27,8 +27,6 @@ interface MatchParams {
   placeId: string
 }
 
-// 무한루프를 방지하기 위한 변수
-var i = 0
 const Marker = ({}: any) => (
   <div style={{ position: 'absolute', transform: 'translate(-50%, -50%)' }}>
     <IconUi iconName='location-pin' />
@@ -50,10 +48,11 @@ const RestaurantDetail: React.FC<IOwnProps &
   const photoUrlArr = _.map(restaurantDetailInfo.userPhotoUrl, (val, key) => {
     return val
   })
+  const [index, setIndex] = useState(0)
   useEffect(() => {
-    if (i === 0) {
+    if (index === 0) {
       selectRestaurnatDetail(match.params.placeId)
-      i++
+      setIndex(index + 1)
     }
     if (photoUrlArr.length === 1) {
       settings.slidesToScroll = 1
@@ -61,6 +60,9 @@ const RestaurantDetail: React.FC<IOwnProps &
     } else if (photoUrlArr.length === 2) {
       settings.slidesToScroll = 2
       settings.slidesToShow = 2
+    } else if (photoUrlArr.length >= 3) {
+      settings.slidesToScroll = 3
+      settings.slidesToShow = 3
     }
   }, [restaurantDetailInfo]) // eslint-disable-line
 
@@ -76,15 +78,18 @@ const RestaurantDetail: React.FC<IOwnProps &
               backgroundSize: restaurantDetailInfo.photoUrl ? 'cover' : 'initial'
             }}
           >
-            <img src='/assets/img/vote-place-thumb-holder.png' alt='' />
-            <img
-              className='btn_close'
-              src='/assets/icon/header_btn_close.svg'
-              alt=''
-              onClick={() => {
-                history.goBack()
-              }}
-            />
+            <div className='thumbnailImgs flex'>
+              <img src='/assets/img/vote-place-thumb-holder.png' alt='' />
+              <img
+                className='btn_close'
+                src='/assets/icon/header_btn_close.svg'
+                alt=''
+                onClick={() => {
+                  history.goBack()
+                }}
+              />
+            </div>
+
             <div className='rounded'>
               <div className='greyed mb-1'></div>
             </div>
