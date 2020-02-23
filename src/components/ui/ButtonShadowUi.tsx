@@ -6,18 +6,20 @@ import './ButtonShadowUi.scss'
 interface IButtonShadowUiProps {
   color: string
   text: string
-  onClick: Function
+  onClick?: Function
   disabled?: boolean
+  className?: string
 }
 
 const ButtonShadowUi: React.FunctionComponent<IButtonShadowUiProps> = ({
   text = '',
   color = 'yellow',
-  onClick,
+  onClick = () => {},
+  className = '',
   disabled = false
 }) => {
   return (
-    <div className='button-shadow'>
+    <div className={`button-shadow ${className}`}>
       <img className='button-shadow__gradient' src='/assets/bg/bg-gray-gradient.svg' alt='' />
       <div className='button-shadow__container'>
         <IonButton

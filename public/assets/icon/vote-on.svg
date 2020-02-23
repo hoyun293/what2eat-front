@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" id="chk_btn_on" width="40" height="40" data-name="chk btn_on" viewBox="0 0 40 40">
+    <defs>
+        <style>
+            .cls-1{fill:#fee000}.cls-2{fill:none;stroke:#111}
+        </style>
+    </defs>
+    <circle id="타원_1113" cx="20" cy="20" r="20" class="cls-1" data-name="타원 1113"/>
+    <path id="패스_1083" d="M-2401.184-1294.273l4.935 4.741 8.75-8.421" class="cls-2" data-name="패스 1083" transform="translate(2414.342 1313.567)"/>
+</svg>

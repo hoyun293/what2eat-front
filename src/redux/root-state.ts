@@ -34,6 +34,7 @@ export const initialState: IState = {
         .format('YYYY-MM-DD HH:mm:ss'),
       votePlaces: {}
     },
+    step: 1,
     votePlaces: [],
     pagetoken: '',
     disableVotePlacesInfiniteScroll: false,
@@ -47,6 +48,15 @@ export const initialState: IState = {
     errorMessage: ''
   } as IVoteRoomState,
   voteDetail: {
+    vote: {
+      voteName: '',
+      isMultiVote: false,
+      voteEndDtm: '',
+      votePlaces: []
+    },
+    votePlaceIdsForm: [],
+    isVoteEnd: false,
+    isVoteDone: true,
     isLoading: false,
     errorMessage: ''
   } as IVoteDetailState,
