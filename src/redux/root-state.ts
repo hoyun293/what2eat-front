@@ -1,6 +1,6 @@
-import { IExampleState } from './example/example-state'
+import { IUiState } from './ui/ui-state'
 import { combineReducers } from './combine-reducers'
-import example from './example/example-reducer'
+import ui from './ui/ui-reducer'
 import user from './user/user-reducer'
 import voteInsert from './vote-insert/vote-insert-reducer'
 import voteRoom from './vote-room/vote-room-reducer'
@@ -14,12 +14,18 @@ import moment from 'moment'
 import { IRestaurantDetailState } from './restaurant-detail/restaurant-detail-state'
 
 export const initialState: IState = {
-  example: {
-    news: [],
-    count: 0,
-    isLoading: false,
-    errorMessage: ''
-  } as IExampleState,
+  ui: {
+    alert: {
+      isOpen: false,
+      title: '',
+      message: ''
+    },
+    toast: {
+      isOpen: false,
+      message: '',
+      duration: 2000
+    }
+  } as IUiState,
   user: {
     userDomain: {},
     isLoading: false,
@@ -68,7 +74,7 @@ export const initialState: IState = {
 }
 
 export const rootReducers = combineReducers({
-  example,
+  ui,
   user,
   voteInsert,
   voteRoom,
