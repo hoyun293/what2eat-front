@@ -4,7 +4,6 @@ import * as _ from 'lodash'
 import { connect } from '../redux/redux-connect'
 import IconUi from '../components/ui/IconUi'
 import { Plugins } from '@capacitor/core'
-import { IonModal, IonPopover } from '@ionic/react'
 
 import { VoteDetailPlaceListItem, VoteDetailPlaceListItemEdit } from '../components/VoteDetailPlaceListItem'
 import {
@@ -102,7 +101,7 @@ const VoteDetailPlaceListContainer: React.FC<IOwnProps & IStateProps & IDispatch
   }
 
   return (
-    <div className='vote-detail-place-list-container flex flex-col move-up'>
+    <div className='vote-detail-place-list-container flex-col move-up'>
       <div className='px-container'>
         <div className='vote-detail-place-list-container__handle'></div>
         <div className='flex justify-between mx-1'>
@@ -140,6 +139,7 @@ const VoteDetailPlaceListContainer: React.FC<IOwnProps & IStateProps & IDispatch
               />
             ) : (
               <VoteDetailPlaceListItem
+                key={v.placeId}
                 placeId={v.placeId}
                 name={v.name}
                 photoUrl={v.photoUrl}

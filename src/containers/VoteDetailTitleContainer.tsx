@@ -1,21 +1,23 @@
 import React, { useEffect, useState } from 'react'
-import * as _ from 'lodash'
 
 import { connect } from '../redux/redux-connect'
 import IconUi from '../components/ui/IconUi'
-import { IonModal, IonPopover } from '@ionic/react'
-import VotePlaceItem from '../components/VotePlaceItem'
 
 import './VoteDetailTitleContainer.scss'
+import ShareLink from '../components/ShareLink'
 
 interface IOwnProps {
   themeNum: number
+  voteUrl: string
 }
 interface IStateProps {}
 interface IDispatchProps {}
 
-const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ themeNum }) => {
-  const [isShowModal, setIsShowModal] = useState(false)
+const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
+  themeNum,
+  voteUrl
+}) => {
+  const [isShareOpen, setIsShareOpen] = useState(true)
 
   useEffect(() => {}, []) // eslint-disable-line
 
@@ -33,16 +35,18 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
         <div className='bg-white-opacity-30 flex-center white w-full br-md py-4'>
           <IconUi iconName='edit' className='pr-1'></IconUi> 편집
         </div>
-        <div className='ml-2 flex-center bg-white w-full br-md py-4'>
+        <div className='ml-2 flex-center bg-white w-full br-md py-4' onClick={() => setIsShareOpen(true)}>
           <IconUi iconName='share' className='pr-1'></IconUi> 투표초대
         </div>
       </div>
+
+      <ShareLink shareUrl={`/vote/${voteUrl}`} isOpen={isShareOpen} setIsOpen={setIsShareOpen}></ShareLink>
     </div>
   )
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({}) => ({}),
+  mapStateToProps: ({ voteDetail }) => ({}),
   mapDispatchToProps: {},
   component: VoteDetailTitleContainer
 })

@@ -25,7 +25,7 @@ interface IDispatchProps {
 }
 
 interface MatchParams {
-  voteId: string
+  voteUrl: string
 }
 
 const getThemeNum = (str: string) => {
@@ -41,9 +41,10 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
 }) => {
   const [scrollY, setScrollY] = useState(0)
   const [isVoteEdit, setIsVoteEdit] = useState(false)
+  const voteUrl = match.params.voteUrl
 
   const history = useHistory()
-  const themeNum = getThemeNum(match.params.voteId)
+  const themeNum = getThemeNum(voteUrl)
 
   useEffect(() => {}, []) // eslint-disable-line
 
@@ -55,7 +56,7 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
         scrollEvents={true}
         onIonScroll={({ detail }) => setScrollY(detail.currentY)}
       >
-        <VoteDetailTitleContainer themeNum={themeNum} />
+        <VoteDetailTitleContainer themeNum={themeNum} voteUrl={voteUrl} />
         <VoteDetailPlaceListContainer themeNum={themeNum} isVoteEdit={isVoteEdit} />
 
         <IonFab
@@ -90,7 +91,8 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
         )}
         {!isVoteEnd && !isVoteDone && (
           <ButtonShadowUi
-            onClick={() => insertUserVotes(match.params.voteId, votePlaceIdsForm)}
+            //  TODO : voteId 넣기
+            onClick={() => insertUserVotes('123', votePlaceIdsForm)}
             text='투표하기'
             color={votePlaceIdsForm.length > 0 ? 'yellow' : 'gray'}
           />
@@ -104,7 +106,8 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
               className='w-1/3'
             />
             <ButtonShadowUi
-              onClick={() => insertUserVotes(match.params.voteId, votePlaceIdsForm)}
+              //  TODO : voteId 넣기
+              onClick={() => insertUserVotes('123', votePlaceIdsForm)}
               text='투표하기'
               disabled={votePlaceIdsForm.length === 0}
               color={votePlaceIdsForm.length > 0 ? 'yellow' : 'gray'}

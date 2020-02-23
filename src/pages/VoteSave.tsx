@@ -76,14 +76,12 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
             onClick={async () => {
               const { isMultiVote, voteName, votePlaces, voteEndDtm } = voteForm
 
-              await insertVote({
+              insertVote({
                 voteName: voteName,
                 placeIds: Object.keys(votePlaces),
                 isMultiVote,
                 voteEndDtm
               })
-
-              if (!voteErrorMessage) setVoteInsertStep(step + 1)
             }}
             text='다음'
             color='yellow'

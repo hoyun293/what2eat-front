@@ -32,7 +32,7 @@ const VoteDetailPlaceListItemEdit: React.FunctionComponent<IVoteDetailPlaceListI
   return (
     <li
       key={placeId}
-      className={`flex w-full justify-between br-xlg bg-white py-6 relative px-4 my-4 ${isMostVoted &&
+      className={`flex w-full justify-between br-xlg bg-white relative py-6 px-4 my-4 ${isMostVoted &&
         'most-voted'}`}
     >
       {isMostVoted && <IconUi iconName='most-voted' className='absolute left-0 top-0'></IconUi>}
