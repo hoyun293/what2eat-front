@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+    <defs>
+        <style>
+            .cls-1{fill:#fff;opacity:0}.cls-2{fill:#ffba00;font-size:13px;font-family:NotoSansCJKkr-Regular,Noto Sans CJK KR;letter-spacing:-.03em}.cls-3{fill:none;stroke:#ffba00}
+        </style>
+    </defs>
+    <g id="badge_vote_done" data-name="badge_vote done" transform="translate(-278 -180)">
+        <path id="bg" d="M0 0h40v40H0z" class="cls-1" transform="translate(278 180)"/>
+        <text id="투표함" class="cls-2" transform="translate(296 212)">
+            <tspan x="-17.55" y="0">투표함</tspan>
+        </text>
+        <path id="패스_1092" d="M-2401.184-1293.976l5.333 5.125 10.457-10.1" class="cls-3" data-name="패스 1092" transform="translate(2691.342 1482.953)"/>
+    </g>
+</svg>

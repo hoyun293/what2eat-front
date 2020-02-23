@@ -29,6 +29,7 @@ import VotePlaceItem from '../components/VotePlaceItem'
 import './VoteSaveFormFoodCartContainer.scss'
 import GoogleMapReact from 'google-map-react'
 import { IPlace } from '../models/place'
+import { getDistanceByCordinate } from '../utils/distance-util'
 
 // eslint-disable-next-line
 const Marker = ({}: any) => (
@@ -159,10 +160,12 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
               name={v.name}
               rating={v.rating}
               userRatingsTotal={v.userRatingsTotal}
-              lat={v.lat}
-              lng={v.lng}
-              nowLatitude={coordinate.lat}
-              nowLongitude={coordinate.lng}
+              distance={getDistanceByCordinate({
+                latitude: v.lat,
+                longitude: v.lng,
+                nowLatitude: coordinate.lat,
+                nowLongitude: coordinate.lng
+              })}
               photoUrl={v.photoUrl}
               isAdded={voteForm?.votePlaces?.hasOwnProperty(v.placeId)}
               onClickItem={

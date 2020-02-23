@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="37" height="36" viewBox="0 0 37 36">
+    <defs>
+        <style>
+            .cls-1{fill:#fee000}.cls-2{opacity:.9}.cls-3{fill:#ffba00;opacity:.6}.cls-4{fill:#ff6c00;font-size:18px;font-family:Dita-BoldItalic,Dita;font-weight:700;font-style:italic}
+        </style>
+    </defs>
+    <g id="badge_1st" transform="translate(-15 -358)">
+        <path id="사각형_306" d="M12 0h25v24a12 12 0 0 1-12 12H0V12A12 12 0 0 1 12 0z" class="cls-1" data-name="사각형 306" transform="translate(15 358)"/>
+        <g id="그룹_1089" data-name="그룹 1089" transform="translate(26.959 364.2)">
+            <g id="그룹_1091" class="cls-2" data-name="그룹 1091" transform="translate(9.001 1.506)">
+                <path id="패스_1100" d="M5 .361l.865 1.752a.648.648 0 0 0 .488.354l1.934.281a.648.648 0 0 1 .359 1.1l-1.4 1.364a.648.648 0 0 0-.187.573l.33 1.926a.648.648 0 0 1-.94.683L4.724 7.49a.648.648 0 0 0-.6 0l-1.733.91a.648.648 0 0 1-.94-.683l.33-1.926a.648.648 0 0 0-.181-.574L.2 3.853a.648.648 0 0 1 .359-1.1l1.934-.281a.648.648 0 0 0 .488-.354l.86-1.757A.648.648 0 0 1 5 .361z" class="cls-3" data-name="패스 1100" transform="rotate(-74.99 5.855 4.968)"/>
+            </g>
+            <text id="_1" class="cls-4" data-name="1" transform="translate(4 18)">
+                <tspan x="-3.798" y="0">1</tspan>
+            </text>
+        </g>
+    </g>
+</svg>
