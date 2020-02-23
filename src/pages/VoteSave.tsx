@@ -1,10 +1,10 @@
-import { IonContent, IonHeader, IonFooter, IonPage, IonTitle, IonToolbar } from '@ionic/react'
-import VoteSaveFormContainer from '../containers/VoteSaveFormContainer'
-import VoteSaveFormFoodCartContainer from '../containers/VoteSaveFormFoodCartContainer'
-import VoteSaveCompleteContainer from '../containers/VoteSaveCompleteContainer'
+import { IonHeader, IonFooter, IonPage, IonTitle, IonToolbar } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
+import VoteSaveFormContainer from '../containers/VoteSaveFormContainer'
+import VoteSaveFormFoodCartContainer from '../containers/VoteSaveFormFoodCartContainer'
+import VoteSaveCompleteContainer from '../containers/VoteSaveCompleteContainer'
 import { connect } from '../redux/redux-connect'
 import ButtonShadowUi from '../components/ui/ButtonShadowUi'
 import IconUi from '../components/ui/IconUi'
@@ -12,23 +12,26 @@ import { IVoteForm } from '../models/vote'
 
 import './VoteSave.scss'
 
-import { insertVote } from '../redux/vote-insert/vote-insert-actions'
+import { insertVote, setVoteInsertStep } from '../redux/vote-insert/vote-insert-actions'
 
 interface IOwnProps {}
 interface IStateProps {
+  step: number
   voteForm: IVoteForm
   voteErrorMessage: string
 }
 interface IDispatchProps {
   insertVote: typeof insertVote
+  setVoteInsertStep: typeof setVoteInsertStep
 }
 
 const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
+  step,
   voteForm,
   voteErrorMessage,
-  insertVote
+  insertVote,
+  setVoteInsertStep
 }) => {
-  const [step, setStep] = useState(1)
   const history = useHistory()
 
   useEffect(() => {}, []) // eslint-disable-line
@@ -38,7 +41,9 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
       <IonHeader>
         <IonToolbar className={`toolbar--step${step}`}>
           <div className='flex justify-between items-center px-container'>
-            <div>{step === 2 && <IconUi iconName='left-arrow' onClick={() => setStep(step - 1)} />}</div>
+            <div>
+              {step === 2 && <IconUi iconName='left-arrow' onClick={() => setVoteInsertStep(step - 1)} />}
+            </div>
             <div>
               {step === 2 && (
                 <IonTitle>
@@ -60,7 +65,7 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
         {step === 1 && (
           <ButtonShadowUi
             disabled={!voteForm.voteName || !voteForm.voteEndDtm}
-            onClick={() => setStep(step + 1)}
+            onClick={() => setVoteInsertStep(step + 1)}
             text='다음'
             color='yellow'
           />
@@ -78,7 +83,7 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
                 voteEndDtm
               })
 
-              if (!voteErrorMessage) setStep(step + 1)
+              if (!voteErrorMessage) setVoteInsertStep(step + 1)
             }}
             text='다음'
             color='yellow'
@@ -92,10 +97,12 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ voteInsert }) => ({
     voteForm: voteInsert.voteForm,
-    voteErrorMessage: voteInsert.errorMessage
+    voteErrorMessage: voteInsert.errorMessage,
+    step: voteInsert.step
   }),
   mapDispatchToProps: {
-    insertVote
+    insertVote,
+    setVoteInsertStep
   },
   component: VoteSave
 })

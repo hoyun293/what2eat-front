@@ -9,7 +9,8 @@ import {
   DELETE_VOTE_INSERT_FORM_PLACE_ID,
   SET_VOTE_INSERT_FORM_PLACE_ID,
   SET_DISABLE_VOTE_PLACES_INFINITE_SCROLL,
-  SET_VOTE_INSERT_VOTE_URL
+  SET_VOTE_INSERT_VOTE_URL,
+  SET_VOTE_INSERT_STEP
 } from './vote-insert-constants'
 import { TAction } from '../redux-type'
 import { getVotePlaces, postVote } from '../../api/vote-api'
@@ -21,6 +22,7 @@ export const insertVote = (payload: IPostVote) => async (dispatch: React.Dispatc
   postVote(payload)
     .then(({ result }) => {
       dispatch(setVoteInsertVoteUrl(result.voteUrl))
+      dispatch(setVoteInsertStep(3))
       dispatch(setVoteInsertIsLoading(false))
     })
     .catch(err => dispatch(setVoteInsertErrorMessage(err.message)))
@@ -85,6 +87,12 @@ export const setVoteInsertVoteUrl = (voteUrl: string) =>
     voteUrl
   } as const)
 
+export const setVoteInsertStep = (step: number) =>
+  ({
+    type: SET_VOTE_INSERT_STEP,
+    step
+  } as const)
+
 export const setVoteInsertIsLoading = (isLoading: boolean) =>
   ({
     type: SET_VOTE_INSERT_IS_LOADING,
@@ -107,3 +115,4 @@ export type TVoteActions =
   | TAction<typeof setDisableVotePlacesInfiniteScroll>
   | TAction<typeof deleteVoteInsertPlace>
   | TAction<typeof setVoteInsertVoteUrl>
+  | TAction<typeof setVoteInsertStep>
