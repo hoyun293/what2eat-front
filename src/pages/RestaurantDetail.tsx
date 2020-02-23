@@ -6,7 +6,7 @@ import ButtonUi from '../components/ui/ButtonUi'
 import IconUi from '../components/ui/IconUi'
 import './RestaurantDetail.scss'
 import ReviewStar from '../components/ReviewStar'
-import { RouteComponentProps } from 'react-router'
+import { RouteComponentProps, useHistory } from 'react-router'
 import GoogleMapReact from 'google-map-react'
 import config from '../config'
 import { selectRestaurnatDetail } from '../redux/restaurant-detail/restaurant-detail-actions'
@@ -15,6 +15,7 @@ import _ from 'lodash'
 import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
+import RestaurantPhotoSlideContainer from '../containers/RestaurantPhotoSlideContainer'
 interface IOwnProps {}
 interface IStateProps {
   restaurantDetailInfo: IRestaurantDetail
@@ -50,20 +51,47 @@ const RestaurantDetail: React.FC<IOwnProps &
     return val
   })
   useEffect(() => {
-    if (i == 0) {
+    if (i === 0) {
       selectRestaurnatDetail(match.params.placeId)
       i++
     }
+    if (photoUrlArr.length === 1) {
+      settings.slidesToScroll = 1
+      settings.slidesToShow = 1
+    } else if (photoUrlArr.length === 2) {
+      settings.slidesToScroll = 2
+      settings.slidesToShow = 2
+    }
   }, [restaurantDetailInfo]) // eslint-disable-line
 
+  var history = useHistory()
   return (
     <IonPage>
       <IonContent fullscreen>
         <div className='thumbnail w-full'>
-          <img className='thumbnailImg' alt='' src={restaurantDetailInfo.photoUrl}></img>
+          <div
+            style={{
+              backgroundImage: `url(${restaurantDetailInfo.photoUrl ||
+                '/assets/img/list-place-thumb-empty.svg'})`,
+              backgroundSize: restaurantDetailInfo.photoUrl ? 'cover' : 'initial'
+            }}
+          >
+            <img src='/assets/img/vote-place-thumb-holder.png' alt='' />
+            <img
+              className='btn_close'
+              src='/assets/icon/header_btn_close.svg'
+              alt=''
+              onClick={() => {
+                history.goBack()
+              }}
+            />
+            <div className='rounded'>
+              <div className='greyed mb-1'></div>
+            </div>
+          </div>
         </div>
         <div className='restaurantInfo flex-col'>
-          <div className='title w-full text-center text-xxl pt-2'>{restaurantDetailInfo.name}</div>
+          <div className='title w-full text-center text-xxl'>{restaurantDetailInfo.name}</div>
           <div className='rating w-full flex'>
             <ReviewStar
               className='ratingCenter pt-2'
@@ -104,25 +132,11 @@ const RestaurantDetail: React.FC<IOwnProps &
         </div>
 
         <div className='photo mt-3 ml-3 text-base mb-3'>사진</div>
+
         <Slider className='ml-6' {...settings}>
-          <div className='foodPhotoBox'>
-            <img className='foodPhoto' alt='' src={photoUrlArr[0]}></img>
-          </div>
-          <div className='foodPhotoBox'>
-            <img className='foodPhoto' alt='' src={photoUrlArr[1]}></img>
-          </div>
-          <div className='foodPhotoBox'>
-            <img className='foodPhoto' alt='' src={photoUrlArr[2]}></img>
-          </div>
-          <div className='foodPhotoBox'>
-            <img className='foodPhoto' alt='' src={photoUrlArr[3]}></img>
-          </div>
-          <div className='foodPhotoBox'>
-            <img className='foodPhoto' alt='' src={photoUrlArr[4]}></img>
-          </div>
-          <div className='foodPhotoBox'>
-            <img className='foodPhoto' alt='' src={photoUrlArr[5]}></img>
-          </div>
+          {_.map(photoUrlArr, (v, i) => (
+            <RestaurantPhotoSlideContainer key={i} photoUrl={v}></RestaurantPhotoSlideContainer>
+          ))}
         </Slider>
       </IonContent>
       <IonFooter>

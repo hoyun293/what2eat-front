@@ -1,18 +1,19 @@
 import React from 'react'
-import { IonSlides, IonSlide } from '@ionic/react'
 
 interface IOwnProps {}
 interface IStateProps {
   photoUrl: string
+  key: number
 }
 interface IDispatchProps {}
 
-const RestaurantPhotoSlideContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ photoUrl }) => {
+const RestaurantPhotoSlideContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
+  photoUrl,
+  key
+}) => {
   return (
-    <div className='foodPhotoBox flex justify-between ml-5 mr-5'>
-      <img className='foodPhoto' src={photoUrl}></img>
-      <img className='foodPhoto' src=''></img>
-      <img className='foodPhoto' src=''></img>
+    <div className='foodPhotoBox'>
+      <img className='foodPhoto' alt='' src={photoUrl}></img>
     </div>
   )
 }
