@@ -4,6 +4,7 @@ import {
   SET_VOTE_DETAIL_ERROR_MESSAGE,
   SET_VOTE_DETAIL_IS_VOTE_END,
   SET_VOTE_DETAIL_IS_VOTE_DONE,
+  SET_VOTE_DETAIL_VOTE_PLACE_IDS,
   SET_VOTE_DETAIL_VOTE_PLACE_IDS_FORM,
   SET_VOTE_DETAIL_VOTE_PLACE_ID_FORM,
   DELETE_VOTE_DETAIL_VOTE_PLACE_ID_FORM
@@ -21,13 +22,13 @@ export const selectVote = (voteUrl: string) => async (dispatch: React.Dispatch<a
 
   getVote(voteUrl)
     .then(({ result }) => {
-      console.log(result)
-
-      const { _id, voteName, voteEndDtm, isMultiVote, places, placeIds } = result.voteDeatil
-      // const { voteName, voteEndDtm, isMultiVote } = result.voteDetail
+      const { _id, voteName, voteEndDtm, isMultiVote, places } = result.voteDetail
       const userId = localStorage.getItem('account')
       const maxVote = _.max(_.map(places, v => v.voteUserIds.length))
-
+      const votePlaceIds: string[] = _.map(
+        _.filter(places, v => v.voteUserIds.indexOf(userId) > -1),
+        'placeId'
+      )
       dispatch(
         setVoteDetailVote({
           voteId: _id,
@@ -43,23 +44,27 @@ export const selectVote = (voteUrl: string) => async (dispatch: React.Dispatch<a
           }))
         })
       )
+
       dispatch(setVoteDetailIsVoteDone(_.some(places, v => v.voteUserIds.indexOf(userId) > -1)))
       dispatch(setVoteDetailIsVoteEnd(moment().isSameOrAfter(voteEndDtm)))
-      dispatch(setVoteDetailVotePlaceIdsForm(placeIds))
+      dispatch(setVoteDetailVotePlaceIds(votePlaceIds))
+      dispatch(setVoteDetailVotePlaceIdsForm(votePlaceIds))
 
       dispatch(setVoteDetailIsLoading(false))
     })
     .catch(err => dispatch(setVoteDetailErrorMessage(err.message)))
 }
 
-export const insertUserVotes = (voteId: string, payload: string[]) => async (
+export const insertUserVotes = (voteId: string, myVotePlaceIds: string[]) => async (
   dispatch: React.Dispatch<any>
 ) => {
   dispatch(setVoteDetailIsLoading(true))
 
-  postUserVotes(voteId, payload)
+  postUserVotes(voteId, myVotePlaceIds)
     .then(() => {
       dispatch(setVoteDetailIsLoading(false))
+      dispatch(setVoteDetailIsVoteDone(true))
+      dispatch(setVoteDetailVotePlaceIds(myVotePlaceIds))
     })
     .catch(err => dispatch(setVoteDetailErrorMessage(err.message)))
 }
@@ -68,6 +73,12 @@ export const setVoteDetailVote = (vote: IVoteDetail) =>
   ({
     type: SET_VOTE_DETAIL_VOTE,
     vote
+  } as const)
+
+export const setVoteDetailVotePlaceIds = (votePlaceIds: string[]) =>
+  ({
+    type: SET_VOTE_DETAIL_VOTE_PLACE_IDS,
+    votePlaceIds
   } as const)
 
 export const setVoteDetailVotePlaceIdsForm = (votePlaceIdsForm: string[]) =>
@@ -118,6 +129,7 @@ export type TVoteActions =
   | TAction<typeof setVoteDetailIsVoteDone>
   | TAction<typeof setVoteDetailIsVoteEnd>
   | TAction<typeof setVoteDetailVote>
+  | TAction<typeof setVoteDetailVotePlaceIds>
   | TAction<typeof setVoteDetailVotePlaceIdsForm>
   | TAction<typeof setVoteDetailVotePlaceIdForm>
   | TAction<typeof deleteVoteDetailVotePlaceIdForm>

@@ -61,6 +61,7 @@ export const initialState: IState = {
       voteEndDtm: '',
       votePlaces: []
     },
+    votePlaceIds: [],
     votePlaceIdsForm: [],
     isVoteEnd: false,
     isVoteDone: false,

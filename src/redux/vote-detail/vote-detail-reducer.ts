@@ -6,7 +6,8 @@ import {
   SET_VOTE_DETAIL_VOTE,
   SET_VOTE_DETAIL_VOTE_PLACE_ID_FORM,
   DELETE_VOTE_DETAIL_VOTE_PLACE_ID_FORM,
-  SET_VOTE_DETAIL_VOTE_PLACE_IDS_FORM
+  SET_VOTE_DETAIL_VOTE_PLACE_IDS_FORM,
+  SET_VOTE_DETAIL_VOTE_PLACE_IDS
 } from './vote-detail-constants'
 import { IVoteDetailState } from './vote-detail-state'
 import { TVoteActions } from './vote-detail-actions'
@@ -15,6 +16,8 @@ export default function userReducer(state: IVoteDetailState, action: TVoteAction
   switch (action.type) {
     case SET_VOTE_DETAIL_VOTE:
       return { ...state, vote: { ...state.vote, ...action.vote } }
+    case SET_VOTE_DETAIL_VOTE_PLACE_IDS:
+      return { ...state, votePlaceIds: action.votePlaceIds }
     case SET_VOTE_DETAIL_VOTE_PLACE_IDS_FORM:
       return { ...state, votePlaceIdsForm: action.votePlaceIdsForm }
     case SET_VOTE_DETAIL_VOTE_PLACE_ID_FORM:

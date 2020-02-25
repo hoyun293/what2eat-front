@@ -2,6 +2,7 @@ import { IonContent, IonFooter, IonPage, IonFab } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
+import _ from 'lodash'
 
 import { connect } from '../redux/redux-connect'
 import ButtonShadowUi from '../components/ui/ButtonShadowUi'
@@ -19,6 +20,7 @@ interface IStateProps {
   vote: IVoteDetail
   isVoteEnd: boolean
   isVoteDone: boolean
+  votePlaceIds: string[]
   votePlaceIdsForm: string[]
 }
 interface IDispatchProps {
@@ -39,6 +41,7 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
   vote,
   isVoteDone,
   isVoteEnd,
+  votePlaceIds,
   votePlaceIdsForm,
   selectVote,
   insertUserVotes
@@ -52,8 +55,13 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
 
   useEffect(() => {
     selectVote(voteUrl)
-    // TODO: 재투표시 리렌더링 할 방법 찾기
-  }, [voteUrl, isVoteDone]) // eslint-disable-line
+  }, [voteUrl, isVoteDone, _.sum(votePlaceIds)]) // eslint-disable-line
+
+  useEffect(() => {
+    if (isVoteEdit === true) {
+      setIsVoteEdit(false)
+    }
+  }, [_.sum(votePlaceIds)]) // eslint-disable-line
 
   return (
     <IonPage>
@@ -130,7 +138,8 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
     vote: voteDetail.vote,
     isVoteEnd: voteDetail.isVoteEnd,
     isVoteDone: voteDetail.isVoteDone,
-    votePlaceIdsForm: voteDetail.votePlaceIdsForm
+    votePlaceIdsForm: voteDetail.votePlaceIdsForm,
+    votePlaceIds: voteDetail.votePlaceIds
   }),
   mapDispatchToProps: {
     selectVote,
