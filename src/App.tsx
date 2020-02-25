@@ -4,18 +4,18 @@ import { IonApp, IonRouterOutlet, IonPopover, IonToast } from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
 import { connect } from './redux/redux-connect'
 import { signIn } from './redux/user/user-actions'
-// import SpinnerUi from './components/ui/SpinnerUi'
+import SpinnerUi from './components/ui/SpinnerUi'
 import './global.scss'
 import RestaurantDetail from './pages/RestaurantDetail'
 import { setUiAlert, setUiToast } from './redux/ui/ui-actions'
 import { IAlert, IToast } from './models/ui'
 
-// const VoteSave = lazy(() => import('./pages/VoteSave'))
-// const Main = lazy(() => import('./pages/Main'))
-// const VoteDetail = lazy(() => import('./pages/VoteDetail'))
-import Main from './pages/Main'
-import VoteSave from './pages/VoteSave'
-import VoteDetail from './pages/VoteDetail'
+const VoteSave = lazy(() => import('./pages/VoteSave'))
+const Main = lazy(() => import('./pages/Main'))
+const VoteDetail = lazy(() => import('./pages/VoteDetail'))
+// import Main from './pages/Main'
+// import VoteSave from './pages/VoteSave'
+// import VoteDetail from './pages/VoteDetail'
 
 interface IStateProps {
   uiAlert: IAlert
@@ -35,17 +35,17 @@ const App: React.FC<IAppProps> = ({ signIn, uiAlert, uiToast, setUiToast, setUiA
 
   return (
     <IonApp>
-      {/* <Suspense fallback={<SpinnerUi isFull={true} color='tertiary' />}> */}
-      <IonReactRouter>
-        <IonRouterOutlet>
-          <Route path='/main' component={Main} exact={true} />
-          <Route path='/vote-save' component={VoteSave} exact={true} />
-          <Route path='/vote/:voteUrl' component={VoteDetail} exact={true} />
-          <Route path='/restaurant-detail/:placeId' component={RestaurantDetail} exact={true} />
-          <Route exact path='/' render={() => <Redirect to='/main' />} />
-        </IonRouterOutlet>
-      </IonReactRouter>
-      {/* </Suspense> */}
+      <Suspense fallback={<SpinnerUi isFull={true} color='tertiary' />}>
+        <IonReactRouter>
+          <IonRouterOutlet>
+            <Route path='/main' component={Main} exact={true} />
+            <Route path='/vote-save' component={VoteSave} exact={true} />
+            <Route path='/vote/:voteUrl' component={VoteDetail} exact={true} />
+            <Route path='/restaurant-detail/:placeId' component={RestaurantDetail} exact={true} />
+            <Route exact path='/' render={() => <Redirect to='/main' />} />
+          </IonRouterOutlet>
+        </IonReactRouter>
+      </Suspense>
       <IonPopover isOpen={uiAlert.isOpen} cssClass='cart-list-modal'>
         <div>
           {uiAlert.title && <div className='flex-center text-xl text-medium pt-5 pb-2'>{uiAlert.title}</div>}
