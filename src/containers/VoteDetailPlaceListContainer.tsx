@@ -12,59 +12,16 @@ import {
 } from '../redux/vote-detail/vote-detail-actions'
 import { getDistanceByCordinate } from '../utils/distance-util'
 
-import { IVote } from '../models/vote'
+import { IVoteDetail } from '../models/vote'
 
 import './VoteDetailPlaceListContainer.scss'
-
-const places = [
-  {
-    placeId: 'ChIJf7r2G6B7ezUR0Spbjzr6eck',
-    name: '데블스토어',
-    photoUrl: 'assets/img/food-1.jpeg',
-    lat: 37.4961895,
-    lng: 127.0253834,
-    voteCount: 5,
-    isAdded: true,
-    isMostVoted: true
-  },
-  {
-    placeId: 'ChIJjffgKeR7ezURbphP_YpaYEE',
-    name: '고반식당 삼성점',
-    photoUrl: 'assets/img/food-2.jpeg',
-    lat: 39.4961895,
-    lng: 127.0253834,
-    voteCount: 2,
-    isAdded: false,
-    isMostVoted: false
-  },
-  {
-    placeId: 'ChIJVS5FkuZ7ezURuqmWGhPufXE',
-    name: '칼리가리박사의 밀실',
-    photoUrl: 'assets/img/food-3.jpeg',
-    lat: 34.4961895,
-    lng: 127.0253834,
-    voteCount: 5,
-    isAdded: false,
-    isMostVoted: true
-  },
-  {
-    placeId: 'ChIJZeBnkuZ7ezURK49I1xqHFOo',
-    name: '느린마을 양조장 강남점',
-    photoUrl: 'assets/img/food-4.jpeg',
-    lat: 31.4961895,
-    lng: 127.0253834,
-    voteCount: 1,
-    isAdded: false,
-    isMostVoted: false
-  }
-]
 interface IOwnProps {
   themeNum: number
   isVoteEdit: boolean
 }
 interface IStateProps {
   isVoteDone: boolean
-  vote: IVote
+  vote: IVoteDetail
   votePlaceIdsForm: string[]
 }
 interface IDispatchProps {
@@ -79,12 +36,10 @@ const VoteDetailPlaceListContainer: React.FC<IOwnProps & IStateProps & IDispatch
   isVoteEdit,
   isVoteDone,
   vote,
-
   votePlaceIdsForm,
   setVoteDetailVotePlaceIdForm,
   deleteVoteDetailVotePlaceIdForm
 }) => {
-  const [isShowModal, setIsShowModal] = useState(false)
   const [coordinate, setCoordinate] = useState({ lat: INIT_LATITUDE, lng: INIT_LONGITUDE })
 
   useEffect(() => {
@@ -115,7 +70,7 @@ const VoteDetailPlaceListContainer: React.FC<IOwnProps & IStateProps & IDispatch
           )}
         </div>
         <ul>
-          {_.map(places, (v, i) =>
+          {_.map(vote.votePlaces, (v, i) =>
             !isVoteDone || isVoteEdit ? (
               <VoteDetailPlaceListItemEdit
                 key={v.placeId}

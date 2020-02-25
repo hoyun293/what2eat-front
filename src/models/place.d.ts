@@ -7,3 +7,10 @@ export interface IPlace {
   lat: number
   lng: number
 }
+
+export interface IVoteDetailPlace extends IPlace {
+  voteUserIds: string[]
+  voteCount: number
+  isAdded: boolean
+  isMostVoted: boolean
+}

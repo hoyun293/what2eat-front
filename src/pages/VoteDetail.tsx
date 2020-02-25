@@ -1,8 +1,7 @@
-import { IonContent, IonHeader, IonFooter, IonPage, IonTitle, IonToolbar, IonFab } from '@ionic/react'
+import { IonContent, IonFooter, IonPage, IonFab } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
-import _ from 'lodash'
 
 import { connect } from '../redux/redux-connect'
 import ButtonShadowUi from '../components/ui/ButtonShadowUi'
@@ -10,17 +9,20 @@ import IconUi from '../components/ui/IconUi'
 
 import './VoteDetail.scss'
 
-import { insertUserVotes } from '../redux/vote-detail/vote-detail-actions'
+import { selectVote, insertUserVotes } from '../redux/vote-detail/vote-detail-actions'
 import VoteDetailTitleContainer from '../containers/VoteDetailTitleContainer'
 import VoteDetailPlaceListContainer from '../containers/VoteDetailPlaceListContainer'
+import { IVoteDetail } from '../models/vote'
 
 interface IOwnProps {}
 interface IStateProps {
+  vote: IVoteDetail
   isVoteEnd: boolean
   isVoteDone: boolean
   votePlaceIdsForm: string[]
 }
 interface IDispatchProps {
+  selectVote: typeof selectVote
   insertUserVotes: typeof insertUserVotes
 }
 
@@ -34,9 +36,11 @@ const getThemeNum = (str: string) => {
 
 const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteComponentProps<MatchParams>> = ({
   match,
+  vote,
   isVoteDone,
   isVoteEnd,
   votePlaceIdsForm,
+  selectVote,
   insertUserVotes
 }) => {
   const [scrollY, setScrollY] = useState(0)
@@ -46,7 +50,10 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
   const history = useHistory()
   const themeNum = getThemeNum(voteUrl)
 
-  useEffect(() => {}, []) // eslint-disable-line
+  useEffect(() => {
+    selectVote(voteUrl)
+    // TODO: 재투표시 리렌더링 할 방법 찾기
+  }, [voteUrl, isVoteDone]) // eslint-disable-line
 
   return (
     <IonPage>
@@ -79,7 +86,7 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
                 className='pl-4 pr-3'
                 onClick={() => history.push('/main')}
               ></IconUi>
-              <div className='w-2/3 text-xl text-center text-bold'>이번달 저녁회식 뭐먹죠</div>
+              <div className='w-2/3 text-xl text-center text-bold'>{vote.voteName}</div>
             </div>
           )}
         </IonFab>
@@ -91,8 +98,7 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
         )}
         {!isVoteEnd && !isVoteDone && (
           <ButtonShadowUi
-            //  TODO : voteId 넣기
-            onClick={() => insertUserVotes('123', votePlaceIdsForm)}
+            onClick={() => insertUserVotes(vote.voteId, votePlaceIdsForm)}
             text='투표하기'
             color={votePlaceIdsForm.length > 0 ? 'yellow' : 'gray'}
           />
@@ -106,8 +112,7 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
               className='w-1/3'
             />
             <ButtonShadowUi
-              //  TODO : voteId 넣기
-              onClick={() => insertUserVotes('123', votePlaceIdsForm)}
+              onClick={() => insertUserVotes(vote.voteId, votePlaceIdsForm)}
               text='투표하기'
               disabled={votePlaceIdsForm.length === 0}
               color={votePlaceIdsForm.length > 0 ? 'yellow' : 'gray'}
@@ -122,11 +127,13 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ voteDetail }) => ({
+    vote: voteDetail.vote,
     isVoteEnd: voteDetail.isVoteEnd,
     isVoteDone: voteDetail.isVoteDone,
     votePlaceIdsForm: voteDetail.votePlaceIdsForm
   }),
   mapDispatchToProps: {
+    selectVote,
     insertUserVotes
   },
   component: VoteDetail

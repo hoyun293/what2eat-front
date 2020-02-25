@@ -1,9 +1,9 @@
 import { ICommonState } from '../redux-type'
-import { IVote } from '../../models/vote'
+import { IVoteDetail } from '../../models/vote'
 
 export interface IVoteDetailState extends ICommonState {
-  vote: IVote
-  votePlaceIdsForm: string[]
+  vote: IVoteDetail
+  votePlaceIdsForm: Array<string>
   isVoteEnd: boolean
   isVoteDone: boolean
 }

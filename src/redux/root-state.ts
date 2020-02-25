@@ -55,6 +55,7 @@ export const initialState: IState = {
   } as IVoteRoomState,
   voteDetail: {
     vote: {
+      voteId: '',
       voteName: '',
       isMultiVote: false,
       voteEndDtm: '',
@@ -62,7 +63,7 @@ export const initialState: IState = {
     },
     votePlaceIdsForm: [],
     isVoteEnd: false,
-    isVoteDone: true,
+    isVoteDone: false,
     isLoading: false,
     errorMessage: ''
   } as IVoteDetailState,

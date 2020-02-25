@@ -8,3 +8,7 @@ export const getVotePlaces = (p: IGetVotePlaces) => {
 export const postVote = (p: IPostVote) => {
   return axios.post('/votes', p)
 }
+
+export const getVote = (voteUrl: string) => {
+  return axios.get(`/votes/${voteUrl}`)
+}

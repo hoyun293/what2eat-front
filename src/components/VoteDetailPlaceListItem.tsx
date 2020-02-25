@@ -49,6 +49,7 @@ const VoteDetailPlaceListItemEdit: React.FunctionComponent<IVoteDetailPlaceListI
           </div>
         </div>
       </div>
+      {/* TODO : 단일 투표의 경우 단일만 선택되도록 수정 */}
       <div className='flex-center' onClick={() => onClickItem(placeId)}>
         {isAdded ? <IconUi iconName='vote-on'></IconUi> : <IconUi iconName='vote-off'></IconUi>}
       </div>
