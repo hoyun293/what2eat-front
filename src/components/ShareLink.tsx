@@ -24,14 +24,14 @@ interface IDispatchProps {
 
 declare const Kakao: any
 
-const shareKakao = (shareUrl: string, photoUrl: string, success = () => {}) => {
+const shareKakao = (shareUrl: string, imageUrl: string, success = () => {}) => {
   const url = `${config.WEB_URL}${shareUrl}`
   if (isMobile) {
     return Kakao.Link.sendDefault({
       objectType: 'feed',
       content: {
         title: '투표 공유하기',
-        photoUrl,
+        imageUrl,
         link: { mobileWebUrl: url, webUrl: url }
       },
       buttons: [
