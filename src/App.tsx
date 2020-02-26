@@ -7,6 +7,7 @@ import { signIn } from './redux/user/user-actions'
 import SpinnerUi from './components/ui/SpinnerUi'
 import './global.scss'
 import RestaurantDetail from './pages/RestaurantDetail'
+import VoteUpdateFormContainer from './containers/VoteUpdateFormContainer'
 
 const Home = lazy(() => import('./pages/Home'))
 const VoteSave = lazy(() => import('./pages/VoteSave'))
@@ -36,6 +37,7 @@ const App: React.FC<IAppProps> = ({ signIn }) => {
             <Route path='/dev' component={Home} exact={true} />
             <Route path='/vote/:voteId' component={VoteDetail} exact={true} />
             <Route path='/restaurant-detail/:placeId' component={RestaurantDetail} exact={true} />
+            <Route path='/vote-update' component={VoteUpdateFormContainer} exact={true} />
             <Route exact path='/' render={() => <Redirect to='/main' />} />
           </IonRouterOutlet>
         </IonReactRouter>

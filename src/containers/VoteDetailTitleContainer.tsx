@@ -7,6 +7,7 @@ import { IonModal, IonPopover } from '@ionic/react'
 import VotePlaceItem from '../components/VotePlaceItem'
 
 import './VoteDetailTitleContainer.scss'
+import { useHistory } from 'react-router-dom'
 
 interface IOwnProps {
   themeNum: number
@@ -18,6 +19,7 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
   const [isShowModal, setIsShowModal] = useState(false)
 
   useEffect(() => {}, []) // eslint-disable-line
+  const history = useHistory()
 
   return (
     <div className='vote-detail-title-container'>
@@ -30,7 +32,12 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
       <div className='text-xxxl white text-bold'>이번달 저녁회식 뭐먹죠</div>
 
       <div className='flex flex-1 pt-6'>
-        <div className='bg-white-opacity-30 flex-center white w-full br-md py-4'>
+        <div
+          className='bg-white-opacity-30 flex-center white w-full br-md py-4'
+          onClick={() => {
+            history.push('/vote-update')
+          }}
+        >
           <IconUi iconName='edit' className='pr-1'></IconUi> 편집
         </div>
         <div className='ml-2 flex-center bg-white w-full br-md py-4'>

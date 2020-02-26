@@ -5,6 +5,7 @@ import user from './user/user-reducer'
 import voteInsert from './vote-insert/vote-insert-reducer'
 import voteRoom from './vote-room/vote-room-reducer'
 import voteDetail from './vote-detail/vote-detail-reducer'
+import voteUpdateDetail from './vote-update/vote-update-reducer'
 import restaurantDetail from './restaurant-detail/restaurant-detail-reducer'
 import { IUserState } from './user/user-state'
 import { IVoteInsertState } from './vote-insert/vote-insert-state'
@@ -12,6 +13,7 @@ import { IVoteRoomState } from './vote-room/vote-room-state'
 import { IVoteDetailState } from './vote-detail/vote-detail-state'
 import moment from 'moment'
 import { IRestaurantDetailState } from './restaurant-detail/restaurant-detail-state'
+import { IVoteUpdateState } from './vote-update/vote-update-state'
 
 export const initialState: IState = {
   example: {
@@ -60,6 +62,16 @@ export const initialState: IState = {
     isLoading: false,
     errorMessage: ''
   } as IVoteDetailState,
+  voteUpdateDetail: {
+    vote: {
+      voteName: '',
+      isMultiVote: false,
+      voteEndDtm: '',
+      votePlaces: []
+    },
+    isLoading: false,
+    errorMessage: ''
+  } as IVoteUpdateState,
   restaurantDetail: {
     restaurantDetailInfo: {},
     isLoading: false,
@@ -73,6 +85,7 @@ export const rootReducers = combineReducers({
   voteInsert,
   voteRoom,
   voteDetail,
+  voteUpdateDetail,
   restaurantDetail
 })
 
