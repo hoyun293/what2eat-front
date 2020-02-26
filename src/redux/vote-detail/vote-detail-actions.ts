@@ -22,8 +22,8 @@ export const selectVote = (voteUrl: string) => async (dispatch: React.Dispatch<a
 
   getVote(voteUrl)
     .then(({ result }) => {
-      const { _id, voteName, voteEndDtm, isMultiVote, places } = result.voteDetail
-      const userId = localStorage.getItem('account')
+      const { _id, voteName, voteEndDtm, isMultiVote, places } = result.voteDeatil
+      const userId = localStorage.getItem('userId')
       const maxVote = _.max(_.map(places, v => v.voteUserIds.length))
       const votePlaceIds: string[] = _.map(
         _.filter(places, v => v.voteUserIds.indexOf(userId) > -1),
