@@ -123,7 +123,6 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
       pagetoken
     })
 
-    // radius=6500&latitude=37.482643&longitude=126.896992&rankby=distance&pagetoken=CsQDw
     _.invoke($event.target, 'complete')
   }
 

@@ -1,25 +1,3 @@
-@font-face {
-  font-family: NotoSansCJKkr-Medium;
-  src: local(NotoSansCJKkr-Medium), url(../font/NotoSansCJKkr-Medium.otf) format('OpenType');
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-}
-@font-face {
-  font-family: NotoSansCJKkr-Regular;
-  src: local(NotoSansCJKkr-Regular), url(../font/NotoSansCJKkr-Regular.otf) format('OpenType');
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-}
-@font-face {
-  font-family: Roboto-Regular;
-  src: local(Roboto-Regular), url(../font/Roboto-Regular.ttf) format('TrueType');
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-}
-
 .thumbnail {
   .btn_close {
     width: 3rem;
@@ -46,7 +24,6 @@
 }
 .restaurantInfo {
   .title {
-    font-family: NotoSansCJKkr-Medium;
     font-weight: 500;
     line-height: 1.06;
     letter-spacing: -0.72px;
@@ -56,10 +33,6 @@
     margin: 0 auto;
   }
   .address {
-    font-family: NotoSansCJKkr-Regular;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
     line-height: 1.57;
     letter-spacing: -0.28px;
 
@@ -73,10 +46,6 @@
     }
   }
   .operatingTime {
-    font-family: NotoSansCJKkr-Regular;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
     line-height: 1.57;
     letter-spacing: -0.28px;
 
@@ -90,10 +59,6 @@
     }
   }
   .phoneNumber {
-    font-family: NotoSansCJKkr-Regular;
-    font-weight: normal;
-    font-stretch: normal;
-    font-style: normal;
     line-height: 1.57;
     letter-spacing: -0.28px;
     .numberInBlack {
@@ -108,10 +73,7 @@
   background: #eeeeee;
 }
 .map {
-  font-family: NotoSansCJKkr-Medium;
   font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.36;
   letter-spacing: -0.28px;
   text-align: left;
@@ -122,10 +84,7 @@
 }
 
 .photo {
-  font-family: NotoSansCJKkr-Medium;
   font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.36;
   letter-spacing: -0.28px;
   text-align: left;

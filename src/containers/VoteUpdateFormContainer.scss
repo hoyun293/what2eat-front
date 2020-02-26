@@ -3,10 +3,7 @@
 }
 .HeaderTitle {
   flex-basis: 100%;
-  font-family: NotoSansCJKkr-Medium;
   font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 1.12;
   letter-spacing: -0.34px;
   color: #111111;
@@ -24,20 +21,13 @@
   margin-top: 6.4rem;
 }
 .multiStr1 {
-  font-family: NotoSansCJKkr-Medium;
   font-weight: 500;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 2.25;
   letter-spacing: -0.32px;
   text-align: left;
   color: #111111;
 }
 .multiStr2 {
-  font-family: NotoSansCJKkr-Regular;
-  font-weight: normal;
-  font-stretch: normal;
-  font-style: normal;
   line-height: 2.57;
   letter-spacing: -0.28px;
   text-align: right;
@@ -45,9 +35,7 @@
 }
 
 .deadlineStr {
-  font-family: NotoSansCJKkr-Medium;
-  font-stretch: normal;
-  font-style: normal;
+  font-weight: 500;
   line-height: 2.25;
   letter-spacing: -0.32px;
   text-align: left;

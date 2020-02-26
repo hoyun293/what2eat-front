@@ -1,4 +1,4 @@
-import { IonContent, IonHeader, IonFooter, IonPage, IonTitle, IonToolbar, IonFab } from '@ionic/react'
+import { IonContent, IonFooter, IonPage, IonFab } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
@@ -10,22 +10,26 @@ import IconUi from '../components/ui/IconUi'
 
 import './VoteDetail.scss'
 
-import { insertUserVotes } from '../redux/vote-detail/vote-detail-actions'
+import { selectVote, insertUserVotes } from '../redux/vote-detail/vote-detail-actions'
 import VoteDetailTitleContainer from '../containers/VoteDetailTitleContainer'
 import VoteDetailPlaceListContainer from '../containers/VoteDetailPlaceListContainer'
+import { IVoteDetail } from '../models/vote'
 
 interface IOwnProps {}
 interface IStateProps {
+  vote: IVoteDetail
   isVoteEnd: boolean
   isVoteDone: boolean
+  votePlaceIds: string[]
   votePlaceIdsForm: string[]
 }
 interface IDispatchProps {
+  selectVote: typeof selectVote
   insertUserVotes: typeof insertUserVotes
 }
 
 interface MatchParams {
-  voteId: string
+  voteUrl: string
 }
 
 const getThemeNum = (str: string) => {
@@ -34,18 +38,30 @@ const getThemeNum = (str: string) => {
 
 const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteComponentProps<MatchParams>> = ({
   match,
+  vote,
   isVoteDone,
   isVoteEnd,
+  votePlaceIds,
   votePlaceIdsForm,
+  selectVote,
   insertUserVotes
 }) => {
   const [scrollY, setScrollY] = useState(0)
   const [isVoteEdit, setIsVoteEdit] = useState(false)
+  const voteUrl = match.params.voteUrl
 
   const history = useHistory()
-  const themeNum = getThemeNum(match.params.voteId)
+  const themeNum = getThemeNum(voteUrl)
 
-  useEffect(() => {}, []) // eslint-disable-line
+  useEffect(() => {
+    selectVote(voteUrl)
+  }, [voteUrl, isVoteDone, _.sum(votePlaceIds)]) // eslint-disable-line
+
+  useEffect(() => {
+    if (isVoteEdit === true) {
+      setIsVoteEdit(false)
+    }
+  }, [_.sum(votePlaceIds)]) // eslint-disable-line
 
   return (
     <IonPage>
@@ -55,7 +71,7 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
         scrollEvents={true}
         onIonScroll={({ detail }) => setScrollY(detail.currentY)}
       >
-        <VoteDetailTitleContainer themeNum={themeNum} />
+        <VoteDetailTitleContainer themeNum={themeNum} voteUrl={voteUrl} />
         <VoteDetailPlaceListContainer themeNum={themeNum} isVoteEdit={isVoteEdit} />
 
         <IonFab
@@ -78,7 +94,7 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
                 className='pl-4 pr-3'
                 onClick={() => history.push('/main')}
               ></IconUi>
-              <div className='w-2/3 text-xl text-center text-bold'>이번달 저녁회식 뭐먹죠</div>
+              <div className='w-2/3 text-xl text-center text-bold'>{vote.voteName}</div>
             </div>
           )}
         </IonFab>
@@ -90,7 +106,7 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
         )}
         {!isVoteEnd && !isVoteDone && (
           <ButtonShadowUi
-            onClick={() => insertUserVotes(match.params.voteId, votePlaceIdsForm)}
+            onClick={() => insertUserVotes(vote.voteId, votePlaceIdsForm)}
             text='투표하기'
             color={votePlaceIdsForm.length > 0 ? 'yellow' : 'gray'}
           />
@@ -104,7 +120,7 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
               className='w-1/3'
             />
             <ButtonShadowUi
-              onClick={() => insertUserVotes(match.params.voteId, votePlaceIdsForm)}
+              onClick={() => insertUserVotes(vote.voteId, votePlaceIdsForm)}
               text='투표하기'
               disabled={votePlaceIdsForm.length === 0}
               color={votePlaceIdsForm.length > 0 ? 'yellow' : 'gray'}
@@ -119,11 +135,14 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ voteDetail }) => ({
+    vote: voteDetail.vote,
     isVoteEnd: voteDetail.isVoteEnd,
     isVoteDone: voteDetail.isVoteDone,
-    votePlaceIdsForm: voteDetail.votePlaceIdsForm
+    votePlaceIdsForm: voteDetail.votePlaceIdsForm,
+    votePlaceIds: voteDetail.votePlaceIds
   }),
   mapDispatchToProps: {
+    selectVote,
     insertUserVotes
   },
   component: VoteDetail

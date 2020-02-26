@@ -1,22 +1,29 @@
 import React, { useEffect, useState } from 'react'
-import * as _ from 'lodash'
+import moment from '../utils/moment-util'
 
 import { connect } from '../redux/redux-connect'
 import IconUi from '../components/ui/IconUi'
-import { IonModal, IonPopover } from '@ionic/react'
-import VotePlaceItem from '../components/VotePlaceItem'
 
 import './VoteDetailTitleContainer.scss'
 import { useHistory } from 'react-router-dom'
+import ShareLink from '../components/ShareLink'
+import { IVoteDetail } from '../models/vote'
 
 interface IOwnProps {
   themeNum: number
+  voteUrl: string
 }
-interface IStateProps {}
+interface IStateProps {
+  vote: IVoteDetail
+}
 interface IDispatchProps {}
 
-const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ themeNum }) => {
-  const [isShowModal, setIsShowModal] = useState(false)
+const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
+  themeNum,
+  voteUrl,
+  vote
+}) => {
+  const [isShareOpen, setIsShareOpen] = useState(false)
 
   useEffect(() => {}, []) // eslint-disable-line
   const history = useHistory()
@@ -24,12 +31,14 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
   return (
     <div className='vote-detail-title-container'>
       <div className='flex flex-1 mt-3'>
-        <div className='flex items-end text-base white w-full'>01.15(수) 오전 11:30 마감</div>
+        <div className='flex items-end text-base white w-full'>
+          {moment(vote.voteEndDtm).format('MM.DD(dd) A hh:mm')} 마감
+        </div>
         <div className='w-full'>
           <img className='w-full' src={`/assets/img/vote-theme-${themeNum}.svg`} alt='' />
         </div>
       </div>
-      <div className='text-xxxl white text-bold'>이번달 저녁회식 뭐먹죠</div>
+      <div className='text-xxxl white text-bold'>{vote.voteName}</div>
 
       <div className='flex flex-1 pt-6'>
         <div
@@ -40,16 +49,20 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
         >
           <IconUi iconName='edit' className='pr-1'></IconUi> 편집
         </div>
-        <div className='ml-2 flex-center bg-white w-full br-md py-4'>
+        <div className='ml-2 flex-center bg-white w-full br-md py-4' onClick={() => setIsShareOpen(true)}>
           <IconUi iconName='share' className='pr-1'></IconUi> 투표초대
         </div>
       </div>
+
+      <ShareLink shareUrl={`/vote/${voteUrl}`} isOpen={isShareOpen} setIsOpen={setIsShareOpen}></ShareLink>
     </div>
   )
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({}) => ({}),
+  mapStateToProps: ({ voteDetail }) => ({
+    vote: voteDetail.vote
+  }),
   mapDispatchToProps: {},
   component: VoteDetailTitleContainer
 })

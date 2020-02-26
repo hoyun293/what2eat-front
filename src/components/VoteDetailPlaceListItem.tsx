@@ -32,7 +32,7 @@ const VoteDetailPlaceListItemEdit: React.FunctionComponent<IVoteDetailPlaceListI
   return (
     <li
       key={placeId}
-      className={`flex w-full justify-between br-xlg bg-white py-6 relative px-4 my-4 ${isMostVoted &&
+      className={`flex w-full justify-between br-xlg bg-white relative py-6 px-4 my-4 ${isMostVoted &&
         'most-voted'}`}
     >
       {isMostVoted && <IconUi iconName='most-voted' className='absolute left-0 top-0'></IconUi>}
@@ -49,6 +49,7 @@ const VoteDetailPlaceListItemEdit: React.FunctionComponent<IVoteDetailPlaceListI
           </div>
         </div>
       </div>
+      {/* TODO : 단일 투표의 경우 단일만 선택되도록 수정 */}
       <div className='flex-center' onClick={() => onClickItem(placeId)}>
         {isAdded ? <IconUi iconName='vote-on'></IconUi> : <IconUi iconName='vote-off'></IconUi>}
       </div>

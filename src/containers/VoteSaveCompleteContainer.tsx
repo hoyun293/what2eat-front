@@ -1,70 +1,24 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { isMobile } from 'react-device-detect'
-import { IonToast, IonButton, IonContent } from '@ionic/react'
-import copy from 'copy-to-clipboard'
-import Helmet from 'react-helmet'
+import { IonButton, IonContent } from '@ionic/react'
 
 import { connect } from '../redux/redux-connect'
-import config from '../config'
-
 import './VoteSaveCompleteContainer.scss'
+import ShareLink from '../components/ShareLink'
 
 interface IOwnProps {}
 interface IStateProps {
   voteUrl: string
 }
 interface IDispatchProps {}
-declare const Kakao: any
 
 const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteUrl }) => {
   const history = useHistory()
-  const [isShowToast, setIsShowToast] = useState(false)
-  const handleScriptInject = ({ scriptTags }: any) => {
-    if (scriptTags) {
-      const scriptTag = scriptTags[0]
-      scriptTag.onload = () => {
-        if (!Kakao.isInitialized()) {
-          Kakao.init(config.KAKAO_JS_KEY)
-        }
-      }
-    }
-  }
-
-  const shareKakao = () => {
-    const url = 'https://what2eat.me'
-    if (isMobile) {
-      return Kakao.Link.sendDefault({
-        objectType: 'feed',
-        content: {
-          title: '투표 공유하기',
-          photoUrl: '/assets/img/logo.png',
-          link: { mobileWebUrl: url, webUrl: url }
-        },
-        buttons: [
-          {
-            title: '앱에서 바로 확인',
-            link: { mobileWebUrl: url, webUrl: url }
-          }
-        ],
-        success: () => {},
-        fail: () => {
-          alert('카카오톡 공유하기를 지원하지 않는 환경입니다.')
-        }
-      })
-    } else {
-      copy(url)
-      setIsShowToast(true)
-    }
-  }
+  const [isShowShare, setIsShowShare] = useState(false)
 
   return (
     <IonContent fullscreen>
       <div className='bg-yellow h-full px-container'>
-        <Helmet
-          script={[{ src: '//developers.kakao.com/sdk/js/kakao.min.js' }]}
-          onChangeClientState={(newState, addedTags) => handleScriptInject(addedTags)}
-        />
         <div className='text-xxxl text-bold pt-3 text-center'>
           투표가
           <br />
@@ -74,12 +28,16 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
           <img className='text-center' src='/assets/img/vote-save-complete.svg' alt='' />
         </div>
         <div>
-          <IonButton className='vote-button' onClick={() => shareKakao()} expand='block' color='white'>
+          <IonButton
+            className='vote-button'
+            onClick={() => setIsShowShare(true)}
+            expand='block'
+            color='white'
+          >
             투표 공유하기
           </IonButton>
         </div>
         <div className='pt-2'>
-          {/* TODO : 연동 필요 */}
           <IonButton
             className='vote-button'
             color='white'
@@ -92,14 +50,8 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
         <div className='dark-gray text-xl text-center pt-4' onClick={() => history.push('/main')}>
           홈으로 이동
         </div>
-
-        <IonToast
-          isOpen={isShowToast}
-          onDidDismiss={() => setIsShowToast(false)}
-          message='클립보드에 복사되었습니다.'
-          duration={1000}
-        />
       </div>
+      <ShareLink shareUrl={`/vote/${voteUrl}`} isOpen={isShowShare} setIsOpen={setIsShowShare}></ShareLink>
     </IonContent>
   )
 }
