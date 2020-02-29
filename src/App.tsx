@@ -7,9 +7,10 @@ import { signIn } from './redux/user/user-actions'
 import SpinnerUi from './components/ui/SpinnerUi'
 import './global.scss'
 import RestaurantDetail from './pages/RestaurantDetail'
-import VoteUpdateFormContainer from './containers/VoteUpdateFormContainer'
+import voteUpdate from './pages/VoteUpdate'
 import { setUiAlert, setUiToast } from './redux/ui/ui-actions'
 import { IAlert, IToast } from './models/ui'
+import VoteUpdateFormFoodCart from './pages/VoteUpdateFormFoodCart'
 
 const VoteSave = lazy(() => import('./pages/VoteSave'))
 const Main = lazy(() => import('./pages/Main'))
@@ -43,7 +44,8 @@ const App: React.FC<IAppProps> = ({ signIn, uiAlert, uiToast, setUiToast, setUiA
             <Route path='/vote-save' component={VoteSave} exact={true} />
             <Route path='/vote/:voteUrl' component={VoteDetail} exact={true} />
             <Route path='/restaurant-detail/:placeId' component={RestaurantDetail} exact={true} />
-            <Route path='/vote-update' component={VoteUpdateFormContainer} exact={true} />
+            <Route path='/vote-update' component={voteUpdate} exact={true} />
+            <Route path='/vote-update-foodcart' component={VoteUpdateFormFoodCart} exact={true} />
             <Route exact path='/' render={() => <Redirect to='/main' />} />
           </IonRouterOutlet>
         </IonReactRouter>

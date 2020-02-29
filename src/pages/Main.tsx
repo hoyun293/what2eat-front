@@ -8,6 +8,7 @@ import MainFormVoteRoomListContainer from '../containers/MainFormVoteRoomListCon
 import { signIn } from '../redux/user/user-actions'
 import './Main.scss'
 import { IVoteRoom } from '../models/vote-room'
+import { changeStep } from '../redux/vote-insert/vote-insert-actions'
 
 interface IOwnProps {}
 interface IStateProps {
@@ -16,9 +17,14 @@ interface IStateProps {
 interface IDispatchProps {
   selectVoteRooms: typeof selectVoteRooms
   signIn: typeof signIn
+  changeStep: typeof changeStep
 }
 
-const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ selectVoteRooms, voteRooms }) => {
+const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
+  selectVoteRooms,
+  voteRooms,
+  changeStep
+}) => {
   const history = useHistory()
   const [toggle, setToggle] = useState(1)
   const pagingNum = 5
@@ -68,7 +74,13 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ selectVoteRo
           }}
         >
           <MainFormVoteRoomListContainer />
-          <div className='bottom-floating' onClick={() => history.push('/vote-save')}>
+          <div
+            className='bottom-floating'
+            onClick={() => {
+              changeStep(1)
+              history.push('/vote-save')
+            }}
+          >
             <img src='/assets/img/floating_btn_add.svg' alt='' />
           </div>
         </div>
@@ -83,7 +95,8 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
   }),
   mapDispatchToProps: {
     selectVoteRooms,
-    signIn
+    signIn,
+    changeStep
   },
   component: Main
 })

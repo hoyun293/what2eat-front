@@ -28,6 +28,9 @@ export const insertVote = (payload: IPostVote) => async (dispatch: React.Dispatc
     .catch(err => dispatch(setVoteInsertErrorMessage(err.message)))
 }
 
+export const changeStep = (step: number) => (dispatch: React.Dispatch<any>) => {
+  dispatch(setVoteInsertStep(step))
+}
 export const selectVotePlaces = (payload: IGetVotePlaces) => async (dispatch: React.Dispatch<any>) => {
   dispatch(setVoteInsertIsLoading(true))
   getVotePlaces(payload)

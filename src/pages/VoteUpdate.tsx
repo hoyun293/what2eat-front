@@ -1,6 +1,7 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import React, { useRef } from 'react'
-import { IVoteForm, IVote } from '../models/vote'
-import './VoteUpdateFormContainer.scss'
+import { IVote } from '../models/vote'
+import './VoteUpdate.scss'
 import InputUi from '../components/ui/InputUi'
 import IconUi from '../components/ui/IconUi'
 import DateTime from '../components/DateTime'
@@ -8,35 +9,46 @@ import ButtonUi from '../components/ui/ButtonUi'
 import { connect } from '../redux/redux-connect'
 import { IonPage, IonContent } from '@ionic/react'
 import { editVoteDetail } from '../redux/vote-update/vote-update-actions'
+import { useHistory } from 'react-router-dom'
+import { changeStep } from '../redux/vote-insert/vote-insert-actions'
 interface IOwnProps {}
 interface IStateProps {
   voteForm: IVote
 }
 interface IDispatchProps {
   editVoteDetail: typeof editVoteDetail
+  changeStep: typeof changeStep
 }
 
-const VoteUpdateFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
+const voteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   voteForm,
-  editVoteDetail
+  editVoteDetail,
+  changeStep
 }) => {
   const datepickerRef = useRef<HTMLInputElement>()
-
+  const history = useHistory()
   return (
     <IonPage>
       <IonContent>
         <div>
           <div className='px-container flex text-center'>
             <div className='dummy'></div>
-            <div className='HeaderTitle text-xxl pt-2'>투표편집</div>
-            <img className='HeaderIcon' src='/assets/icon/close.svg' alt='' />
+            <div className='HeaderTitle text-xxl'>투표편집</div>
+            <img
+              className='HeaderIcon'
+              src='/assets/icon/close.svg'
+              alt=''
+              onClick={() => {
+                history.goBack()
+              }}
+            />
           </div>
           <div className='text-center mt-2'>
             <img src='/assets/img/vote-update.svg' alt='' />
           </div>
           <div className='x-container'>
             <InputUi
-              placeholder={voteForm.voteName}
+              value={voteForm.voteName}
               maxlength={24}
               onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
                 // setVoteInsertForm({ voteName: target.value })
@@ -46,15 +58,17 @@ const VoteUpdateFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps
             <div className='x-divider'></div>
             <div className='text-right text-xs gray mt-1'>{voteForm.voteName.length || 0}/24</div>
           </div>
-          <div className='spaceMaker'>
-            <div className='x-divider'></div>
-          </div>
+          <div className='spaceMaker'></div>
+          <div className='x-divider'></div>
           <div className='py-4 px-container flex items-center justify-between'>
             <div className='flex items-center'>
               <IconUi className='pr-3' iconName='check'></IconUi>
               <div className='multiStr1 text-xl text-medium'>복수투표 가능</div>
             </div>
-            <div className='multiStr2 text-base'>가능 (편집 불가능)</div>
+            {voteForm.isMultiVote === true && <div className='multiStr2 text-base'>가능 (편집 불가능)</div>}
+            {voteForm.isMultiVote === false && (
+              <div className='multiStr2 text-base'>불가능 (편집 불가능)</div>
+            )}
           </div>
           <div className='x-divider' />
           <div className='py-4 px-container flex items-center justify-between'>
@@ -84,8 +98,14 @@ const VoteUpdateFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps
               <div className='multiStr1 text-xl text-medium'>투표지 추가하기</div>
             </div>
             <div className='purple flex items-center'>
-              <div className='text-base'>가능 (편집 불가능)</div>
-              <IconUi className='ml-2' iconName='arrow-horizontal'></IconUi>
+              <div className='text-base'>+{voteForm.votePlaces.length}개</div>
+              <IconUi
+                className='ml-2'
+                iconName='arrow-horizontal'
+                onClick={() => {
+                  history.push('/vote-update-foodcart')
+                }}
+              ></IconUi>
             </div>
           </div>
           <div className='x-divider' />
@@ -93,14 +113,12 @@ const VoteUpdateFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps
             color='yellow'
             text='저장'
             onClick={() => {
-              console.log('click!')
               editVoteDetail({
                 voteName: 'test',
                 isMultiVote: true,
                 voteEndDtm: 'testtest',
                 votePlaces: []
               } as IVote)
-              console.log('click done!')
             }}
           />
         </div>
@@ -114,7 +132,8 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
     voteForm: voteDetail.vote
   }),
   mapDispatchToProps: {
-    editVoteDetail
+    editVoteDetail,
+    changeStep
   },
-  component: VoteUpdateFormContainer
+  component: voteUpdate
 })
