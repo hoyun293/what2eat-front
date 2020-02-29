@@ -7,6 +7,7 @@ import {
   SET_VOTE_INSERT_PLACES,
   SET_VOTE_INSERT_PAGETOKEN,
   DELETE_VOTE_INSERT_FORM_PLACE_ID,
+  DELETE_VOTE_INSERT_FORM_ALL,
   SET_VOTE_INSERT_FORM_PLACE_ID,
   SET_DISABLE_VOTE_PLACES_INFINITE_SCROLL,
   SET_VOTE_INSERT_VOTE_URL,
@@ -31,6 +32,7 @@ export const insertVote = (payload: IPostVote) => async (dispatch: React.Dispatc
 export const changeStep = (step: number) => (dispatch: React.Dispatch<any>) => {
   dispatch(setVoteInsertStep(step))
 }
+
 export const selectVotePlaces = (payload: IGetVotePlaces) => async (dispatch: React.Dispatch<any>) => {
   dispatch(setVoteInsertIsLoading(true))
   getVotePlaces(payload)
@@ -70,7 +72,10 @@ export const deleteVoteInsertPlace = (votePlace: IPlace) =>
     type: DELETE_VOTE_INSERT_FORM_PLACE_ID,
     votePlace
   } as const)
-
+export const deleteVoteInsertPlaceAll = () =>
+  ({
+    type: DELETE_VOTE_INSERT_FORM_ALL
+  } as const)
 export const setVoteInsertPlaces = (votePlaces: IPlace[], reset: boolean = true) =>
   ({
     type: SET_VOTE_INSERT_PLACES,
@@ -119,3 +124,4 @@ export type TVoteActions =
   | TAction<typeof deleteVoteInsertPlace>
   | TAction<typeof setVoteInsertVoteUrl>
   | TAction<typeof setVoteInsertStep>
+  | TAction<typeof deleteVoteInsertPlaceAll>

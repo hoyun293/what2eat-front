@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import React, { useRef } from 'react'
-import { IVote } from '../models/vote'
+import { IVote, IVoteForm } from '../models/vote'
 import './VoteUpdate.scss'
 import InputUi from '../components/ui/InputUi'
 import IconUi from '../components/ui/IconUi'
@@ -10,20 +10,31 @@ import { connect } from '../redux/redux-connect'
 import { IonPage, IonContent } from '@ionic/react'
 import { editVoteDetail } from '../redux/vote-update/vote-update-actions'
 import { useHistory } from 'react-router-dom'
-import { changeStep } from '../redux/vote-insert/vote-insert-actions'
+import {
+  changeStep,
+  setVoteInsertPlace,
+  deleteVoteInsertPlaceAll
+} from '../redux/vote-insert/vote-insert-actions'
+import _ from 'lodash'
+import { IPlace } from '../models/place'
 interface IOwnProps {}
 interface IStateProps {
   voteForm: IVote
+  voteInsertForm: IVoteForm
 }
 interface IDispatchProps {
   editVoteDetail: typeof editVoteDetail
   changeStep: typeof changeStep
+  setVoteInsertPlace: typeof setVoteInsertPlace
+  deleteVoteInsertPlaceAll: typeof deleteVoteInsertPlaceAll
 }
 
 const voteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   voteForm,
   editVoteDetail,
-  changeStep
+  voteInsertForm,
+  setVoteInsertPlace,
+  deleteVoteInsertPlaceAll
 }) => {
   const datepickerRef = useRef<HTMLInputElement>()
   const history = useHistory()
@@ -103,6 +114,13 @@ const voteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
                 className='ml-2'
                 iconName='arrow-horizontal'
                 onClick={() => {
+                  deleteVoteInsertPlaceAll()
+                  _.map(voteForm.votePlaces, (v, i) => {
+                    var placeId = v.placeId
+                    var photoUrl = v.photoUrl
+                    var name = v.name
+                    setVoteInsertPlace({ placeId, photoUrl, name } as IPlace)
+                  })
                   history.push('/vote-update-foodcart')
                 }}
               ></IconUi>
@@ -128,12 +146,15 @@ const voteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ voteDetail }) => ({
-    voteForm: voteDetail.vote
+  mapStateToProps: ({ voteDetail, voteInsert }) => ({
+    voteForm: voteDetail.vote,
+    voteInsertForm: voteInsert.voteForm
   }),
   mapDispatchToProps: {
     editVoteDetail,
-    changeStep
+    changeStep,
+    setVoteInsertPlace,
+    deleteVoteInsertPlaceAll
   },
   component: voteUpdate
 })
