@@ -72,11 +72,16 @@ export const initialState: IState = {
   } as IVoteDetailState,
   voteUpdateDetail: {
     vote: {
+      voteId: '',
       voteName: '',
       isMultiVote: false,
       voteEndDtm: '',
       votePlaces: []
     },
+    votePlaceIds: [],
+    votePlaceIdsForm: [],
+    isVoteEnd: false,
+    isVoteDone: false,
     isLoading: false,
     errorMessage: ''
   } as IVoteUpdateState,

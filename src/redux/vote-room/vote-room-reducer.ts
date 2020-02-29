@@ -5,7 +5,6 @@ import { TVoteActions } from './vote-room-actions'
 export default function userReducer(state: IVoteRoomState, action: TVoteActions): IVoteRoomState {
   switch (action.type) {
     case SET_VOTEROOM_FORM:
-      console.log(action.voteRoom)
       return { ...state, voteRooms: action.voteRoom }
     case SET_VOTEROOM_IS_LOADING:
       return { ...state, isLoading: action.isLoading }

@@ -125,7 +125,6 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
 
     _.invoke($event.target, 'complete')
   }
-
   return (
     <IonContent>
       <div className='px-container pt-4'>
@@ -254,8 +253,8 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ voteInsert }) => ({
-    voteForm: voteInsert.voteForm,
-    votePlaces: voteInsert.votePlaces,
+    voteForm: voteInsert.voteForm, // 장바구니
+    votePlaces: voteInsert.votePlaces, // 해당 지역 음식점 리스트
     pagetoken: voteInsert.pagetoken,
     disableVotePlacesInfiniteScroll: voteInsert.disableVotePlacesInfiniteScroll
   }),

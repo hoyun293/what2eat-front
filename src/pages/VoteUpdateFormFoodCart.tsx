@@ -3,15 +3,33 @@ import { IonPage, IonHeader, IonToolbar, IonTitle, IonFooter } from '@ionic/reac
 import IconUi from '../components/ui/IconUi'
 import { useHistory } from 'react-router'
 import ButtonShadowUi from '../components/ui/ButtonShadowUi'
-import { connect } from 'react-redux'
+import { connect } from '../redux/redux-connect'
 import VoteSaveFormFoodCartContainer from '../containers/VoteSaveFormFoodCartContainer'
+import { IVote, IVoteForm } from '../models/vote'
+import {
+  addVoteDetailUpdatePlaceId,
+  deleteVoteDetailUpdateVote
+} from '../redux/vote-update/vote-update-actions'
+import { IVoteDetailPlace, IPlace } from '../models/place'
+import _ from 'lodash'
 
 interface IOwnProps {}
 
-interface IStateProps {}
+interface IStateProps {
+  voteUpdateForm: IVote
+  voteInsertForm: IVoteForm
+}
 
-interface IDispatchProps {}
-const VoteUpdateFormFoodCart: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({}) => {
+interface IDispatchProps {
+  addVoteDetailUpdatePlaceId: typeof addVoteDetailUpdatePlaceId
+  deleteVoteDetailUpdateVote: typeof deleteVoteDetailUpdateVote
+}
+const VoteUpdateFormFoodCart: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
+  voteUpdateForm,
+  addVoteDetailUpdatePlaceId,
+  voteInsertForm,
+  deleteVoteDetailUpdateVote
+}) => {
   const history = useHistory()
   return (
     <IonPage>
@@ -32,18 +50,36 @@ const VoteUpdateFormFoodCart: React.FC<IOwnProps & IStateProps & IDispatchProps>
       <VoteSaveFormFoodCartContainer />
       <IonFooter>
         <ButtonShadowUi
-          /*disabled={Object.keys(voteForm.votePlaces).length === 0}
-          onClick={async () => {
-            const { isMultiVote, voteName, votePlaces, voteEndDtm } = voteForm
+          disabled={Object.keys(voteUpdateForm.votePlaces).length === 0}
+          onClick={() => {
+            // 리스트를 voteUpdateDetail의 placeIdS에
 
-            insertVote({
-              voteName: voteName,
-              placeIds: Object.keys(votePlaces),
-              isMultiVote,
-              voteEndDtm
+            /*
+            var tempVotePlaces: {
+              [key: string]: IPlace
+            } = {}
+            _.map(voteUpdateForm.votePlaces, (v, i) => {
+              tempVotePlaces[v.placeId] = v
             })
+            */
+            deleteVoteDetailUpdateVote()
+            _.map(voteInsertForm.votePlaces, (v, i) => {
+              //if (!tempVotePlaces.hasOwnProperty(v.placeId)) {
+              addVoteDetailUpdatePlaceId({
+                placeId: v.placeId,
+                photoUrl: v.photoUrl,
+                name: v.name
+              } as IVoteDetailPlace)
+              //  }
+            })
+
+            //voteUpdateForm.votePlaces
+            /*const { isMultiVote, voteName, votePlaces, voteEndDtm } = voteForm
+
+
+            */
+            history.goBack()
           }}
-          */
           text='확인'
           color='yellow'
         />
@@ -51,14 +87,14 @@ const VoteUpdateFormFoodCart: React.FC<IOwnProps & IStateProps & IDispatchProps>
     </IonPage>
   )
 }
-
-export default VoteUpdateFormFoodCart
-/*
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({  }) => ({
-
+  mapStateToProps: ({ voteUpdateDetail, voteInsert }) => ({
+    voteUpdateForm: voteUpdateDetail.vote,
+    voteInsertForm: voteInsert.voteForm
   }),
-  mapDispatchToProps: {},
+  mapDispatchToProps: {
+    addVoteDetailUpdatePlaceId,
+    deleteVoteDetailUpdateVote
+  },
   component: VoteUpdateFormFoodCart
 })
-*/

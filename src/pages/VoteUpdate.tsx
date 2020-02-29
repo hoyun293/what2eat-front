@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/rules-of-hooks */
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import { IVote, IVoteForm } from '../models/vote'
 import './VoteUpdate.scss'
 import InputUi from '../components/ui/InputUi'
@@ -19,8 +19,8 @@ import _ from 'lodash'
 import { IPlace } from '../models/place'
 interface IOwnProps {}
 interface IStateProps {
-  voteForm: IVote
   voteInsertForm: IVoteForm
+  voteUpdateForm: IVote
 }
 interface IDispatchProps {
   editVoteDetail: typeof editVoteDetail
@@ -30,11 +30,11 @@ interface IDispatchProps {
 }
 
 const voteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
-  voteForm,
   editVoteDetail,
   voteInsertForm,
   setVoteInsertPlace,
-  deleteVoteInsertPlaceAll
+  deleteVoteInsertPlaceAll,
+  voteUpdateForm
 }) => {
   const datepickerRef = useRef<HTMLInputElement>()
   const history = useHistory()
@@ -59,7 +59,7 @@ const voteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
           </div>
           <div className='x-container'>
             <InputUi
-              value={voteForm.voteName}
+              value={voteUpdateForm.voteName}
               maxlength={24}
               onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
                 // setVoteInsertForm({ voteName: target.value })
@@ -67,7 +67,7 @@ const voteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
               }
             ></InputUi>
             <div className='x-divider'></div>
-            <div className='text-right text-xs gray mt-1'>{voteForm.voteName.length || 0}/24</div>
+            <div className='text-right text-xs gray mt-1'>{voteUpdateForm.voteName.length || 0}/24</div>
           </div>
           <div className='spaceMaker'></div>
           <div className='x-divider'></div>
@@ -76,8 +76,10 @@ const voteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
               <IconUi className='pr-3' iconName='check'></IconUi>
               <div className='multiStr1 text-xl text-medium'>복수투표 가능</div>
             </div>
-            {voteForm.isMultiVote === true && <div className='multiStr2 text-base'>가능 (편집 불가능)</div>}
-            {voteForm.isMultiVote === false && (
+            {voteUpdateForm.isMultiVote === true && (
+              <div className='multiStr2 text-base'>가능 (편집 불가능)</div>
+            )}
+            {voteUpdateForm.isMultiVote === false && (
               <div className='multiStr2 text-base'>불가능 (편집 불가능)</div>
             )}
           </div>
@@ -90,7 +92,7 @@ const voteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
             <div className='purple flex items-center'>
               <DateTime
                 ref={datepickerRef}
-                value={voteForm.voteEndDtm}
+                value={voteUpdateForm.voteEndDtm}
                 //  onChange={(voteEndDtm: string) => setVoteInsertForm({ voteEndDtm })}
               />
               <IconUi
@@ -109,13 +111,13 @@ const voteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
               <div className='multiStr1 text-xl text-medium'>투표지 추가하기</div>
             </div>
             <div className='purple flex items-center'>
-              <div className='text-base'>+{voteForm.votePlaces.length}개</div>
+              <div className='text-base'>+{voteUpdateForm.votePlaces.length}개</div>
               <IconUi
                 className='ml-2'
                 iconName='arrow-horizontal'
                 onClick={() => {
                   deleteVoteInsertPlaceAll()
-                  _.map(voteForm.votePlaces, (v, i) => {
+                  _.map(voteUpdateForm.votePlaces, (v, i) => {
                     var placeId = v.placeId
                     var photoUrl = v.photoUrl
                     var name = v.name
@@ -146,8 +148,8 @@ const voteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ voteDetail, voteInsert }) => ({
-    voteForm: voteDetail.vote,
+  mapStateToProps: ({ voteInsert, voteUpdateDetail }) => ({
+    voteUpdateForm: voteUpdateDetail.vote,
     voteInsertForm: voteInsert.voteForm
   }),
   mapDispatchToProps: {

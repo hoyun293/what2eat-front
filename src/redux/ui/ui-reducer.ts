@@ -3,8 +3,6 @@ import { IUiState } from './ui-state'
 import { TUiActions } from './ui-actions'
 
 export default function uiReducer(state: IUiState, action: TUiActions): IUiState {
-  console.log(action)
-
   switch (action.type) {
     case SET_UI_ALERT:
       return { ...state, alert: { ...state.alert, ...action.alert } }

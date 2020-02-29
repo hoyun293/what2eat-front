@@ -8,6 +8,7 @@ import './VoteDetailTitleContainer.scss'
 import { useHistory } from 'react-router-dom'
 import ShareLink from '../components/ShareLink'
 import { IVoteDetail } from '../models/vote'
+import { setVoteDetailUpdateVote } from '../redux/vote-update/vote-update-actions'
 
 interface IOwnProps {
   themeNum: number
@@ -16,12 +17,15 @@ interface IOwnProps {
 interface IStateProps {
   vote: IVoteDetail
 }
-interface IDispatchProps {}
+interface IDispatchProps {
+  setVoteDetailUpdateVote: typeof setVoteDetailUpdateVote
+}
 
 const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   themeNum,
   voteUrl,
-  vote
+  vote,
+  setVoteDetailUpdateVote
 }) => {
   const [isShareOpen, setIsShareOpen] = useState(false)
 
@@ -44,6 +48,7 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
         <div
           className='bg-white-opacity-30 flex-center white w-full br-md py-4'
           onClick={() => {
+            setVoteDetailUpdateVote(vote)
             history.push('/vote-update')
           }}
         >
@@ -63,6 +68,8 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ voteDetail }) => ({
     vote: voteDetail.vote
   }),
-  mapDispatchToProps: {},
+  mapDispatchToProps: {
+    setVoteDetailUpdateVote
+  },
   component: VoteDetailTitleContainer
 })
