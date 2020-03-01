@@ -30,6 +30,7 @@ export const initialState: IState = {
   } as IUiState,
   user: {
     userDomain: {},
+    isLogin: false,
     isLoading: false,
     errorMessage: ''
   } as IUserState,

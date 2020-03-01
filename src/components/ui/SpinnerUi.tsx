@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { IonSpinner } from '@ionic/react'
 
 import './SpinnerUi.scss'
 
@@ -11,7 +10,7 @@ interface ILoaderUiProps {
 const LoaderUi: React.FunctionComponent<ILoaderUiProps> = props => {
   return (
     <div className='spinner'>
-      <IonSpinner color={props.color ? props.color : ''} className={props.isFull ? 'spinner--full' : ''} />
+      <img className={props.isFull ? 'spinner--full' : ''} src='/assets/loader.gif' alt='' />
     </div>
   )
 }

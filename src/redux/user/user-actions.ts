@@ -1,5 +1,10 @@
 import { IUser } from './../../models/user.d'
-import { SET_USER_DOMAIN, SET_USER_IS_LOADING, SET_USER_ERROR_MESSAGE } from './user-constants'
+import {
+  SET_USER_DOMAIN,
+  SET_USER_IS_LOADING,
+  SET_USER_ERROR_MESSAGE,
+  SET_USER_IS_LOGIN
+} from './user-constants'
 import { TAction } from '../redux-type'
 import { postSignInApi } from '../../api/user-api'
 import { setAuthoriation } from '../../utils/http-with-credential-util'
@@ -11,6 +16,7 @@ export const signIn = () => async (dispatch: React.Dispatch<any>) => {
   const expire = 1000 * 60 * 60 * 3
   if (parseInt(accountTs) + expire > ts) {
     const token = localStorage.getItem('token') || ''
+    dispatch(setUserIsLogin(true))
     setAuthoriation(token)
     return true
   }
@@ -25,6 +31,7 @@ export const signIn = () => async (dispatch: React.Dispatch<any>) => {
       localStorage.setItem('account', result.account)
       localStorage.setItem('userId', result.userId)
 
+      dispatch(setUserIsLogin(true))
       setAuthoriation(result.token)
     })
     .catch(err => dispatch(setUserErrorMessage(err.message)))
@@ -34,6 +41,12 @@ export const setUserDomain = (userDomain: IUser) =>
   ({
     type: SET_USER_DOMAIN,
     userDomain
+  } as const)
+
+export const setUserIsLogin = (isLogin: boolean) =>
+  ({
+    type: SET_USER_IS_LOGIN,
+    isLogin
   } as const)
 
 export const setUserIsLoading = (isLoading: boolean) =>
@@ -50,5 +63,6 @@ export const setUserErrorMessage = (errorMessage: string) =>
 
 export type TUserActions =
   | TAction<typeof setUserDomain>
+  | TAction<typeof setUserIsLogin>
   | TAction<typeof setUserIsLoading>
   | TAction<typeof setUserErrorMessage>
