@@ -9,7 +9,8 @@ import {
   DELETE_VOTE_INSERT_FORM_PLACE_ID,
   SET_VOTE_INSERT_VOTE_URL,
   SET_VOTE_INSERT_STEP,
-  DELETE_VOTE_INSERT_FORM_ALL
+  DELETE_VOTE_INSERT_FORM_ALL,
+  SET_VOTE_INSERT_INIT
 } from './vote-insert-constants'
 import { IVoteInsertState } from './vote-insert-state'
 import { TVoteActions } from './vote-insert-actions'
@@ -42,7 +43,6 @@ export default function userReducer(state: IVoteInsertState, action: TVoteAction
         ...state,
         votePlaces: action.reset ? action.votePlaces : [...state.votePlaces, ...action.votePlaces]
       }
-
     case SET_DISABLE_VOTE_PLACES_INFINITE_SCROLL:
       return {
         ...state,
@@ -56,5 +56,7 @@ export default function userReducer(state: IVoteInsertState, action: TVoteAction
       return { ...state, isLoading: action.isLoading }
     case SET_VOTE_INSERT_ERROR_MESSAGE:
       return { ...state, errorMessage: action.errorMessage }
+    case SET_VOTE_INSERT_INIT:
+      return { ...action.voteInsert }
   }
 }
