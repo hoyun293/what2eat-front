@@ -36,7 +36,7 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
     <div className='vote-detail-title-container'>
       <div className='flex flex-1 mt-3'>
         <div className='flex items-end text-base white w-full'>
-          {moment(vote.voteEndDtm).format('MM.DD(dd) A hh:mm')} 마감
+          {vote.voteEndDtm && `${moment(vote.voteEndDtm).format('MM.DD(dd) A hh:mm')} 마감`}
         </div>
         <div className='w-full'>
           <img className='w-full' src={`/assets/img/vote-theme-${themeNum}.svg`} alt='' />

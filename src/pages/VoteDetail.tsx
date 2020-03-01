@@ -1,4 +1,4 @@
-import { IonContent, IonFooter, IonPage, IonFab } from '@ionic/react'
+import { IonContent, IonFooter, IonPage, IonFab, useIonViewWillEnter } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { RouteComponentProps } from 'react-router'
@@ -10,22 +10,26 @@ import IconUi from '../components/ui/IconUi'
 
 import './VoteDetail.scss'
 
-import { selectVote, insertUserVotes } from '../redux/vote-detail/vote-detail-actions'
+import { selectVote, insertUserVotes, setVoteDetailInit } from '../redux/vote-detail/vote-detail-actions'
 import VoteDetailTitleContainer from '../containers/VoteDetailTitleContainer'
 import VoteDetailPlaceListContainer from '../containers/VoteDetailPlaceListContainer'
 import { IVoteDetail } from '../models/vote'
+import { setUiIsLoader } from '../redux/ui/ui-actions'
 
 interface IOwnProps {}
 interface IStateProps {
   vote: IVoteDetail
   isVoteEnd: boolean
   isVoteDone: boolean
+  isLoading: boolean
   votePlaceIds: string[]
   votePlaceIdsForm: string[]
 }
 interface IDispatchProps {
   selectVote: typeof selectVote
   insertUserVotes: typeof insertUserVotes
+  setUiIsLoader: typeof setUiIsLoader
+  setVoteDetailInit: typeof setVoteDetailInit
 }
 
 interface MatchParams {
@@ -41,10 +45,13 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
   vote,
   isVoteDone,
   isVoteEnd,
+  isLoading,
+  setUiIsLoader,
   votePlaceIds,
   votePlaceIdsForm,
   selectVote,
-  insertUserVotes
+  insertUserVotes,
+  setVoteDetailInit
 }) => {
   const [scrollY, setScrollY] = useState(0)
   const [isVoteEdit, setIsVoteEdit] = useState(false)
@@ -52,6 +59,10 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
 
   const history = useHistory()
   const themeNum = getThemeNum(voteUrl)
+
+  useIonViewWillEnter(() => {
+    setVoteDetailInit()
+  })
 
   useEffect(() => {
     selectVote(voteUrl)
@@ -62,6 +73,10 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
       setIsVoteEdit(false)
     }
   }, [_.sum(votePlaceIds)]) // eslint-disable-line
+
+  useEffect(() => {
+    setUiIsLoader(isLoading)
+  }, [isLoading]) // eslint-disable-line
 
   return (
     <IonPage>
@@ -139,11 +154,14 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
     isVoteEnd: voteDetail.isVoteEnd,
     isVoteDone: voteDetail.isVoteDone,
     votePlaceIdsForm: voteDetail.votePlaceIdsForm,
-    votePlaceIds: voteDetail.votePlaceIds
+    votePlaceIds: voteDetail.votePlaceIds,
+    isLoading: voteDetail.isLoading
   }),
   mapDispatchToProps: {
     selectVote,
-    insertUserVotes
+    insertUserVotes,
+    setVoteDetailInit,
+    setUiIsLoader
   },
   component: VoteDetail
 })

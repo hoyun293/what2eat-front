@@ -29,9 +29,9 @@ export const insertVote = (payload: IPostVote) => async (dispatch: React.Dispatc
     .then(({ result }) => {
       dispatch(setVoteInsertVoteUrl(result.voteUrl))
       dispatch(setVoteInsertStep(3))
-      dispatch(setVoteInsertIsLoading(false))
     })
     .catch(err => dispatch(setVoteInsertErrorMessage(err.message)))
+    .finally(() => dispatch(setVoteInsertIsLoading(false)))
 }
 
 export const changeStep = (step: number) => (dispatch: React.Dispatch<any>) => {
@@ -52,6 +52,7 @@ export const selectVotePlaces = (payload: IGetVotePlaces) => async (dispatch: Re
       }
     })
     .catch(err => dispatch(setVoteInsertErrorMessage(err.message)))
+    .finally(() => dispatch(setVoteInsertIsLoading(false)))
 }
 
 export const setVoteInsertPagetoken = (pagetoken: string) =>

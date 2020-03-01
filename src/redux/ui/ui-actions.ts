@@ -1,6 +1,12 @@
-import { SET_UI_ALERT, SET_UI_TOAST } from './ui-constants'
+import { SET_UI_ALERT, SET_UI_TOAST, SET_UI_IS_LOADER } from './ui-constants'
 import { TAction } from '../redux-type'
 import { IAlert, IToast } from '../../models/ui'
+
+export const setUiIsLoader = (isLoader: boolean) =>
+  ({
+    type: SET_UI_IS_LOADER,
+    isLoader
+  } as const)
 
 export const setUiAlert = (alert: Partial<IAlert>) =>
   ({
@@ -14,4 +20,7 @@ export const setUiToast = (toast: Partial<IToast>) =>
     toast
   } as const)
 
-export type TUiActions = TAction<typeof setUiAlert> | TAction<typeof setUiToast>
+export type TUiActions =
+  | TAction<typeof setUiAlert>
+  | TAction<typeof setUiToast>
+  | TAction<typeof setUiIsLoader>

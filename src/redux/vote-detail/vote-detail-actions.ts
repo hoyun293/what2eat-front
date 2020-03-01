@@ -7,7 +7,8 @@ import {
   SET_VOTE_DETAIL_VOTE_PLACE_IDS,
   SET_VOTE_DETAIL_VOTE_PLACE_IDS_FORM,
   SET_VOTE_DETAIL_VOTE_PLACE_ID_FORM,
-  DELETE_VOTE_DETAIL_VOTE_PLACE_ID_FORM
+  DELETE_VOTE_DETAIL_VOTE_PLACE_ID_FORM,
+  SET_VOTE_DETAIL_INIT
 } from './vote-detail-constants'
 import * as _ from 'lodash'
 import moment from 'moment'
@@ -16,6 +17,10 @@ import { TAction } from '../redux-type'
 import { IVoteDetail } from '../../models/vote'
 import { getVote } from '../../api/vote-api'
 import { postUserVotes } from '../../api/user-vote-api'
+
+import { initialState } from '../root-state'
+import { IVoteDetailState } from './vote-detail-state'
+const voteDetail: IVoteDetailState = initialState.voteDetail
 
 export const selectVote = (voteUrl: string) => async (dispatch: React.Dispatch<any>) => {
   dispatch(setVoteDetailIsLoading(true))
@@ -123,12 +128,19 @@ export const setVoteDetailErrorMessage = (errorMessage: string) =>
     errorMessage
   } as const)
 
+export const setVoteDetailInit = () =>
+  ({
+    type: SET_VOTE_DETAIL_INIT,
+    voteDetail
+  } as const)
+
 export type TVoteActions =
   | TAction<typeof setVoteDetailIsLoading>
   | TAction<typeof setVoteDetailErrorMessage>
   | TAction<typeof setVoteDetailIsVoteDone>
   | TAction<typeof setVoteDetailIsVoteEnd>
   | TAction<typeof setVoteDetailVote>
+  | TAction<typeof setVoteDetailInit>
   | TAction<typeof setVoteDetailVotePlaceIds>
   | TAction<typeof setVoteDetailVotePlaceIdsForm>
   | TAction<typeof setVoteDetailVotePlaceIdForm>
