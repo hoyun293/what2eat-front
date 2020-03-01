@@ -1,4 +1,4 @@
-import { IonHeader, IonFooter, IonPage, IonTitle, IonToolbar } from '@ionic/react'
+import { IonHeader, IonFooter, IonPage, IonTitle, IonToolbar, useIonViewWillEnter } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
@@ -12,7 +12,7 @@ import { IVoteForm } from '../models/vote'
 
 import './VoteSave.scss'
 
-import { insertVote, setVoteInsertStep } from '../redux/vote-insert/vote-insert-actions'
+import { insertVote, setVoteInsertStep, setVoteInsertInit } from '../redux/vote-insert/vote-insert-actions'
 
 interface IOwnProps {}
 interface IStateProps {
@@ -21,6 +21,7 @@ interface IStateProps {
   voteErrorMessage: string
 }
 interface IDispatchProps {
+  setVoteInsertInit: typeof setVoteInsertInit
   insertVote: typeof insertVote
   setVoteInsertStep: typeof setVoteInsertStep
 }
@@ -29,12 +30,15 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   step,
   voteForm,
   voteErrorMessage,
+  setVoteInsertInit,
   insertVote,
   setVoteInsertStep
 }) => {
   const history = useHistory()
 
-  useEffect(() => {}, []) // eslint-disable-line
+  useIonViewWillEnter(() => {
+    setVoteInsertInit()
+  })
 
   return (
     <IonPage>
@@ -99,6 +103,7 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
     step: voteInsert.step
   }),
   mapDispatchToProps: {
+    setVoteInsertInit,
     insertVote,
     setVoteInsertStep
   },
