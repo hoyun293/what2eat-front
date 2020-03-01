@@ -1,4 +1,4 @@
-import { IonContent, IonPage } from '@ionic/react'
+import { IonContent, IonPage, useIonViewWillEnter } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
@@ -28,12 +28,18 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   const history = useHistory()
   const [toggle, setToggle] = useState(1)
   const pagingNum = 5
+
   useEffect(() => {
     //signIn()
     selectVoteRooms()
     //selectVoteRooms(pagingNum, bool)  onClick 시 pagingNum, bool만 바꾸게 해야되지 않을까?
     // toggle 값 바뀌면 useEffect가 실행되고 selectVoteRooms가 2번실행될듯?
   }, [toggle]) // eslint-disable-line
+
+  useIonViewWillEnter(() => {
+    selectVoteRooms()
+  })
+
   return (
     <IonPage>
       <IonContent fullscreen>
