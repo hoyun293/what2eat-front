@@ -52,7 +52,7 @@ const App: React.FC<IAppProps> = ({
           <Route path='/restaurant-detail/:placeId' component={RestaurantDetail} exact={true} />
           <Route path='/vote-update' component={voteUpdate} exact={true} />
           <Route path='/vote-update-foodcart' component={VoteUpdateFormFoodCart} exact={true} />
-          <Route exact path='/' render={() => <Redirect to='/' />} />
+          <Redirect to='/' />
         </IonRouterOutlet>
       </IonReactRouter>
       <IonPopover isOpen={uiAlert.isOpen} cssClass='cart-list-modal'>
