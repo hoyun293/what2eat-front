@@ -10,7 +10,7 @@ import {
   addVoteDetailUpdatePlaceId,
   deleteVoteDetailUpdateVote
 } from '../redux/vote-update/vote-update-actions'
-import { IVoteDetailPlace, IPlace } from '../models/place'
+import { IVoteDetailPlace } from '../models/place'
 import _ from 'lodash'
 
 interface IOwnProps {}
@@ -52,35 +52,17 @@ const VoteUpdateFormFoodCart: React.FC<IOwnProps & IStateProps & IDispatchProps>
         <ButtonShadowUi
           disabled={Object.keys(voteUpdateForm.votePlaces).length === 0}
           onClick={() => {
-            // 리스트를 voteUpdateDetail의 placeIdS에
-
-            /*
-            var tempVotePlaces: {
-              [key: string]: IPlace
-            } = {}
-            _.map(voteUpdateForm.votePlaces, (v, i) => {
-              tempVotePlaces[v.placeId] = v
-            })
-            */
             deleteVoteDetailUpdateVote()
             _.map(voteInsertForm.votePlaces, (v, i) => {
-              //if (!tempVotePlaces.hasOwnProperty(v.placeId)) {
               addVoteDetailUpdatePlaceId({
                 placeId: v.placeId,
                 photoUrl: v.photoUrl,
                 name: v.name
               } as IVoteDetailPlace)
-              //  }
             })
-
-            //voteUpdateForm.votePlaces
-            /*const { isMultiVote, voteName, votePlaces, voteEndDtm } = voteForm
-
-
-            */
             history.goBack()
           }}
-          text='확인'
+          text='다음'
           color='yellow'
         />
       </IonFooter>

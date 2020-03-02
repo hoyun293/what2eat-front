@@ -5,4 +5,6 @@ export interface IVoteRoom {
   isMultiVote: boolean
   isVoted: boolean
   isEnded: boolean
+  voteCreateDtm: string
+  voteEndDtm: string
 }
