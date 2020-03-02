@@ -1,4 +1,4 @@
-import React, { Suspense, lazy, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { IonApp, IonRouterOutlet, IonPopover, IonToast } from '@ionic/react'
 import { IonReactRouter } from '@ionic/react-router'
@@ -6,18 +6,15 @@ import { connect } from './redux/redux-connect'
 import { signIn } from './redux/user/user-actions'
 import SpinnerUi from './components/ui/SpinnerUi'
 import './global.scss'
-import RestaurantDetail from './pages/RestaurantDetail'
-import voteUpdate from './pages/VoteUpdate'
 import { setUiAlert, setUiToast } from './redux/ui/ui-actions'
 import { IAlert, IToast } from './models/ui'
-import VoteUpdateFormFoodCart from './pages/VoteUpdateFormFoodCart'
 
-const VoteSave = lazy(() => import('./pages/VoteSave'))
-const Main = lazy(() => import('./pages/Main'))
-const VoteDetail = lazy(() => import('./pages/VoteDetail'))
-// import Main from './pages/Main'
-// import VoteSave from './pages/VoteSave'
-// import VoteDetail from './pages/VoteDetail'
+import Main from './pages/Main'
+import voteUpdate from './pages/VoteUpdate'
+import VoteUpdateFormFoodCart from './pages/VoteUpdateFormFoodCart'
+import RestaurantDetail from './pages/RestaurantDetail'
+import VoteSave from './pages/VoteSave'
+import VoteDetail from './pages/VoteDetail'
 
 interface IStateProps {
   isLogin: boolean
@@ -47,19 +44,17 @@ const App: React.FC<IAppProps> = ({
 
   return isLogin ? (
     <IonApp>
-      <Suspense fallback={<SpinnerUi isFull={true} />}>
-        <IonReactRouter>
-          <IonRouterOutlet>
-            <Route path='/main' component={Main} exact={true} />
-            <Route path='/vote-save' component={VoteSave} exact={true} />
-            <Route path='/vote/:voteUrl' component={VoteDetail} exact={true} />
-            <Route path='/restaurant-detail/:placeId' component={RestaurantDetail} exact={true} />
-            <Route path='/vote-update' component={voteUpdate} exact={true} />
-            <Route path='/vote-update-foodcart' component={VoteUpdateFormFoodCart} exact={true} />
-            <Route exact path='/' render={() => <Redirect to='/main' />} />
-          </IonRouterOutlet>
-        </IonReactRouter>
-      </Suspense>
+      <IonReactRouter>
+        <IonRouterOutlet>
+          <Route path='/main' component={Main} />
+          <Route path='/vote-save' component={VoteSave} exact={true} />
+          <Route path='/vote/:voteUrl' component={VoteDetail} />
+          <Route path='/restaurant-detail/:placeId' component={RestaurantDetail} exact={true} />
+          <Route path='/vote-update' component={voteUpdate} exact={true} />
+          <Route path='/vote-update-foodcart' component={VoteUpdateFormFoodCart} exact={true} />
+          <Route exact path='/' render={() => <Redirect to='/main' />} />
+        </IonRouterOutlet>
+      </IonReactRouter>
       <IonPopover isOpen={uiAlert.isOpen} cssClass='cart-list-modal'>
         <div>
           {uiAlert.title && <div className='flex-center text-xl text-medium pt-5 pb-2'>{uiAlert.title}</div>}
