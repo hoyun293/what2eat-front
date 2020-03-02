@@ -1,4 +1,12 @@
-import { IonHeader, IonFooter, IonPage, IonTitle, IonToolbar, useIonViewWillEnter } from '@ionic/react'
+import {
+  IonHeader,
+  IonFooter,
+  IonPage,
+  IonTitle,
+  IonToolbar,
+  IonFab,
+  useIonViewWillEnter
+} from '@ionic/react'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
@@ -51,56 +59,81 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 
   return (
     <IonPage>
-      <IonHeader>
-        <IonToolbar className={`toolbar--step${step}`}>
-          <div className='flex justify-between items-center px-container'>
-            <div>
-              {step === 2 && <IconUi iconName='left-arrow' onClick={() => setVoteInsertStep(step - 1)} />}
-            </div>
-            <div>
-              {step === 2 && (
-                <IonTitle>
-                  <div className='text-xl text-medium black'>투표지 담기</div>
-                </IonTitle>
-              )}
-            </div>
-            <div>
-              <IconUi iconName='close' onClick={() => history.push('/main')}></IconUi>
-            </div>
-          </div>
-        </IonToolbar>
-      </IonHeader>
+      {step === 1 && (
+        <>
+          <IonFab
+            vertical='top'
+            horizontal='end'
+            slot='fixed'
+            className='top-0-safe-area'
+            onClick={() => history.push('/main')}
+          >
+            <IconUi iconName='close' className='pt-4 pr-2' onClick={() => history.push('/main')}></IconUi>
+          </IonFab>
+          <VoteSaveFormContainer />
+          <IonFooter>
+            <ButtonShadowUi
+              disabled={!voteForm.voteName || !voteForm.voteEndDtm}
+              onClick={() => setVoteInsertStep(step + 1)}
+              text='다음'
+              color='yellow'
+            />
+          </IonFooter>
+        </>
+      )}
+      {step === 2 && (
+        <>
+          <IonHeader>
+            <IonToolbar className={`toolbar--step${step}`}>
+              <div className='flex justify-between items-center px-container'>
+                <div>
+                  <IconUi iconName='left-arrow' onClick={() => setVoteInsertStep(step - 1)} />
+                </div>
+                <div>
+                  <IonTitle>
+                    <div className='text-xl text-medium black'>투표지 담기</div>
+                  </IonTitle>
+                </div>
+                <div>
+                  <IconUi iconName='close' onClick={() => history.push('/main')}></IconUi>
+                </div>
+              </div>
+            </IonToolbar>
+          </IonHeader>
+          <VoteSaveFormFoodCartContainer />
+          <IonFooter>
+            <ButtonShadowUi
+              disabled={Object.keys(voteForm.votePlaces).length === 0}
+              onClick={async () => {
+                const { isMultiVote, voteName, votePlaces, voteEndDtm } = voteForm
 
-      {step === 1 && <VoteSaveFormContainer />}
-      {step === 2 && <VoteSaveFormFoodCartContainer />}
-      {step === 3 && <VoteSaveCompleteContainer />}
-      <IonFooter>
-        {step === 1 && (
-          <ButtonShadowUi
-            disabled={!voteForm.voteName || !voteForm.voteEndDtm}
-            onClick={() => setVoteInsertStep(step + 1)}
-            text='다음'
-            color='yellow'
-          />
-        )}
-        {step === 2 && (
-          <ButtonShadowUi
-            disabled={Object.keys(voteForm.votePlaces).length === 0}
-            onClick={async () => {
-              const { isMultiVote, voteName, votePlaces, voteEndDtm } = voteForm
-
-              insertVote({
-                voteName: voteName,
-                placeIds: Object.keys(votePlaces),
-                isMultiVote,
-                voteEndDtm
-              })
-            }}
-            text='다음'
-            color='yellow'
-          />
-        )}
-      </IonFooter>
+                insertVote({
+                  voteName: voteName,
+                  placeIds: Object.keys(votePlaces),
+                  isMultiVote,
+                  voteEndDtm
+                })
+              }}
+              text='다음'
+              color='yellow'
+            />
+          </IonFooter>
+        </>
+      )}
+      {step === 3 && (
+        <>
+          <IonFab
+            vertical='top'
+            horizontal='end'
+            slot='fixed'
+            className='top-0-safe-area'
+            onClick={() => history.push('/main')}
+          >
+            <IconUi iconName='close' className='pt-4 pr-2' onClick={() => history.push('/main')}></IconUi>
+          </IonFab>
+          <VoteSaveCompleteContainer />
+        </>
+      )}
     </IonPage>
   )
 }

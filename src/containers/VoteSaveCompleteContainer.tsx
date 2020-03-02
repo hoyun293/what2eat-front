@@ -18,7 +18,7 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
 
   return (
     <IonContent fullscreen>
-      <div className='bg-yellow h-full px-container'>
+      <div className='bg-yellow h-full px-container pt-12'>
         <div className='text-xxxl text-bold pt-3 text-center'>
           투표가
           <br />

@@ -25,7 +25,7 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
 
   return (
     <IonContent fullscreen>
-      <div className='px-container'>
+      <div className='px-container pt-12'>
         <div className='text-xxxl text-bold mb-7'>
           새로운 투표를
           <br />
