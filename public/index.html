@@ -15,7 +15,8 @@
 
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
-    <link rel="shortcut icon" type="image/png" href="%PUBLIC_URL%/assets/icon/favicon.png" />
+    <link rel="shortcut icon" type="image/png" href="%PUBLIC_URL%/assets/icon/favicon.ico" />
+    <link rel="icon" type="image/png" href="%PUBLIC_URL%/assets/icon/favicon.ico" type="image/x-icon" />
     <link
       href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:300,400,700&display=swap&subset=korean"
       rel="stylesheet"
@@ -25,9 +26,23 @@
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-title" content="Ionic App" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+
+    <style>
+      .init-loader {
+        width: 66px;
+        height: 66px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        border-radius: 50%;
+        border: 1px #dfe2e6 solid;
+      }
+    </style>
   </head>
 
   <body>
+    <img class="init-loader" src="/assets/loader.gif" alt="" />
     <div id="root"></div>
   </body>
 </html>
