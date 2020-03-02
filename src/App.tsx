@@ -46,13 +46,13 @@ const App: React.FC<IAppProps> = ({
     <IonApp>
       <IonReactRouter>
         <IonRouterOutlet>
-          <Route path='/main' component={Main} />
+          <Route path='/' component={Main} exact={true} />
           <Route path='/vote-save' component={VoteSave} exact={true} />
           <Route path='/vote/:voteUrl' component={VoteDetail} />
           <Route path='/restaurant-detail/:placeId' component={RestaurantDetail} exact={true} />
           <Route path='/vote-update' component={voteUpdate} exact={true} />
           <Route path='/vote-update-foodcart' component={VoteUpdateFormFoodCart} exact={true} />
-          <Route exact path='/' render={() => <Redirect to='/main' />} />
+          <Route exact path='/' render={() => <Redirect to='/' />} />
         </IonRouterOutlet>
       </IonReactRouter>
       <IonPopover isOpen={uiAlert.isOpen} cssClass='cart-list-modal'>

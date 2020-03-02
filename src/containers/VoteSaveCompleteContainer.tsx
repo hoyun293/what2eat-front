@@ -47,7 +47,7 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
             투표 하러가기
           </IonButton>
         </div>
-        <div className='dark-gray text-xl text-center pt-4' onClick={() => history.push('/main')}>
+        <div className='dark-gray text-xl text-center pt-4' onClick={() => history.push('/')}>
           홈으로 이동
         </div>
       </div>

@@ -66,9 +66,9 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
             horizontal='end'
             slot='fixed'
             className='top-0-safe-area'
-            onClick={() => history.push('/main')}
+            onClick={() => history.push('/')}
           >
-            <IconUi iconName='close' className='pt-4 pr-2' onClick={() => history.push('/main')}></IconUi>
+            <IconUi iconName='close' className='pt-4 pr-2' onClick={() => history.push('/')}></IconUi>
           </IonFab>
           <VoteSaveFormContainer />
           <IonFooter>
@@ -95,7 +95,7 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
                   </IonTitle>
                 </div>
                 <div>
-                  <IconUi iconName='close' onClick={() => history.push('/main')}></IconUi>
+                  <IconUi iconName='close' onClick={() => history.push('/')}></IconUi>
                 </div>
               </div>
             </IonToolbar>
@@ -127,9 +127,9 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
             horizontal='end'
             slot='fixed'
             className='top-0-safe-area'
-            onClick={() => history.push('/main')}
+            onClick={() => history.push('/')}
           >
-            <IconUi iconName='close' className='pt-4 pr-2' onClick={() => history.push('/main')}></IconUi>
+            <IconUi iconName='close' className='pt-4 pr-2' onClick={() => history.push('/')}></IconUi>
           </IonFab>
           <VoteSaveCompleteContainer />
         </>

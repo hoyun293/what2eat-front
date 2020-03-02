@@ -94,21 +94,17 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
           horizontal='start'
           slot='fixed'
           className='w-full top-0-safe-area left-0'
-          onClick={() => history.push('/main')}
+          onClick={() => history.push('/')}
         >
           {scrollY === 0 ? (
             <IconUi
               iconName='left-arrow-white'
               className='pl-4 pt-3'
-              onClick={() => history.push('/main')}
+              onClick={() => history.push('/')}
             ></IconUi>
           ) : (
             <div className='bg-white flex items-center height-50'>
-              <IconUi
-                iconName='left-arrow'
-                className='pl-4 pr-3'
-                onClick={() => history.push('/main')}
-              ></IconUi>
+              <IconUi iconName='left-arrow' className='pl-4 pr-3' onClick={() => history.push('/')}></IconUi>
               <div className='w-2/3 text-xl text-center text-bold'>{vote.voteName}</div>
             </div>
           )}
