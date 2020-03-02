@@ -26,10 +26,12 @@ export const initialState: IState = {
       isOpen: false,
       message: '',
       duration: 2000
-    }
+    },
+    isLoader: false
   } as IUiState,
   user: {
     userDomain: {},
+    isLogin: false,
     isLoading: false,
     errorMessage: ''
   } as IUserState,

@@ -206,7 +206,11 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
         </div>
       </IonModal>
 
-      <IonPopover isOpen={isShowCartModal} cssClass='cart-list-modal'>
+      <IonPopover
+        isOpen={isShowCartModal}
+        onDidDismiss={() => setIsShowCartModal(false)}
+        cssClass='cart-list-modal'
+      >
         <div>
           <div className='cart-lit-modal__header flex-center text-xl black text-bold'>추가한 투표지</div>
           <div className='flex-col'>

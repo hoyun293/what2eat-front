@@ -3,4 +3,5 @@ import { IUser } from '../../models/user'
 
 export interface IUserState extends ICommonState {
   userDomain: IUser
+  isLogin: boolean
 }

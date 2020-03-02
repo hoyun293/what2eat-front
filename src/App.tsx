@@ -20,6 +20,8 @@ const VoteDetail = lazy(() => import('./pages/VoteDetail'))
 // import VoteDetail from './pages/VoteDetail'
 
 interface IStateProps {
+  isLogin: boolean
+  uiIsLoader: boolean
   uiAlert: IAlert
   uiToast: IToast
 }
@@ -30,14 +32,22 @@ interface IDispatchProps {
 }
 interface IAppProps extends IStateProps, IDispatchProps {}
 
-const App: React.FC<IAppProps> = ({ signIn, uiAlert, uiToast, setUiToast, setUiAlert }) => {
+const App: React.FC<IAppProps> = ({
+  signIn,
+  uiAlert,
+  uiToast,
+  setUiToast,
+  isLogin,
+  setUiAlert,
+  uiIsLoader
+}) => {
   useEffect(() => {
     signIn()
   }, []) // eslint-disable-line
 
-  return (
+  return isLogin ? (
     <IonApp>
-      <Suspense fallback={<SpinnerUi isFull={true} color='tertiary' />}>
+      <Suspense fallback={<SpinnerUi isFull={true} />}>
         <IonReactRouter>
           <IonRouterOutlet>
             <Route path='/main' component={Main} exact={true} />
@@ -61,6 +71,8 @@ const App: React.FC<IAppProps> = ({ signIn, uiAlert, uiToast, setUiToast, setUiA
         </div>
       </IonPopover>
 
+      {uiIsLoader && <SpinnerUi isFull={true} />}
+
       <IonToast
         isOpen={uiToast.isOpen}
         onDidDismiss={() => setUiToast({ isOpen: false })}
@@ -68,11 +80,15 @@ const App: React.FC<IAppProps> = ({ signIn, uiAlert, uiToast, setUiToast, setUiA
         duration={uiToast.duration}
       />
     </IonApp>
+  ) : (
+    <SpinnerUi isFull={true} />
   )
 }
 
 const AppWithConnect = connect<{}, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ ui }) => ({
+  mapStateToProps: ({ ui, user }) => ({
+    isLogin: user.isLogin,
+    uiIsLoader: ui.isLoader,
     uiAlert: ui.alert,
     uiToast: ui.toast
   }),

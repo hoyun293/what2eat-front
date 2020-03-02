@@ -7,7 +7,8 @@ import {
   SET_VOTE_DETAIL_VOTE_PLACE_ID_FORM,
   DELETE_VOTE_DETAIL_VOTE_PLACE_ID_FORM,
   SET_VOTE_DETAIL_VOTE_PLACE_IDS_FORM,
-  SET_VOTE_DETAIL_VOTE_PLACE_IDS
+  SET_VOTE_DETAIL_VOTE_PLACE_IDS,
+  SET_VOTE_DETAIL_INIT
 } from './vote-detail-constants'
 import { IVoteDetailState } from './vote-detail-state'
 import { TVoteActions } from './vote-detail-actions'
@@ -34,5 +35,7 @@ export default function userReducer(state: IVoteDetailState, action: TVoteAction
       return { ...state, isLoading: action.isLoading }
     case SET_VOTE_DETAIL_ERROR_MESSAGE:
       return { ...state, errorMessage: action.errorMessage }
+    case SET_VOTE_DETAIL_INIT:
+      return { ...action.voteDetail }
   }
 }

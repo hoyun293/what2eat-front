@@ -1,4 +1,4 @@
-import { IonHeader, IonFooter, IonPage, IonTitle, IonToolbar } from '@ionic/react'
+import { IonHeader, IonFooter, IonPage, IonTitle, IonToolbar, useIonViewWillEnter } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
@@ -12,29 +12,42 @@ import { IVoteForm } from '../models/vote'
 
 import './VoteSave.scss'
 
-import { insertVote, setVoteInsertStep } from '../redux/vote-insert/vote-insert-actions'
+import { insertVote, setVoteInsertStep, setVoteInsertInit } from '../redux/vote-insert/vote-insert-actions'
+import { setUiIsLoader } from '../redux/ui/ui-actions'
 
 interface IOwnProps {}
 interface IStateProps {
   step: number
   voteForm: IVoteForm
   voteErrorMessage: string
+  isLoading: boolean
 }
 interface IDispatchProps {
+  setVoteInsertInit: typeof setVoteInsertInit
   insertVote: typeof insertVote
   setVoteInsertStep: typeof setVoteInsertStep
+  setUiIsLoader: typeof setUiIsLoader
 }
 
 const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   step,
+  isLoading,
+  setUiIsLoader,
   voteForm,
   voteErrorMessage,
+  setVoteInsertInit,
   insertVote,
   setVoteInsertStep
 }) => {
   const history = useHistory()
 
-  useEffect(() => {}, []) // eslint-disable-line
+  useIonViewWillEnter(() => {
+    setVoteInsertInit()
+  })
+
+  useEffect(() => {
+    setUiIsLoader(isLoading)
+  }, [isLoading]) // eslint-disable-line
 
   return (
     <IonPage>
@@ -96,11 +109,14 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ voteInsert }) => ({
     voteForm: voteInsert.voteForm,
     voteErrorMessage: voteInsert.errorMessage,
-    step: voteInsert.step
+    step: voteInsert.step,
+    isLoading: voteInsert.isLoading
   }),
   mapDispatchToProps: {
+    setVoteInsertInit,
     insertVote,
-    setVoteInsertStep
+    setVoteInsertStep,
+    setUiIsLoader
   },
   component: VoteSave
 })

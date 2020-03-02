@@ -1,4 +1,4 @@
-import { IonContent, IonPage } from '@ionic/react'
+import { IonContent, IonPage, useIonViewWillEnter } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
@@ -81,10 +81,13 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
       return -1 * compareDate(a.voteEndDtm, b.voteEndDtm)
     })
   }
+
   useEffect(() => {
     //signIn()
     if (index === 0) {
+      //  useIonViewWillEnter(() => {
       selectVoteRooms()
+      //  })
       setIndex(index + 1)
     }
     //selectVoteRooms(pagingNum, bool)  onClick 시 pagingNum, bool만 바꾸게 해야되지 않을까?
