@@ -8,15 +8,17 @@ import './MainFormVoteRoomListContainer.scss'
 
 interface IOwnProps {}
 interface IStateProps {
-  voteRooms: IVoteRoom[]
+  sortedVoteRooms: IVoteRoom[]
 }
 interface IDispatchProps {}
 
-const MainFormVoteRoomListContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteRooms }) => {
+const MainFormVoteRoomListContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
+  sortedVoteRooms
+}) => {
   return (
     <div className='px-container pt-3'>
       <ol className='align-center flex-col justify-between'>
-        {_.map(voteRooms, (v, i) => (
+        {_.map(sortedVoteRooms, (v, i) => (
           <MainFormVoteRoomListItem
             key={v._id}
             voteUrl={v.voteUrl}
@@ -30,10 +32,4 @@ const MainFormVoteRoomListContainer: React.FC<IOwnProps & IStateProps & IDispatc
   )
 }
 
-export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ voteRoom }) => ({
-    voteRooms: voteRoom.voteRooms
-  }),
-  mapDispatchToProps: {},
-  component: MainFormVoteRoomListContainer
-})
+export default MainFormVoteRoomListContainer

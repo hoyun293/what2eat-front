@@ -9,6 +9,7 @@ import { signIn } from '../redux/user/user-actions'
 import './Main.scss'
 import { IVoteRoom } from '../models/vote-room'
 import { changeStep } from '../redux/vote-insert/vote-insert-actions'
+import _ from 'lodash'
 
 interface IOwnProps {}
 interface IStateProps {
@@ -27,13 +28,80 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 }) => {
   const history = useHistory()
   const [toggle, setToggle] = useState(1)
-  const pagingNum = 5
+  const [index, setIndex] = useState(0)
+  const [votes, setVotes] = useState<Array<IVoteRoom>>([])
+
+  const compareDate = (date1: string, date2: string) => {
+    var year1 = Number(date1.substring(0, 4))
+    var year2 = Number(date2.substring(0, 4))
+    var month1 = Number(date1.substring(5, 7))
+    var month2 = Number(date2.substring(5, 7))
+    var day1 = Number(date1.substring(8, 10))
+    var day2 = Number(date2.substring(8, 10))
+    var time1 =
+      Number(date1.substring(11, 13)) * 3600 +
+      Number(date1.substring(14, 16)) * 60 +
+      +Number(date1.substring(17, 19))
+    var time2 =
+      Number(date2.substring(11, 13)) * 3600 +
+      Number(date2.substring(14, 16)) * 60 +
+      +Number(date2.substring(17, 19))
+
+    if (year1 > year2) {
+      return year2 - year1
+    } else if (year1 < year2) {
+      return year2 - year1
+    } else {
+      if (month1 > month2) {
+        return month2 - month1
+      } else if (month1 < month2) {
+        return month2 - month1
+      } else {
+        if (day1 > day2) {
+          return day2 - day1
+        } else if (day1 < day2) {
+          return day2 - day1
+        } else {
+          if (time1 > time2) {
+            return time2 - time1
+          } else {
+            return time2 - time1
+          }
+        }
+      }
+    }
+  }
+  const sortInCreate = () => {
+    votes.sort((a: IVoteRoom, b: IVoteRoom): number => {
+      return compareDate(a.voteCreateDtm, b.voteCreateDtm)
+    })
+  }
+  const sortInEnd = () => {
+    votes.sort((a: IVoteRoom, b: IVoteRoom): number => {
+      return -1 * compareDate(a.voteEndDtm, b.voteEndDtm)
+    })
+  }
   useEffect(() => {
     //signIn()
-    selectVoteRooms()
+    if (index === 0) {
+      selectVoteRooms()
+      setIndex(index + 1)
+    }
     //selectVoteRooms(pagingNum, bool)  onClick 시 pagingNum, bool만 바꾸게 해야되지 않을까?
     // toggle 값 바뀌면 useEffect가 실행되고 selectVoteRooms가 2번실행될듯?
-  }, [toggle]) // eslint-disable-line
+    //console.log('addVote start')
+
+    if (index === 1) {
+      setVotes(voteRooms)
+      setIndex(index + 1)
+    }
+
+    if (index === 2) {
+      sortInEnd()
+      setIndex(index + 1)
+    }
+  }, [voteRooms, votes]) // eslint-disable-line
+
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -49,7 +117,8 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
               className='toggleName text-lg'
               onClick={() => {
                 setToggle(toggle + 1)
-                selectVoteRooms(pagingNum, true)
+                sortInCreate()
+                setVotes(votes)
               }}
             >
               마감순
@@ -60,10 +129,11 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
               className='toggleName text-lg'
               onClick={() => {
                 setToggle(toggle + 1)
-                selectVoteRooms(pagingNum, false)
+                sortInEnd()
+                setVotes(votes)
               }}
             >
-              인기순
+              최신순
             </div>
           )}
         </div>
@@ -73,7 +143,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
             height: voteRooms ? (voteRooms.length > 5 ? 'auto' : '100%') : '100%'
           }}
         >
-          <MainFormVoteRoomListContainer />
+          <MainFormVoteRoomListContainer sortedVoteRooms={votes} />
           <div
             className='bottom-floating'
             onClick={() => {
