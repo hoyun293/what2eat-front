@@ -1,4 +1,4 @@
-import { IonContent, IonPage, useIonViewWillEnter } from '@ionic/react'
+import { IonContent, IonPage, IonImg, useIonViewWillEnter } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 
@@ -114,7 +114,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
             <br />
             하루되세요
           </div>
-          <img className='toggleIcon' src='/assets/icon/sorting btn_icon.svg' alt='' />
+          <IonImg className='toggleIcon' src='/assets/icon/sorting btn_icon.svg' alt='' />
           {toggle % 2 === 1 && (
             <div
               className='toggleName text-lg'

@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { getNumberUnit } from '../utils/number-util'
+import { IonImg } from '@ionic/react'
 
 import './VotePlaceItem.scss'
 import IconUi from './ui/IconUi'
@@ -37,7 +38,7 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
           backgroundSize: photoUrl ? 'cover' : 'initial'
         }}
       >
-        <img src='/assets/img/vote-place-thumb-holder.png' alt='' />
+        <IonImg src='/assets/img/vote-place-thumb-holder.png' alt='' />
       </div>
       <div className='info-container flex justify-between'>
         <div

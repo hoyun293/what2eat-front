@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { IonButton, IonContent } from '@ionic/react'
+import { IonButton, IonContent, IonImg } from '@ionic/react'
 
 import { connect } from '../redux/redux-connect'
 import './VoteSaveCompleteContainer.scss'
@@ -24,8 +24,8 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
           <br />
           생성되었습니다!
         </div>
-        <div className='text-center pt-9'>
-          <img className='text-center' src='/assets/img/vote-save-complete.svg' alt='' />
+        <div className='pt-9'>
+          <IonImg className='w-67 m-auto' src='/assets/img/vote-save-complete.svg' alt='' />
         </div>
         <div>
           <IonButton

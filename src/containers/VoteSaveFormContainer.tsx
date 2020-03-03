@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { IonToggle, IonContent } from '@ionic/react'
+import { IonToggle, IonContent, IonImg } from '@ionic/react'
 
 import { IVote, IVoteForm } from '../models/vote.d'
 import { connect } from '../redux/redux-connect'
@@ -83,7 +83,7 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
       <div className='x-divider' />
 
       <div className='text-center mt-8'>
-        <img src='/assets/img/vote-save.svg' alt='' />
+        <IonImg src='/assets/img/vote-save.svg'></IonImg>
       </div>
     </IonContent>
   )

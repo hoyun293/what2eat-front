@@ -7,7 +7,7 @@ import IconUi from '../components/ui/IconUi'
 import DateTime from '../components/DateTime'
 import ButtonUi from '../components/ui/ButtonUi'
 import { connect } from '../redux/redux-connect'
-import { IonPage, IonContent } from '@ionic/react'
+import { IonPage, IonContent, IonImg } from '@ionic/react'
 import { editVoteDetail } from '../redux/vote-update/vote-update-actions'
 import { useHistory } from 'react-router-dom'
 import {
@@ -45,7 +45,7 @@ const voteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
           <div className='px-container flex text-center'>
             <div className='dummy'></div>
             <div className='HeaderTitle text-xxl'>투표편집</div>
-            <img
+            <IonImg
               className='HeaderIcon'
               src='/assets/icon/close.svg'
               alt=''
@@ -54,8 +54,8 @@ const voteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
               }}
             />
           </div>
-          <div className='text-center mt-2'>
-            <img src='/assets/img/vote-update.svg' alt='' />
+          <div className='mt-2'>
+            <IonImg className='w-50 m-auto' src='/assets/img/vote-update.svg' alt='' />
           </div>
           <div className='x-container'>
             <InputUi

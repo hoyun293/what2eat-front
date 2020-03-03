@@ -1,6 +1,6 @@
 import React from 'react'
 import './VotePlaceItem.scss'
-import { IonPopover } from '@ionic/react'
+import { IonPopover, IonImg } from '@ionic/react'
 
 import { isMobile } from 'react-device-detect'
 import copy from 'copy-to-clipboard'
@@ -27,7 +27,9 @@ declare const Kakao: any
 const shareKakao = (shareUrl: string, imageUrl: string, success = () => {}) => {
   const url = `${config.WEB_URL}${shareUrl}`
   if (isMobile) {
+    console.log(Kakao.Link)
     return Kakao.Link.sendDefault({
+      // container: '#kakao-link-btn',
       objectType: 'feed',
       content: {
         title: '투표 공유하기',
@@ -86,6 +88,7 @@ const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProp
         <div className='flex-center text-xl text-medium pt-5 pb-2'>투표 초대하기</div>
         <div className='flex flex-center'>
           <div
+            id='kakao-link-btn'
             className='flex-col'
             onClick={() =>
               shareKakao(shareUrl, thumbnailUrl, () => {
@@ -93,7 +96,7 @@ const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProp
               })
             }
           >
-            <img src='/assets/img/share-kakao.png' className='w-20' alt='' />
+            <IonImg src='/assets/img/share-kakao.png' className='w-20' alt='' />
             <div className='text-center text-xs dark-gray'>카카오톡</div>
           </div>
           <div
@@ -105,7 +108,7 @@ const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProp
               })
             }
           >
-            <img src='/assets/img/share-link.svg' className='w-20' alt='' />
+            <IonImg src='/assets/img/share-link.svg' className='w-20' alt='' />
             <div className='text-center text-xs dark-gray'>URL</div>
           </div>
         </div>
