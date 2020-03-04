@@ -1,23 +1,20 @@
 import React from 'react'
+import './PopUpImageContainer.scss'
+
 interface IOwnProps {}
 interface IStateProps {
   photoUrl: string
-  key: number
   onClick: Function
 }
 interface IDispatchProps {}
 
-const RestaurantPhotoSlideContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
-  photoUrl,
-  key,
-  onClick
-}) => {
+const PopUpImageContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ photoUrl, onClick }) => {
   return (
-    <div className='foodPhotoBox'>
+    <div className='popUpParent'>
       <img
-        className='foodPhoto'
-        alt=''
+        className='popUpImage'
         src={photoUrl}
+        alt=''
         onClick={() => {
           onClick()
         }}
@@ -26,4 +23,4 @@ const RestaurantPhotoSlideContainer: React.FC<IOwnProps & IStateProps & IDispatc
   )
 }
 
-export default RestaurantPhotoSlideContainer
+export default PopUpImageContainer
