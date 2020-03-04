@@ -91,16 +91,18 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 
   useIonViewWillEnter(() => {
     setUiIsLoader(false)
-    // 투표방 생성 이후, 재진입시 호출
-    index !== 0 && selectVoteRooms()
+    // TODO: 투표방 생성 이후, 페이지 재진입시에 호출이 필요해서 필요합니다.
+    // 제가 임의로 수정했으니, 한번 확인해주셔요 ^^
+    selectVoteRooms()
+    setIndex(index + 1)
   })
 
   useEffect(() => {
-    //signIn()
-    if (index === 0) {
-      selectVoteRooms()
-      setIndex(index + 1)
-    }
+    // if (index === 0) {
+    //   selectVoteRooms()
+    //   setIndex(index + 1)
+    // }
+
     //selectVoteRooms(pagingNum, bool)  onClick 시 pagingNum, bool만 바꾸게 해야되지 않을까?
     // toggle 값 바뀌면 useEffect가 실행되고 selectVoteRooms가 2번실행될듯?
     //console.log('addVote start')
