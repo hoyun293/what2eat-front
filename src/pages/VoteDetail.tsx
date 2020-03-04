@@ -60,11 +60,8 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
   const history = useHistory()
   const themeNum = getThemeNum(voteUrl)
 
-  useIonViewWillEnter(() => {
-    setVoteDetailInit()
-  })
-
   useEffect(() => {
+    setVoteDetailInit()
     selectVote(voteUrl)
   }, [voteUrl, isVoteDone, _.sum(votePlaceIds)]) // eslint-disable-line
 

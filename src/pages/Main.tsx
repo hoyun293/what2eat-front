@@ -91,14 +91,14 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 
   useIonViewWillEnter(() => {
     setUiIsLoader(false)
+    // 투표방 생성 이후, 재진입시 호출
+    index !== 0 && selectVoteRooms()
   })
 
   useEffect(() => {
     //signIn()
     if (index === 0) {
-      //  useIonViewWillEnter(() => {
       selectVoteRooms()
-      //  })
       setIndex(index + 1)
     }
     //selectVoteRooms(pagingNum, bool)  onClick 시 pagingNum, bool만 바꾸게 해야되지 않을까?
