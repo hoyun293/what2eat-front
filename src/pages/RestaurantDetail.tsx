@@ -16,6 +16,8 @@ import Slider from 'react-slick'
 import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import RestaurantPhotoSlideContainer from '../containers/RestaurantPhotoSlideContainer'
+import PopUpImageContainer from '../containers/PopUpImageContainer'
+
 interface IOwnProps {}
 interface IStateProps {
   restaurantDetailInfo: IRestaurantDetail
@@ -49,6 +51,8 @@ const RestaurantDetail: React.FC<IOwnProps &
     return val
   })
   const [index, setIndex] = useState(0)
+  const [popUpImageUrl, setPopUpImageUrl] = useState('')
+  const [isPopUp, setIsPopUp] = useState(false)
   useEffect(() => {
     if (index === 0) {
       selectRestaurnatDetail(match.params.placeId)
@@ -140,9 +144,24 @@ const RestaurantDetail: React.FC<IOwnProps &
 
         <Slider className='ml-6' {...settings}>
           {_.map(photoUrlArr, (v, i) => (
-            <RestaurantPhotoSlideContainer key={i} photoUrl={v}></RestaurantPhotoSlideContainer>
+            <RestaurantPhotoSlideContainer
+              key={i}
+              photoUrl={v}
+              onClick={() => {
+                setIsPopUp(true)
+                setPopUpImageUrl(v)
+              }}
+            ></RestaurantPhotoSlideContainer>
           ))}
         </Slider>
+        {isPopUp && (
+          <PopUpImageContainer
+            photoUrl={popUpImageUrl}
+            onClick={() => {
+              setIsPopUp(false)
+            }}
+          />
+        )}
       </IonContent>
       <IonFooter>
         <ButtonUi color='yellow' text='후보지 추가' />
