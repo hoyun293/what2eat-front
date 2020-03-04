@@ -16,8 +16,8 @@ export const signIn = () => async (dispatch: React.Dispatch<any>) => {
   const expire = 1000 * 60 * 60 * 3
   if (parseInt(accountTs) + expire > ts) {
     const token = localStorage.getItem('token') || ''
-    dispatch(setUserIsLogin(true))
     setAuthoriation(token)
+    dispatch(setUserIsLogin(true))
     return true
   }
 
@@ -31,8 +31,8 @@ export const signIn = () => async (dispatch: React.Dispatch<any>) => {
       localStorage.setItem('account', result.account)
       localStorage.setItem('userId', result.userId)
 
-      dispatch(setUserIsLogin(true))
       setAuthoriation(result.token)
+      dispatch(setUserIsLogin(true))
     })
     .catch(err => dispatch(setUserErrorMessage(err.message)))
 }

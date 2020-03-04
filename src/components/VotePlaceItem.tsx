@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { getNumberUnit } from '../utils/number-util'
+import { IonImg } from '@ionic/react'
 
 import './VotePlaceItem.scss'
 import IconUi from './ui/IconUi'
@@ -37,14 +38,12 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
           backgroundSize: photoUrl ? 'cover' : 'initial'
         }}
       >
-        <img src='/assets/img/vote-place-thumb-holder.png' alt='' />
+        <IonImg src='/assets/img/vote-place-thumb-holder.png' alt='' />
       </div>
       <div className='info-container flex justify-between'>
         <div
           className='flex-col'
           onClick={() => {
-            //window.location.href = `http://what2eat.me/restaurant-detail/${placeId}`
-            //window.location.href = `http://localhost:5500/restaurant-detail/${placeId}`
             history.push(`/restaurant-detail/${placeId}`)
           }}
         >
@@ -60,7 +59,8 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
             onClickItem({ placeId, photoUrl, name })
           }}
         >
-          {isAdded ? <IconUi iconName='remove-btn'></IconUi> : <IconUi iconName='add-btn'></IconUi>}
+          <IconUi className={`${!isAdded && 'hidden'}`} iconName='remove-btn'></IconUi>
+          <IconUi className={`${isAdded && 'hidden'}`} iconName='add-btn'></IconUi>
         </div>
       </div>
     </li>

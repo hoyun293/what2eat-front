@@ -3,6 +3,7 @@ import moment from '../utils/moment-util'
 
 import { connect } from '../redux/redux-connect'
 import IconUi from '../components/ui/IconUi'
+import { IonImg } from '@ionic/react'
 
 import './VoteDetailTitleContainer.scss'
 import { useHistory } from 'react-router-dom'
@@ -39,7 +40,7 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
           {vote.voteEndDtm && `${moment(vote.voteEndDtm).format('MM.DD(dd) A hh:mm')} 마감`}
         </div>
         <div className='w-full'>
-          <img className='w-full' src={`/assets/img/vote-theme-${themeNum}.svg`} alt='' />
+          <IonImg className='w-full' src={`/assets/img/vote-theme-${themeNum}.svg`} alt='' />
         </div>
       </div>
       <div className='text-xxxl white text-bold'>{vote.voteName}</div>

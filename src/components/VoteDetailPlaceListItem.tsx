@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { IPlace } from '../models/place'
+import { IonImg } from '@ionic/react'
 import { getNumberUnit } from '../utils/number-util'
 
 import './VoteDetailPlaceListItem.scss'
@@ -37,7 +37,7 @@ const VoteDetailPlaceListItemEdit: React.FunctionComponent<IVoteDetailPlaceListI
     >
       {isMostVoted && <IconUi iconName='most-voted' className='absolute left-0 top-0'></IconUi>}
       <div className='flex'>
-        <img src={photoUrl} alt='' className='br-lg place-image' />
+        <IonImg src={photoUrl} alt='' className='br-lg place-image' />
         <div className='flex-col justify-center ml-3'>
           <div>{name}</div>
           <div className='mt-1 flex text-base leading-none'>
@@ -51,7 +51,8 @@ const VoteDetailPlaceListItemEdit: React.FunctionComponent<IVoteDetailPlaceListI
       </div>
       {/* TODO : 단일 투표의 경우 단일만 선택되도록 수정 */}
       <div className='flex-center' onClick={() => onClickItem(placeId)}>
-        {isAdded ? <IconUi iconName='vote-on'></IconUi> : <IconUi iconName='vote-off'></IconUi>}
+        <IconUi className={`${!isAdded && 'hidden'}`} iconName='vote-on'></IconUi>
+        <IconUi className={`${isAdded && 'hidden'}`} iconName='vote-off'></IconUi>
       </div>
     </li>
   )
@@ -75,7 +76,7 @@ const VoteDetailPlaceListItem: React.FunctionComponent<IVoteDetailPlaceListItem>
     >
       {isMostVoted && <IconUi iconName='most-voted' className='absolute left-0 top-0'></IconUi>}
       <div className='flex'>
-        <img src={photoUrl} alt='' className='br-lg place-image' />
+        <IonImg src={photoUrl} alt='' className='br-lg place-image' />
         <div className='flex-col justify-center ml-3'>
           <div>{name}</div>
           <div className='mt-1 flex text-base leading-none'>

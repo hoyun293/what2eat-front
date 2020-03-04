@@ -31,7 +31,7 @@ const ReviewStar: React.FC<IReviewStarProps> = ({ rating = 0, userRatingsTotal =
           <IconUi iconName='star-empty'></IconUi>
         </li>
       ))}
-      <li className='pl-1 text-base leading-none gray'>({userRatingsTotal})</li>
+      <li className='pl-1 text-base leading-none gray'>({userRatingsTotal || 0})</li>
     </ul>
   )
 }

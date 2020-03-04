@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react'
-import { IonToggle, IonContent } from '@ionic/react'
+import { IonToggle, IonContent, IonImg } from '@ionic/react'
 
 import { IVote, IVoteForm } from '../models/vote.d'
 import { connect } from '../redux/redux-connect'
@@ -25,7 +25,7 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
 
   return (
     <IonContent fullscreen>
-      <div className='px-container'>
+      <div className='px-container pt-12'>
         <div className='text-xxxl text-bold mb-7'>
           새로운 투표를
           <br />
@@ -83,7 +83,7 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
       <div className='x-divider' />
 
       <div className='text-center mt-8'>
-        <img src='/assets/img/vote-save.svg' alt='' />
+        <IonImg src='/assets/img/vote-save.svg'></IonImg>
       </div>
     </IonContent>
   )

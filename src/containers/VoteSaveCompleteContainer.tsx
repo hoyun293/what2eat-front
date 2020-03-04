@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { IonButton, IonContent } from '@ionic/react'
+import { IonButton, IonContent, IonImg } from '@ionic/react'
 
 import { connect } from '../redux/redux-connect'
 import './VoteSaveCompleteContainer.scss'
@@ -18,14 +18,14 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
 
   return (
     <IonContent fullscreen>
-      <div className='bg-yellow h-full px-container'>
+      <div className='bg-yellow h-full px-container pt-12'>
         <div className='text-xxxl text-bold pt-3 text-center'>
           투표가
           <br />
           생성되었습니다!
         </div>
-        <div className='text-center pt-9'>
-          <img className='text-center' src='/assets/img/vote-save-complete.svg' alt='' />
+        <div className='pt-9'>
+          <IonImg className='w-67 m-auto' src='/assets/img/vote-save-complete.svg' alt='' />
         </div>
         <div>
           <IonButton
@@ -47,7 +47,7 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
             투표 하러가기
           </IonButton>
         </div>
-        <div className='dark-gray text-xl text-center pt-4' onClick={() => history.push('/main')}>
+        <div className='dark-gray text-xl text-center pt-4' onClick={() => history.push('/')}>
           홈으로 이동
         </div>
       </div>

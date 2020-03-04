@@ -1,4 +1,4 @@
-import { IonContent, IonFooter, IonPage } from '@ionic/react'
+import { IonContent, IonFooter, IonPage, IonImg } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
 
 import { connect } from '../redux/redux-connect'
@@ -83,8 +83,8 @@ const RestaurantDetail: React.FC<IOwnProps &
             }}
           >
             <div className='thumbnailImgs flex'>
-              <img src='/assets/img/vote-place-thumb-holder.png' alt='' />
-              <img
+              <IonImg src='/assets/img/vote-place-thumb-holder.png' alt='' />
+              <IonImg
                 className='btn_close'
                 src='/assets/icon/header_btn_close.svg'
                 alt=''
@@ -109,19 +109,19 @@ const RestaurantDetail: React.FC<IOwnProps &
             ></ReviewStar>
           </div>
           <div className='address flex text-left pt-4'>
-            <img className='ml-3' src='/assets/icon/location2.svg' alt='' />
+            <IonImg className='ml-3' src='/assets/icon/location2.svg' alt='' />
             <div className='flex-col'>
               <div className='addressInBlack ml-3 mr-2'>{restaurantDetailInfo.formattedAddress}</div>
               <div className='addressInPurple ml-3 '>현재위치에서 265m</div>
             </div>
           </div>
           <div className='operatingTime ml-3 flex pt-2'>
-            <img src='/assets/icon/clock2.svg' alt='' />
+            <IonImg src='/assets/icon/clock2.svg' alt='' />
             <div className='timeInPurple ml-3'>영업중</div>
             <div className='timeInBlack ml-3'>종료시간 : 오후 10시</div>
           </div>
           <div className='phoneNumber mt-2 ml-3 flex'>
-            <img src='/assets/icon/phone.svg' alt='' />
+            <IonImg src='/assets/icon/phone.svg' alt='' />
             <div className='numberInBlack ml-3'>{restaurantDetailInfo.formattedPhoneNumber}</div>
           </div>
         </div>
