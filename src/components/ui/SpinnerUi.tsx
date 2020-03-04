@@ -1,13 +1,13 @@
-import * as React from 'react'
+import React from 'react'
 
 import './SpinnerUi.scss'
 
-interface ILoaderUiProps {
+interface ISpinnerUiProps {
   isFull?: boolean
   color?: string
 }
 
-const LoaderUi: React.FunctionComponent<ILoaderUiProps> = props => {
+const SpinnerUi: React.FunctionComponent<ISpinnerUiProps> = props => {
   return (
     <div className='spinner'>
       <img className={props.isFull ? 'spinner--full' : ''} src='/assets/loader.gif' alt='' />
@@ -15,4 +15,4 @@ const LoaderUi: React.FunctionComponent<ILoaderUiProps> = props => {
   )
 }
 
-export default LoaderUi
+export default SpinnerUi

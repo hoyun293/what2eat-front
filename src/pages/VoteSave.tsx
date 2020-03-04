@@ -49,13 +49,14 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 }) => {
   const history = useHistory()
 
+  useEffect(() => {
+    setUiIsLoader(true)
+  }, []) // eslint-disable-line
+
   useIonViewWillEnter(() => {
     setVoteInsertInit()
+    setUiIsLoader(false)
   })
-
-  useEffect(() => {
-    setUiIsLoader(isLoading)
-  }, [isLoading]) // eslint-disable-line
 
   return (
     <IonPage>

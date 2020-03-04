@@ -1,5 +1,5 @@
-/* eslint-disable react-hooks/rules-of-hooks */
-import React, { useRef, useState } from 'react'
+import React, { useRef, useEffect } from 'react'
+import { IonPage, IonContent, IonImg, useIonViewWillEnter } from '@ionic/react'
 import { IVote, IVoteForm } from '../models/vote'
 import './VoteUpdate.scss'
 import InputUi from '../components/ui/InputUi'
@@ -7,7 +7,6 @@ import IconUi from '../components/ui/IconUi'
 import DateTime from '../components/DateTime'
 import ButtonUi from '../components/ui/ButtonUi'
 import { connect } from '../redux/redux-connect'
-import { IonPage, IonContent, IonImg } from '@ionic/react'
 import { editVoteDetail } from '../redux/vote-update/vote-update-actions'
 import { useHistory } from 'react-router-dom'
 import {
@@ -17,6 +16,8 @@ import {
 } from '../redux/vote-insert/vote-insert-actions'
 import _ from 'lodash'
 import { IPlace } from '../models/place'
+import { setUiIsLoader } from '../redux/ui/ui-actions'
+
 interface IOwnProps {}
 interface IStateProps {
   voteInsertForm: IVoteForm
@@ -27,17 +28,29 @@ interface IDispatchProps {
   changeStep: typeof changeStep
   setVoteInsertPlace: typeof setVoteInsertPlace
   deleteVoteInsertPlaceAll: typeof deleteVoteInsertPlaceAll
+  setUiIsLoader: typeof setUiIsLoader
 }
 
-const voteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
+const VoteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   editVoteDetail,
   voteInsertForm,
   setVoteInsertPlace,
   deleteVoteInsertPlaceAll,
-  voteUpdateForm
+  voteUpdateForm,
+  setUiIsLoader
 }) => {
   const datepickerRef = useRef<HTMLInputElement>()
   const history = useHistory()
+
+  // 최초 페이지 로딩시 로더를 보여줍니다.
+  useEffect(() => {
+    setUiIsLoader(true)
+  }, []) // eslint-disable-line
+
+  useIonViewWillEnter(() => {
+    setUiIsLoader(false)
+  })
+
   return (
     <IonPage>
       <IonContent>
@@ -156,7 +169,8 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
     editVoteDetail,
     changeStep,
     setVoteInsertPlace,
-    deleteVoteInsertPlaceAll
+    deleteVoteInsertPlaceAll,
+    setUiIsLoader
   },
-  component: voteUpdate
+  component: VoteUpdate
 })

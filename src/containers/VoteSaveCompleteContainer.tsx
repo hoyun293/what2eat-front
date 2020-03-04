@@ -3,6 +3,8 @@ import { useHistory } from 'react-router-dom'
 import { IonButton, IonContent, IonImg } from '@ionic/react'
 
 import { connect } from '../redux/redux-connect'
+import { setUiIsLoader } from '../redux/ui/ui-actions'
+
 import './VoteSaveCompleteContainer.scss'
 import ShareLink from '../components/ShareLink'
 
@@ -10,9 +12,14 @@ interface IOwnProps {}
 interface IStateProps {
   voteUrl: string
 }
-interface IDispatchProps {}
+interface IDispatchProps {
+  setUiIsLoader: typeof setUiIsLoader
+}
 
-const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ voteUrl }) => {
+const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
+  voteUrl,
+  setUiIsLoader
+}) => {
   const history = useHistory()
   const [isShowShare, setIsShowShare] = useState(false)
 
@@ -24,13 +31,16 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
           <br />
           생성되었습니다!
         </div>
-        <div className='pt-9'>
+        <div className='mt-9 height-150'>
           <IonImg className='w-67 m-auto' src='/assets/img/vote-save-complete.svg' alt='' />
         </div>
         <div>
           <IonButton
             className='vote-button'
-            onClick={() => setIsShowShare(true)}
+            onClick={() => {
+              setIsShowShare(true)
+              setUiIsLoader(true)
+            }}
             expand='block'
             color='white'
           >
@@ -60,6 +70,8 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ voteInsert }) => ({
     voteUrl: voteInsert.voteUrl
   }),
-  mapDispatchToProps: {},
+  mapDispatchToProps: {
+    setUiIsLoader
+  },
   component: VoteSaveCompleteContainer
 })

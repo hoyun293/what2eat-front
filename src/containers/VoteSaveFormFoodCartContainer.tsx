@@ -30,6 +30,7 @@ import './VoteSaveFormFoodCartContainer.scss'
 import GoogleMapReact from 'google-map-react'
 import { IPlace } from '../models/place'
 import { getDistanceByCordinate } from '../utils/distance-util'
+import { setUiIsLoader } from '../redux/ui/ui-actions'
 
 // eslint-disable-next-line
 const Marker = ({}: any) => (
@@ -50,6 +51,7 @@ interface IDispatchProps {
   selectVotePlaces: typeof selectVotePlaces
   setVoteInsertPlace: typeof setVoteInsertPlace
   deleteVoteInsertPlace: typeof deleteVoteInsertPlace
+  setUiIsLoader: typeof setUiIsLoader
 }
 
 const INIT_LATITUDE = 37.4961895
@@ -63,7 +65,8 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
   pagetoken,
   selectVotePlaces,
   setVoteInsertPlace,
-  deleteVoteInsertPlace
+  deleteVoteInsertPlace,
+  setUiIsLoader
 }) => {
   const [address, setAddress] = useState('주소를 불러오는중...')
   const [isShowModal, setIsShowModal] = useState(false)
@@ -128,7 +131,13 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
   return (
     <IonContent>
       <div className='px-container pt-4'>
-        <div className='text-xxl text-bold flex items-center' onClick={() => setIsShowModal(true)}>
+        <div
+          className='text-xxl text-bold flex items-center'
+          onClick={() => {
+            setIsShowModal(true)
+            setUiIsLoader(true)
+          }}
+        >
           <div className='ellipsis'>{address}</div>
           {coordinate.lat !== 0 && <IconUi className='ml-2' iconName='location'></IconUi>}
         </div>
@@ -181,7 +190,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
         </IonInfiniteScroll>
       </div>
 
-      <IonModal isOpen={isShowModal}>
+      <IonModal isOpen={isShowModal} onWillPresent={() => setUiIsLoader(false)}>
         <div style={{ height: '100vh', width: '100%' }}>
           <IconUi className='back-btn' iconName='left-arrow' onClick={() => setIsShowModal(false)}></IconUi>
 
@@ -208,6 +217,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
 
       <IonPopover
         isOpen={isShowCartModal}
+        onWillPresent={() => setUiIsLoader(false)}
         onDidDismiss={() => setIsShowCartModal(false)}
         cssClass='cart-list-modal'
       >
@@ -245,7 +255,10 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
         horizontal='end'
         slot='fixed'
         edge={false}
-        onClick={() => setIsShowCartModal(true)}
+        onClick={() => {
+          setIsShowCartModal(true)
+          setUiIsLoader(true)
+        }}
       >
         <div className='flex-center cart-list__btn'>
           <IconUi iconName='cart-list' className='pt-1'></IconUi>
@@ -266,7 +279,8 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
     setVoteInsertForm,
     selectVotePlaces,
     deleteVoteInsertPlace,
-    setVoteInsertPlace
+    setVoteInsertPlace,
+    setUiIsLoader
   },
   component: VoteSaveFormFoodCartContainer
 })

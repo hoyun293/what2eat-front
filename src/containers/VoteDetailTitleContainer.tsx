@@ -10,6 +10,7 @@ import { useHistory } from 'react-router-dom'
 import ShareLink from '../components/ShareLink'
 import { IVoteDetail } from '../models/vote'
 import { setVoteDetailUpdateVote } from '../redux/vote-update/vote-update-actions'
+import { setUiIsLoader } from '../redux/ui/ui-actions'
 
 interface IOwnProps {
   themeNum: number
@@ -20,13 +21,15 @@ interface IStateProps {
 }
 interface IDispatchProps {
   setVoteDetailUpdateVote: typeof setVoteDetailUpdateVote
+  setUiIsLoader: typeof setUiIsLoader
 }
 
 const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   themeNum,
   voteUrl,
   vote,
-  setVoteDetailUpdateVote
+  setVoteDetailUpdateVote,
+  setUiIsLoader
 }) => {
   const [isShareOpen, setIsShareOpen] = useState(false)
 
@@ -39,11 +42,11 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
         <div className='flex items-end text-base white w-full'>
           {vote.voteEndDtm && `${moment(vote.voteEndDtm).format('MM.DD(dd) A hh:mm')} 마감`}
         </div>
-        <div className='w-full'>
+        <div className='w-full height-100'>
           <IonImg className='w-full' src={`/assets/img/vote-theme-${themeNum}.svg`} alt='' />
         </div>
       </div>
-      <div className='text-xxxl white text-bold'>{vote.voteName}</div>
+      <div className='text-xxxl white text-bold h-9'>{vote.voteName}</div>
 
       <div className='flex flex-1 pt-6'>
         <div
@@ -55,7 +58,13 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
         >
           <IconUi iconName='edit' className='pr-1'></IconUi> 편집
         </div>
-        <div className='ml-2 flex-center bg-white w-full br-md py-4' onClick={() => setIsShareOpen(true)}>
+        <div
+          className='ml-2 flex-center bg-white w-full br-md py-4'
+          onClick={() => {
+            setIsShareOpen(true)
+            setUiIsLoader(true)
+          }}
+        >
           <IconUi iconName='share' className='pr-1'></IconUi> 투표초대
         </div>
       </div>
@@ -70,7 +79,8 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
     vote: voteDetail.vote
   }),
   mapDispatchToProps: {
-    setVoteDetailUpdateVote
+    setVoteDetailUpdateVote,
+    setUiIsLoader
   },
   component: VoteDetailTitleContainer
 })

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import './VotePlaceItem.scss'
 import { IonPopover, IonImg } from '@ionic/react'
 
@@ -9,7 +9,7 @@ import Helmet from 'react-helmet'
 import { connect } from '../redux/redux-connect'
 
 import config from '../config'
-import { setUiToast } from '../redux/ui/ui-actions'
+import { setUiToast, setUiIsLoader } from '../redux/ui/ui-actions'
 
 interface IOwnProps {
   shareUrl: string
@@ -20,6 +20,7 @@ interface IOwnProps {
 interface IStateProps {}
 interface IDispatchProps {
   setUiToast: typeof setUiToast
+  setUiIsLoader: typeof setUiIsLoader
 }
 
 declare const Kakao: any
@@ -65,7 +66,8 @@ const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProp
   thumbnailUrl = `${config.WEB_URL}/assets/img/logo.png`,
   isOpen,
   setIsOpen,
-  setUiToast
+  setUiToast,
+  setUiIsLoader
 }) => {
   const handleScriptInject = ({ scriptTags }: any) => {
     if (scriptTags) {
@@ -74,12 +76,13 @@ const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProp
         if (!Kakao.isInitialized()) {
           Kakao.init(config.KAKAO_JS_KEY)
         }
+        console.log('end')
       }
     }
   }
 
   return (
-    <IonPopover isOpen={isOpen} cssClass='cart-list-modal'>
+    <IonPopover isOpen={isOpen} cssClass='cart-list-modal' onWillPresent={() => setUiIsLoader(false)}>
       <Helmet
         script={[{ src: '//developers.kakao.com/sdk/js/kakao.min.js' }]}
         onChangeClientState={(newState, addedTags) => handleScriptInject(addedTags)}
@@ -126,7 +129,8 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
     voteRooms: voteRoom.voteRooms
   }),
   mapDispatchToProps: {
-    setUiToast
+    setUiToast,
+    setUiIsLoader
   },
   component: ShareLink
 })

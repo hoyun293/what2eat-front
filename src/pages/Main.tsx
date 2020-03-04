@@ -9,7 +9,7 @@ import { signIn } from '../redux/user/user-actions'
 import './Main.scss'
 import { IVoteRoom } from '../models/vote-room'
 import { changeStep } from '../redux/vote-insert/vote-insert-actions'
-import _ from 'lodash'
+import { setUiIsLoader } from '../redux/ui/ui-actions'
 
 interface IOwnProps {}
 interface IStateProps {
@@ -19,12 +19,14 @@ interface IDispatchProps {
   selectVoteRooms: typeof selectVoteRooms
   signIn: typeof signIn
   changeStep: typeof changeStep
+  setUiIsLoader: typeof setUiIsLoader
 }
 
 const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   selectVoteRooms,
   voteRooms,
-  changeStep
+  changeStep,
+  setUiIsLoader
 }) => {
   const history = useHistory()
   const [toggle, setToggle] = useState(1)
@@ -81,6 +83,15 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
       return -1 * compareDate(a.voteEndDtm, b.voteEndDtm)
     })
   }
+
+  // 최초 페이지 로딩시 로더를 보여줍니다.
+  useEffect(() => {
+    setUiIsLoader(true)
+  }, []) // eslint-disable-line
+
+  useIonViewWillEnter(() => {
+    setUiIsLoader(false)
+  })
 
   useEffect(() => {
     //signIn()
@@ -169,7 +180,8 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapDispatchToProps: {
     selectVoteRooms,
     signIn,
-    changeStep
+    changeStep,
+    setUiIsLoader
   },
   component: Main
 })
