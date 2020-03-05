@@ -22,7 +22,8 @@ import {
   IonSelect,
   IonSelectOption,
   IonInfiniteScroll,
-  IonInfiniteScrollContent
+  IonInfiniteScrollContent,
+  IonRippleEffect
 } from '@ionic/react'
 import VotePlaceItem from '../components/VotePlaceItem'
 
@@ -71,6 +72,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
   const [address, setAddress] = useState('주소를 불러오는중...')
   const [isShowModal, setIsShowModal] = useState(false)
   const [isShowCartModal, setIsShowCartModal] = useState(false)
+  const [isLoadingShowCartModal, setIsLoadingShowCartModal] = useState(false)
   const [filterDistance, setFilterDistance] = useState(1000)
   const [rankby, setRankBy] = useState({ label: '거리순', value: 'distance' })
 
@@ -132,12 +134,13 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
     <IonContent>
       <div className='px-container pt-4'>
         <div
-          className='text-xxl text-bold flex items-center'
+          className='text-xxl text-bold flex items-center ion-activatable ripple-parent'
           onClick={() => {
             setIsShowModal(true)
             setUiIsLoader(true)
           }}
         >
+          <IonRippleEffect></IonRippleEffect>
           <div className='ellipsis'>{address}</div>
           {coordinate.lat !== 0 && <IconUi className='ml-2' iconName='location'></IconUi>}
         </div>
@@ -217,7 +220,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
 
       <IonPopover
         isOpen={isShowCartModal}
-        onWillPresent={() => setUiIsLoader(false)}
+        onWillPresent={() => setIsLoadingShowCartModal(false)}
         onDidDismiss={() => setIsShowCartModal(false)}
         cssClass='cart-list-modal'
       >
@@ -257,11 +260,11 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
         edge={false}
         onClick={() => {
           setIsShowCartModal(true)
-          setUiIsLoader(true)
+          setIsLoadingShowCartModal(true)
         }}
       >
         <div className='flex-center cart-list__btn'>
-          <IconUi iconName='cart-list' className='pt-1'></IconUi>
+          <IconUi iconName='cart-list' className='pt-1' isLoading={isLoadingShowCartModal}></IconUi>
         </div>
       </IonFab>
     </IonContent>
@@ -269,11 +272,12 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ voteInsert }) => ({
+  mapStateToProps: ({ voteInsert, ui }) => ({
     voteForm: voteInsert.voteForm, // 장바구니
     votePlaces: voteInsert.votePlaces, // 해당 지역 음식점 리스트
     pagetoken: voteInsert.pagetoken,
-    disableVotePlacesInfiniteScroll: voteInsert.disableVotePlacesInfiniteScroll
+    disableVotePlacesInfiniteScroll: voteInsert.disableVotePlacesInfiniteScroll,
+    uiIsLoader: ui.isLoader
   }),
   mapDispatchToProps: {
     setVoteInsertForm,

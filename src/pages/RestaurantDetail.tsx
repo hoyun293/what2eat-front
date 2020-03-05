@@ -70,7 +70,7 @@ const RestaurantDetail: React.FC<IOwnProps &
     }
   }, [restaurantDetailInfo]) // eslint-disable-line
 
-  var history = useHistory()
+  const history = useHistory()
   return (
     <IonPage>
       <IonContent fullscreen>

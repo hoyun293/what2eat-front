@@ -1006,3 +1006,11 @@
 .br-xlg {
   border-radius: 1.2rem;
 }
+.br-full {
+  border-radius: 50%;
+}
+
+.ripple-parent {
+  position: relative;
+  overflow: hidden;
+}

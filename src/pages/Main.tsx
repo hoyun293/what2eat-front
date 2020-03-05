@@ -1,5 +1,5 @@
-import { IonContent, IonPage, IonImg, useIonViewWillEnter } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
+import { IonContent, IonPage, IonImg, useIonViewWillEnter, IonRippleEffect } from '@ionic/react'
 import { useHistory } from 'react-router-dom'
 
 import { connect } from '../redux/redux-connect'
@@ -161,12 +161,13 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
         >
           <MainFormVoteRoomListContainer sortedVoteRooms={votes} />
           <div
-            className='bottom-floating'
+            className='bottom-floating ion-activatable ripple-parent br-full'
             onClick={() => {
               changeStep(1)
               history.push('/vote-save')
             }}
           >
+            <IonRippleEffect></IonRippleEffect>
             <img src='/assets/img/floating_btn_add.svg' alt='' />
           </div>
         </div>

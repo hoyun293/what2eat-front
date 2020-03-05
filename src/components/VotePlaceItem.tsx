@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { getNumberUnit } from '../utils/number-util'
-import { IonImg } from '@ionic/react'
+import { IonImg, IonRippleEffect } from '@ionic/react'
 
 import './VotePlaceItem.scss'
 import IconUi from './ui/IconUi'
@@ -30,7 +30,13 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
 }) => {
   const history = useHistory()
   return (
-    <li key={placeId} className='item-container'>
+    <li
+      key={placeId}
+      className='item-container'
+      onClick={() => {
+        history.push(`/restaurant-detail/${placeId}`)
+      }}
+    >
       <div
         className='image-container'
         style={{
@@ -41,12 +47,7 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
         <IonImg src='/assets/img/vote-place-thumb-holder.png' alt='' />
       </div>
       <div className='info-container flex justify-between'>
-        <div
-          className='flex-col'
-          onClick={() => {
-            history.push(`/restaurant-detail/${placeId}`)
-          }}
-        >
+        <div className='flex-col'>
           <div>{name}</div>
           <div className='mt-1 flex text-base leading-none'>
             <ReviewStar rating={rating} userRatingsTotal={userRatingsTotal}></ReviewStar>
@@ -54,13 +55,15 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
             <span className='purple'>{getNumberUnit(distance)}m</span>
           </div>
         </div>
+
         <div
-          onClick={() => {
+          onClick={e => {
+            e.stopPropagation()
             onClickItem({ placeId, photoUrl, name })
           }}
         >
-          <IconUi className={`${!isAdded && 'hidden'}`} iconName='remove-btn'></IconUi>
-          <IconUi className={`${isAdded && 'hidden'}`} iconName='add-btn'></IconUi>
+          <IconUi className={`${!isAdded ? 'hidden' : ''}`} iconName='remove-btn'></IconUi>
+          <IconUi className={`${isAdded ? 'hidden' : ''}`} iconName='add-btn'></IconUi>
         </div>
       </div>
     </li>

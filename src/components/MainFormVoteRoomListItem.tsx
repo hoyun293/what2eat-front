@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useHistory } from 'react-router-dom'
-import { IonImg } from '@ionic/react'
+import { IonImg, IonRippleEffect } from '@ionic/react'
 
 import './MainFormVoteRoomListItem.scss'
 
@@ -26,7 +26,8 @@ const MainFormVoteRoomListItem: React.FunctionComponent<IMainFromVoteRoomListIte
   const history = useHistory()
 
   return (
-    <div>
+    <div className='ion-activatable ripple-parent'>
+      <IonRippleEffect></IonRippleEffect>
       <div className='itemBox mb-1_5 flex' onClick={() => history.push(`/vote/${props.voteUrl}`)}>
         {props.voteRoomStatus === true && (
           <IonImg className='voteBox pt-2_5 pb-2_5' src='/assets/img/list_vote_icon_off.svg' alt='' />
