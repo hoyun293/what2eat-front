@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { IonSpinner, IonRippleEffect } from '@ionic/react'
 
 import './IconUi.scss'
 
@@ -6,13 +7,19 @@ interface IIconUiProps {
   iconName: string
   className?: string
   onClick?: Function
+  isLoading?: boolean
 }
 
-const IconUi: React.FunctionComponent<IIconUiProps> = ({ iconName, className = '', onClick = () => {} }) => {
+const IconUi: React.FunctionComponent<IIconUiProps> = ({
+  iconName,
+  className = '',
+  isLoading = false,
+  onClick = () => {}
+}) => {
   const iconSrc = `assets/icon/${iconName}.svg`
   return (
     <div className={className} onClick={() => onClick()}>
-      <img src={iconSrc} alt='' />
+      {isLoading ? <IonSpinner name='crescent' color='tertiary' /> : <img src={iconSrc} alt='' />}
     </div>
   )
 }
