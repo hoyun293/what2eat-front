@@ -928,14 +928,6 @@
   height: 1px;
 }
 
-.bottom-floating {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-  text-align: center;
-}
-
 .ellipsis {
   @extend %ellipsis;
 }

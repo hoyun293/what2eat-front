@@ -17,6 +17,15 @@
   padding-top: 3.5rem;
   margin-right: 0rem;
 }
+.bottom-floating {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  display: inline;
+  text-align: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
 
 .toggleIcon {
   width: 1.6rem;
