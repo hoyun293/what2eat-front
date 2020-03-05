@@ -45,7 +45,7 @@ export const selectVote = (voteUrl: string) => async (dispatch: React.Dispatch<a
             photoUrl: v.photoUrl || '/assets/img/list-place-thumb-empty.svg',
             voteCount: v.voteUserIds.length,
             isAdded: v.voteUserIds.indexOf(userId) > -1,
-            isMostVoted: maxVote === v.voteUserIds.length
+            isMostVoted: maxVote !== 0 && maxVote === v.voteUserIds.length
           }))
         })
       )
