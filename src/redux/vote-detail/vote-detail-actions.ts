@@ -92,10 +92,11 @@ export const setVoteDetailVotePlaceIdsForm = (votePlaceIdsForm: string[]) =>
     votePlaceIdsForm
   } as const)
 
-export const setVoteDetailVotePlaceIdForm = (placeId: string) =>
+export const setVoteDetailVotePlaceIdForm = (placeId: string, isMultiVote?: boolean) =>
   ({
     type: SET_VOTE_DETAIL_VOTE_PLACE_ID_FORM,
-    placeId
+    placeId,
+    isMultiVote
   } as const)
 
 export const deleteVoteDetailVotePlaceIdForm = (placeId: string) =>

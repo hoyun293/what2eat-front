@@ -17,6 +17,7 @@ interface IVoteDetailPlaceListItem {
 
 export interface IVoteDetailPlaceListItemEdit extends IVoteDetailPlaceListItem {
   onClickItem: Function
+  isMultiVote: boolean
 }
 
 const VoteDetailPlaceListItemEdit: React.FunctionComponent<IVoteDetailPlaceListItemEdit> = ({
@@ -27,6 +28,7 @@ const VoteDetailPlaceListItemEdit: React.FunctionComponent<IVoteDetailPlaceListI
   distance,
   isAdded,
   isMostVoted,
+  isMultiVote,
   onClickItem
 }) => {
   return (
@@ -49,8 +51,7 @@ const VoteDetailPlaceListItemEdit: React.FunctionComponent<IVoteDetailPlaceListI
           </div>
         </div>
       </div>
-      {/* TODO : 단일 투표의 경우 단일만 선택되도록 수정 */}
-      <div className='flex-center' onClick={() => onClickItem(placeId)}>
+      <div className='flex-center' onClick={() => onClickItem(placeId, isMultiVote)}>
         <IconUi className={`${!isAdded && 'hidden'}`} iconName='vote-on'></IconUi>
         <IconUi className={`${isAdded && 'hidden'}`} iconName='vote-off'></IconUi>
       </div>

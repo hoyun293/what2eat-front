@@ -24,7 +24,10 @@ export default function userReducer(state: IVoteDetailState, action: TVoteAction
     case SET_VOTE_DETAIL_VOTE_PLACE_ID_FORM:
       const isExist = state.votePlaceIdsForm.indexOf(action.placeId) > -1
       if (isExist) return state
-      return { ...state, votePlaceIdsForm: [...state.votePlaceIdsForm, action.placeId] }
+      const votePlaceIdsForm = action.isMultiVote
+        ? [...state.votePlaceIdsForm, action.placeId]
+        : [action.placeId]
+      return { ...state, votePlaceIdsForm: votePlaceIdsForm }
     case DELETE_VOTE_DETAIL_VOTE_PLACE_ID_FORM:
       return { ...state, votePlaceIdsForm: state.votePlaceIdsForm.filter(v => v !== action.placeId) }
     case SET_VOTE_DETAIL_IS_VOTE_END:

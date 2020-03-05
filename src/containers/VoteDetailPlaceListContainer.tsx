@@ -86,6 +86,7 @@ const VoteDetailPlaceListContainer: React.FC<IOwnProps & IStateProps & IDispatch
                 })}
                 isAdded={votePlaceIdsForm.indexOf(v.placeId) > -1}
                 isMostVoted={v.isMostVoted}
+                isMultiVote={vote.isMultiVote}
                 onClickItem={
                   votePlaceIdsForm.indexOf(v.placeId) > -1
                     ? deleteVoteDetailVotePlaceIdForm
