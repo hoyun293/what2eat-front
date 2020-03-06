@@ -9,7 +9,6 @@ export const selectVoteRooms = (limit: number = 5, orderby: boolean = true) => a
   dispatch(setVoteRoomIsLoading(true))
   const { result } = await getMyVoteRooms(limit, orderby)
   /*
-  console.log(result)
     mainVotesApi().then(({ result }) => {
   })
   */
