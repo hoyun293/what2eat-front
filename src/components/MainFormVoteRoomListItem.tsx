@@ -37,8 +37,8 @@ const MainFormVoteRoomListItem: React.FunctionComponent<IMainFromVoteRoomListIte
         )}
         <div className='itemContent flex-col pt-1 pl-3'>
           <div className='voteTitle text-left text-lg'>{props.voteRoomTitle}</div>
-          {props.voteRoomStatus === true && <div className='voteOn text-sm'>투표진행중</div>}
-          {props.voteRoomStatus === false && <div className='voteOff text-sm'>투표마감됨</div>}
+          {props.voteRoomStatus === false && <div className='voteOn text-sm'>투표진행중</div>}
+          {props.voteRoomStatus === true && <div className='voteOff text-sm'>투표마감됨</div>}
         </div>
 
         {getClassNameByStatus(props.voteRoomStatus, props.isPrivateStatus) === 0 && (
