@@ -920,11 +920,17 @@
 .yellow-dark {
   color: $yellow-dark;
 }
+.border {
+  color: $border;
+}
+.light-border {
+  color: $light-border;
+}
 
 .x-divider {
   display: block;
   width: 100%;
-  background-color: $border;
+  background-color: $light-border;
   height: 1px;
 }
 

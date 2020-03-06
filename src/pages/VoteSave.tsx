@@ -54,7 +54,6 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   }, []) // eslint-disable-line
 
   useIonViewWillEnter(() => {
-    setVoteInsertInit()
     setUiIsLoader(false)
   })
 

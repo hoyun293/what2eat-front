@@ -23,7 +23,7 @@ const ButtonShadowUi: React.FunctionComponent<IButtonShadowUiProps> = ({
       <IonImg className='button-shadow__gradient' src='/assets/bg/bg-gray-gradient.svg' alt='' />
       <div className='button-shadow__container'>
         <IonButton
-          className='p-4 pt-3 m-0'
+          className='p-4 pt-3 m-0 text-xl'
           disabled={disabled}
           expand='block'
           color={color}

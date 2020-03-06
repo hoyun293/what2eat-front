@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { IonContent, IonPage, IonImg, useIonViewWillEnter, IonRippleEffect } from '@ionic/react'
+import { IonContent, IonPage, IonImg, useIonViewWillEnter, IonRippleEffect, IonNav } from '@ionic/react'
 import { useHistory } from 'react-router-dom'
 
 import { connect } from '../redux/redux-connect'
@@ -8,7 +8,7 @@ import MainFormVoteRoomListContainer from '../containers/MainFormVoteRoomListCon
 import { signIn } from '../redux/user/user-actions'
 import './Main.scss'
 import { IVoteRoom } from '../models/vote-room'
-import { changeStep } from '../redux/vote-insert/vote-insert-actions'
+import { setVoteInsertInit } from '../redux/vote-insert/vote-insert-actions'
 import { setUiIsLoader } from '../redux/ui/ui-actions'
 
 interface IOwnProps {}
@@ -18,14 +18,14 @@ interface IStateProps {
 interface IDispatchProps {
   selectVoteRooms: typeof selectVoteRooms
   signIn: typeof signIn
-  changeStep: typeof changeStep
+  setVoteInsertInit: typeof setVoteInsertInit
   setUiIsLoader: typeof setUiIsLoader
 }
 
 const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   selectVoteRooms,
   voteRooms,
-  changeStep,
+  setVoteInsertInit,
   setUiIsLoader
 }) => {
   const history = useHistory()
@@ -163,10 +163,11 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
           <div
             className='bottom-floating ion-activatable ripple-parent br-full'
             onClick={() => {
-              changeStep(1)
+              setVoteInsertInit()
               history.push('/vote-save')
             }}
           >
+            <IonNav></IonNav>
             <IonRippleEffect></IonRippleEffect>
             <img src='/assets/img/floating_btn_add.svg' alt='' />
           </div>
@@ -183,7 +184,7 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapDispatchToProps: {
     selectVoteRooms,
     signIn,
-    changeStep,
+    setVoteInsertInit,
     setUiIsLoader
   },
   component: Main
