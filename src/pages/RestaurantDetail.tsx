@@ -9,7 +9,10 @@ import ReviewStar from '../components/ReviewStar'
 import { RouteComponentProps, useHistory } from 'react-router'
 import GoogleMapReact from 'google-map-react'
 import config from '../config'
-import { selectRestaurnatDetail } from '../redux/restaurant-detail/restaurant-detail-actions'
+import {
+  selectRestaurnatDetail,
+  setRestaurantDetailInit
+} from '../redux/restaurant-detail/restaurant-detail-actions'
 import { IRestaurantDetail } from '../models/restaurant-detail'
 import _ from 'lodash'
 import Slider from 'react-slick'
@@ -17,6 +20,7 @@ import 'slick-carousel/slick/slick.css'
 import 'slick-carousel/slick/slick-theme.css'
 import RestaurantPhotoSlideContainer from '../containers/RestaurantPhotoSlideContainer'
 import PopUpImageContainer from '../containers/PopUpImageContainer'
+import { setUiIsLoader } from '../redux/ui/ui-actions'
 
 interface IOwnProps {}
 interface IStateProps {
@@ -24,6 +28,8 @@ interface IStateProps {
 }
 interface IDispatchProps {
   selectRestaurnatDetail: typeof selectRestaurnatDetail
+  setRestaurantDetailInit: typeof setRestaurantDetailInit
+  setUiIsLoader: typeof setUiIsLoader
 }
 interface MatchParams {
   placeId: string
@@ -46,7 +52,13 @@ var settings = {
 const RestaurantDetail: React.FC<IOwnProps &
   IStateProps &
   IDispatchProps &
-  RouteComponentProps<MatchParams>> = ({ match, restaurantDetailInfo, selectRestaurnatDetail }) => {
+  RouteComponentProps<MatchParams>> = ({
+  match,
+  restaurantDetailInfo,
+  selectRestaurnatDetail,
+  setRestaurantDetailInit,
+  setUiIsLoader
+}) => {
   const photoUrlArr = _.map(restaurantDetailInfo.userPhotoUrl, (val, key) => {
     return val
   })
@@ -55,8 +67,12 @@ const RestaurantDetail: React.FC<IOwnProps &
   const [isPopUp, setIsPopUp] = useState(false)
   useEffect(() => {
     if (index === 0) {
+      setUiIsLoader(true)
       selectRestaurnatDetail(match.params.placeId)
       setIndex(index + 1)
+    }
+    if (index === 1) {
+      setUiIsLoader(false)
     }
     if (photoUrlArr.length === 1) {
       settings.slidesToScroll = 1
@@ -90,6 +106,7 @@ const RestaurantDetail: React.FC<IOwnProps &
                 alt=''
                 onClick={() => {
                   history.goBack()
+                  setRestaurantDetailInit()
                 }}
               />
             </div>
@@ -175,7 +192,9 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
     restaurantDetailInfo: restaurantDetail.restaurantDetailInfo
   }),
   mapDispatchToProps: {
-    selectRestaurnatDetail
+    selectRestaurnatDetail,
+    setRestaurantDetailInit,
+    setUiIsLoader
   },
   component: RestaurantDetail
 })

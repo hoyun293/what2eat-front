@@ -1,12 +1,16 @@
 import {
   SET_RESTAURANT_DETAIL_FORM,
   SET_RESTAURANT_DETAIL_LOADING,
-  SET_RESTAURANT_DETAIL_MESSAGE
+  SET_RESTAURANT_DETAIL_MESSAGE,
+  SET_RESTAURANT_DETAIL_INIT
 } from './restaurant-detail-constants'
 import { TAction } from '../redux-type'
 import { IRestaurantDetail } from '../../models/restaurant-detail'
 import { getRestaurantDetail } from '../../api/restaurant-detail-api'
+import { initialState } from '../root-state'
+import { IRestaurantDetailState } from './restaurant-detail-state'
 
+const restaurantDetailInit: IRestaurantDetailState = initialState.restaurantDetail
 export const selectRestaurnatDetail = (placeId: string) => async (dispatch: React.Dispatch<any>) => {
   dispatch(setRestaurantDetailIsLoading(true))
   const { result } = await getRestaurantDetail(placeId)
@@ -32,7 +36,13 @@ export const setRestaurantDetailErrorMessage = (errorMessage: string) =>
     errorMessage
   } as const)
 
+export const setRestaurantDetailInit = () =>
+  ({
+    type: SET_RESTAURANT_DETAIL_INIT,
+    restaurantDetailInit
+  } as const)
 export type TRestaurantDetailActions =
   | TAction<typeof setRestaurantDetailForm>
   | TAction<typeof setRestaurantDetailIsLoading>
   | TAction<typeof setRestaurantDetailErrorMessage>
+  | TAction<typeof setRestaurantDetailInit>
