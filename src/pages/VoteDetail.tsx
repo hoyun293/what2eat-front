@@ -21,7 +21,9 @@ interface IStateProps {
   vote: IVoteDetail
   isVoteEnd: boolean
   isVoteDone: boolean
+  refetch: number
   isLoading: boolean
+  isUpdateLoading: boolean
   votePlaceIds: string[]
   votePlaceIdsForm: string[]
 }
@@ -46,6 +48,7 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
   isVoteDone,
   isVoteEnd,
   isLoading,
+  refetch,
   setUiIsLoader,
   votePlaceIds,
   votePlaceIdsForm,
@@ -63,7 +66,7 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
   useEffect(() => {
     // setVoteDetailInit()
     selectVote(voteUrl)
-  }, [voteUrl, isVoteDone, _.sum(votePlaceIds)]) // eslint-disable-line
+  }, [voteUrl, isVoteDone, _.sum(votePlaceIds), refetch]) // eslint-disable-line
 
   useEffect(() => {
     if (isVoteEdit === true) {
@@ -142,13 +145,15 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ voteDetail }) => ({
+  mapStateToProps: ({ voteDetail, voteUpdateDetail }) => ({
     vote: voteDetail.vote,
     isVoteEnd: voteDetail.isVoteEnd,
     isVoteDone: voteDetail.isVoteDone,
     votePlaceIdsForm: voteDetail.votePlaceIdsForm,
     votePlaceIds: voteDetail.votePlaceIds,
-    isLoading: voteDetail.isLoading
+    refetch: voteDetail.refetch,
+    isLoading: voteDetail.isLoading,
+    isUpdateLoading: voteUpdateDetail.isLoading
   }),
   mapDispatchToProps: {
     selectVote,

@@ -61,7 +61,7 @@ const VoteDetailPlaceListContainer: React.FC<IOwnProps & IStateProps & IDispatch
         <div className='vote-detail-place-list-container__handle'></div>
         <div className='flex justify-between mx-1'>
           <div>
-            총 <span className='yellow-dark'>4</span>개
+            총 <span className='yellow-dark'>{vote.votePlaces.length}</span>개
           </div>
           {vote.isMultiVote && (
             <div className='flex gray'>

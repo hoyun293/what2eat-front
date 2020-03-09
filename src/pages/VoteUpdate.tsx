@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from 'react'
+import React, { useRef, useEffect, useState } from 'react'
 import { IonPage, IonContent, IonImg, useIonViewWillEnter } from '@ionic/react'
 import { IVote, IVoteForm } from '../models/vote'
 import './VoteUpdate.scss'
@@ -7,7 +7,7 @@ import IconUi from '../components/ui/IconUi'
 import DateTime from '../components/DateTime'
 import ButtonUi from '../components/ui/ButtonUi'
 import { connect } from '../redux/redux-connect'
-import { editVoteDetail } from '../redux/vote-update/vote-update-actions'
+import { editVoteDetail, setVoteDetailUpdateVote } from '../redux/vote-update/vote-update-actions'
 import { useHistory } from 'react-router-dom'
 import {
   changeStep,
@@ -20,8 +20,9 @@ import { setUiIsLoader } from '../redux/ui/ui-actions'
 
 interface IOwnProps {}
 interface IStateProps {
-  voteInsertForm: IVoteForm
   voteUpdateForm: IVote
+  voteUrl: string
+  isLoading: boolean
 }
 interface IDispatchProps {
   editVoteDetail: typeof editVoteDetail
@@ -29,28 +30,38 @@ interface IDispatchProps {
   setVoteInsertPlace: typeof setVoteInsertPlace
   deleteVoteInsertPlaceAll: typeof deleteVoteInsertPlaceAll
   setUiIsLoader: typeof setUiIsLoader
+  setVoteDetailUpdateVote: typeof setVoteDetailUpdateVote
 }
 
 const VoteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   editVoteDetail,
-  voteInsertForm,
   setVoteInsertPlace,
   deleteVoteInsertPlaceAll,
   voteUpdateForm,
-  setUiIsLoader
+  setUiIsLoader,
+  setVoteDetailUpdateVote,
+  voteUrl,
+  isLoading
 }) => {
   const datepickerRef = useRef<HTMLInputElement>()
   const history = useHistory()
-
+  const [index, setIndex] = useState(0)
   // 최초 페이지 로딩시 로더를 보여줍니다.
   useEffect(() => {
     setUiIsLoader(true)
+    setIndex(index + 1)
   }, []) // eslint-disable-line
 
+  useEffect(() => {
+    if (index >= 1 && isLoading === false) {
+      history.push(`/vote/${voteUrl}`)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isLoading])
   useIonViewWillEnter(() => {
     setUiIsLoader(false)
   })
-
+  console.log(index)
   return (
     <IonPage>
       <IonContent>
@@ -74,10 +85,9 @@ const VoteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
             <InputUi
               value={voteUpdateForm.voteName}
               maxlength={24}
-              onChange={({ target }: React.ChangeEvent<HTMLInputElement>) =>
-                // setVoteInsertForm({ voteName: target.value })
-                {}
-              }
+              onChange={({ target }: React.ChangeEvent<HTMLInputElement>) => {
+                setVoteDetailUpdateVote({ voteName: target.value })
+              }}
             ></InputUi>
             <div className='x-divider'></div>
             <div className='text-right text-xs gray mt-1'>{voteUpdateForm.voteName.length || 0}/24</div>
@@ -106,7 +116,7 @@ const VoteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
               <DateTime
                 ref={datepickerRef}
                 value={voteUpdateForm.voteEndDtm}
-                //  onChange={(voteEndDtm: string) => setVoteInsertForm({ voteEndDtm })}
+                onChange={(voteEndDtm: string) => setVoteDetailUpdateVote({ voteEndDtm })}
               />
               <IconUi
                 iconName='arrow'
@@ -146,12 +156,19 @@ const VoteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
             color='yellow'
             text='저장'
             onClick={() => {
-              editVoteDetail({
-                voteName: 'test',
-                isMultiVote: true,
-                voteEndDtm: 'testtest',
-                votePlaces: []
-              } as IVote)
+              const ids: string[] = []
+              _.map(voteUpdateForm.votePlaces, (v, i) => {
+                ids.push(v.placeId)
+              })
+              editVoteDetail(
+                {
+                  voteName: voteUpdateForm.voteName,
+                  isMultiVote: true,
+                  voteEndDtm: voteUpdateForm.voteEndDtm,
+                  placeIds: ids
+                },
+                voteUrl
+              )
             }}
           />
         </div>
@@ -161,16 +178,18 @@ const VoteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ voteInsert, voteUpdateDetail }) => ({
+  mapStateToProps: ({ voteUpdateDetail, voteDetail }) => ({
     voteUpdateForm: voteUpdateDetail.vote,
-    voteInsertForm: voteInsert.voteForm
+    voteUrl: voteDetail.voteUrl,
+    isLoading: voteUpdateDetail.isLoading
   }),
   mapDispatchToProps: {
     editVoteDetail,
     changeStep,
     setVoteInsertPlace,
     deleteVoteInsertPlaceAll,
-    setUiIsLoader
+    setUiIsLoader,
+    setVoteDetailUpdateVote
   },
   component: VoteUpdate
 })

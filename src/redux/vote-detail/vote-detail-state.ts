@@ -7,4 +7,6 @@ export interface IVoteDetailState extends ICommonState {
   votePlaceIdsForm: Array<string>
   isVoteEnd: boolean
   isVoteDone: boolean
+  refetch: number
+  voteUrl: string
 }

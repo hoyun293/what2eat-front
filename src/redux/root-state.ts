@@ -67,8 +67,10 @@ export const initialState: IState = {
     },
     votePlaceIds: [],
     votePlaceIdsForm: [],
+    voteUrl: '',
     isVoteEnd: false,
     isVoteDone: false,
+    refetch: 0,
     isLoading: false,
     errorMessage: ''
   } as IVoteDetailState,

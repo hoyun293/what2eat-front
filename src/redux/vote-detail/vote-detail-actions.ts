@@ -8,7 +8,9 @@ import {
   SET_VOTE_DETAIL_VOTE_PLACE_IDS_FORM,
   SET_VOTE_DETAIL_VOTE_PLACE_ID_FORM,
   DELETE_VOTE_DETAIL_VOTE_PLACE_ID_FORM,
-  SET_VOTE_DETAIL_INIT
+  SET_VOTE_DETAIL_INIT,
+  SET_VOTE_DETAIL_URL,
+  SET_VOTE_DETAIL_REFETCH
 } from './vote-detail-constants'
 import * as _ from 'lodash'
 import moment from 'moment'
@@ -54,7 +56,7 @@ export const selectVote = (voteUrl: string) => async (dispatch: React.Dispatch<a
       dispatch(setVoteDetailIsVoteEnd(moment().isSameOrAfter(voteEndDtm)))
       dispatch(setVoteDetailVotePlaceIds(votePlaceIds))
       dispatch(setVoteDetailVotePlaceIdsForm(votePlaceIds))
-
+      dispatch(setVoteDetailUrl(voteUrl))
       dispatch(setVoteDetailIsLoading(false))
     })
     .catch(err => dispatch(setVoteDetailErrorMessage(err.message)))
@@ -117,6 +119,11 @@ export const setVoteDetailIsVoteDone = (isVoteDone: boolean) =>
     isVoteDone
   } as const)
 
+export const setVoteDetailRefetch = () =>
+  ({
+    type: SET_VOTE_DETAIL_REFETCH
+  } as const)
+
 export const setVoteDetailIsLoading = (isLoading: boolean) =>
   ({
     type: SET_VOTE_DETAIL_IS_LOADING,
@@ -135,8 +142,14 @@ export const setVoteDetailInit = () =>
     voteDetail
   } as const)
 
+export const setVoteDetailUrl = (voteUrl: string) =>
+  ({
+    type: SET_VOTE_DETAIL_URL,
+    voteUrl
+  } as const)
 export type TVoteActions =
   | TAction<typeof setVoteDetailIsLoading>
+  | TAction<typeof setVoteDetailRefetch>
   | TAction<typeof setVoteDetailErrorMessage>
   | TAction<typeof setVoteDetailIsVoteDone>
   | TAction<typeof setVoteDetailIsVoteEnd>
@@ -146,3 +159,4 @@ export type TVoteActions =
   | TAction<typeof setVoteDetailVotePlaceIdsForm>
   | TAction<typeof setVoteDetailVotePlaceIdForm>
   | TAction<typeof deleteVoteDetailVotePlaceIdForm>
+  | TAction<typeof setVoteDetailUrl>

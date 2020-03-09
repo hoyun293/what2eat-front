@@ -29,7 +29,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   setUiIsLoader
 }) => {
   const history = useHistory()
-  const [toggle, setToggle] = useState(1)
+  const [toggle, setToggle] = useState(0)
   const [index, setIndex] = useState(0)
   const [votes, setVotes] = useState<Array<IVoteRoom>>([])
 
@@ -113,11 +113,14 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
     }
 
     if (index === 2) {
-      sortInEnd()
+      if (toggle % 2 === 1) {
+        sortInEnd()
+      } else {
+        sortInCreate()
+      }
       setIndex(index + 1)
     }
   }, [voteRooms, votes]) // eslint-disable-line
-
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -169,7 +172,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
           >
             <IonNav></IonNav>
             <IonRippleEffect></IonRippleEffect>
-            <img src='/assets/img/floating_btn_add.svg' alt='' />
+            <img className='btn_add' src='/assets/img/floating_btn_add.svg' alt='' />
           </div>
         </div>
       </IonContent>

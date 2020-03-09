@@ -30,10 +30,10 @@ const MainFormVoteRoomListItem: React.FunctionComponent<IMainFromVoteRoomListIte
       <IonRippleEffect></IonRippleEffect>
       <div className='itemBox mb-1_5 flex' onClick={() => history.push(`/vote/${props.voteUrl}`)}>
         {props.voteRoomStatus === true && (
-          <IonImg className='voteBox pt-2_5 pb-2_5' src='/assets/img/list_vote_icon_off.svg' alt='' />
+          <img className='voteBox' src='/assets/img/list_vote_icon_off.svg' alt='' />
         )}
         {props.voteRoomStatus === false && (
-          <IonImg className='voteBox pt-2_5 pb-2_5' src='/assets/img/list_vote_icon_on.svg' alt='' />
+          <img className='voteBox' src='/assets/img/list_vote_icon_on.svg' alt='' />
         )}
         <div className='itemContent flex-col pt-1 pl-3'>
           <div className='voteTitle text-left text-lg'>{props.voteRoomTitle}</div>
@@ -42,13 +42,13 @@ const MainFormVoteRoomListItem: React.FunctionComponent<IMainFromVoteRoomListIte
         </div>
 
         {getClassNameByStatus(props.voteRoomStatus, props.isPrivateStatus) === 0 && (
-          <IonImg className='cplBtn' src='/assets/img/list_vote_badge_done.svg' alt='' />
+          <img className='cplBtn' src='/assets/img/list_vote_badge_done.svg' alt='' />
         )}
         {getClassNameByStatus(props.voteRoomStatus, props.isPrivateStatus) === 1 && (
-          <IonImg className='cplBtn' src='/assets/img/list_vote_badge_expired.svg' alt='' />
+          <img className='cplBtn' src='/assets/img/list_vote_badge_expired.svg' alt='' />
         )}
         {getClassNameByStatus(props.voteRoomStatus, props.isPrivateStatus) === 2 && (
-          <IonImg className='cplBtn' src='/assets/img/list_vote_badge_notdone.svg' alt='' />
+          <img className='cplBtn' src='/assets/img/list_vote_badge_notdone.svg' alt='' />
         )}
       </div>
     </div>
