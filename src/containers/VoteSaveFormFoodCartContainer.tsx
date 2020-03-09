@@ -75,13 +75,21 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
   const [isLoadingShowCartModal, setIsLoadingShowCartModal] = useState(false)
   const [filterDistance, setFilterDistance] = useState(1000)
   const [rankby, setRankBy] = useState({ label: '거리순', value: 'distance' })
-
+  const [index, setIndex] = useState(0)
   const [coordinate, setCoordinate] = useState({ lat: INIT_LATITUDE, lng: INIT_LONGITUDE })
 
   useEffect(() => {
     getCurrentPosition()
+    setUiIsLoader(true)
+    setIndex(index + 1)
   }, []) // eslint-disable-line
 
+  useEffect(() => {
+    if (index >= 1) {
+      setUiIsLoader(false)
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [votePlaces])
   useEffect(() => {
     if (coordinate.lat === INIT_LATITUDE) return
     getAddress(coordinate.lat, coordinate.lng)
