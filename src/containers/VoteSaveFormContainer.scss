@@ -1,7 +1,15 @@
 @import '../theme/variable';
 
 ion-toggle {
+  --background: #c2c7cc;
   --background-checked: #5f5cce;
+  --handle-background: white;
+  --handle-background-checked: white;
+}
+
+ion-datetime {
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
 }
 
 .picker-columns {

@@ -53,6 +53,7 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
           <div className='text-xl text-medium'>복수투표 가능</div>
         </div>
         <IonToggle
+          mode='ios'
           checked={voteForm.isMultiVote}
           onIonChange={({ detail }) => setVoteInsertForm({ isMultiVote: detail.checked })}
         ></IonToggle>
