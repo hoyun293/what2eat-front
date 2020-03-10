@@ -19,7 +19,7 @@ const ButtonUi: React.FunctionComponent<IButtonUiProps> = ({
   return (
     <div className='button'>
       <IonButton
-        className='button__container p-4 pt-3 m-0'
+        className='button__container text-xl p-4 pt-3 m-0'
         expand='block'
         color={color}
         style={{ height }}
