@@ -150,7 +150,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
         >
           <IonRippleEffect></IonRippleEffect>
           <div className='ellipsis'>{address}</div>
-          {coordinate.lat !== 0 && <IconUi className='ml-2' iconName='location'></IconUi>}
+          {coordinate.lat !== 0 && <IconUi className='ml-2 height-30' iconName='location'></IconUi>}
         </div>
         <div className='flex items-center justify-between mt-3'>
           <div className='filter-btn flex-center text-lg m-black'>
@@ -233,10 +233,10 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
         cssClass='cart-list-modal'
       >
         <div>
-          <div className='cart-lit-modal__header flex-center text-xl black text-bold'>추가한 투표지</div>
+          <div className='cart-list-modal__header flex-center text-xl black text-bold'>추가한 투표지</div>
           <div className='flex-col'>
             {_.map(voteForm.votePlaces, v => (
-              <div className='flex justify-between p-4' key={v.placeId}>
+              <div className='flex justify-between py-2 px-4' key={v.placeId}>
                 <div className='flex items-center'>
                   <div
                     className='thumb-container'
@@ -245,7 +245,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
                       backgroundSize: v.photoUrl ? 'cover' : 'initial'
                     }}
                   ></div>
-                  <div className='pl-4'>{v.name}</div>
+                  <div className='pl-3'>{v.name}</div>
                 </div>
                 <IconUi onClick={() => deleteVoteInsertPlace(v)} iconName='remove-btn'></IconUi>
               </div>

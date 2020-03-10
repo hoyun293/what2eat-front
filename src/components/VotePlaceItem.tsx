@@ -48,7 +48,7 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
       </div>
       <div className='info-container flex justify-between'>
         <div className='flex-col'>
-          <div>{name}</div>
+          <div className='text-17'>{name}</div>
           <div className='mt-1 flex text-base leading-none'>
             <ReviewStar rating={rating} userRatingsTotal={userRatingsTotal}></ReviewStar>
             <div className='gray px-1'>·</div>

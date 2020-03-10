@@ -91,7 +91,7 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
                 </div>
                 <div>
                   <IonTitle>
-                    <div className='text-xl text-medium black'>투표지 담기</div>
+                    <div className='text-17 text-medium black'>투표지 담기</div>
                   </IonTitle>
                 </div>
                 <div>
