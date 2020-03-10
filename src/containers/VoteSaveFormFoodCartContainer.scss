@@ -3,10 +3,10 @@
 .back-btn {
   position: absolute;
   z-index: 1;
-  padding-top: calc(constant(safe-area-inset-bottom) + $padding-container);
-  padding-top: calc(env(safe-area-inset-bottom) + $padding-container);
-  padding-left: calc(constant(safe-area-inset-bottom) + $padding-container);
-  padding-left: calc(env(safe-area-inset-bottom) + $padding-container);
+  padding-top: calc(constant(safe-area-inset-bottom) + 1.6rem);
+  padding-top: calc(env(safe-area-inset-bottom) + 1.6rem);
+  padding-left: calc(constant(safe-area-inset-bottom) + 1.6rem);
+  padding-left: calc(env(safe-area-inset-bottom) + 1.6rem);
 }
 
 .map-container {
@@ -42,7 +42,7 @@
 .filter-btn {
   border: 1px $border solid;
   border-radius: 3rem;
-  padding-left: $padding-container;
+  padding-left: 1.6rem;
   padding-top: 0rem;
   padding-bottom: 0rem;
   height: 3rem;
@@ -57,7 +57,7 @@
 
 .cart-list {
   &__container {
-    right: $padding-container;
+    right: 1.6rem;
   }
 
   &__btn {
