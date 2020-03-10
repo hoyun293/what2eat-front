@@ -12,15 +12,39 @@
 .HeaderIcon {
   flex-basis: 10%;
   padding-top: 1rem;
+  width: 3rem;
+  height: 3rem;
+}
+.bodyImg {
+  margin-top: 1.5rem;
+  width: 12.5rem;
+  height: 12rem;
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
 }
 
 .x-container {
+  margin-top: 13.5rem;
   padding-left: 5rem;
   padding-right: 5rem;
 }
 
 .spaceMaker {
-  margin-top: 6.4rem;
+  margin-top: 5.8rem;
+}
+
+.iconUi {
+  img {
+    width: 2rem;
+    height: 1.2rem;
+  }
+}
+.arrowIcon {
+  img {
+    width: 1.6rem;
+    height: 1.8rem;
+  }
 }
 .multiStr1 {
   font-weight: 500;
