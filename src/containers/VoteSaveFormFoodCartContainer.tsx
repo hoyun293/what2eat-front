@@ -43,6 +43,7 @@ const Marker = ({}: any) => (
 interface IOwnProps {}
 interface IStateProps {
   voteForm: IVoteForm
+  originVotePlaceIds: Array<string>
   votePlaces: IPlace[]
   pagetoken: string
   disableVotePlacesInfiniteScroll: boolean
@@ -63,6 +64,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
   votePlaces,
   disableVotePlacesInfiniteScroll,
   setVoteInsertForm,
+  originVotePlaceIds,
   pagetoken,
   selectVotePlaces,
   setVoteInsertPlace,
@@ -77,6 +79,8 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
   const [rankby, setRankBy] = useState({ label: '거리순', value: 'distance' })
   const [index, setIndex] = useState(0)
   const [coordinate, setCoordinate] = useState({ lat: INIT_LATITUDE, lng: INIT_LONGITUDE })
+
+  console.log(originVotePlaceIds)
 
   useEffect(() => {
     getCurrentPosition()
@@ -186,6 +190,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
               })}
               photoUrl={v.photoUrl}
               isAdded={voteForm?.votePlaces?.hasOwnProperty(v.placeId)}
+              isReadOnly={originVotePlaceIds.indexOf(v.placeId) > -1}
               onClickItem={
                 voteForm?.votePlaces?.hasOwnProperty(v.placeId) ? deleteVoteInsertPlace : setVoteInsertPlace
               }
@@ -247,7 +252,9 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
                   ></div>
                   <div className='pl-3'>{v.name}</div>
                 </div>
-                <IconUi onClick={() => deleteVoteInsertPlace(v)} iconName='remove-btn'></IconUi>
+                {originVotePlaceIds.indexOf(v.placeId) === -1 && (
+                  <IconUi onClick={() => deleteVoteInsertPlace(v)} iconName='remove-btn'></IconUi>
+                )}
               </div>
             ))}
           </div>
@@ -280,10 +287,11 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ voteInsert, ui }) => ({
+  mapStateToProps: ({ voteInsert, voteDetail, ui }) => ({
     voteForm: voteInsert.voteForm, // 장바구니
     votePlaces: voteInsert.votePlaces, // 해당 지역 음식점 리스트
     pagetoken: voteInsert.pagetoken,
+    originVotePlaceIds: voteDetail.vote.votePlaces.map(v => v.placeId),
     disableVotePlacesInfiniteScroll: voteInsert.disableVotePlacesInfiniteScroll,
     uiIsLoader: ui.isLoader
   }),

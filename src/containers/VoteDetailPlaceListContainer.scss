@@ -4,7 +4,8 @@
   border-top-left-radius: 3rem;
   border-top-right-radius: 3rem;
   background-color: #f6f6f6;
-  height: 100%;
+  min-height: 100%;
+  height: auto;
   padding-top: 1.2rem;
 
   &__handle {

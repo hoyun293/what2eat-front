@@ -10,8 +10,14 @@
     background-color: $light-border;
     border-top-left-radius: 1.2rem;
     border-top-right-radius: 1.2rem;
+    min-height: 20rem;
 
     @extend %bg-image;
+
+    .already-added {
+      border-top-left-radius: 1.4rem;
+      border-top-right-radius: 1.4rem;
+    }
   }
 
   .info-container {

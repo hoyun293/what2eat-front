@@ -16,6 +16,7 @@ interface IVotePlace {
   distance: string
   isAdded: boolean
   onClickItem: Function
+  isReadOnly?: boolean
 }
 
 const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
@@ -26,7 +27,8 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
   photoUrl,
   distance,
   isAdded,
-  onClickItem
+  onClickItem,
+  isReadOnly = false
 }) => {
   const history = useHistory()
   return (
@@ -38,15 +40,20 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
       }}
     >
       <div
-        className='image-container'
+        className='image-container relative'
         style={{
           backgroundImage: `url(${photoUrl || '/assets/img/list-place-thumb-empty.svg'})`,
           backgroundSize: photoUrl ? 'cover' : 'initial'
         }}
       >
+        {isReadOnly && (
+          <div className='bg-black-opacity-60 absolute w-full h-full white text-xl flex-center already-added'>
+            이미 투표지에 추가되어 있음
+          </div>
+        )}
         <IonImg src='/assets/img/vote-place-thumb-holder.png' alt='' />
       </div>
-      <div className='info-container flex justify-between'>
+      <div className='info-container flex justify-between relative bottom-0'>
         <div className='flex-col'>
           <div className='text-17'>{name}</div>
           <div className='mt-1 flex text-base leading-none'>
@@ -61,6 +68,7 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
             e.stopPropagation()
             onClickItem({ placeId, photoUrl, name })
           }}
+          className={isReadOnly ? 'hidden' : ''}
         >
           <IconUi className={`${!isAdded ? 'hidden' : ''}`} iconName='remove-btn'></IconUi>
           <IconUi className={`${isAdded ? 'hidden' : ''}`} iconName='add-btn'></IconUi>

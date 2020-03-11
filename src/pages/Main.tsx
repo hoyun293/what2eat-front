@@ -170,7 +170,6 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
               history.push('/vote-save')
             }}
           >
-            <IonNav></IonNav>
             <IonRippleEffect></IonRippleEffect>
             <img className='btn_add' src='/assets/img/floating_btn_add.svg' alt='' />
           </div>
