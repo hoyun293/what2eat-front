@@ -31,8 +31,8 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
           <br />
           생성되었습니다!
         </div>
-        <div className='mt-9 height-150'>
-          <IonImg className='w-67 m-auto' src='/assets/img/vote-save-complete.svg' alt='' />
+        <div className='mt-9'>
+          <IonImg className='w-67 m-auto height-159' src='/assets/img/vote-save-complete.svg' alt='' />
         </div>
         <div>
           <IonButton
@@ -47,7 +47,7 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
             투표 공유하기
           </IonButton>
         </div>
-        <div className='pt-2'>
+        <div className='pt-1'>
           <IonButton
             className='vote-button'
             color='white'
