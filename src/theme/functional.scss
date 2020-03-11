@@ -237,6 +237,10 @@
   width: 100vw;
 }
 
+.max-w-90\% {
+  max-width: 90%;
+}
+
 .h-7 {
   height: 2.8rem;
 }
@@ -1000,6 +1004,15 @@
 .h-full {
   height: 100%;
 }
+
+.max-h-half-screen {
+  max-height: 50vh;
+}
+
+.min-h-100 {
+  min-height: 10rem;
+}
+
 .height-50 {
   height: 5rem;
 }
@@ -1033,4 +1046,12 @@
 .ripple-parent {
   position: relative;
   overflow: hidden;
+}
+
+.overflow-hidden {
+  overflow: hidden;
+}
+
+.overflow-auto {
+  overflow: auto;
 }
