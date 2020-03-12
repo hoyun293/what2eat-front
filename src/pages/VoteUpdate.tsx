@@ -94,7 +94,7 @@ const VoteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
           <div className='x-divider'></div>
           <div className='py-4 px-container flex items-center justify-between'>
             <div className='flex items-center'>
-              <IconUi className='iconUi pr-3' iconName='check'></IconUi>
+              <IconUi className='checkIconUi pr-3' iconName='check'></IconUi>
               <div className='multiStr1 text-xl text-medium'>복수투표 가능</div>
             </div>
             {voteUpdateForm.isMultiVote === true && (
@@ -108,7 +108,7 @@ const VoteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
           <div className='py-4 px-container flex items-center justify-between'>
             <div className='flex items-center'>
               <IconUi className='iconUi pr-3' iconName='clock'></IconUi>
-              <div className='deadlineStr text-xl text-medium mb-1'>마감시한 설정</div>
+              <div className='deadlineStr text-xl text-medium '>마감시한 설정</div>
             </div>
             <div className='purple flex items-center text-base'>
               <DateTime
