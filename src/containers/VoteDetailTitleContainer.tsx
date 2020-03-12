@@ -46,26 +46,26 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
           <IonImg className='w-full' src={`/assets/img/vote-theme-${themeNum}.svg`} alt='' />
         </div>
       </div>
-      <div className='text-xxxl white text-bold h-9'>{vote.voteName}</div>
+      <div className='text-xxxl white text-bold'>{vote.voteName}</div>
 
       <div className='flex flex-1 pt-6'>
         <div
-          className='bg-white-opacity-30 flex-center white w-full br-md py-4'
+          className='bg-white-opacity-30 flex-center white w-full br-md py-2'
           onClick={() => {
             setVoteDetailUpdateVote(vote)
             history.push('/vote-update')
           }}
         >
-          <IconUi iconName='edit' className='pr-1'></IconUi> 편집
+          <IconUi iconName='edit' className='pr-1 mt-2'></IconUi> 편집
         </div>
         <div
-          className='ml-2 flex-center bg-white w-full br-md py-4'
+          className='ml-2 flex-center bg-white w-full br-md py-2'
           onClick={() => {
             setIsShareOpen(true)
             setUiIsLoader(true)
           }}
         >
-          <IconUi iconName='share' className='pr-1'></IconUi> 투표초대
+          <IconUi iconName='share' className='pr-1 mt-2'></IconUi> 투표초대
         </div>
       </div>
 

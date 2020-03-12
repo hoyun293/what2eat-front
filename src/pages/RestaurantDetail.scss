@@ -1,3 +1,5 @@
+@import '../theme/variable';
+
 .thumbnail {
   .btn_close {
     width: 3rem;
@@ -20,6 +22,9 @@
       border-radius: 0.3rem;
       display: inline-block;
     }
+  }
+  .image-container {
+    @extend %bg-image;
   }
 }
 .restaurantInfo {

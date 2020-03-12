@@ -92,6 +92,7 @@ const RestaurantDetail: React.FC<IOwnProps &
       <IonContent fullscreen>
         <div className='thumbnail w-full'>
           <div
+            className='image-container'
             style={{
               backgroundImage: `url(${restaurantDetailInfo.photoUrl ||
                 '/assets/img/list-place-thumb-empty.svg'})`,
