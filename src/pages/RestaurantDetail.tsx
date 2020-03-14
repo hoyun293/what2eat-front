@@ -86,6 +86,11 @@ const RestaurantDetail: React.FC<IOwnProps &
     }
   }, [restaurantDetailInfo]) // eslint-disable-line
 
+  useEffect(() => {
+    return () => {
+      setRestaurantDetailInit()
+    }
+  }, [])
   const history = useHistory()
   return (
     <IonPage>
@@ -107,7 +112,6 @@ const RestaurantDetail: React.FC<IOwnProps &
                 alt=''
                 onClick={() => {
                   history.goBack()
-                  setRestaurantDetailInit()
                 }}
               />
             </div>
@@ -139,8 +143,12 @@ const RestaurantDetail: React.FC<IOwnProps &
             <div className='timeInBlack ml-3'>종료시간 : 오후 10시</div>
           </div>
           <div className='phoneNumber mt-2 ml-3 flex'>
-            <img src='/assets/icon/phone.svg' alt='' />
-            <div className='numberInBlack ml-3'>{restaurantDetailInfo.formattedPhoneNumber}</div>
+            {restaurantDetailInfo.formattedPhoneNumber !== null && (
+              <img src='/assets/icon/phone.svg' alt='' />
+            )}
+            {restaurantDetailInfo.formattedPhoneNumber !== null && (
+              <div className='numberInBlack ml-3'>{restaurantDetailInfo.formattedPhoneNumber}</div>
+            )}
           </div>
         </div>
 
@@ -158,9 +166,8 @@ const RestaurantDetail: React.FC<IOwnProps &
           </GoogleMapReact>
         </div>
 
-        <div className='photo mt-3 ml-3 text-base mb-3'>사진</div>
-
-        <Slider className='' {...settings}>
+        {photoUrlArr.length !== 0 && <div className='photo mt-3 ml-3 text-base mb-3'>사진</div>}
+        <Slider className='slider' {...settings}>
           {_.map(photoUrlArr, (v, i) => (
             <RestaurantPhotoSlideContainer
               key={i}

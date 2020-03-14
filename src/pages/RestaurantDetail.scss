@@ -111,8 +111,9 @@
 
 .foodPhotoBox {
   width: 100%;
-  display: block !important;
+  display: flex !important;
   .foodPhoto {
+    margin: 0 auto;
     width: 10rem !important;
     height: 10rem !important;
     border-radius: 1rem;
