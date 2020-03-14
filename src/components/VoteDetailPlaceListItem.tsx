@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { IonImg } from '@ionic/react'
+import { useHistory } from 'react-router-dom'
 import { getNumberUnit } from '../utils/number-util'
 
 import './VoteDetailPlaceListItem.scss'
@@ -31,14 +31,16 @@ const VoteDetailPlaceListItemEdit: React.FunctionComponent<IVoteDetailPlaceListI
   isMultiVote,
   onClickItem
 }) => {
+  const history = useHistory()
+
   return (
     <li
       key={placeId}
-      className={`flex w-full justify-between br-xxlg bg-white relative py-6 px-4 my-4 ${isMostVoted &&
+      className={`flex w-full justify-between br-xxlg bg-white relative py-4 px-4 my-4 ${isMostVoted &&
         'most-voted'}`}
     >
       {isMostVoted && <IconUi iconName='most-voted' className='absolute left-0 top-0'></IconUi>}
-      <div className='flex'>
+      <div className='flex' onClick={() => history.push(`/restaurant-detail/${placeId}`)}>
         <img src={photoUrl} alt='' className='br-lg place-image' />
         <div className='flex-col justify-center ml-3'>
           <div>{name}</div>
@@ -51,7 +53,12 @@ const VoteDetailPlaceListItemEdit: React.FunctionComponent<IVoteDetailPlaceListI
           </div>
         </div>
       </div>
-      <div className='flex-center' onClick={() => onClickItem(placeId, isMultiVote)}>
+      <div
+        className='flex-center'
+        onClick={e => {
+          onClickItem(placeId, isMultiVote)
+        }}
+      >
         <IconUi className={`${!isAdded && 'hidden'}`} iconName='vote-on'></IconUi>
         <IconUi className={`${isAdded && 'hidden'}`} iconName='vote-off'></IconUi>
       </div>
@@ -69,15 +76,17 @@ const VoteDetailPlaceListItem: React.FunctionComponent<IVoteDetailPlaceListItem>
   isAdded,
   isMostVoted
 }) => {
+  const history = useHistory()
+
   return (
     <li
       key={placeId}
-      className={`flex w-full justify-between br-xxlg bg-white py-6 relative px-4 my-4 ${isMostVoted &&
+      className={`flex w-full justify-between br-xxlg bg-white py-4 relative px-4 my-4 ${isMostVoted &&
         'most-voted'}`}
     >
       {isMostVoted && <IconUi iconName='most-voted' className='absolute left-0 top-0'></IconUi>}
-      <div className='flex'>
-        <IonImg src={photoUrl} alt='' className='br-lg place-image' />
+      <div className='flex' onClick={() => history.push(`/restaurant-detail/${placeId}`)}>
+        <img src={photoUrl} alt='' className='br-lg place-image' />
         <div className='flex-col justify-center ml-3'>
           <div>{name}</div>
           <div className='mt-1 flex text-base leading-none'>

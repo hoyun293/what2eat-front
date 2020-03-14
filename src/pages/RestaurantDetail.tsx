@@ -98,7 +98,7 @@ const RestaurantDetail: React.FC<IOwnProps &
             backgroundSize: restaurantDetailInfo.photoUrl ? 'cover' : 'initial'
           }}
         >
-          <div className='thumbnail w-full '>
+          <div className='thumbnail w-full'>
             <div className='thumbnailImgs flex'>
               <IonImg src='/assets/img/vote-place-thumb-holder.png' alt='' />
               <IonImg
