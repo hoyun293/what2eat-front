@@ -2,7 +2,8 @@ import {
   SET_RESTAURANT_DETAIL_FORM,
   SET_RESTAURANT_DETAIL_LOADING,
   SET_RESTAURANT_DETAIL_MESSAGE,
-  SET_RESTAURANT_DETAIL_INIT
+  SET_RESTAURANT_DETAIL_INIT,
+  SET_IS_RESTAURANT_PAGE
 } from './restaurant-detail-constants'
 import { TAction } from '../redux-type'
 import { IRestaurantDetail } from '../../models/restaurant-detail'
@@ -41,7 +42,14 @@ export const setRestaurantDetailInit = () =>
     type: SET_RESTAURANT_DETAIL_INIT,
     restaurantDetailInit
   } as const)
+
+export const setIsRestaurantPage = (isRestaurantPage: boolean) =>
+  ({
+    type: SET_IS_RESTAURANT_PAGE,
+    isRestaurantPage
+  } as const)
 export type TRestaurantDetailActions =
+  | TAction<typeof setIsRestaurantPage>
   | TAction<typeof setRestaurantDetailForm>
   | TAction<typeof setRestaurantDetailIsLoading>
   | TAction<typeof setRestaurantDetailErrorMessage>

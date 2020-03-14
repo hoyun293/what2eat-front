@@ -11,7 +11,8 @@ import GoogleMapReact from 'google-map-react'
 import config from '../config'
 import {
   selectRestaurnatDetail,
-  setRestaurantDetailInit
+  setRestaurantDetailInit,
+  setIsRestaurantPage
 } from '../redux/restaurant-detail/restaurant-detail-actions'
 import { IRestaurantDetail } from '../models/restaurant-detail'
 import _ from 'lodash'
@@ -25,11 +26,13 @@ import { setUiIsLoader } from '../redux/ui/ui-actions'
 interface IOwnProps {}
 interface IStateProps {
   restaurantDetailInfo: IRestaurantDetail
+  isVoteUpdatePage: boolean
 }
 interface IDispatchProps {
   selectRestaurnatDetail: typeof selectRestaurnatDetail
   setRestaurantDetailInit: typeof setRestaurantDetailInit
   setUiIsLoader: typeof setUiIsLoader
+  setIsRestaurantPage: typeof setIsRestaurantPage
 }
 interface MatchParams {
   placeId: string
@@ -57,7 +60,9 @@ const RestaurantDetail: React.FC<IOwnProps &
   restaurantDetailInfo,
   selectRestaurnatDetail,
   setRestaurantDetailInit,
-  setUiIsLoader
+  setUiIsLoader,
+  isVoteUpdatePage,
+  setIsRestaurantPage
 }) => {
   const photoUrlArr = _.map(restaurantDetailInfo.userPhotoUrl, (val, key) => {
     return val
@@ -111,6 +116,7 @@ const RestaurantDetail: React.FC<IOwnProps &
                 src='/assets/icon/header_btn_close.svg'
                 alt=''
                 onClick={() => {
+                  setIsRestaurantPage(true)
                   history.goBack()
                 }}
               />
@@ -188,21 +194,21 @@ const RestaurantDetail: React.FC<IOwnProps &
           />
         )}
       </IonContent>
-      <IonFooter>
-        <ButtonUi color='yellow' text='후보지 추가' />
-      </IonFooter>
+      <IonFooter>{isVoteUpdatePage === true && <ButtonUi color='yellow' text='후보지 추가' />}</IonFooter>
     </IonPage>
   )
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ restaurantDetail }) => ({
-    restaurantDetailInfo: restaurantDetail.restaurantDetailInfo
+    restaurantDetailInfo: restaurantDetail.restaurantDetailInfo,
+    isVoteUpdatePage: restaurantDetail.isVoteUpdatePage
   }),
   mapDispatchToProps: {
     selectRestaurnatDetail,
     setRestaurantDetailInit,
-    setUiIsLoader
+    setUiIsLoader,
+    setIsRestaurantPage
   },
   component: RestaurantDetail
 })

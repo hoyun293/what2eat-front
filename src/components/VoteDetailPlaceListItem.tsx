@@ -4,7 +4,34 @@ import { getNumberUnit } from '../utils/number-util'
 
 import './VoteDetailPlaceListItem.scss'
 import IconUi from './ui/IconUi'
+import { setIsRestaurantPage } from '../redux/restaurant-detail/restaurant-detail-actions'
+import { connect } from '../redux/redux-connect'
 
+interface IOwnProps {
+  placeId: string
+  name: string
+  photoUrl: string
+  voteCount: number
+  distance: string
+  isAdded: boolean
+  isMostVoted: boolean
+}
+interface IOwnProps2 {
+  placeId: string
+  name: string
+  photoUrl: string
+  voteCount: number
+  distance: string
+  isAdded: boolean
+  isMostVoted: boolean
+  onClickItem: Function
+  isMultiVote: boolean
+}
+
+interface IStateProps {}
+interface IDispatchProps {
+  setIsRestaurantPage: typeof setIsRestaurantPage
+}
 interface IVoteDetailPlaceListItem {
   placeId: string
   name: string
@@ -20,7 +47,7 @@ export interface IVoteDetailPlaceListItemEdit extends IVoteDetailPlaceListItem {
   isMultiVote: boolean
 }
 
-const VoteDetailPlaceListItemEdit: React.FunctionComponent<IVoteDetailPlaceListItemEdit> = ({
+const VoteDetailPlaceListItemEditComponent: React.FC<IOwnProps2 & IStateProps & IDispatchProps> = ({
   placeId,
   name,
   photoUrl,
@@ -29,7 +56,8 @@ const VoteDetailPlaceListItemEdit: React.FunctionComponent<IVoteDetailPlaceListI
   isAdded,
   isMostVoted,
   isMultiVote,
-  onClickItem
+  onClickItem,
+  setIsRestaurantPage
 }) => {
   const history = useHistory()
 
@@ -40,7 +68,13 @@ const VoteDetailPlaceListItemEdit: React.FunctionComponent<IVoteDetailPlaceListI
         'most-voted'}`}
     >
       {isMostVoted && <IconUi iconName='most-voted' className='absolute left-0 top-0'></IconUi>}
-      <div className='flex' onClick={() => history.push(`/restaurant-detail/${placeId}`)}>
+      <div
+        className='flex'
+        onClick={() => {
+          history.push(`/restaurant-detail/${placeId}`)
+          setIsRestaurantPage(false)
+        }}
+      >
         <img src={photoUrl} alt='' className='br-lg place-image' />
         <div className='flex-col justify-center ml-3'>
           <div>{name}</div>
@@ -67,7 +101,7 @@ const VoteDetailPlaceListItemEdit: React.FunctionComponent<IVoteDetailPlaceListI
 }
 //window.location.href = `http://what2eat.me/restaurant-detail/${placeId}`
 
-const VoteDetailPlaceListItem: React.FunctionComponent<IVoteDetailPlaceListItem> = ({
+const VoteDetailPlaceListItemComponent: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   placeId,
   name,
   photoUrl,
@@ -85,7 +119,13 @@ const VoteDetailPlaceListItem: React.FunctionComponent<IVoteDetailPlaceListItem>
         'most-voted'}`}
     >
       {isMostVoted && <IconUi iconName='most-voted' className='absolute left-0 top-0'></IconUi>}
-      <div className='flex' onClick={() => history.push(`/restaurant-detail/${placeId}`)}>
+      <div
+        className='flex'
+        onClick={() => {
+          history.push(`/restaurant-detail/${placeId}`)
+          setIsRestaurantPage(false)
+        }}
+      >
         <img src={photoUrl} alt='' className='br-lg place-image' />
         <div className='flex-col justify-center ml-3'>
           <div>{name}</div>
@@ -102,5 +142,13 @@ const VoteDetailPlaceListItem: React.FunctionComponent<IVoteDetailPlaceListItem>
     </li>
   )
 }
-
-export { VoteDetailPlaceListItemEdit, VoteDetailPlaceListItem }
+export const VoteDetailPlaceListItem = connect<IOwnProps, IStateProps, IDispatchProps>({
+  mapStateToProps: () => ({}),
+  mapDispatchToProps: { setIsRestaurantPage },
+  component: VoteDetailPlaceListItemComponent
+})
+export const VoteDetailPlaceListItemEdit = connect<IOwnProps2, IStateProps, IDispatchProps>({
+  mapStateToProps: () => ({}),
+  mapDispatchToProps: { setIsRestaurantPage },
+  component: VoteDetailPlaceListItemEditComponent
+})

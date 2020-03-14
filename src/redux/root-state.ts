@@ -92,7 +92,8 @@ export const initialState: IState = {
   restaurantDetail: {
     restaurantDetailInfo: {},
     isLoading: false,
-    errorMessage: ''
+    errorMessage: '',
+    isVoteUpdatePage: true
   } as IRestaurantDetailState
 }
 
