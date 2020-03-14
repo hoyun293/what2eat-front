@@ -90,15 +90,15 @@ const RestaurantDetail: React.FC<IOwnProps &
   return (
     <IonPage>
       <IonContent fullscreen>
-        <div
-          className='image-container flex-col'
-          style={{
-            backgroundImage: `url(${restaurantDetailInfo.photoUrl ||
-              '/assets/img/list-place-thumb-empty.svg'})`,
-            backgroundSize: restaurantDetailInfo.photoUrl ? 'cover' : 'initial'
-          }}
-        >
-          <div className='thumbnail w-full'>
+        <div className='thumbnail w-full'>
+          <div
+            className='image-container flex-col'
+            style={{
+              backgroundImage: `url(${restaurantDetailInfo.photoUrl ||
+                '/assets/img/list-place-thumb-empty.svg'})`,
+              backgroundSize: restaurantDetailInfo.photoUrl ? 'cover' : 'initial'
+            }}
+          >
             <div className='thumbnailImgs flex'>
               <IonImg src='/assets/img/vote-place-thumb-holder.png' alt='' />
               <IonImg
@@ -111,9 +111,10 @@ const RestaurantDetail: React.FC<IOwnProps &
                 }}
               />
             </div>
-          </div>
-          <div className='rounded'>
-            <div className='greyed mb-1'></div>
+
+            <div className='rounded'>
+              <div className='greyed mb-1'></div>
+            </div>
           </div>
         </div>
         <div className='restaurantInfo flex-col'>
@@ -159,7 +160,7 @@ const RestaurantDetail: React.FC<IOwnProps &
 
         <div className='photo mt-3 ml-3 text-base mb-3'>사진</div>
 
-        <Slider className='ml-6' {...settings}>
+        <Slider className='' {...settings}>
           {_.map(photoUrlArr, (v, i) => (
             <RestaurantPhotoSlideContainer
               key={i}
