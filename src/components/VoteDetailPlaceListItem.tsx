@@ -108,7 +108,8 @@ const VoteDetailPlaceListItemComponent: React.FC<IOwnProps & IStateProps & IDisp
   voteCount,
   distance,
   isAdded,
-  isMostVoted
+  isMostVoted,
+  setIsRestaurantPage
 }) => {
   const history = useHistory()
 
@@ -123,6 +124,7 @@ const VoteDetailPlaceListItemComponent: React.FC<IOwnProps & IStateProps & IDisp
         className='flex'
         onClick={() => {
           history.push(`/restaurant-detail/${placeId}`)
+          console.log('?')
           setIsRestaurantPage(false)
         }}
       >
