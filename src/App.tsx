@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { IonApp, IonRouterOutlet, IonPopover, IonToast } from '@ionic/react'
+import { Plugins } from '@capacitor/core'
 import { IonReactRouter } from '@ionic/react-router'
 import { connect } from './redux/redux-connect'
 import { signIn } from './redux/user/user-actions'
@@ -15,6 +16,8 @@ import VoteUpdateFormFoodCart from './pages/VoteUpdateFormFoodCart'
 import RestaurantDetail from './pages/RestaurantDetail'
 import VoteSave from './pages/VoteSave'
 import VoteDetail from './pages/VoteDetail'
+
+const { SplashScreen } = Plugins
 
 interface IStateProps {
   isLogin: boolean
@@ -41,6 +44,10 @@ const App: React.FC<IAppProps> = ({
   useEffect(() => {
     signIn()
   }, []) // eslint-disable-line
+
+  useEffect(() => {
+    SplashScreen.hide()
+  }, [isLogin])
 
   return isLogin ? (
     <IonApp>

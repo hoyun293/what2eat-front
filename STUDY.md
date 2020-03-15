@@ -6,6 +6,10 @@
 
 - sync : copy + update
 
+# 스플래시 스크린 생성
+
+https://apetools.webprofusion.com/#/tools/imagegorilla
+
 # 아이콘/Splash screen 등록
 
 https://www.joshmorony.com/adding-icons-splash-screens-launch-images-to-capacitor-projects/
