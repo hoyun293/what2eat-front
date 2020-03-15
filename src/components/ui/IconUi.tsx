@@ -19,7 +19,13 @@ const IconUi: React.FunctionComponent<IIconUiProps> = ({
   const iconSrc = `assets/icon/${iconName}.svg`
   return (
     <div className={className} onClick={() => onClick()}>
-      {isLoading ? <IonSpinner name='crescent' color='tertiary' /> : <img src={iconSrc} alt='' />}
+      {isLoading ? (
+        <IonSpinner name='crescent' color='tertiary' />
+      ) : iconName === 'star-full' || iconName === 'star-half' || iconName === 'star-empty' ? (
+        <img className='reviewStar' src={iconSrc} alt='' />
+      ) : (
+        <img src={iconSrc} alt='' />
+      )}
     </div>
   )
 }

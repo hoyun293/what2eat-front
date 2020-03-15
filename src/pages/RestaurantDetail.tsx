@@ -137,20 +137,20 @@ const RestaurantDetail: React.FC<IOwnProps &
             ></ReviewStar>
           </div>
           <div className='address flex text-left pt-4'>
-            <img className='ml-3' src='/assets/icon/location2.svg' alt='' />
+            <img className='addressIcon ml-3' src='/assets/icon/location2.svg' alt='' />
             <div className='flex-col'>
               <div className='addressInBlack ml-3 mr-2'>{restaurantDetailInfo.formattedAddress}</div>
               <div className='addressInPurple ml-3 '>현재위치에서 265m</div>
             </div>
           </div>
           <div className='operatingTime ml-3 flex pt-2'>
-            <img src='/assets/icon/clock2.svg' alt='' />
+            <img className='timeIcon' src='/assets/icon/clock2.svg' alt='' />
             <div className='timeInPurple ml-3'>영업중</div>
             <div className='timeInBlack ml-3'>종료시간 : 오후 10시</div>
           </div>
           <div className='phoneNumber mt-2 ml-3 flex'>
             {restaurantDetailInfo.formattedPhoneNumber !== null && (
-              <img src='/assets/icon/phone.svg' alt='' />
+              <img className='phoneIcon' src='/assets/icon/phone.svg' alt='' />
             )}
             {restaurantDetailInfo.formattedPhoneNumber !== null && (
               <div className='numberInBlack ml-3'>{restaurantDetailInfo.formattedPhoneNumber}</div>

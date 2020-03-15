@@ -49,7 +49,10 @@
   .address {
     line-height: 1.57;
     letter-spacing: -0.28px;
-
+    .addressIcon {
+      width: 1.9rem;
+      height: 2.1rem;
+    }
     .addressInBlack {
       font-size: 1.4rem;
       color: #555555;
@@ -62,7 +65,10 @@
   .operatingTime {
     line-height: 1.57;
     letter-spacing: -0.28px;
-
+    .timeIcon {
+      width: 1.9rem;
+      height: 2.1rem;
+    }
     .timeInPurple {
       font-size: 1.4rem;
       color: #5f5cce;
@@ -75,6 +81,10 @@
   .phoneNumber {
     line-height: 1.57;
     letter-spacing: -0.28px;
+    .phoneIcon {
+      width: 1.9rem;
+      height: 2.1rem;
+    }
     .numberInBlack {
       font-size: 1.4rem;
       color: #555555;
