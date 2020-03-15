@@ -67,6 +67,15 @@ $ npx cap open
   yarn dev:ios or yarn dev:and
 ```
 
+> Android에서 live-reload를 하려고하면 cleartext not permitted 오류가 난다. `android/app/src/main/AndroidManifest.xml` 에 다음과 같이 추가한다.
+
+```
+    <application
+        ...
+        android:usesCleartextTraffic="true"
+        ...
+```
+
 # 배포
 
 - build 한 파일 구동
