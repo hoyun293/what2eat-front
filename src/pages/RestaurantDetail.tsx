@@ -128,7 +128,9 @@ const RestaurantDetail: React.FC<IOwnProps &
           </div>
         </div>
         <div className='restaurantInfo flex-col'>
-          <div className='title w-full text-center text-xxl'>{restaurantDetailInfo.name}</div>
+          <div className='titleWrapper flex'>
+            <div className='title w-full text-center text-xxl'>{restaurantDetailInfo.name}</div>
+          </div>
           <div className='rating w-full flex'>
             <ReviewStar
               className='ratingCenter pt-2'

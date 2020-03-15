@@ -38,10 +38,16 @@
 
 .restaurantInfo {
   .title {
+    display: inline-block;
+    margin: 0 auto;
+    width: 26rem;
+    white-space: nowrap;
     font-weight: 500;
     line-height: 1.06;
     letter-spacing: -0.72px;
     color: #111111;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   .ratingCenter {
     margin: 0 auto;
