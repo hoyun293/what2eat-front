@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Redirect, Route } from 'react-router-dom'
-import { IonApp, IonRouterOutlet, IonPopover, IonToast } from '@ionic/react'
+import { setupConfig, IonApp, IonRouterOutlet, IonPopover, IonToast } from '@ionic/react'
 import { Plugins } from '@capacitor/core'
 import { IonReactRouter } from '@ionic/react-router'
 import { connect } from './redux/redux-connect'
@@ -18,6 +18,13 @@ import VoteSave from './pages/VoteSave'
 import VoteDetail from './pages/VoteDetail'
 
 const { SplashScreen } = Plugins
+
+setupConfig({
+  hardwareBackButton: false,
+  statusTap: true,
+  swipeBackEnabled: true,
+  mode: 'ios'
+})
 
 interface IStateProps {
   isLogin: boolean

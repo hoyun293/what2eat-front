@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { IonContent, IonPage, IonImg, useIonViewWillEnter, IonRippleEffect, IonNav } from '@ionic/react'
+import { IonContent, IonPage, IonImg, useIonViewWillEnter, IonRippleEffect } from '@ionic/react'
+import { Plugins, Capacitor } from '@capacitor/core'
 import { useHistory } from 'react-router-dom'
 
 import { connect } from '../redux/redux-connect'
@@ -8,25 +9,34 @@ import MainFormVoteRoomListContainer from '../containers/MainFormVoteRoomListCon
 import { signIn } from '../redux/user/user-actions'
 import './Main.scss'
 import { IVoteRoom } from '../models/vote-room'
-import { setVoteInsertInit } from '../redux/vote-insert/vote-insert-actions'
-import { setUiIsLoader } from '../redux/ui/ui-actions'
+import { setVoteInsertInit, setVoteInsertStep } from '../redux/vote-insert/vote-insert-actions'
+import { setUiIsLoader, setUiToast } from '../redux/ui/ui-actions'
+import { setVoteDetailInit } from '../redux/vote-detail/vote-detail-actions'
 
 interface IOwnProps {}
 interface IStateProps {
   voteRooms: IVoteRoom[]
+  voteInsertStep: number
 }
 interface IDispatchProps {
   selectVoteRooms: typeof selectVoteRooms
   signIn: typeof signIn
   setVoteInsertInit: typeof setVoteInsertInit
   setUiIsLoader: typeof setUiIsLoader
+  setUiToast: typeof setUiToast
+  setVoteInsertStep: typeof setVoteInsertStep
+  setVoteDetailInit: typeof setVoteDetailInit
 }
 
 const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   selectVoteRooms,
   voteRooms,
   setVoteInsertInit,
-  setUiIsLoader
+  setUiIsLoader,
+  setUiToast,
+  voteInsertStep,
+  setVoteInsertStep,
+  setVoteDetailInit
 }) => {
   const history = useHistory()
   const [toggle, setToggle] = useState(0)
@@ -89,6 +99,32 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
     setUiIsLoader(true)
   }, []) // eslint-disable-line
 
+  let timePeriodToExit = 2000
+  let lastTimeBackPress = 0
+
+  const exitApp = () => {
+    if (Date.now() - lastTimeBackPress < timePeriodToExit) {
+      Plugins.App.exitApp()
+    } else {
+      lastTimeBackPress = Date.now()
+      setUiToast({ isOpen: true, message: '한 번 더 누르시면 앱을 종료합니다' })
+    }
+  }
+
+  useEffect(() => {
+    if (Capacitor.isNative) {
+      Plugins.App.addListener('backButton', e => {
+        if (history.location.pathname === '/') {
+          exitApp()
+        } else if (history.location.pathname === '/vote-save') {
+          history.push('/')
+        } else {
+          history.goBack()
+        }
+      })
+    }
+  }, []) // eslint-disable-line
+
   useIonViewWillEnter(() => {
     setUiIsLoader(false)
     // TODO: 투표방 생성 이후, 페이지 재진입시에 호출이 필요해서 필요합니다.
@@ -121,6 +157,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
       setIndex(index + 1)
     }
   }, [voteRooms, votes]) // eslint-disable-line
+
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -167,6 +204,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
             className='bottom-floating ion-activatable ripple-parent br-full'
             onClick={() => {
               setVoteInsertInit()
+              setVoteDetailInit()
               history.push('/vote-save')
             }}
           >
@@ -180,14 +218,18 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
-  mapStateToProps: ({ voteRoom }) => ({
-    voteRooms: voteRoom.voteRooms
+  mapStateToProps: ({ voteRoom, voteInsert }) => ({
+    voteRooms: voteRoom.voteRooms,
+    voteInsertStep: voteInsert.step
   }),
   mapDispatchToProps: {
     selectVoteRooms,
     signIn,
     setVoteInsertInit,
-    setUiIsLoader
+    setUiIsLoader,
+    setUiToast,
+    setVoteInsertStep,
+    setVoteDetailInit
   },
   component: Main
 })
