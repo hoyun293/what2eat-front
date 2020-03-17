@@ -71,14 +71,6 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
             <IconUi iconName='close' className='pt-4 pr-2' onClick={() => history.push('/')}></IconUi>
           </IonFab>
           <VoteSaveFormContainer />
-          <IonFooter>
-            <ButtonShadowUi
-              disabled={!voteForm.voteName || !voteForm.voteEndDtm}
-              onClick={() => setVoteInsertStep(step + 1)}
-              text='다음'
-              color='yellow'
-            />
-          </IonFooter>
         </>
       )}
       {step === 2 && (
@@ -101,24 +93,30 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
             </IonToolbar>
           </IonHeader>
           <VoteSaveFormFoodCartContainer />
-          <IonFooter>
-            <ButtonShadowUi
-              disabled={Object.keys(voteForm.votePlaces).length === 0}
-              onClick={async () => {
-                const { isMultiVote, voteName, votePlaces, voteEndDtm } = voteForm
-
-                insertVote({
-                  voteName: voteName,
-                  placeIds: Object.keys(votePlaces),
-                  isMultiVote,
-                  voteEndDtm
-                })
-              }}
-              text='다음'
-              color='yellow'
-            />
-          </IonFooter>
         </>
+      )}
+      {(step === 1 || step === 2) && (
+        <IonFooter>
+          <ButtonShadowUi
+            disabled={
+              step === 1
+                ? !voteForm.voteName || !voteForm.voteEndDtm
+                : Object.keys(voteForm.votePlaces).length === 0
+            }
+            onClick={() =>
+              step === 1
+                ? setVoteInsertStep(step + 1)
+                : insertVote({
+                    voteName: voteForm.voteName,
+                    placeIds: Object.keys(voteForm.votePlaces),
+                    isMultiVote: voteForm.isMultiVote,
+                    voteEndDtm: voteForm.voteEndDtm
+                  })
+            }
+            text='다음'
+            color='yellow'
+          />
+        </IonFooter>
       )}
       {step === 3 && (
         <>
