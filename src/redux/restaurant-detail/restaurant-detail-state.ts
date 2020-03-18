@@ -4,4 +4,5 @@ import { IRestaurantDetail } from '../../models/restaurant-detail'
 export interface IRestaurantDetailState extends ICommonState {
   restaurantDetailInfo: IRestaurantDetail
   isVoteUpdatePage: boolean
+  distance: string
 }

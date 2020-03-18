@@ -3,7 +3,8 @@ import {
   SET_RESTAURANT_DETAIL_LOADING,
   SET_RESTAURANT_DETAIL_MESSAGE,
   SET_RESTAURANT_DETAIL_INIT,
-  SET_IS_RESTAURANT_PAGE
+  SET_IS_RESTAURANT_PAGE,
+  SET_RESTAURANT_DISTANCE
 } from './restaurant-detail-constants'
 import { TAction } from '../redux-type'
 import { IRestaurantDetail } from '../../models/restaurant-detail'
@@ -48,9 +49,15 @@ export const setIsRestaurantPage = (isRestaurantPage: boolean) =>
     type: SET_IS_RESTAURANT_PAGE,
     isRestaurantPage
   } as const)
+export const setRestaurantDistance = (distance: string) =>
+  ({
+    type: SET_RESTAURANT_DISTANCE,
+    distance
+  } as const)
 export type TRestaurantDetailActions =
   | TAction<typeof setIsRestaurantPage>
   | TAction<typeof setRestaurantDetailForm>
   | TAction<typeof setRestaurantDetailIsLoading>
   | TAction<typeof setRestaurantDetailErrorMessage>
   | TAction<typeof setRestaurantDetailInit>
+  | TAction<typeof setRestaurantDistance>

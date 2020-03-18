@@ -3,7 +3,8 @@ import {
   SET_RESTAURANT_DETAIL_MESSAGE,
   SET_RESTAURANT_DETAIL_FORM,
   SET_RESTAURANT_DETAIL_INIT,
-  SET_IS_RESTAURANT_PAGE
+  SET_IS_RESTAURANT_PAGE,
+  SET_RESTAURANT_DISTANCE
 } from './restaurant-detail-constants'
 import { TRestaurantDetailActions } from './restaurant-detail-actions'
 import { IRestaurantDetailState } from './restaurant-detail-state'
@@ -23,6 +24,8 @@ export default function userReducer(
       return { ...action.restaurantDetailInit }
     case SET_IS_RESTAURANT_PAGE:
       return { ...state, isVoteUpdatePage: action.isRestaurantPage }
+    case SET_RESTAURANT_DISTANCE:
+      return { ...state, distance: action.distance }
     default:
       return { ...state }
   }

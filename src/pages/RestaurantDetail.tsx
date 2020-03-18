@@ -22,17 +22,21 @@ import 'slick-carousel/slick/slick-theme.css'
 import RestaurantPhotoSlideContainer from '../containers/RestaurantPhotoSlideContainer'
 import PopUpImageContainer from '../containers/PopUpImageContainer'
 import { setUiIsLoader } from '../redux/ui/ui-actions'
+import { setVoteInsertPlace } from '../redux/vote-insert/vote-insert-actions'
+import { IPlace } from '../models/place'
 
 interface IOwnProps {}
 interface IStateProps {
   restaurantDetailInfo: IRestaurantDetail
   isVoteUpdatePage: boolean
+  distance: string
 }
 interface IDispatchProps {
   selectRestaurnatDetail: typeof selectRestaurnatDetail
   setRestaurantDetailInit: typeof setRestaurantDetailInit
   setUiIsLoader: typeof setUiIsLoader
   setIsRestaurantPage: typeof setIsRestaurantPage
+  setVoteInsertPlace: typeof setVoteInsertPlace
 }
 interface MatchParams {
   placeId: string
@@ -62,7 +66,9 @@ const RestaurantDetail: React.FC<IOwnProps &
   setRestaurantDetailInit,
   setUiIsLoader,
   isVoteUpdatePage,
-  setIsRestaurantPage
+  setIsRestaurantPage,
+  setVoteInsertPlace,
+  distance
 }) => {
   const photoUrlArr = _.map(restaurantDetailInfo.userPhotoUrl, (val, key) => {
     return val
@@ -116,8 +122,8 @@ const RestaurantDetail: React.FC<IOwnProps &
                 src='/assets/icon/header_btn_close.svg'
                 alt=''
                 onClick={() => {
-                  setIsRestaurantPage(true)
                   history.goBack()
+                  setIsRestaurantPage(true)
                 }}
               />
             </div>
@@ -142,13 +148,8 @@ const RestaurantDetail: React.FC<IOwnProps &
             <img className='addressIcon ml-3' src='/assets/icon/location2.svg' alt='' />
             <div className='flex-col'>
               <div className='addressInBlack ml-3 mr-2'>{restaurantDetailInfo.formattedAddress}</div>
-              <div className='addressInPurple ml-3 '>현재위치에서 265m</div>
+              <div className='addressInPurple ml-3 '>현재위치에서 {distance}m</div>
             </div>
-          </div>
-          <div className='operatingTime ml-3 flex pt-2'>
-            <img className='timeIcon' src='/assets/icon/clock2.svg' alt='' />
-            <div className='timeInPurple ml-3'>영업중</div>
-            <div className='timeInBlack ml-3'>종료시간 : 오후 10시</div>
           </div>
           <div className='phoneNumber mt-2 ml-3 flex'>
             {restaurantDetailInfo.formattedPhoneNumber !== null && (
@@ -196,7 +197,22 @@ const RestaurantDetail: React.FC<IOwnProps &
           />
         )}
       </IonContent>
-      <IonFooter>{isVoteUpdatePage === true && <ButtonUi color='yellow' text='후보지 추가' />}</IonFooter>
+      <IonFooter>
+        {isVoteUpdatePage === true && (
+          <ButtonUi
+            color='yellow'
+            text='후보지 추가'
+            onClick={() => {
+              setVoteInsertPlace({
+                placeId: match.params.placeId,
+                photoUrl: restaurantDetailInfo.photoUrl,
+                name: restaurantDetailInfo.name
+              } as IPlace)
+              history.goBack()
+            }}
+          />
+        )}
+      </IonFooter>
     </IonPage>
   )
 }
@@ -204,13 +220,15 @@ const RestaurantDetail: React.FC<IOwnProps &
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ restaurantDetail }) => ({
     restaurantDetailInfo: restaurantDetail.restaurantDetailInfo,
-    isVoteUpdatePage: restaurantDetail.isVoteUpdatePage
+    isVoteUpdatePage: restaurantDetail.isVoteUpdatePage,
+    distance: restaurantDetail.distance
   }),
   mapDispatchToProps: {
     selectRestaurnatDetail,
     setRestaurantDetailInit,
     setUiIsLoader,
-    setIsRestaurantPage
+    setIsRestaurantPage,
+    setVoteInsertPlace
   },
   component: RestaurantDetail
 })

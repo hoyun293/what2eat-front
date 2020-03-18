@@ -6,7 +6,25 @@ import './VotePlaceItem.scss'
 import IconUi from './ui/IconUi'
 import ReviewStar from './ReviewStar'
 import { useHistory } from 'react-router-dom'
+import { connect } from '../redux/redux-connect'
+import { setRestaurantDistance } from '../redux/restaurant-detail/restaurant-detail-actions'
 
+interface IOwnProps {
+  placeId: string
+  name: string
+  rating: number
+  userRatingsTotal: number
+  photoUrl: string
+  distance: string
+  isAdded: boolean
+  onClickItem: Function
+  isReadOnly?: boolean
+}
+interface IStateProps {}
+
+interface IDispatchProps {
+  setRestaurantDistance: typeof setRestaurantDistance
+}
 interface IVotePlace {
   placeId: string
   name: string
@@ -19,7 +37,7 @@ interface IVotePlace {
   isReadOnly?: boolean
 }
 
-const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
+const VotePlaceItem: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProps> = ({
   placeId,
   name,
   rating,
@@ -28,6 +46,7 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
   distance,
   isAdded,
   onClickItem,
+  setRestaurantDistance,
   isReadOnly = false
 }) => {
   const history = useHistory()
@@ -36,6 +55,7 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
       key={placeId}
       className='item-container'
       onClick={() => {
+        setRestaurantDistance(getNumberUnit(distance))
         history.push(`/restaurant-detail/${placeId}`)
       }}
     >
@@ -78,4 +98,10 @@ const VotePlaceItem: React.FunctionComponent<IVotePlace> = ({
   )
 }
 
-export default VotePlaceItem
+export default connect<IOwnProps, IStateProps, IDispatchProps>({
+  mapStateToProps: () => ({}),
+  mapDispatchToProps: {
+    setRestaurantDistance
+  },
+  component: VotePlaceItem
+})

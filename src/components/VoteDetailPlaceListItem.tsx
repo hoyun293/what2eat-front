@@ -4,7 +4,10 @@ import { getNumberUnit } from '../utils/number-util'
 
 import './VoteDetailPlaceListItem.scss'
 import IconUi from './ui/IconUi'
-import { setIsRestaurantPage } from '../redux/restaurant-detail/restaurant-detail-actions'
+import {
+  setIsRestaurantPage,
+  setRestaurantDistance
+} from '../redux/restaurant-detail/restaurant-detail-actions'
 import { connect } from '../redux/redux-connect'
 
 interface IOwnProps {
@@ -31,6 +34,7 @@ interface IOwnProps2 {
 interface IStateProps {}
 interface IDispatchProps {
   setIsRestaurantPage: typeof setIsRestaurantPage
+  setRestaurantDistance: typeof setRestaurantDistance
 }
 interface IVoteDetailPlaceListItem {
   placeId: string
@@ -57,7 +61,8 @@ const VoteDetailPlaceListItemEditComponent: React.FC<IOwnProps2 & IStateProps & 
   isMostVoted,
   isMultiVote,
   onClickItem,
-  setIsRestaurantPage
+  setIsRestaurantPage,
+  setRestaurantDistance
 }) => {
   const history = useHistory()
 
@@ -72,6 +77,7 @@ const VoteDetailPlaceListItemEditComponent: React.FC<IOwnProps2 & IStateProps & 
         className='flex'
         onClick={() => {
           history.push(`/restaurant-detail/${placeId}`)
+          setRestaurantDistance(getNumberUnit(distance))
           setIsRestaurantPage(false)
         }}
       >
@@ -109,7 +115,8 @@ const VoteDetailPlaceListItemComponent: React.FC<IOwnProps & IStateProps & IDisp
   distance,
   isAdded,
   isMostVoted,
-  setIsRestaurantPage
+  setIsRestaurantPage,
+  setRestaurantDistance
 }) => {
   const history = useHistory()
 
@@ -124,7 +131,7 @@ const VoteDetailPlaceListItemComponent: React.FC<IOwnProps & IStateProps & IDisp
         className='flex'
         onClick={() => {
           history.push(`/restaurant-detail/${placeId}`)
-          console.log('?')
+          setRestaurantDistance(getNumberUnit(distance))
           setIsRestaurantPage(false)
         }}
       >
@@ -146,11 +153,11 @@ const VoteDetailPlaceListItemComponent: React.FC<IOwnProps & IStateProps & IDisp
 }
 export const VoteDetailPlaceListItem = connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: () => ({}),
-  mapDispatchToProps: { setIsRestaurantPage },
+  mapDispatchToProps: { setIsRestaurantPage, setRestaurantDistance },
   component: VoteDetailPlaceListItemComponent
 })
 export const VoteDetailPlaceListItemEdit = connect<IOwnProps2, IStateProps, IDispatchProps>({
   mapStateToProps: () => ({}),
-  mapDispatchToProps: { setIsRestaurantPage },
+  mapDispatchToProps: { setIsRestaurantPage, setRestaurantDistance },
   component: VoteDetailPlaceListItemEditComponent
 })
