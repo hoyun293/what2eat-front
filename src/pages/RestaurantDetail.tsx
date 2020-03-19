@@ -35,7 +35,6 @@ interface IDispatchProps {
   selectRestaurnatDetail: typeof selectRestaurnatDetail
   setRestaurantDetailInit: typeof setRestaurantDetailInit
   setUiIsLoader: typeof setUiIsLoader
-  setIsRestaurantPage: typeof setIsRestaurantPage
   setVoteInsertPlace: typeof setVoteInsertPlace
 }
 interface MatchParams {
@@ -66,7 +65,6 @@ const RestaurantDetail: React.FC<IOwnProps &
   setRestaurantDetailInit,
   setUiIsLoader,
   isVoteUpdatePage,
-  setIsRestaurantPage,
   setVoteInsertPlace,
   distance
 }) => {
@@ -123,7 +121,6 @@ const RestaurantDetail: React.FC<IOwnProps &
                 alt=''
                 onClick={() => {
                   history.goBack()
-                  setIsRestaurantPage(true)
                 }}
               />
             </div>
@@ -227,7 +224,6 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
     selectRestaurnatDetail,
     setRestaurantDetailInit,
     setUiIsLoader,
-    setIsRestaurantPage,
     setVoteInsertPlace
   },
   component: RestaurantDetail
