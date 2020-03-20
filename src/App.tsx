@@ -62,7 +62,7 @@ const App: React.FC<IAppProps> = ({
         <IonRouterOutlet>
           <Route path='/' component={Main} exact={true} />
           <Route path='/vote-save' component={VoteSave} exact={true} />
-          <Route path='/vote/:voteUrl' component={VoteDetail} />
+          <Route path='/vote/:voteUrl' component={VoteDetail} exact={true} />
           <Route path='/restaurant-detail/:placeId' component={RestaurantDetail} exact={true} />
           <Route path='/vote-update' component={voteUpdate} exact={true} />
           <Route path='/vote-update-foodcart' component={VoteUpdateFormFoodCart} exact={true} />

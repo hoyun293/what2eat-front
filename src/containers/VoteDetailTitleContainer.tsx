@@ -18,6 +18,7 @@ interface IOwnProps {
 }
 interface IStateProps {
   vote: IVoteDetail
+  isVoteEnd: boolean
 }
 interface IDispatchProps {
   setVoteDetailUpdateVote: typeof setVoteDetailUpdateVote
@@ -29,7 +30,8 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
   voteUrl,
   vote,
   setVoteDetailUpdateVote,
-  setUiIsLoader
+  setUiIsLoader,
+  isVoteEnd
 }) => {
   const [isShareOpen, setIsShareOpen] = useState(false)
 
@@ -49,24 +51,28 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
       <div className='text-xxxl white text-bold'>{vote.voteName}</div>
 
       <div className='flex flex-1 pt-6'>
-        <div
-          className='bg-white-opacity-30 flex-center white w-full br-md py-2'
-          onClick={() => {
-            setVoteDetailUpdateVote(vote)
-            history.push('/vote-update')
-          }}
-        >
-          <IconUi iconName='edit' className='pr-1 mt-2'></IconUi> 편집
-        </div>
-        <div
-          className='ml-2 flex-center bg-white w-full br-md py-2'
-          onClick={() => {
-            setIsShareOpen(true)
-            setUiIsLoader(true)
-          }}
-        >
-          <IconUi iconName='share' className='pr-1 mt-2'></IconUi> 투표초대
-        </div>
+        {isVoteEnd === false && (
+          <div
+            className='bg-white-opacity-30 flex-center white w-full br-md py-2'
+            onClick={() => {
+              setVoteDetailUpdateVote(vote)
+              history.push('/vote-update')
+            }}
+          >
+            <IconUi iconName='edit' className='pr-1 mt-2'></IconUi> 편집
+          </div>
+        )}
+        {isVoteEnd === false && (
+          <div
+            className='ml-2 flex-center bg-white w-full br-md py-2'
+            onClick={() => {
+              setIsShareOpen(true)
+              setUiIsLoader(true)
+            }}
+          >
+            <IconUi iconName='share' className='pr-1 mt-2'></IconUi> 투표초대
+          </div>
+        )}
       </div>
 
       <ShareLink shareUrl={`/vote/${voteUrl}`} isOpen={isShareOpen} setIsOpen={setIsShareOpen}></ShareLink>
@@ -76,7 +82,8 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ voteDetail }) => ({
-    vote: voteDetail.vote
+    vote: voteDetail.vote,
+    isVoteEnd: voteDetail.isVoteEnd
   }),
   mapDispatchToProps: {
     setVoteDetailUpdateVote,

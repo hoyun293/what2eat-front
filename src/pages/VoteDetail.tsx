@@ -10,7 +10,12 @@ import IconUi from '../components/ui/IconUi'
 
 import './VoteDetail.scss'
 
-import { selectVote, insertUserVotes, setVoteDetailInit } from '../redux/vote-detail/vote-detail-actions'
+import {
+  selectVote,
+  insertUserVotes,
+  setVoteDetailInit,
+  setVoteDetailIsVoteEnd
+} from '../redux/vote-detail/vote-detail-actions'
 import VoteDetailTitleContainer from '../containers/VoteDetailTitleContainer'
 import VoteDetailPlaceListContainer from '../containers/VoteDetailPlaceListContainer'
 import { IVoteDetail } from '../models/vote'
@@ -32,6 +37,7 @@ interface IDispatchProps {
   insertUserVotes: typeof insertUserVotes
   setUiIsLoader: typeof setUiIsLoader
   setVoteDetailInit: typeof setVoteDetailInit
+  setVoteDetailIsVoteEnd: typeof setVoteDetailIsVoteEnd
 }
 
 interface MatchParams {
@@ -54,7 +60,8 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
   votePlaceIdsForm,
   selectVote,
   insertUserVotes,
-  setVoteDetailInit
+  setVoteDetailInit,
+  setVoteDetailIsVoteEnd
 }) => {
   const [scrollY, setScrollY] = useState(0)
   const [isVoteEdit, setIsVoteEdit] = useState(false)
@@ -78,6 +85,11 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
     setUiIsLoader(isLoading)
   }, [isLoading]) // eslint-disable-line
 
+  useEffect(() => {
+    return () => {
+      setVoteDetailIsVoteEnd(true)
+    }
+  }, [])
   return (
     <IonPage>
       <IonContent
@@ -94,17 +106,13 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
           horizontal='start'
           slot='fixed'
           className='w-full top-0-safe-area left-0'
-          onClick={() => history.push('/')}
+          onClick={() => history.goBack()}
         >
           {scrollY === 0 ? (
-            <IconUi
-              iconName='left-arrow-white'
-              className='pl-4 pt-3'
-              onClick={() => history.push('/')}
-            ></IconUi>
+            <IconUi iconName='left-arrow-white' className='pl-4 pt-3' onClick={() => history.goBack}></IconUi>
           ) : (
             <div className='bg-white flex items-center height-50'>
-              <IconUi iconName='left-arrow' className='pl-4 pr-3' onClick={() => history.push('/')}></IconUi>
+              <IconUi iconName='left-arrow' className='pl-4 pr-3' onClick={() => history.goBack}></IconUi>
               <div className='w-2/3 text-xl text-center text-bold'>{vote.voteName}</div>
             </div>
           )}
@@ -159,7 +167,8 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
     selectVote,
     insertUserVotes,
     setVoteDetailInit,
-    setUiIsLoader
+    setUiIsLoader,
+    setVoteDetailIsVoteEnd
   },
   component: VoteDetail
 })

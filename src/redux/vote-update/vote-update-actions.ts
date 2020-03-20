@@ -1,4 +1,4 @@
-import { IVote, IVoteDetail } from '../../models/vote'
+import { IVoteDetail } from '../../models/vote'
 import {
   SET_VOTE_DETAIL_UPDATE_VOTE,
   ADD_VOTE_DETAIL_UPDATE_PLACEID,
@@ -11,7 +11,6 @@ import { IVoteDetailPlace } from '../../models/place'
 import { IPostVote } from '../vote-insert/vote-insert-payloads'
 import { postVoteUpdate } from '../../api/vote-update-api'
 import { setVoteDetailRefetch } from '../vote-detail/vote-detail-actions'
-import { useHistory } from 'react-router'
 
 export const editUserVotes = (voteId: string, payload: string[]) => async (dispatch: React.Dispatch<any>) => {
   //dispatch()
@@ -25,7 +24,7 @@ export const editVoteDetail = (vote: IPostVote, voteUrl: string) => async (dispa
     })
     .catch(err => {
       dispatch(setVoteDetailUpdateErrorMessage(err.errorMessage))
-      console.log('err?')
+      console.log(err)
     })
     .finally(() => {
       dispatch(setVoteDetailUpdateIsLoading(false))
