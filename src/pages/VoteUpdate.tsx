@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { IonPage, IonContent, IonImg, useIonViewWillEnter } from '@ionic/react'
+import { IonPage, IonContent, IonImg, useIonViewWillEnter, IonPopover } from '@ionic/react'
 import { IVote, IVoteForm } from '../models/vote'
 import './VoteUpdate.scss'
 import InputUi from '../components/ui/InputUi'
@@ -7,7 +7,11 @@ import IconUi from '../components/ui/IconUi'
 import DateTime from '../components/DateTime'
 import ButtonUi from '../components/ui/ButtonUi'
 import { connect } from '../redux/redux-connect'
-import { editVoteDetail, setVoteDetailUpdateVote } from '../redux/vote-update/vote-update-actions'
+import {
+  editVoteDetail,
+  setVoteDetailUpdateVote,
+  setVoteDetailUpdateErrorMessage
+} from '../redux/vote-update/vote-update-actions'
 import { useHistory } from 'react-router-dom'
 import {
   changeStep,
@@ -23,6 +27,7 @@ interface IStateProps {
   voteUpdateForm: IVote
   voteUrl: string
   isLoading: boolean
+  voteUpdateErrMessage: string
 }
 interface IDispatchProps {
   editVoteDetail: typeof editVoteDetail
@@ -31,6 +36,7 @@ interface IDispatchProps {
   deleteVoteInsertPlaceAll: typeof deleteVoteInsertPlaceAll
   setUiIsLoader: typeof setUiIsLoader
   setVoteDetailUpdateVote: typeof setVoteDetailUpdateVote
+  setVoteDetailUpdateErrorMessage: typeof setVoteDetailUpdateErrorMessage
 }
 
 const VoteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
@@ -41,7 +47,9 @@ const VoteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   setUiIsLoader,
   setVoteDetailUpdateVote,
   voteUrl,
-  isLoading
+  isLoading,
+  voteUpdateErrMessage,
+  setVoteDetailUpdateErrorMessage
 }) => {
   const datepickerRef = useRef<HTMLInputElement>()
   const history = useHistory()
@@ -61,7 +69,6 @@ const VoteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   useIonViewWillEnter(() => {
     setUiIsLoader(false)
   })
-  console.log(index)
   return (
     <IonPage>
       <IonContent>
@@ -170,6 +177,25 @@ const VoteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
             }}
           />
         </div>
+
+        <IonPopover
+          isOpen={voteUpdateErrMessage !== ''}
+          onWillDismiss={() => {
+            setVoteDetailUpdateErrorMessage('')
+          }}
+        >
+          <div>
+            <div className='flex-col min-h-100 max-h-half-screen overflow-auto text-center'>
+              <div className='errString'>{voteUpdateErrMessage}</div>
+            </div>
+            <div
+              onClick={() => setVoteDetailUpdateErrorMessage('')}
+              className='purple text-sm flex-center cart-list-modal__confirm-btn'
+            >
+              확인
+            </div>
+          </div>
+        </IonPopover>
       </IonContent>
     </IonPage>
   )
@@ -179,7 +205,8 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ voteUpdateDetail, voteDetail }) => ({
     voteUpdateForm: voteUpdateDetail.vote,
     voteUrl: voteDetail.voteUrl,
-    isLoading: voteUpdateDetail.isLoading
+    isLoading: voteUpdateDetail.isLoading,
+    voteUpdateErrMessage: voteUpdateDetail.errorMessage
   }),
   mapDispatchToProps: {
     editVoteDetail,
@@ -187,7 +214,8 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
     setVoteInsertPlace,
     deleteVoteInsertPlaceAll,
     setUiIsLoader,
-    setVoteDetailUpdateVote
+    setVoteDetailUpdateVote,
+    setVoteDetailUpdateErrorMessage
   },
   component: VoteUpdate
 })

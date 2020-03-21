@@ -106,7 +106,7 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
           horizontal='start'
           slot='fixed'
           className='w-full top-0-safe-area left-0'
-          onClick={() => history.goBack()}
+          onClick={() => history.push('/')}
         >
           {scrollY === 0 ? (
             <IconUi iconName='left-arrow-white' className='pl-4 pt-3' onClick={() => history.goBack}></IconUi>

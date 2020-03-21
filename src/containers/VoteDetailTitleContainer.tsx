@@ -49,7 +49,6 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
         </div>
       </div>
       <div className='text-xxxl white text-bold'>{vote.voteName}</div>
-
       <div className='flex flex-1 pt-6'>
         {isVoteEnd === false && (
           <div

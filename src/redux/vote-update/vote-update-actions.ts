@@ -23,8 +23,11 @@ export const editVoteDetail = (vote: IPostVote, voteUrl: string) => async (dispa
       dispatch(setVoteDetailRefetch())
     })
     .catch(err => {
-      dispatch(setVoteDetailUpdateErrorMessage(err.errorMessage))
-      console.log(err)
+      var errMessage: string = err.response.data
+      var tempStr = errMessage.substr(17)
+      var errMsg = tempStr.substr(0, tempStr.length - 2)
+      // eslint-disable-next-line @typescript-eslint/no-unused-expressions
+      dispatch(setVoteDetailUpdateErrorMessage(errMsg))
     })
     .finally(() => {
       dispatch(setVoteDetailUpdateIsLoading(false))
