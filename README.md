@@ -81,3 +81,13 @@ $ npx cap open
 - build 한 파일 구동
 
 > yarn build && yarn serve:build
+
+- 다음 포스팅을 참고합니다.
+
+https://www.joshmorony.com/deploying-capacitor-applications-to-android-development-distribution/
+
+- android keysotre password : what2eat11!!
+
+- ios distribution key : htbi11!!
+
+- keystore 파일이 필요하면 저한테 문의해주세요.
