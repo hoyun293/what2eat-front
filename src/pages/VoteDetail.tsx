@@ -89,7 +89,8 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
     return () => {
       setVoteDetailIsVoteEnd(true)
     }
-  }, [])
+  }, []) // eslint-disable-line
+
   return (
     <IonPage>
       <IonContent

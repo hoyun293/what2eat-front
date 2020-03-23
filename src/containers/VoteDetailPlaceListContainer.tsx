@@ -21,6 +21,7 @@ interface IOwnProps {
 }
 interface IStateProps {
   isVoteDone: boolean
+  isVoteEnd: boolean
   vote: IVoteDetail
   votePlaceIdsForm: string[]
 }
@@ -35,6 +36,7 @@ const VoteDetailPlaceListContainer: React.FC<IOwnProps & IStateProps & IDispatch
   themeNum,
   isVoteEdit,
   isVoteDone,
+  isVoteEnd,
   vote,
   votePlaceIdsForm,
   setVoteDetailVotePlaceIdForm,
@@ -71,7 +73,7 @@ const VoteDetailPlaceListContainer: React.FC<IOwnProps & IStateProps & IDispatch
         </div>
         <ul>
           {_.map(vote.votePlaces, (v, i) =>
-            !isVoteDone || isVoteEdit ? (
+            (!isVoteDone && !isVoteEnd) || isVoteEdit ? (
               <VoteDetailPlaceListItemEdit
                 key={v.placeId}
                 placeId={v.placeId}
@@ -121,6 +123,7 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ voteDetail }) => ({
     vote: voteDetail.vote,
     isVoteDone: voteDetail.isVoteDone,
+    isVoteEnd: voteDetail.isVoteEnd,
     votePlaceIdsForm: voteDetail.votePlaceIdsForm
   }),
   mapDispatchToProps: {
