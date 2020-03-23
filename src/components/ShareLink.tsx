@@ -82,7 +82,12 @@ const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProp
   }
 
   return (
-    <IonPopover isOpen={isOpen} cssClass='cart-list-modal' onWillPresent={() => setUiIsLoader(false)}>
+    <IonPopover
+      isOpen={isOpen}
+      cssClass='cart-list-modal'
+      onWillPresent={() => setUiIsLoader(false)}
+      onDidDismiss={() => setIsOpen(false)}
+    >
       <Helmet
         script={[{ src: '//developers.kakao.com/sdk/js/kakao.min.js' }]}
         onChangeClientState={(newState, addedTags) => handleScriptInject(addedTags)}
