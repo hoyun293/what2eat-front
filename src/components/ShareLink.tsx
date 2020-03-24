@@ -28,7 +28,6 @@ declare const Kakao: any
 const shareKakao = (shareUrl: string, imageUrl: string, success = () => {}) => {
   const url = `${config.WEB_URL}${shareUrl}`
   if (isMobile) {
-    console.log(Kakao.Link)
     return Kakao.Link.sendDefault({
       // container: '#kakao-link-btn',
       objectType: 'feed',
@@ -39,7 +38,7 @@ const shareKakao = (shareUrl: string, imageUrl: string, success = () => {}) => {
       },
       buttons: [
         {
-          title: '앱에서 바로 확인',
+          title: '투표하러가기',
           link: { mobileWebUrl: url, webUrl: url }
         }
       ],
@@ -95,7 +94,7 @@ const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProp
       <div>
         <div className='flex-center text-xl text-medium pt-5 pb-2'>투표 초대하기</div>
         <div className='flex flex-center'>
-          <div
+          {/* <div
             id='kakao-link-btn'
             className='flex-col'
             onClick={() =>
@@ -106,9 +105,10 @@ const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProp
           >
             <IonImg src='/assets/img/share-kakao.png' className='w-20' alt='' />
             <div className='text-center text-xs dark-gray'>카카오톡</div>
-          </div>
+          </div> */}
           <div
-            className='flex-col ml-8'
+            // className='flex-col ml-8'
+            className='flex-col'
             onClick={() =>
               copyUrl(shareUrl, () => {
                 setIsOpen(false)
