@@ -16,6 +16,7 @@ import VoteUpdateFormFoodCart from './pages/VoteUpdateFormFoodCart'
 import RestaurantDetail from './pages/RestaurantDetail'
 import VoteSave from './pages/VoteSave'
 import VoteDetail from './pages/VoteDetail'
+import Privacy from './pages/Privacy'
 
 const { SplashScreen } = Plugins
 
@@ -66,6 +67,7 @@ const App: React.FC<IAppProps> = ({
           <Route path='/restaurant-detail/:placeId' component={RestaurantDetail} exact={true} />
           <Route path='/vote-update' component={voteUpdate} exact={true} />
           <Route path='/vote-update-foodcart' component={VoteUpdateFormFoodCart} exact={true} />
+          <Route path='/privacy' component={Privacy} exact={true} />
           <Redirect to='/' />
         </IonRouterOutlet>
       </IonReactRouter>
