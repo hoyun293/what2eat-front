@@ -154,12 +154,14 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
         >
           <IonRippleEffect></IonRippleEffect>
           <div className='ellipsis'>{address}</div>
-          {coordinate.lat !== 0 && <IconUi className='ml-2 height-30' iconName='location'></IconUi>}
+          {coordinate.lat !== 0 && (
+            <IconUi className='iconLocation ml-2 height-30' iconName='location'></IconUi>
+          )}
         </div>
         <div className='flex items-center justify-between mt-3'>
           <div className='filter-btn flex-center text-lg m-black'>
             <IonLabel>
-              <IconUi iconName='filter' className='pr-1'></IconUi>
+              <IconUi iconName='filter' className='iconFilter pr-1'></IconUi>
             </IonLabel>
             <IonSelect value={filterDistance} onIonChange={({ detail }) => setFilterDistance(detail.value)}>
               <IonSelectOption value={500}>0.5 km</IonSelectOption>
@@ -170,7 +172,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
             </IonSelect>
           </div>
           <div className='flex-center text-lg m-black' onClick={() => toggleSortBy()}>
-            <IconUi iconName='sort' className='pt-1 pr-1'></IconUi> {rankby.label}
+            <IconUi iconName='sort' className='iconSort pt-1 pr-1'></IconUi> {rankby.label}
           </div>
         </div>
 
@@ -279,7 +281,11 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
         }}
       >
         <div className='flex-center cart-list__btn'>
-          <IconUi iconName='cart-list' className='pt-1' isLoading={isLoadingShowCartModal}></IconUi>
+          <IconUi
+            iconName='cart-list'
+            className='iconCartList pt-1'
+            isLoading={isLoadingShowCartModal}
+          ></IconUi>
         </div>
       </IonFab>
     </IonContent>

@@ -22,5 +22,18 @@
 
   .info-container {
     padding: 1.7rem 2rem 1.5rem;
+
+    .iconRemove {
+      img {
+        width: 4.2rem;
+        height: 4.2rem;
+      }
+    }
+    .iconAdd {
+      img {
+        width: 4.2rem;
+        height: 4.2rem;
+      }
+    }
   }
 }

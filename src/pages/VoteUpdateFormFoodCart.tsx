@@ -12,7 +12,7 @@ import {
 } from '../redux/vote-update/vote-update-actions'
 import { IVoteDetailPlace } from '../models/place'
 import _ from 'lodash'
-
+import './VoteUpdateFormFoodCart.scss'
 interface IOwnProps {}
 
 interface IStateProps {
@@ -37,7 +37,7 @@ const VoteUpdateFormFoodCart: React.FC<IOwnProps & IStateProps & IDispatchProps>
         <IonToolbar>
           <div className='flex justify-between items-center px-container'>
             <div>
-              <IconUi iconName='left-arrow' onClick={() => history.goBack()} />
+              <IconUi className='iconArrow' iconName='left-arrow' onClick={() => history.goBack()} />
             </div>
             <div>
               <IonTitle>

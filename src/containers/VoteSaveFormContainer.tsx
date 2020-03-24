@@ -49,7 +49,7 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
 
       <div className='py-3 px-container flex items-center justify-between'>
         <div className='flex items-center'>
-          <IconUi className='pr-2' iconName='check'></IconUi>
+          <IconUi className='iconCheck pr-2' iconName='check'></IconUi>
           <div className='text-xl text-medium'>복수투표 가능</div>
         </div>
         <IonToggle
@@ -63,7 +63,7 @@ const VoteSaveFormContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> 
 
       <div className='py-3 px-container flex items-center justify-between'>
         <div className='flex items-center'>
-          <IconUi className='pr-2 mt-1' iconName='clock'></IconUi>
+          <IconUi className='iconClock pr-2 mt-1' iconName='clock'></IconUi>
           <div className='text-xl text-medium'>마감시한 설정</div>
         </div>
         <div className='purple flex items-center'>

@@ -90,8 +90,8 @@ const VotePlaceItem: React.FunctionComponent<IOwnProps & IStateProps & IDispatch
           }}
           className={isReadOnly ? 'hidden' : ''}
         >
-          <IconUi className={`${!isAdded ? 'hidden' : ''}`} iconName='remove-btn'></IconUi>
-          <IconUi className={`${isAdded ? 'hidden' : ''}`} iconName='add-btn'></IconUi>
+          <IconUi className={`${!isAdded ? 'hidden' : 'iconRemove'}`} iconName='remove-btn'></IconUi>
+          <IconUi className={`${isAdded ? 'hidden' : 'iconAdd'}`} iconName='add-btn'></IconUi>
         </div>
       </div>
     </li>

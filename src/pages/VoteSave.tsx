@@ -68,7 +68,11 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
             className='top-0-safe-area'
             onClick={() => history.push('/')}
           >
-            <IconUi iconName='close' className='pt-4 pr-2' onClick={() => history.push('/')}></IconUi>
+            <IconUi
+              iconName='close'
+              className='iconStepOneClose pt-4 pr-2'
+              onClick={() => history.push('/')}
+            ></IconUi>
           </IonFab>
           <VoteSaveFormContainer />
         </>
@@ -79,7 +83,11 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
             <IonToolbar className={`toolbar--step${step}`}>
               <div className='flex justify-between items-center px-container'>
                 <div>
-                  <IconUi iconName='left-arrow' onClick={() => setVoteInsertStep(step - 1)} />
+                  <IconUi
+                    iconName='left-arrow'
+                    className='leftArrow'
+                    onClick={() => setVoteInsertStep(step - 1)}
+                  />
                 </div>
                 <div>
                   <IonTitle>
@@ -87,7 +95,11 @@ const VoteSave: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
                   </IonTitle>
                 </div>
                 <div>
-                  <IconUi iconName='close' onClick={() => history.push('/')}></IconUi>
+                  <IconUi
+                    iconName='close'
+                    className='iconStepTwoClose'
+                    onClick={() => history.push('/')}
+                  ></IconUi>
                 </div>
               </div>
             </IonToolbar>
