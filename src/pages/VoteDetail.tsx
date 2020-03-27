@@ -114,7 +114,7 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
           ) : (
             <div className='bg-white flex items-center height-50'>
               <IconUi iconName='left-arrow' className='pl-4 pr-3' onClick={() => history.goBack}></IconUi>
-              <div className='w-2/3 text-xl text-center text-bold'>{vote.voteName}</div>
+              <div className='header-title w-2/3 text-xl text-center text-bold'>{vote.voteName}</div>
             </div>
           )}
         </IonFab>

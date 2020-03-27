@@ -82,7 +82,7 @@ const VoteDetailPlaceListItemEditComponent: React.FC<IOwnProps2 & IStateProps & 
         }}
       >
         <img src={photoUrl} alt='' className='br-lg place-image' />
-        <div className='flex-col justify-center ml-3'>
+        <div className='flex-col list-text justify-center ml-3'>
           <div>{name}</div>
           <div className='mt-1 flex text-base leading-none'>
             <div className='flex-center gray'>
@@ -136,7 +136,7 @@ const VoteDetailPlaceListItemComponent: React.FC<IOwnProps & IStateProps & IDisp
         }}
       >
         <img src={photoUrl} alt='' className='br-lg place-image' />
-        <div className='flex-col justify-center ml-3'>
+        <div className='flex-col list-text justify-center ml-3'>
           <div>{name}</div>
           <div className='mt-1 flex text-base leading-none'>
             <div className='flex-center gray'>
@@ -147,7 +147,9 @@ const VoteDetailPlaceListItemComponent: React.FC<IOwnProps & IStateProps & IDisp
           </div>
         </div>
       </div>
-      <div className='flex-center'>{isAdded && <IconUi iconName='vote-done'></IconUi>}</div>
+      <div className='flex-center'>
+        {isAdded && <IconUi className='vote-done' iconName='vote-done'></IconUi>}
+      </div>
     </li>
   )
 }
