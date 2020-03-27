@@ -23,6 +23,8 @@ const IconUi: React.FunctionComponent<IIconUiProps> = ({
         <IonSpinner name='crescent' color='tertiary' />
       ) : iconName === 'star-full' || iconName === 'star-half' || iconName === 'star-empty' ? (
         <img className='reviewStar' src={iconSrc} alt='' />
+      ) : iconName === 'vote-done' ? (
+        <img src={iconSrc} alt='' />
       ) : (
         <img src={iconSrc} alt='' />
       )}

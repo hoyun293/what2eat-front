@@ -10,15 +10,14 @@ interface IDispatchProps {}
 
 const PopUpImageContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({ photoUrl, onClick }) => {
   return (
-    <div className='popUpParent'>
-      <img
-        className='popUpImage'
-        src={photoUrl}
-        alt=''
-        onClick={() => {
-          onClick()
-        }}
-      ></img>
+    <div
+      className='popUpParent'
+      onClick={() => {
+        console.log('test')
+        onClick()
+      }}
+    >
+      <img className='popUpImage' src={photoUrl} alt=''></img>
     </div>
   )
 }

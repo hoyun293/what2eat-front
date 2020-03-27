@@ -11,3 +11,9 @@ ion-content.theme-1 {
 ion-content.theme-2 {
   --background: #468ba5;
 }
+
+.header-title {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

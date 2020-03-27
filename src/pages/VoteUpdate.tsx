@@ -76,14 +76,16 @@ const VoteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
           <div className='px-container flex text-center'>
             <div className='dummy'></div>
             <div className='HeaderTitle text-xxl'>투표편집</div>
-            <img
-              className='HeaderIcon'
-              src='/assets/icon/close.svg'
-              alt=''
-              onClick={() => {
-                history.goBack()
-              }}
-            />
+            <div>
+              <img
+                className='HeaderIcon'
+                src='/assets/icon/close.svg'
+                alt=''
+                onClick={() => {
+                  history.goBack()
+                }}
+              />
+            </div>
           </div>
           <img className='bodyImg ' src='/assets/img/vote-update.svg' alt='' />
           <div className='x-container'>
@@ -114,7 +116,7 @@ const VoteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
           <div className='x-divider' />
           <div className='py-4 px-container flex items-center justify-between'>
             <div className='flex items-center'>
-              <IconUi className='iconUi pr-3' iconName='clock'></IconUi>
+              <IconUi className='clockIconUi pr-3' iconName='clock'></IconUi>
               <div className='deadlineStr text-xl text-medium '>마감시한 설정</div>
             </div>
             <div className='purple flex items-center text-base'>
@@ -135,7 +137,7 @@ const VoteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
           <div className='x-divider' />
           <div className='py-4 px-container flex items-center justify-between'>
             <div className='flex items-center'>
-              <IconUi className='iconUi pr-3' iconName='add'></IconUi>
+              <IconUi className='addIconUi pr-3' iconName='add'></IconUi>
               <div className='multiStr1 text-xl text-medium'>투표지 추가하기</div>
             </div>
             <div className='purple flex items-center'>
