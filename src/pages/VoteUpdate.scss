@@ -14,6 +14,7 @@
   padding-top: 1rem;
   width: 3rem;
   height: 3rem;
+  max-width: none;
 }
 .bodyImg {
   margin-top: 1.5rem;
@@ -34,7 +35,15 @@
   margin-top: 5.8rem;
 }
 
-.iconUi {
+.clockIconUi {
+  height: 1.9rem;
+  img {
+    width: 2rem;
+    height: 1.8rem;
+  }
+}
+.addIconUi {
+  height: 1.9rem;
   img {
     width: 2rem;
     height: 1.8rem;
