@@ -62,7 +62,8 @@ const VoteUpdate: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 
   useEffect(() => {
     if (index >= 1 && isLoading === false) {
-      history.push(`/vote/${voteUrl}`)
+      /*history.push(`/vote/${voteUrl}`)*/
+      history.goBack()
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLoading])

@@ -45,6 +45,13 @@ export default function userReducer(state: IVoteDetailState, action: TVoteAction
     case SET_VOTE_DETAIL_ERROR_MESSAGE:
       return { ...state, errorMessage: action.errorMessage }
     case SET_VOTE_DETAIL_INIT:
-      return { ...action.voteDetail }
+      console.log(state)
+      //  var newVoteDetail = Object.assign(action.voteDetail)
+      // console.log(newVoteDetail)
+
+      //return { ...state, ...newVoteDetail }
+      //      console.log(action.voteDetail)
+      //  return action.voteDetail
+      return { ...state, ...action.voteDetail }
   }
 }

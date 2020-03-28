@@ -1,6 +1,6 @@
 import { IonContent, IonFooter, IonPage, IonFab, useIonViewWillEnter } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router'
 import { RouteComponentProps } from 'react-router'
 import _ from 'lodash'
 
@@ -90,7 +90,6 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
       setVoteDetailIsVoteEnd(true)
     }
   }, []) // eslint-disable-line
-
   return (
     <IonPage>
       <IonContent
@@ -107,7 +106,7 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
           horizontal='start'
           slot='fixed'
           className='w-full top-0-safe-area left-0'
-          onClick={() => history.push('/')}
+          onClick={() => history.goBack() /*history.push('/')*/}
         >
           {scrollY === 0 ? (
             <IconUi iconName='left-arrow-white' className='pl-4 pt-3' onClick={() => history.goBack}></IconUi>
