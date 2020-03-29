@@ -130,6 +130,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
     // TODO: 투표방 생성 이후, 페이지 재진입시에 호출이 필요해서 필요합니다.
     // 제가 임의로 수정했으니, 한번 확인해주셔요 ^^
     selectVoteRooms()
+    console.log(index)
     setIndex(index + 1)
   })
 
@@ -138,7 +139,6 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
     //   selectVoteRooms()
     //   setIndex(index + 1)
     // }
-
     //selectVoteRooms(pagingNum, bool)  onClick 시 pagingNum, bool만 바꾸게 해야되지 않을까?
     // toggle 값 바뀌면 useEffect가 실행되고 selectVoteRooms가 2번실행될듯?
     //console.log('addVote start')
@@ -200,7 +200,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
           }}
         >
           <MainFormVoteRoomListContainer sortedVoteRooms={votes} />
-          {votes.length === 0 && (
+          {index >= 2 && votes.length === 0 && (
             <img className='welcome_tooltip' src='/assets/img/tooltip_welcome.svg' alt=''></img>
           )}
           <div
