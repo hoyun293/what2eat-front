@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="304" height="152.45" viewBox="0 0 304 152.45">
+    <defs>
+        <clipPath id="prefix__clip-path">
+            <path id="prefix__사각형_162" d="M0 0H27.641V21.348H0z" data-name="사각형 162" style="stroke-width:2px;stroke:#111;fill:#fee000"/>
+        </clipPath>
+        <filter id="prefix__talk" width="304" height="105.45" x="0" y="47" filterUnits="userSpaceOnUse">
+            <feOffset dy="5"/>
+            <feGaussianBlur result="blur" stdDeviation="4"/>
+            <feFlood flood-opacity=".161"/>
+            <feComposite in2="blur" operator="in"/>
+            <feComposite in="SourceGraphic"/>
+        </filter>
+        <style>
+            .prefix__cls-5{fill:#fff}.prefix__cls-14,.prefix__cls-9{fill:#111}.prefix__cls-13,.prefix__cls-14{stroke:none}
+        </style>
+    </defs>
+    <g id="prefix__tooltip_welcome" transform="translate(-28 -406)">
+        <g transform="translate(28 406)">
+            <path id="prefix__talk-2" d="M-3475.393-35.136l-4.864-4.864H-3604a10 10 0 0 1-10-10v-56a10 10 0 0 1 10-10h260a10 10 0 0 1 10 10v56a10 10 0 0 1-10 10h-123.7l-4.864 4.864a1.993 1.993 0 0 1-1.414.586 1.993 1.993 0 0 1-1.415-.586z" data-name="talk" transform="translate(3626 170)" style="fill:#fff"/>
+        </g>
+        <text id="prefix__반가워요__투표를_만들어서_시작해_볼까요_" data-name="반가워요. 투표를 만들어서 시작해 볼까요?" transform="translate(180 493)" style="font-size:15px;font-family:NotoSansCJKkr-Regular,Noto Sans CJK KR;letter-spacing:0;fill:#111">
+            <tspan x="-29.679" y="0">반가워요.</tspan><tspan x="-98.271" y="21">투표를 만들어서 시작해 볼까요?</tspan>
+        </text>
+        <g id="prefix__그룹_1237" data-name="그룹 1237" transform="translate(0 5)">
+            <g id="prefix__list_vote_icon_on" transform="translate(158.651 404.652)">
+                <path id="prefix__bg" d="M0 0H300V140H0z" transform="translate(-128.651 -3.652)" style="opacity:0;fill:#fff"/>
+                <g id="prefix__그룹_797" data-name="그룹 797" transform="translate(1.888 20.416)">
+                    <g id="prefix__합치기_136" class="prefix__cls-5" data-name="합치기 136">
+                        <path d="M35.57 27.999H3.54l-.37-13.947-.02-.713-.712-.017-1.027-.025-.184-3.733L3.473 4.31h.043l.213-.368c.614-1.061 1.457-1.88 2.504-2.434C7.172 1.012 8.25.75 9.35.75h20.405c1.791 0 3.755 1.118 4.776 2.72l.225.353.12-.002 3.451 5.801-.194 4.56-1.993-.048-.78-.02.012.78.2 13.105z" class="prefix__cls-13" transform="translate(.088)"/>
+                        <path d="M34.809 27.249l-.188-12.343-.024-1.56 1.56.038 1.257.03.153-3.6-3.114-5.236-.105.001-.45-.706C33.02 2.498 31.278 1.5 29.754 1.5H9.349c-1.004 0-3.499.275-4.97 2.817l-.356.614L1.985 9.7l.14 2.864.331.008 1.426.034.038 1.426.35 13.217h30.539m1.523 1.5H2.81L2.42 14.072.696 14.03.47 9.428l2.505-5.86.105-.002C4.528 1.066 7.017 0 9.35 0h20.404C31.786 0 34 1.243 35.163 3.067l.135-.002 3.787 6.366-.236 5.518-2.729-.066.212 13.866z" class="prefix__cls-14" transform="translate(.088)"/>
+                    </g>
+                    <g id="prefix__패스_899" data-name="패스 899" style="fill:#fee000">
+                        <path d="M33.33 32.038H5.395c-2.568 0-4.657-2.257-4.657-5.03V3.718l.085-.077.075-.069c.02.2.064.402.14.6.152.394.499.929 1.287 1.276.64.45 1.943.672 4.66.804l.018.001h.018c7.175.017 12.949.026 17.16.026 3.75 0 5.54-.007 6.384-.013.516-.003.781-.005.935-.013H31.5c1.511 0 3.204-.041 4.317-.348 1.756-.404 1.994-1.633 1.95-2.73.103.114.18.212.219.287v23.546c0 2.773-2.089 5.03-4.657 5.03z" class="prefix__cls-13" transform="translate(.472 6.175)"/>
+                        <path d="M1.49 5.845v21.163c0 2.36 1.752 4.28 3.906 4.28h27.933c2.155 0 3.907-1.92 3.907-4.28V6.12c-.346.23-.758.401-1.235.512-1.196.326-2.937.371-4.489.371-.19.008-.476.01-.94.013-1.212.008-3.42.013-6.39.013-4.211 0-9.985-.009-17.162-.026h-.035l-.035-.001c-2.857-.14-4.205-.374-4.994-.898-.172-.08-.327-.167-.467-.259M36.025.75c.44.298 2.711 1.976 2.711 2.635v23.624c0 3.192-2.42 5.78-5.407 5.78H5.396c-2.986 0-5.407-2.588-5.407-5.78V3.384c.026-.016 2.149-1.972 2.23-1.972h.001c.035.11-1.615 2.538.485 3.382.489.415 2.089.6 4.318.71 8.11.018 13.533.025 17.16.025 7.252 0 7.317-.026 7.317-.026 1.41 0 3.107-.038 4.133-.325 1.25-.282 1.456-1.004 1.373-2.166.019-.26-.985-2.263-.981-2.263z" class="prefix__cls-14" transform="translate(.472 6.175)"/>
+                    </g>
+                    <path id="prefix__패스_1142" d="M0-2.4S.575-.188 5.157.124c16.853.263-.883-.048 24 0 4.312 0 5.718-2.337 5.718-2.337v19.784a4.471 4.471 0 0 1-4.475 4.471H4.471A4.471 4.471 0 0 1 0 17.571V-2.4z" data-name="패스 1142" transform="translate(1.876 15.319)" style="fill:#fee000"/>
+                    <rect id="prefix__사각형_159" width="14.3" height="1.276" data-name="사각형 159" rx=".638" transform="translate(12.01 6.077)" style="fill:#16181a"/>
+                    <g id="prefix__그룹_1236" data-name="그룹 1236" transform="translate(1 .5)">
+                        <rect id="prefix__사각형_400" width="2" height="4" class="prefix__cls-9" data-name="사각형 400" rx="1" transform="translate(15.461 19.932)"/>
+                        <rect id="prefix__사각형_401" width="2" height="4" class="prefix__cls-9" data-name="사각형 401" rx="1" transform="translate(20.461 19.932)"/>
+                    </g>
+                </g>
+                <g id="prefix__그룹_58" data-name="그룹 58" transform="translate(9.602 5.259)">
+                    <g id="prefix__사각형_161" data-name="사각형 161" transform="rotate(45 9.318 18.75)" style="stroke-width:1.5px;stroke:#111;fill:#fee000">
+                        <rect width="16.219" height="22.301" class="prefix__cls-13" rx="3"/>
+                        <rect width="14.719" height="20.801" x=".75" y=".75" rx="2.25" style="fill:none"/>
+                    </g>
+                </g>
+                <path id="prefix__패스_1217" d="M3788.145 570.133s2.049 3.433 8.542 3.179c6.14.033 8.019-3.179 8.019-3.179" data-name="패스 1217" transform="translate(-3774.296 -522.964)" style="stroke-linecap:round;fill:none;stroke-width:1.5px;stroke:#111"/>
+                <g id="prefix__패스_1218" class="prefix__cls-5" data-name="패스 1218">
+                    <path d="M2.274 4.475c-.66 0-1.196-.14-1.553-.262L.75 2.934v-.017C.75 1.722 1.722.75 2.917.75c1.195 0 2.167.972 2.167 2.167v.955c-.741.286-1.49.477-2.23.568-.193.023-.388.035-.58.035z" class="prefix__cls-13" transform="rotate(-30 98.406 -21.93)"/>
+                    <path d="M2.917 1.5c-.781 0-1.417.636-1.417 1.417v.034l-.016.695c.23.046.494.08.79.08.162 0 .326-.01.488-.03.521-.064 1.047-.182 1.572-.353v-.426c0-.781-.636-1.417-1.417-1.417m0-1.5c1.61 0 2.917 1.306 2.917 2.917v1.458c-.031 0-1.25.609-2.89.81-.234.028-.458.04-.67.04-1.286 0-2.15-.453-2.315-.497L0 2.917C0 1.306 1.306 0 2.917 0z" class="prefix__cls-14" transform="rotate(-30 98.406 -21.93)"/>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

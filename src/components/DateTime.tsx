@@ -23,7 +23,7 @@ const DateTime: React.FunctionComponent<IDateTimeProps> = forwardRef(
         ref={ref}
         displayFormat='MM.DD (DDDD) A hh:mm'
         pickerFormat='YYYY-MMMM-DDDD HH:mm'
-        min={moment().format('YYYY-MM-DD')}
+        min={moment().format('YYYY-MM-DDTHH:mm')}
         max={moment()
           .add(1, 'month')
           .format('YYYY-MM-DD')}

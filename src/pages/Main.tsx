@@ -200,6 +200,9 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
           }}
         >
           <MainFormVoteRoomListContainer sortedVoteRooms={votes} />
+          {votes.length === 0 && (
+            <img className='welcome_tooltip' src='/assets/img/tooltip_welcome.svg' alt=''></img>
+          )}
           <div
             className='bottom-floating ion-activatable ripple-parent br-full'
             onClick={() => {

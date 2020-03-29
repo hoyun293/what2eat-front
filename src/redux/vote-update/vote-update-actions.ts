@@ -13,7 +13,6 @@ import { postVoteUpdate } from '../../api/vote-update-api'
 import { setVoteDetailRefetch } from '../vote-detail/vote-detail-actions'
 
 export const editUserVotes = (voteId: string, payload: string[]) => async (dispatch: React.Dispatch<any>) => {
-  //dispatch()
 }
 export const editVoteDetail = (vote: IPostVote, voteUrl: string) => async (dispatch: React.Dispatch<any>) => {
   dispatch(setVoteDetailUpdateIsLoading(true))
