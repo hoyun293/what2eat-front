@@ -13,6 +13,8 @@ import { setVoteInsertInit, setVoteInsertStep } from '../redux/vote-insert/vote-
 import { setUiIsLoader, setUiToast } from '../redux/ui/ui-actions'
 import { setVoteDetailInit } from '../redux/vote-detail/vote-detail-actions'
 
+import { BranchIo } from '@ionic-native/branch-io'
+
 interface IOwnProps {}
 interface IStateProps {
   voteRooms: IVoteRoom[]
@@ -38,6 +40,12 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   setVoteInsertStep,
   setVoteDetailInit
 }) => {
+  const initDeeplinkBranchIo = async () => {
+    BranchIo.initSession().then(res => {
+      console.log(res)
+    })
+  }
+
   const history = useHistory()
   const [toggle, setToggle] = useState(0)
   const [index, setIndex] = useState(0)
@@ -113,6 +121,8 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 
   useEffect(() => {
     if (Capacitor.isNative) {
+      initDeeplinkBranchIo()
+
       Plugins.App.addListener('backButton', e => {
         if (history.location.pathname === '/') {
           exitApp()

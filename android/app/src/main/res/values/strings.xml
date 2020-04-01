@@ -3,5 +3,6 @@
     <string name="app_name">what2eat</string>
     <string name="title_activity_main">what2eat</string>
     <string name="package_name">kr.what2eat.app</string>
-    <string name="custom_url_scheme">kr.what2eat.app</string>
+    <string name="custom_url_scheme">what2eat</string>
+    <string name="branch_key">key_live_chUPLWgw8rmFFffWtS8XBjjhErdnmkbF</string>
 </resources>
