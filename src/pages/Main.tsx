@@ -12,6 +12,7 @@ import { IVoteRoom } from '../models/vote-room'
 import { setVoteInsertInit, setVoteInsertStep } from '../redux/vote-insert/vote-insert-actions'
 import { setUiIsLoader, setUiToast } from '../redux/ui/ui-actions'
 import { setVoteDetailInit } from '../redux/vote-detail/vote-detail-actions'
+import _ from 'lodash'
 
 import { BranchIo } from '@ionic-native/branch-io'
 
@@ -50,7 +51,23 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   const [toggle, setToggle] = useState(0)
   const [index, setIndex] = useState(0)
   const [votes, setVotes] = useState<Array<IVoteRoom>>([])
-
+  const [newVotes, setNewVotes] = useState<Array<IVoteRoom>>([])
+  const [oldVotes, setOldVotes] = useState<Array<IVoteRoom>>([])
+  const [voteToggle, setVoteToggle] = useState(0)
+  const chooseNewVote = (date: string): boolean => {
+    var today = new Date()
+    var _date = new Date(
+      Number(date.substring(0, 4)),
+      Number(date.substring(5, 7)) - 1,
+      Number(date.substring(8, 10))
+    )
+    var day = 60 * 60 * 24 * 1000
+    if (Math.floor((today.getTime() - _date.getTime()) / day) > 7) {
+      return false
+    } else {
+      return true
+    }
+  }
   const compareDate = (date1: string, date2: string) => {
     var year1 = Number(date1.substring(0, 4))
     var year2 = Number(date2.substring(0, 4))
@@ -91,13 +108,13 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
       }
     }
   }
-  const sortInCreate = () => {
-    votes.sort((a: IVoteRoom, b: IVoteRoom): number => {
+  const sortInCreate = (voteArr: Array<IVoteRoom>) => {
+    voteArr.sort((a: IVoteRoom, b: IVoteRoom): number => {
       return compareDate(a.voteCreateDtm, b.voteCreateDtm)
     })
   }
-  const sortInEnd = () => {
-    votes.sort((a: IVoteRoom, b: IVoteRoom): number => {
+  const sortInEnd = (voteArr: Array<IVoteRoom>) => {
+    voteArr.sort((a: IVoteRoom, b: IVoteRoom): number => {
       return -1 * compareDate(a.voteEndDtm, b.voteEndDtm)
     })
   }
@@ -148,26 +165,31 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
     //   selectVoteRooms()
     //   setIndex(index + 1)
     // }
-
     //selectVoteRooms(pagingNum, bool)  onClick 시 pagingNum, bool만 바꾸게 해야되지 않을까?
     // toggle 값 바뀌면 useEffect가 실행되고 selectVoteRooms가 2번실행될듯?
     //console.log('addVote start')
 
     if (index === 1) {
       setVotes(voteRooms)
+      // 최신투표 지난 투표를 여기서 분류한다.
+      var newVoteArr = _.filter(voteRooms, v => {
+        return chooseNewVote(v.voteCreateDtm) === true
+      })
+      var oldVoteArr = _.filter(voteRooms, v => {
+        return chooseNewVote(v.voteCreateDtm) === false
+      })
+      setNewVotes(newVoteArr)
+      setOldVotes(oldVoteArr)
       setIndex(index + 1)
     }
 
     if (index === 2) {
-      if (toggle % 2 === 1) {
-        sortInEnd()
-      } else {
-        sortInCreate()
-      }
+      sortInCreate(newVotes)
       setIndex(index + 1)
     }
   }, [voteRooms, votes]) // eslint-disable-line
 
+  //useEffect(() => {}, [newVotes, oldVotes])
   return (
     <IonPage>
       <IonContent fullscreen>
@@ -183,8 +205,13 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
               className='toggleName text-lg'
               onClick={() => {
                 setToggle(toggle + 1)
-                sortInCreate()
-                setVotes(votes)
+                if (voteToggle === 0) {
+                  sortInCreate(newVotes)
+                  setNewVotes(newVotes)
+                } else {
+                  sortInCreate(oldVotes)
+                  setOldVotes(oldVotes)
+                }
               }}
             >
               마감순
@@ -195,22 +222,95 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
               className='toggleName text-lg'
               onClick={() => {
                 setToggle(toggle + 1)
-                sortInEnd()
-                setVotes(votes)
+                if (voteToggle === 0) {
+                  sortInEnd(newVotes)
+                  setNewVotes(newVotes)
+                } else {
+                  sortInEnd(oldVotes)
+                  setOldVotes(oldVotes)
+                }
               }}
             >
               최신순
             </div>
           )}
         </div>
+        <div className='vote_choose'>
+          <div className='vote_btns'>
+            <div
+              id='vote_new'
+              className='vote_new'
+              onClick={() => {
+                setVoteToggle(0)
+                var oldVote = document.getElementById('vote_old')
+                var newVote = document.getElementById('vote_new')
+                if (oldVote !== null) {
+                  oldVote.style.color = 'black'
+                  oldVote.style.backgroundColor = 'white'
+                }
+                if (newVote !== null) {
+                  newVote.style.color = 'white'
+                  newVote.style.backgroundColor = '#5f5cce'
+                }
+                if (toggle % 2 === 1) {
+                  sortInEnd(newVotes)
+                  setNewVotes(newVotes)
+                } else {
+                  sortInCreate(newVotes)
+                  setNewVotes(newVotes)
+                }
+              }}
+            >
+              최신 투표
+            </div>
+            <div
+              id='vote_old'
+              className='vote_old'
+              onClick={() => {
+                setVoteToggle(1)
+                var oldVote = document.getElementById('vote_old')
+                var newVote = document.getElementById('vote_new')
+                if (oldVote !== null) {
+                  oldVote.style.color = 'white'
+                  oldVote.style.backgroundColor = '#5f5cce'
+                }
+                if (newVote !== null) {
+                  newVote.style.color = 'black'
+                  newVote.style.backgroundColor = 'white'
+                }
+                if (toggle % 2 === 1) {
+                  sortInEnd(oldVotes)
+                  setOldVotes(oldVotes)
+                } else {
+                  sortInCreate(oldVotes)
+                  setOldVotes(oldVotes)
+                }
+              }}
+            >
+              지난 투표
+            </div>
+          </div>
+        </div>
         <div
           className='background-img'
           style={{
-            height: voteRooms ? (voteRooms.length > 5 ? 'auto' : '100%') : '100%'
+            height:
+              voteToggle === 0
+                ? newVotes
+                  ? newVotes.length > 5
+                    ? 'auto'
+                    : '100%'
+                  : '100%'
+                : oldVotes
+                ? oldVotes.length > 5
+                  ? 'auto'
+                  : '100%'
+                : '100%'
           }}
         >
-          <MainFormVoteRoomListContainer sortedVoteRooms={votes} />
-          {votes.length === 0 && (
+          {voteToggle === 0 && <MainFormVoteRoomListContainer sortedVoteRooms={newVotes} />}
+          {voteToggle === 1 && <MainFormVoteRoomListContainer sortedVoteRooms={oldVotes} />}
+          {index >= 2 && votes.length === 0 && (
             <img className='welcome_tooltip' src='/assets/img/tooltip_welcome.svg' alt=''></img>
           )}
           <div
