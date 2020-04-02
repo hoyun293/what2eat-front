@@ -28,6 +28,8 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
                 <data android:scheme="@string/custom_url_scheme" />
+                <data android:scheme="https" android:host="what2eat.app.link" />
+                <data android:scheme="https" android:host="what2eat-alternate.app.link" />
             </intent-filter>
 
         </activity>
@@ -41,6 +43,8 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"></meta-data>
         </provider>
+
+        <meta-data android:name="io.branch.sdk.BranchKey" android:value="@string/branch_key" />
     </application>
 
     <!-- Permissions -->
