@@ -2,7 +2,7 @@ import { BranchIo } from '@ionic-native/branch-io'
 
 export const initDeeplinkBranchIo = async () => {
   BranchIo.initSession().then(res => {
-    alert(JSON.stringify(res))
+    console.log(JSON.stringify(res))
   })
 }
 
@@ -17,20 +17,19 @@ export const shareLink = (voteUrl: string, title: string) => {
 
   BranchIo.createBranchUniversalObject(properties)
     .then(function(branchObj) {
-      alert('Response: ' + JSON.stringify(branchObj))
+      console.log('Response: ' + JSON.stringify(branchObj))
 
-      // generate Shourt URL 안됌!!
       branchObj
         .generateShortUrl({}, {})
         .then(function(res) {
-          alert('Response: ' + JSON.stringify(res.url))
+          console.log('Response: ' + JSON.stringify(res.url))
           branchObj.showShareSheet({}, {}, title)
         })
         .catch(function(err) {
-          alert('Error: ' + JSON.stringify(err))
+          console.log('Error: ' + JSON.stringify(err))
         })
     })
     .catch(function(err) {
-      alert('Error: ' + JSON.stringify(err))
+      console.log('Error: ' + JSON.stringify(err))
     })
 }
