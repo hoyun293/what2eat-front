@@ -81,7 +81,6 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
   const [coordinate, setCoordinate] = useState({ lat: INIT_LATITUDE, lng: INIT_LONGITUDE })
   const [tempCoordinate, setTempCoordinate] = useState({ lat: INIT_LATITUDE, lng: INIT_LONGITUDE })
   const [tempAddress, setTempAddress] = useState('')
-  console.log(originVotePlaceIds)
 
   useEffect(() => {
     getCurrentPosition()
@@ -112,7 +111,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
       setTempCoordinate(coordinate)
       getTempAddress(coordinate.lat, coordinate.lng)
     }
-  }, [isShowModal, coordinate])
+  }, [isShowModal])
 
   useEffect(() => {
     getTempAddress(tempCoordinate.lat, tempCoordinate.lng)
@@ -125,7 +124,14 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
       setCoordinate({ lat: 37.4961895, lng: 127.0253834 })
     }
   }
-
+  const getTempCurrentPosition = async () => {
+    try {
+      const { coords } = await Plugins.Geolocation.getCurrentPosition()
+      setTempCoordinate({ lat: coords.latitude, lng: coords.longitude })
+    } catch (e) {
+      setTempCoordinate({ lat: 37.4961895, lng: 127.0253834 })
+    }
+  }
   const getAddress = async (latitude: number, longitude: number) => {
     const { data }: any = await getAddressByCoordinate(latitude, longitude)
     setAddress(_.get(data.results, '[0].formatted_address'))
@@ -231,7 +237,7 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
             <IconUi
               className='reload-btn'
               iconName='location-reload'
-              onClick={() => getCurrentPosition()}
+              onClick={() => getTempCurrentPosition()}
             ></IconUi>
           </div>
           <div className='map-container address-container'>{tempAddress}</div>
