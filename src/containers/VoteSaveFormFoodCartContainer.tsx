@@ -79,7 +79,8 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
   const [rankby, setRankBy] = useState({ label: '거리순', value: 'distance' })
   const [index, setIndex] = useState(0)
   const [coordinate, setCoordinate] = useState({ lat: INIT_LATITUDE, lng: INIT_LONGITUDE })
-
+  const [tempCoordinate, setTempCoordinate] = useState({ lat: INIT_LATITUDE, lng: INIT_LONGITUDE })
+  const [tempAddress, setTempAddress] = useState('')
   console.log(originVotePlaceIds)
 
   useEffect(() => {
@@ -106,6 +107,16 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
     })
   }, [coordinate, rankby, filterDistance]) // eslint-disable-line
 
+  useEffect(() => {
+    if (isShowModal === true) {
+      setTempCoordinate(coordinate)
+      getTempAddress(coordinate.lat, coordinate.lng)
+    }
+  }, [isShowModal, coordinate])
+
+  useEffect(() => {
+    getTempAddress(tempCoordinate.lat, tempCoordinate.lng)
+  }, [tempCoordinate])
   const getCurrentPosition = async () => {
     try {
       const { coords } = await Plugins.Geolocation.getCurrentPosition()
@@ -120,6 +131,10 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
     setAddress(_.get(data.results, '[0].formatted_address'))
   }
 
+  const getTempAddress = async (latitude: number, longitude: number) => {
+    const { data }: any = await getAddressByCoordinate(latitude, longitude)
+    setTempAddress(_.get(data.results, '[0].formatted_address'))
+  }
   const toggleSortBy = () => {
     switch (rankby.value) {
       case 'distance':
@@ -219,16 +234,26 @@ const VoteSaveFormFoodCartContainer: React.FC<IOwnProps & IStateProps & IDispatc
               onClick={() => getCurrentPosition()}
             ></IconUi>
           </div>
-          <div className='map-container address-container'>{address}</div>
+          <div className='map-container address-container'>{tempAddress}</div>
+          <div
+            className='map-container address-btn'
+            onClick={() => {
+              setCoordinate(tempCoordinate)
+              setIsShowModal(false)
+            }}
+          >
+            지정된 장소로 검색
+          </div>
+
           <GoogleMapReact
             bootstrapURLKeys={{ key: config.GOOGLE_MAP_KEY }}
-            defaultCenter={coordinate}
-            center={coordinate}
+            defaultCenter={tempCoordinate}
+            center={tempCoordinate}
             defaultZoom={15}
             options={{ fullscreenControl: false, zoomControl: false }}
-            onClick={({ lat, lng }) => setCoordinate({ lat, lng })}
+            onClick={({ lat, lng }) => setTempCoordinate({ lat, lng })}
           >
-            <Marker lat={coordinate.lat} lng={coordinate.lng} />
+            <Marker lat={tempCoordinate.lat} lng={tempCoordinate.lng} />
           </GoogleMapReact>
         </div>
       </IonModal>
