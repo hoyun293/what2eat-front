@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import { Redirect, Route } from 'react-router-dom'
 import { setupConfig, IonApp, IonRouterOutlet, IonPopover, IonToast } from '@ionic/react'
-import { Plugins } from '@capacitor/core'
+import { Plugins, Capacitor } from '@capacitor/core'
 import { IonReactRouter } from '@ionic/react-router'
 import { connect } from './redux/redux-connect'
 import { signIn } from './redux/user/user-actions'
@@ -17,6 +17,7 @@ import RestaurantDetail from './pages/RestaurantDetail'
 import VoteSave from './pages/VoteSave'
 import VoteDetail from './pages/VoteDetail'
 import Privacy from './pages/Privacy'
+import { initDeeplinkBranchIo } from './utils/branch-io-util'
 
 const { SplashScreen } = Plugins
 
@@ -50,6 +51,9 @@ const App: React.FC<IAppProps> = ({
   uiIsLoader
 }) => {
   useEffect(() => {
+    if (Capacitor.isNative) {
+      initDeeplinkBranchIo()
+    }
     signIn()
   }, []) // eslint-disable-line
 
