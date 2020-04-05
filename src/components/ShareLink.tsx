@@ -77,7 +77,7 @@ const copyUrl = (urlPath: string, success = () => {}) => {
 const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProps> = ({
   shareUrl,
   title,
-  thumbnailUrl = `${config.WEB_URL}/assets/img/meta.png`,
+  thumbnailUrl = `${config.WEB_URL}/assets/img/logo.png`,
   isOpen,
   setIsOpen,
   setUiToast,

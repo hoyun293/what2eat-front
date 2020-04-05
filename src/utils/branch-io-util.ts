@@ -15,7 +15,7 @@ export const shareLink = (voteUrl: string, title: string) => {
     canonicalUrl: `https://what2eat.me/vote/${voteUrl}`,
     title,
     contentDescription: '오늘 뭐 먹을래? : 함께 투표해요!',
-    contentImageUrl: 'https://what2eat.me/assets/img/meta.png'
+    contentImageUrl: 'https://what2eat.me/assets/img/logo.png'
   }
 
   BranchIo.createBranchUniversalObject(properties)
