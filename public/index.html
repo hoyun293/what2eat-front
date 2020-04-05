@@ -75,9 +75,9 @@
       branch.init('key_live_chUPLWgw8rmFFffWtS8XBjjhErdnmkbF', function(err, data) {
         console.log('Deep Link Data')
         console.log(data)
-        if (data_parsed['+clicked_branch_link']) {
+        if (data.data_parsed['+clicked_branch_link']) {
           console.log('move to deep link')
-          location.href = `https://what2eat.me/${data_parsed['$deeplink_path']}`
+          location.href = `https://what2eat.me/${data.data_parsed['$deeplink_path']}`
         }
       })
     </script>
