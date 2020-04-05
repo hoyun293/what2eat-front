@@ -73,14 +73,9 @@
       )
 
       branch.init('key_live_chUPLWgw8rmFFffWtS8XBjjhErdnmkbF', function(err, data) {
-        // callback to handle err or data
-        console.log(data)
-        console.log(data)
-        console.log(data)
-        // if()
+        console.log('Deep Link Data: ' + JSON.stringify(data))
         if (data['+clicked_branch_link']) {
-          console.log('Deep Link Data: ' + JSON.stringify(data))
-          location.href = `https://what2eat.me/${data_parsed['$canonical_identifier']}`
+          location.href = `https://what2eat.me/${data_parsed['$deeplink_path']}`
         }
       })
     </script>

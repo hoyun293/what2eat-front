@@ -51,10 +51,13 @@ const App: React.FC<IAppProps> = ({
   uiIsLoader
 }) => {
   useEffect(() => {
-    if (Capacitor.isNative) {
-      initDeeplinkBranchIo()
-    }
     signIn()
+
+    if (Capacitor.isNative) {
+      Plugins.App.addListener('appUrlOpen', e => {
+        initDeeplinkBranchIo()
+      })
+    }
   }, []) // eslint-disable-line
 
   useEffect(() => {

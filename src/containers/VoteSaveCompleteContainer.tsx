@@ -7,10 +7,14 @@ import { setUiIsLoader } from '../redux/ui/ui-actions'
 
 import './VoteSaveCompleteContainer.scss'
 import ShareLink from '../components/ShareLink'
+import { IVoteForm } from '../models/vote'
+import { Capacitor } from '@capacitor/core'
+import { shareLink } from '../utils/branch-io-util'
 
 interface IOwnProps {}
 interface IStateProps {
   voteUrl: string
+  voteForm: IVoteForm
 }
 interface IDispatchProps {
   setUiIsLoader: typeof setUiIsLoader
@@ -18,7 +22,8 @@ interface IDispatchProps {
 
 const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   voteUrl,
-  setUiIsLoader
+  setUiIsLoader,
+  voteForm
 }) => {
   const history = useHistory()
   const [isShowShare, setIsShowShare] = useState(false)
@@ -38,6 +43,9 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
           <IonButton
             className='vote-button'
             onClick={() => {
+              if (Capacitor.isNative) {
+                return shareLink(voteUrl, voteForm.voteName)
+              }
               setIsShowShare(true)
               setUiIsLoader(true)
             }}
@@ -61,14 +69,21 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
           홈으로 이동
         </div>
       </div>
-      <ShareLink shareUrl={`/vote/${voteUrl}`} isOpen={isShowShare} setIsOpen={setIsShowShare}></ShareLink>
+
+      <ShareLink
+        shareUrl={`vote/${voteUrl}`}
+        title={voteForm.voteName}
+        isOpen={isShowShare}
+        setIsOpen={setIsShowShare}
+      ></ShareLink>
     </IonContent>
   )
 }
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ voteInsert }) => ({
-    voteUrl: voteInsert.voteUrl
+    voteUrl: voteInsert.voteUrl,
+    voteForm: voteInsert.voteForm
   }),
   mapDispatchToProps: {
     setUiIsLoader
