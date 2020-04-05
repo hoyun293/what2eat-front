@@ -3,6 +3,7 @@ const NODE_ENV = process.env.NODE_ENV
 const config = {
   development: {
     WEB_URL: 'https://what2eat.me',
+    LINK_URL: 'https://what2eat.app.link',
     // BASE_URL: 'http://localhost:5050/api',
     BASE_URL: 'https://rm7is5pi3b.execute-api.ap-northeast-2.amazonaws.com/dev',
     AUTH_PUBKEY: `-----BEGIN PUBLIC KEY-----
@@ -18,6 +19,7 @@ OEQxke9JGLTTwqNb4wIDAQAB
   },
   production: {
     WEB_URL: 'https://what2eat.me',
+    LINK_URL: 'https://what2eat.app.link',
     // BASE_URL: 'https://w2e.kindrobot.me/api',
     BASE_URL: 'https://rm7is5pi3b.execute-api.ap-northeast-2.amazonaws.com/dev',
     AUTH_PUBKEY: `-----BEGIN PUBLIC KEY-----

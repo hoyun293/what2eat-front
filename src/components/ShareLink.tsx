@@ -28,7 +28,7 @@ declare const Kakao: any
 declare const branch: any
 
 const shareKakao = (shareUrl: string, imageUrl: string, title: string, success = () => {}) => {
-  const url = `${config.WEB_URL}/${shareUrl}`
+  const url = `${config.LINK_URL}/${shareUrl}`
 
   return branch.link(
     {
@@ -42,10 +42,9 @@ const shareKakao = (shareUrl: string, imageUrl: string, title: string, success =
 
       if (isMobile) {
         return Kakao.Link.sendDefault({
-          // container: '#kakao-link-btn',
           objectType: 'feed',
           content: {
-            title: '투표 공유하기',
+            title,
             imageUrl,
             link: { mobileWebUrl: link, webUrl: link }
           },
@@ -78,7 +77,7 @@ const copyUrl = (urlPath: string, success = () => {}) => {
 const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProps> = ({
   shareUrl,
   title,
-  thumbnailUrl = `${config.WEB_URL}/assets/img/logo.png`,
+  thumbnailUrl = `${config.WEB_URL}/assets/img/meta.png`,
   isOpen,
   setIsOpen,
   setUiToast,
@@ -104,7 +103,7 @@ const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProp
       onDidDismiss={() => setIsOpen(false)}
     >
       <Helmet
-        script={[{ src: 'https://developers.kakao.com/sdk/js/kakao.min.js' }]}
+        script={[{ src: '//developers.kakao.com/sdk/js/kakao.min.js' }]}
         onChangeClientState={(newState, addedTags) => handleScriptInject(addedTags)}
       />
       <div>
