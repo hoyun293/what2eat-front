@@ -112,8 +112,8 @@ const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProp
         <div className='flex flex-center'>
           {!Capacitor.isNative && (
             <div
-              id='kakao-link-btn mr-8'
-              className='flex-col'
+              id='kakao-link-btn'
+              className='flex-col mr-8'
               onClick={() =>
                 shareKakao(shareUrl, thumbnailUrl, title, () => {
                   setIsOpen(false)
