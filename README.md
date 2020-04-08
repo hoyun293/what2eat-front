@@ -88,6 +88,8 @@ https://www.joshmorony.com/deploying-capacitor-applications-to-android-developme
 
 - android keysotre password : what2eat11!!
 
+- android alias : what2eat
+
 - ios distribution key : htbi11!!
 
 - keystore 파일이 필요하면 저한테 문의해주세요.

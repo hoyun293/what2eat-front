@@ -6,8 +6,8 @@ android {
         applicationId "kr.what2eat.app"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        versionCode 5
+        versionName "1.0.4"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
@@ -35,6 +35,14 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation project(':capacitor-cordova-android-plugins')
+
+    implementation ('io.branch.sdk.android:library:3.+') {
+        exclude module: 'answers-shim'
+    }
+
+    implementation 'com.android.installreferrer:installreferrer:1.1'
+    implementation 'com.google.android.gms:play-services-appindexing:9.+' // App indexing
+    implementation 'com.google.android.gms:play-services-ads:9+' // GAID matching
 }
 
 apply from: 'capacitor.build.gradle'
