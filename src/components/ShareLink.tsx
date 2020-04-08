@@ -10,6 +10,7 @@ import { connect } from '../redux/redux-connect'
 
 import config from '../config'
 import { setUiToast, setUiIsLoader } from '../redux/ui/ui-actions'
+import { Capacitor } from '@capacitor/core'
 
 interface IOwnProps {
   title: string
@@ -33,8 +34,8 @@ const shareKakao = (shareUrl: string, imageUrl: string, title: string, success =
   return branch.link(
     {
       data: {
-        $deeplink_path: shareUrl
-      }
+        $deeplink_path: shareUrl,
+      },
     },
     (err: any, link: any) => {
       console.log(err)
@@ -46,18 +47,18 @@ const shareKakao = (shareUrl: string, imageUrl: string, title: string, success =
           content: {
             title,
             imageUrl,
-            link: { mobileWebUrl: link, webUrl: link }
+            link: { mobileWebUrl: link, webUrl: link },
           },
           buttons: [
             {
               title: '투표하러가기',
-              link: { mobileWebUrl: link, webUrl: link }
-            }
+              link: { mobileWebUrl: link, webUrl: link },
+            },
           ],
           success,
           fail: () => {
             alert('카카오톡 공유하기를 지원하지 않는 환경입니다.')
-          }
+          },
         })
       } else {
         copy(url)
@@ -81,7 +82,7 @@ const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProp
   isOpen,
   setIsOpen,
   setUiToast,
-  setUiIsLoader
+  setUiIsLoader,
 }) => {
   const handleScriptInject = ({ scriptTags }: any) => {
     if (scriptTags) {
@@ -109,20 +110,22 @@ const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProp
       <div>
         <div className='flex-center text-xl text-medium pt-5 pb-2'>투표 초대하기</div>
         <div className='flex flex-center'>
+          {!Capacitor.isNative && (
+            <div
+              id='kakao-link-btn mr-8'
+              className='flex-col'
+              onClick={() =>
+                shareKakao(shareUrl, thumbnailUrl, title, () => {
+                  setIsOpen(false)
+                })
+              }
+            >
+              <IonImg src='/assets/img/share-kakao.png' className='w-20' alt='' />
+              <div className='text-center text-xs dark-gray'>카카오톡</div>
+            </div>
+          )}
           <div
-            id='kakao-link-btn'
             className='flex-col'
-            onClick={() =>
-              shareKakao(shareUrl, thumbnailUrl, title, () => {
-                setIsOpen(false)
-              })
-            }
-          >
-            <IonImg src='/assets/img/share-kakao.png' className='w-20' alt='' />
-            <div className='text-center text-xs dark-gray'>카카오톡</div>
-          </div>
-          <div
-            className='flex-col ml-8'
             onClick={() =>
               copyUrl(shareUrl, () => {
                 setIsOpen(false)
@@ -145,11 +148,11 @@ const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProp
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ voteRoom }) => ({
-    voteRooms: voteRoom.voteRooms
+    voteRooms: voteRoom.voteRooms,
   }),
   mapDispatchToProps: {
     setUiToast,
-    setUiIsLoader
+    setUiIsLoader,
   },
-  component: ShareLink
+  component: ShareLink,
 })

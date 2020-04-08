@@ -23,7 +23,7 @@ interface IDispatchProps {
 const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   voteUrl,
   setUiIsLoader,
-  voteForm
+  voteForm,
 }) => {
   const history = useHistory()
   const [isShowShare, setIsShowShare] = useState(false)
@@ -43,7 +43,7 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
           <IonButton
             className='vote-button'
             onClick={() => {
-              if (Capacitor.isNative) {
+              if (Capacitor.isNative && Capacitor.platform === 'ios') {
                 return shareLink(voteUrl, voteForm.voteName)
               }
               setIsShowShare(true)
@@ -83,10 +83,10 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ voteInsert }) => ({
     voteUrl: voteInsert.voteUrl,
-    voteForm: voteInsert.voteForm
+    voteForm: voteInsert.voteForm,
   }),
   mapDispatchToProps: {
-    setUiIsLoader
+    setUiIsLoader,
   },
-  component: VoteSaveCompleteContainer
+  component: VoteSaveCompleteContainer,
 })

@@ -33,7 +33,7 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
   vote,
   setVoteDetailUpdateVote,
   setUiIsLoader,
-  isVoteEnd
+  isVoteEnd,
 }) => {
   const [isShareOpen, setIsShareOpen] = useState(false)
 
@@ -67,7 +67,7 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
           <div
             className='ml-2 flex-center bg-white w-full br-md py-2'
             onClick={() => {
-              if (Capacitor.isNative) {
+              if (Capacitor.isNative && Capacitor.platform === 'ios') {
                 return shareLink(voteUrl, vote.voteName)
               }
               setIsShareOpen(true)
@@ -92,11 +92,11 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ voteDetail }) => ({
     vote: voteDetail.vote,
-    isVoteEnd: voteDetail.isVoteEnd
+    isVoteEnd: voteDetail.isVoteEnd,
   }),
   mapDispatchToProps: {
     setVoteDetailUpdateVote,
-    setUiIsLoader
+    setUiIsLoader,
   },
-  component: VoteDetailTitleContainer
+  component: VoteDetailTitleContainer,
 })
