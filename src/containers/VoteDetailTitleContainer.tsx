@@ -80,7 +80,7 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
       </div>
 
       <ShareLink
-        shareUrl={`vote/${voteUrl}`}
+        sharePath={`vote/${voteUrl}`}
         title={vote.voteName}
         isOpen={isShareOpen}
         setIsOpen={setIsShareOpen}

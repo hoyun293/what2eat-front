@@ -71,7 +71,7 @@ const VoteSaveCompleteContainer: React.FC<IOwnProps & IStateProps & IDispatchPro
       </div>
 
       <ShareLink
-        shareUrl={`vote/${voteUrl}`}
+        sharePath={`vote/${voteUrl}`}
         title={voteForm.voteName}
         isOpen={isShowShare}
         setIsOpen={setIsShowShare}
