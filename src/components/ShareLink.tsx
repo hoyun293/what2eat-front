@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react'
-import './VotePlaceItem.scss'
+import React from 'react'
 import { IonPopover, IonImg } from '@ionic/react'
-
-import { isMobile } from 'react-device-detect'
+import { Capacitor } from '@capacitor/core'
 import copy from 'copy-to-clipboard'
 import Helmet from 'react-helmet'
 
@@ -10,11 +8,12 @@ import { connect } from '../redux/redux-connect'
 
 import config from '../config'
 import { setUiToast, setUiIsLoader } from '../redux/ui/ui-actions'
-import { Capacitor } from '@capacitor/core'
+
+import './VotePlaceItem.scss'
 
 interface IOwnProps {
   title: string
-  shareUrl: string
+  sharePath: string
   isOpen: boolean
   thumbnailUrl?: string
   setIsOpen: Function
@@ -28,55 +27,54 @@ interface IDispatchProps {
 declare const Kakao: any
 declare const branch: any
 
-const shareKakao = (shareUrl: string, imageUrl: string, title: string, success = () => {}) => {
-  const url = `${config.LINK_URL}/${shareUrl}`
-
+const shareKakao = (sharePath: string, imageUrl: string, title: string, success = () => {}) => {
   return branch.link(
     {
       data: {
-        $deeplink_path: shareUrl,
+        $deeplink_path: sharePath,
       },
     },
     (err: any, link: any) => {
-      console.log(err)
       console.log(link)
-
-      if (isMobile) {
-        return Kakao.Link.sendDefault({
-          objectType: 'feed',
-          content: {
-            title,
-            imageUrl,
+      return Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+          title,
+          imageUrl,
+          link: { mobileWebUrl: link, webUrl: link },
+        },
+        buttons: [
+          {
+            title: '투표하러가기',
             link: { mobileWebUrl: link, webUrl: link },
           },
-          buttons: [
-            {
-              title: '투표하러가기',
-              link: { mobileWebUrl: link, webUrl: link },
-            },
-          ],
-          success,
-          fail: () => {
-            alert('카카오톡 공유하기를 지원하지 않는 환경입니다.')
-          },
-        })
-      } else {
-        copy(url)
+        ],
+        success,
+        fail: () => {
+          alert('카카오톡 공유하기를 지원하지 않는 환경입니다.')
+        },
+      })
+    }
+  )
+}
+
+const copyUrl = (sharePath: string, success = () => {}) => {
+  branch.link(
+    {
+      data: {
+        $deeplink_path: sharePath,
+      },
+    },
+    (err: any, link: any) => {
+      if (link && copy(link)) {
         success()
       }
     }
   )
 }
 
-const copyUrl = (urlPath: string, success = () => {}) => {
-  const url = `${config.WEB_URL}${urlPath}`
-  if (copy(url)) {
-    success()
-  }
-}
-
 const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProps> = ({
-  shareUrl,
+  sharePath,
   title,
   thumbnailUrl = `${config.WEB_URL}/assets/img/logo.png`,
   isOpen,
@@ -115,7 +113,7 @@ const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProp
               id='kakao-link-btn'
               className='flex-col mr-8'
               onClick={() =>
-                shareKakao(shareUrl, thumbnailUrl, title, () => {
+                shareKakao(sharePath, thumbnailUrl, title, () => {
                   setIsOpen(false)
                 })
               }
@@ -127,7 +125,7 @@ const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProp
           <div
             className='flex-col'
             onClick={() =>
-              copyUrl(shareUrl, () => {
+              copyUrl(sharePath, () => {
                 setIsOpen(false)
                 setUiToast({ isOpen: true, message: '클립보드 복사에 성공하였습니다.' })
               })
