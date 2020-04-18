@@ -18,18 +18,18 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="What2Eat : 오늘 뭐 먹을래?" />
     <meta property="og:description" content="다 같이 뭐먹을지 고민될땐!" />
-    <meta property="og:image" content="https://what2eat.me/assets/img/meta.png" />
+    <meta property="og:image" content="https://what2eat.me/assets/img/logo.png" />
 
     <!-- Twitter Meta Tags / 트위터 -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Daum" />
     <meta name="twitter:description" content="다 같이 뭐먹을지 고민될땐!" />
-    <meta name="twitter:image" content="https://what2eat.me/assets/img/meta.png" />
+    <meta name="twitter:image" content="https://what2eat.me/assets/img/logo.png" />
 
     <!-- Google / Search Engine Tags / 구글 검색 엔진 -->
     <meta itemprop="name" content="What2Eat : 오늘 뭐 먹을래?" />
     <meta itemprop="description" content="다 같이 뭐먹을지 고민될땐!" />
-    <meta itemprop="image" content="https://what2eat.me/assets/img/meta.png" />
+    <meta itemprop="image" content="https://what2eat.me/assets/img/logo.png" />
 
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
 
@@ -73,14 +73,11 @@
       )
 
       branch.init('key_live_chUPLWgw8rmFFffWtS8XBjjhErdnmkbF', function (err, data) {
-        // callback to handle err or data
-        //console.log(data)
-        //console.log(data)
-        //console.log(data)
-        // if()
-        if (data['+clicked_branch_link']) {
-          console.log('Deep Link Data: ' + JSON.stringify(data))
-          location.href = `https://what2eat.me/${data_parsed['$canonical_identifier']}`
+        console.log('Deep Link Data')
+        console.log(data)
+        if (data.data_parsed['+clicked_branch_link']) {
+          console.log('move to deep link')
+          location.href = `https://what2eat.me/${data.data_parsed['$deeplink_path']}`
         }
       })
     </script>

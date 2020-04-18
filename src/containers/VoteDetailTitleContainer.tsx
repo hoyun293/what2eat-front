@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react'
-import moment from '../utils/moment-util'
+import { IonImg } from '@ionic/react'
+import { Capacitor } from '@capacitor/core'
+import { useHistory } from 'react-router-dom'
 
+import moment from '../utils/moment-util'
 import { connect } from '../redux/redux-connect'
 import IconUi from '../components/ui/IconUi'
-import { IonImg } from '@ionic/react'
 
 import './VoteDetailTitleContainer.scss'
-import { useHistory } from 'react-router-dom'
 import ShareLink from '../components/ShareLink'
 import { IVoteDetail } from '../models/vote'
 import { setVoteDetailUpdateVote } from '../redux/vote-update/vote-update-actions'
 import { setUiIsLoader } from '../redux/ui/ui-actions'
+import { shareLink } from '../utils/branch-io-util'
 
 interface IOwnProps {
   themeNum: number
@@ -31,7 +33,7 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
   vote,
   setVoteDetailUpdateVote,
   setUiIsLoader,
-  isVoteEnd
+  isVoteEnd,
 }) => {
   const [isShareOpen, setIsShareOpen] = useState(false)
 
@@ -65,6 +67,9 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
           <div
             className='ml-2 flex-center bg-white w-full br-md py-2'
             onClick={() => {
+              if (Capacitor.isNative && Capacitor.platform === 'ios') {
+                return shareLink(voteUrl, vote.voteName)
+              }
               setIsShareOpen(true)
               setUiIsLoader(true)
             }}
@@ -74,7 +79,12 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
         )}
       </div>
 
-      <ShareLink shareUrl={`/vote/${voteUrl}`} isOpen={isShareOpen} setIsOpen={setIsShareOpen}></ShareLink>
+      <ShareLink
+        sharePath={`vote/${voteUrl}`}
+        title={vote.voteName}
+        isOpen={isShareOpen}
+        setIsOpen={setIsShareOpen}
+      ></ShareLink>
     </div>
   )
 }
@@ -82,11 +92,11 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ voteDetail }) => ({
     vote: voteDetail.vote,
-    isVoteEnd: voteDetail.isVoteEnd
+    isVoteEnd: voteDetail.isVoteEnd,
   }),
   mapDispatchToProps: {
     setVoteDetailUpdateVote,
-    setUiIsLoader
+    setUiIsLoader,
   },
-  component: VoteDetailTitleContainer
+  component: VoteDetailTitleContainer,
 })

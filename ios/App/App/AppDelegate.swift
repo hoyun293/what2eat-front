@@ -1,5 +1,6 @@
 import UIKit
 import Capacitor
+import Branch
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -9,6 +10,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     // Override point for customization after application launch.
+
+    // BranchIO : listener for Branch Deep Link data
+    Branch.getInstance().initSession(launchOptions: launchOptions) { (params, error) in
+      // do stuff with deep link data (nav to page, display content, etc)
+      print(params as? [String: AnyObject] ?? {})
+    }
+    
     return true
   }
 
@@ -37,6 +45,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey : Any] = [:]) -> Bool {
     // Called when the app was launched with a url. Feel free to add additional processing here,
     // but if you want the App API to support tracking app url opens, make sure to keep this call
+
+    // BranchIO
+    Branch.getInstance().application(app, open: url, options: options)
     return CAPBridge.handleOpenUrl(url, options)
   }
   
@@ -44,6 +55,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Called when the app was launched with an activity, including Universal Links.
     // Feel free to add additional processing here, but if you want the App API to support
     // tracking app url opens, make sure to keep this call
+
+    // BranchIO : handler for Universal Links
+    Branch.getInstance().continue(userActivity)
     return CAPBridge.handleContinueActivity(userActivity, restorationHandler)
   }
 

@@ -1,8 +1,6 @@
-import React, { useEffect } from 'react'
-import './VotePlaceItem.scss'
+import React from 'react'
 import { IonPopover, IonImg } from '@ionic/react'
-
-import { isMobile } from 'react-device-detect'
+import { Capacitor } from '@capacitor/core'
 import copy from 'copy-to-clipboard'
 import Helmet from 'react-helmet'
 
@@ -11,8 +9,11 @@ import { connect } from '../redux/redux-connect'
 import config from '../config'
 import { setUiToast, setUiIsLoader } from '../redux/ui/ui-actions'
 
+import './VotePlaceItem.scss'
+
 interface IOwnProps {
-  shareUrl: string
+  title: string
+  sharePath: string
   isOpen: boolean
   thumbnailUrl?: string
   setIsOpen: Function
@@ -24,49 +25,62 @@ interface IDispatchProps {
 }
 
 declare const Kakao: any
+declare const branch: any
 
-const shareKakao = (shareUrl: string, imageUrl: string, success = () => {}) => {
-  const url = `${config.WEB_URL}${shareUrl}`
-  if (isMobile) {
-    return Kakao.Link.sendDefault({
-      // container: '#kakao-link-btn',
-      objectType: 'feed',
-      content: {
-        title: '투표 공유하기',
-        imageUrl,
-        link: { mobileWebUrl: url, webUrl: url }
+const shareKakao = (sharePath: string, imageUrl: string, title: string, success = () => {}) => {
+  return branch.link(
+    {
+      data: {
+        $deeplink_path: sharePath,
       },
-      buttons: [
-        {
-          title: '투표하러가기',
-          link: { mobileWebUrl: url, webUrl: url }
-        }
-      ],
-      success,
-      fail: () => {
-        alert('카카오톡 공유하기를 지원하지 않는 환경입니다.')
-      }
-    })
-  } else {
-    copy(url)
-    success()
-  }
+    },
+    (err: any, link: any) => {
+      console.log(link)
+      return Kakao.Link.sendDefault({
+        objectType: 'feed',
+        content: {
+          title,
+          imageUrl,
+          link: { mobileWebUrl: link, webUrl: link },
+        },
+        buttons: [
+          {
+            title: '투표하러가기',
+            link: { mobileWebUrl: link, webUrl: link },
+          },
+        ],
+        success,
+        fail: () => {
+          alert('카카오톡 공유하기를 지원하지 않는 환경입니다.')
+        },
+      })
+    }
+  )
 }
 
-const copyUrl = (urlPath: string, success = () => {}) => {
-  const url = `${config.WEB_URL}${urlPath}`
-  if (copy(url)) {
-    success()
-  }
+const copyUrl = (sharePath: string, success = () => {}) => {
+  branch.link(
+    {
+      data: {
+        $deeplink_path: sharePath,
+      },
+    },
+    (err: any, link: any) => {
+      if (link && copy(link)) {
+        success()
+      }
+    }
+  )
 }
 
 const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProps> = ({
-  shareUrl,
+  sharePath,
+  title,
   thumbnailUrl = `${config.WEB_URL}/assets/img/logo.png`,
   isOpen,
   setIsOpen,
   setUiToast,
-  setUiIsLoader
+  setUiIsLoader,
 }) => {
   const handleScriptInject = ({ scriptTags }: any) => {
     if (scriptTags) {
@@ -94,23 +108,24 @@ const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProp
       <div>
         <div className='flex-center text-xl text-medium pt-5 pb-2'>투표 초대하기</div>
         <div className='flex flex-center'>
-          {/* <div
-            id='kakao-link-btn'
-            className='flex-col'
-            onClick={() =>
-              shareKakao(shareUrl, thumbnailUrl, () => {
-                setIsOpen(false)
-              })
-            }
-          >
-            <IonImg src='/assets/img/share-kakao.png' className='w-20' alt='' />
-            <div className='text-center text-xs dark-gray'>카카오톡</div>
-          </div> */}
+          {!Capacitor.isNative && (
+            <div
+              id='kakao-link-btn'
+              className='flex-col mr-8'
+              onClick={() =>
+                shareKakao(sharePath, thumbnailUrl, title, () => {
+                  setIsOpen(false)
+                })
+              }
+            >
+              <IonImg src='/assets/img/share-kakao.png' className='w-20' alt='' />
+              <div className='text-center text-xs dark-gray'>카카오톡</div>
+            </div>
+          )}
           <div
-            // className='flex-col ml-8'
             className='flex-col'
             onClick={() =>
-              copyUrl(shareUrl, () => {
+              copyUrl(sharePath, () => {
                 setIsOpen(false)
                 setUiToast({ isOpen: true, message: '클립보드 복사에 성공하였습니다.' })
               })
@@ -131,11 +146,11 @@ const ShareLink: React.FunctionComponent<IOwnProps & IStateProps & IDispatchProp
 
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ voteRoom }) => ({
-    voteRooms: voteRoom.voteRooms
+    voteRooms: voteRoom.voteRooms,
   }),
   mapDispatchToProps: {
     setUiToast,
-    setUiIsLoader
+    setUiIsLoader,
   },
-  component: ShareLink
+  component: ShareLink,
 })

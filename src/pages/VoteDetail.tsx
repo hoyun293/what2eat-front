@@ -1,4 +1,4 @@
-import { IonContent, IonFooter, IonPage, IonFab, useIonViewWillEnter } from '@ionic/react'
+import { IonContent, IonFooter, IonPage, IonFab } from '@ionic/react'
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router'
 import { RouteComponentProps } from 'react-router'
