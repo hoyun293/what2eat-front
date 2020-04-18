@@ -8,10 +8,6 @@ export const selectVoteRooms = (limit: number = 5, orderby: boolean = true) => a
 ) => {
   dispatch(setVoteRoomIsLoading(true))
   const { result } = await getMyVoteRooms(limit, orderby)
-  /*
-    mainVotesApi().then(({ result }) => {
-  })
-  */
   dispatch(setVoteRoomForm(result))
   dispatch(setVoteRoomIsLoading(false))
 }
@@ -22,19 +18,19 @@ export const selectVoteRooms = (limit: number = 5, orderby: boolean = true) => a
 export const setVoteRoomForm = (voteRoom: IVoteRoom[]) =>
   ({
     type: SET_VOTEROOM_FORM,
-    voteRoom
+    voteRoom,
   } as const)
 
 export const setVoteRoomIsLoading = (isLoading: boolean) =>
   ({
     type: SET_VOTEROOM_IS_LOADING,
-    isLoading
+    isLoading,
   } as const)
 
 export const setVoteRoomErrorMessage = (errorMessage: string) =>
   ({
     type: SET_VOTEROOM_ERROR_MESSAGE,
-    errorMessage
+    errorMessage,
   } as const)
 
 export type TVoteActions =

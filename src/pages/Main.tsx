@@ -168,17 +168,21 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
         if (toggle % 2 === 0) {
           sortInCreate(newVoteArr)
           setNewVotes(newVoteArr)
+          setOldVotes(oldVoteArr)
         } else {
           sortInEnd(newVoteArr)
           setNewVotes(newVoteArr)
+          setOldVotes(oldVoteArr)
         }
       } else {
         if (toggle % 2 === 0) {
           sortInCreate(oldVoteArr)
           setOldVotes(oldVoteArr)
+          setNewVotes(newVoteArr)
         } else {
           sortInEnd(oldVoteArr)
           setOldVotes(oldVoteArr)
+          setNewVotes(newVoteArr)
         }
       }
       setIndex(index + 1)
