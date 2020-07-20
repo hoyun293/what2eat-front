@@ -43,7 +43,7 @@ const VoteDetailTitleContainer: React.FC<IOwnProps & IStateProps & IDispatchProp
   return (
     <div className='vote-detail-title-container'>
       <div className='flex flex-1 mt-3'>
-        <div className='flex items-end text-base white w-full'>
+        <div className='flex items-end text-sm white w-full'>
           {vote.voteEndDtm && `${moment(vote.voteEndDtm).format('MM.DD(dd) A hh:mm')} 마감`}
         </div>
         <div className='w-full height-100'>

@@ -37,7 +37,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
   setUiToast,
   voteInsertStep,
   setVoteInsertStep,
-  setVoteDetailInit
+  setVoteDetailInit,
 }) => {
   const history = useHistory()
   const [toggle, setToggle] = useState(0)
@@ -130,7 +130,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 
   useEffect(() => {
     if (Capacitor.isNative) {
-      Plugins.App.addListener('backButton', e => {
+      Plugins.App.addListener('backButton', (e) => {
         if (history.location.pathname === '/') {
           exitApp()
         } else if (history.location.pathname === '/vote-save') {
@@ -157,10 +157,10 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
     if (index === 1) {
       setVotes(voteRooms)
       // 최신투표 지난 투표를 여기서 분류한다.
-      var newVoteArr = _.filter(voteRooms, v => {
+      var newVoteArr = _.filter(voteRooms, (v) => {
         return chooseNewVote(v.voteCreateDtm) === true
       })
-      var oldVoteArr = _.filter(voteRooms, v => {
+      var oldVoteArr = _.filter(voteRooms, (v) => {
         return chooseNewVote(v.voteCreateDtm) === false
       })
 
@@ -293,18 +293,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
         <div
           className='background-img'
           style={{
-            height:
-              voteToggle === 0
-                ? newVotes
-                  ? newVotes.length > 5
-                    ? 'auto'
-                    : '100%'
-                  : '100%'
-                : oldVotes
-                ? oldVotes.length > 5
-                  ? 'auto'
-                  : '100%'
-                : '100%'
+            height: '100vh',
           }}
         >
           {voteToggle === 0 && <MainFormVoteRoomListContainer sortedVoteRooms={newVotes} />}
@@ -332,7 +321,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
 export default connect<IOwnProps, IStateProps, IDispatchProps>({
   mapStateToProps: ({ voteRoom, voteInsert }) => ({
     voteRooms: voteRoom.voteRooms,
-    voteInsertStep: voteInsert.step
+    voteInsertStep: voteInsert.step,
   }),
   mapDispatchToProps: {
     selectVoteRooms,
@@ -341,7 +330,7 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
     setUiIsLoader,
     setUiToast,
     setVoteInsertStep,
-    setVoteDetailInit
+    setVoteDetailInit,
   },
-  component: Main
+  component: Main,
 })

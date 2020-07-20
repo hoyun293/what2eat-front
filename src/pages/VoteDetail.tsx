@@ -14,7 +14,7 @@ import {
   selectVote,
   insertUserVotes,
   setVoteDetailInit,
-  setVoteDetailIsVoteEnd
+  setVoteDetailIsVoteEnd,
 } from '../redux/vote-detail/vote-detail-actions'
 import VoteDetailTitleContainer from '../containers/VoteDetailTitleContainer'
 import VoteDetailPlaceListContainer from '../containers/VoteDetailPlaceListContainer'
@@ -61,7 +61,7 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
   selectVote,
   insertUserVotes,
   setVoteDetailInit,
-  setVoteDetailIsVoteEnd
+  setVoteDetailIsVoteEnd,
 }) => {
   const [scrollY, setScrollY] = useState(0)
   const [isVoteEdit, setIsVoteEdit] = useState(false)
@@ -113,7 +113,7 @@ const VoteDetail: React.FC<IOwnProps & IStateProps & IDispatchProps & RouteCompo
           ) : (
             <div className='bg-white flex items-center height-50'>
               <IconUi iconName='left-arrow' className='pl-4 pr-3' onClick={() => history.goBack}></IconUi>
-              <div className='header-title w-2/3 text-xl text-center text-bold'>{vote.voteName}</div>
+              <div className='header-title text-xl text-center text-bold'>{vote.voteName}</div>
             </div>
           )}
         </IonFab>
@@ -161,14 +161,14 @@ export default connect<IOwnProps, IStateProps, IDispatchProps>({
     votePlaceIds: voteDetail.votePlaceIds,
     refetch: voteDetail.refetch,
     isLoading: voteDetail.isLoading,
-    isUpdateLoading: voteUpdateDetail.isLoading
+    isUpdateLoading: voteUpdateDetail.isLoading,
   }),
   mapDispatchToProps: {
     selectVote,
     insertUserVotes,
     setVoteDetailInit,
     setUiIsLoader,
-    setVoteDetailIsVoteEnd
+    setVoteDetailIsVoteEnd,
   },
-  component: VoteDetail
+  component: VoteDetail,
 })
