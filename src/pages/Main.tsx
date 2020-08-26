@@ -290,12 +290,7 @@ const Main: React.FC<IOwnProps & IStateProps & IDispatchProps> = ({
             </div>
           </div>
         </div>
-        <div
-          className='background-img'
-          style={{
-            height: '100vh',
-          }}
-        >
+        <div className='background-img'>
           {voteToggle === 0 && <MainFormVoteRoomListContainer sortedVoteRooms={newVotes} />}
           {voteToggle === 1 && <MainFormVoteRoomListContainer sortedVoteRooms={oldVotes} />}
           {index >= 2 && votes.length === 0 && (
